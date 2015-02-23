@@ -2,10 +2,14 @@
 <html>
 	<head>
 		<title>Game</title>
-		<script src="js/main.js"></script>
+		<script src="js/initialize.js"></script>
+		<script src="js/particles.js"></script>
+		<script src="js/background.js"></script>
+		<link rel="stylesheet" href="css/main.css" type="text/css" />
 	</head>
 	<body>
-		<canvas id="foreground"></canvas>
-		<canvas id="background"></canvas>
+		<canvas id="canvasParticles" style="z-index: 100;"></canvas>
+		<canvas id="canvasBackground" style="z-index: 1;"></canvas>
+		<button onClick="failed = false; render();" style="margin: 730px 0 0 10px;">Start rendering</button> <button onClick="failed = true;" style="margin: 730px 0 0 10px;">Stop rendering</button>
 	</body>
 </html>
