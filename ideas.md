@@ -46,3 +46,4 @@
 * nicht Pixelwerte auslesen
 * Funktionsaufrufe vermeiden
 * gerundete Positionen
+* Multilayer
