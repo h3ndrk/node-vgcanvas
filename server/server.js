@@ -1,11 +1,20 @@
-var Rss = require("./rss.js");
+var RSS = require("./rss.js");
 
-var rss = new Rss();
-rss.request("http://www.heise.de/newsticker/heise-top-atom.xml", function()
+var sources = [
+	"http://www.heise.de/newsticker/heise-top-atom.xml",
+	"http://www.spiegel.de/schlagzeilen/tops/index.rss",
+	"http://www.heise.de/security/news/news-atom.xml",
+	"http://www.heise.de/developer/rss/news-atom.xml"
+];
+
+sources.forEach(function(value, key, array)
 {
-	console.log(rss.items[0].meta.title);
-	// rss.items.forEach(function(value, key, array)
-	// {
-	// 	console.log(value.title);
-	// });
+	var rss = new RSS();
+	rss.request(value, function(title, items)
+	{
+		items.forEach(function(value, key, array)
+		{
+			console.log(title + ": " + value.title);
+		});
+	});
 });
