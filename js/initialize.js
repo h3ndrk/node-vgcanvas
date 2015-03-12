@@ -1,4 +1,4 @@
-var failed = false;
+var failed = true;
 
 var canvasParticles = null;
 var canvasParticlesContext = null;
