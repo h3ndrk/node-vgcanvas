@@ -1,121 +1,41 @@
-var FeedParser = require("feedparser");
-var http = require("http");
-var https = require("https");
-var Iconv = require("iconv").Iconv;
+var fs = require("fs");
+var RSSWorker = require("./rssWorker.js");
 
-function RSS()
+function RSS(path)
 {
-	var items = [];
-	var feedparser = FeedParser();
-	
-	this.request = function(url, callback)
+	fs.readFile(path, function(error, data)
 	{
-		// retrieve RSS, support for HTTP and HTTPS
-		if(url.substring(0, 5) == "https")
+		if(error)
 		{
-			https.get(url, function(response)
-			{
-				if(response.statusCode != 200)
-				{
-					return this.emit("error", new Error("Bad status code"));
-				}
-				
-				// convert encodings to utf-8
-				var charset = null;
-				var iconv = null;
-				if(response.headers["content-type"])
-				{
-					charset = response.headers["content-type"].split(";")[1].trim().replace("charset=", "");
-					if(typeof charset == "string")
-					{
-						if(!/utf-*8/i.test(charset))
-						{
-							try
-							{
-								iconv = new Iconv(charset, "utf-8");
-								console.log("Converting from " + charset + " to utf-8");
-								response = response.pipe(iconv);
-							}
-							catch(error)
-							{
-								response.emit("error", error);
-							}
-						}
-					}
-				}
-				
-				response.pipe(feedparser);
-			}).on("error", function(error)
-			{
-				if(error)
-				{
-					console.error(error.message);
-				}
-			});
-		}
-		else
-		{
-			http.get(url, function(response)
-			{
-				if(response.statusCode != 200)
-				{
-					return this.emit("error", new Error("Bad status code"));
-				}
-				
-				// convert encodings to utf-8
-				var charset = null;
-				var iconv = null;
-				if(response.headers["content-type"])
-				{
-					charset = response.headers["content-type"].split(";")[1].trim().replace("charset=", "");
-					if(typeof charset == "string")
-					{
-						if(!/utf-*8/i.test(charset))
-						{
-							try
-							{
-								iconv = new Iconv(charset, "utf-8");
-								console.log("Converting from " + charset + " to utf-8");
-								response = response.pipe(iconv);
-							}
-							catch(error)
-							{
-								response.emit("error", error);
-							}
-						}
-					}
-				}
-				
-				response.pipe(feedparser);
-			}).on("error", function(error)
-			{
-				if(error)
-				{
-					console.error(error.message);
-				}
-			});
+			console.error(error.message);
+			
+			return;
 		}
 		
-		// parse RSS
-		feedparser.on("error", function(error)
+		var sources = data.toString().split("\n");
+		
+		sources = sources.filter(function(value, key, array)
 		{
-			if(error)
+			if(value == "")
 			{
-				console.error(error.message);
+				return false;
 			}
+			
+			return true;
 		});
-		feedparser.on("data", function(chunk)
+		
+		sources.forEach(function(value, key, array)
 		{
-			items.push(chunk);
-		});
-		feedparser.on("end", function()
-		{
-			if(callback)
+			var rssWorker = new RSSWorker();
+			rssWorker.request(value, function(title, items)
 			{
-				callback(items[0].meta.title, items);
-			}
-		}.bind(this));
-	};
+				items.forEach(function(value, key, array)
+				{
+					console.log(title + ": " + value.title);
+				});
+			});
+		});
+	});
 }
 
 module.exports = RSS;
