@@ -4,11 +4,8 @@ var https = require("https");
 var Iconv = require("iconv").Iconv;
 var checkHTTPS = require("./checkHTTPS.js");
 
-function RSS()
+function WeatherWorker()
 {
-	var items = [];
-	var feedparser = FeedParser();
-	
 	this.request = function(url, callback)
 	{
 		// retrieve RSS, support for HTTP and HTTPS
@@ -45,7 +42,13 @@ function RSS()
 					}
 				}
 				
-				response.pipe(feedparser);
+				response.on("data", function(chunk)
+				{
+					if(callback)
+					{
+						callback(JSON.parse(chunk.toString()));
+					}
+				});
 			}).on("error", function(error)
 			{
 				if(error)
@@ -87,7 +90,13 @@ function RSS()
 					}
 				}
 				
-				response.pipe(feedparser);
+				response.on("data", function(chunk)
+				{
+					if(callback)
+					{
+						callback(JSON.parse(chunk.toString()));
+					}
+				});
 			}).on("error", function(error)
 			{
 				if(error)
@@ -96,27 +105,7 @@ function RSS()
 				}
 			});
 		}
-		
-		// parse RSS
-		feedparser.on("error", function(error)
-		{
-			if(error)
-			{
-				console.error(error.message);
-			}
-		});
-		feedparser.on("data", function(chunk)
-		{
-			items.push(chunk);
-		});
-		feedparser.on("end", function()
-		{
-			if(callback)
-			{
-				callback(items[0].meta.title, items);
-			}
-		}.bind(this));
 	};
 }
 
-module.exports = RSS;
+module.exports = WeatherWorker;
