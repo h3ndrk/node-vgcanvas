@@ -2,6 +2,9 @@
 {
 	margin: 0;
 	padding: 0;
+	font-family: "RobotoDraft", Roboto, Arial, sans, sans-serif;
+	font-weight: medium;
+	font-size: 15px;
 }
 
 html
@@ -17,4 +20,25 @@ body
 canvas
 {
 	position: absolute;
+}
+
+section
+{
+	position: absolute;
+}
+
+section h1
+{
+	display: inline-block;
+	background-color: #FFFFFF;
+	padding: 1px 8px;
+	text-transform: uppercase;
+	font-size: 25px;
+	color: #000000;
+}
+
+section p
+{
+	padding: 3px;
+	color: #FFFFFF;
 }
