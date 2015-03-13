@@ -25,6 +25,9 @@ canvas
 section
 {
 	position: absolute;
+	top: 0;
+	left: 0;
+	transition: top 1s ease, left 1s ease;
 }
 
 section h1
