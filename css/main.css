@@ -3,7 +3,7 @@
 	margin: 0;
 	padding: 0;
 	font-family: "RobotoDraft", Roboto, Arial, sans, sans-serif;
-	font-weight: medium;
+	/*font-weight: medium;*/
 	font-size: 15px;
 }
 
@@ -22,26 +22,20 @@ canvas
 	position: absolute;
 }
 
-section
+#svg
 {
 	position: absolute;
-	top: 0;
-	left: 0;
-	transition: top 1s ease, left 1s ease;
+	visibility: hidden;
 }
 
-section h1
+h1#logoTitle
 {
-	display: inline-block;
-	background-color: #FFFFFF;
-	padding: 1px 8px;
-	text-transform: uppercase;
-	font-size: 25px;
-	color: #000000;
-}
-
-section p
-{
-	padding: 3px;
+	position: absolute;
+	font-weight: lighter;
+	font-size: 30px;
 	color: #FFFFFF;
+	opacity: 0;
+	visibility: hidden;
+	-webkit-transition: opacity 2s ease, visibility 2s ease;
+	transition: opacity 2s ease, visibility 2s ease;
 }

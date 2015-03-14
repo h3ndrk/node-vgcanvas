@@ -1,42 +1,13 @@
-var WebsocketServer = require("websocket").server;
-var http = require("http");
+var WebsocketWorker = require("./websocketWorker.js");
 
 function Websocket()
 {
-	this.serve = function(port, callback)
-	{
-		var server = http.createServer(function(request, response)
-		{
-			response.writeHead(404);
-			response.end();
-		}).listen(port, function()
-		{
-			console.log("Serving server... ;)");
-		});
-		
-		var websocketServer = new WebsocketServer({ httpServer: server, autoAcceptConnections: false });
-		
-		// function originIsAllowed(origin)
-		// {
-		// 	return true;
-		// }
-		
-		websocketServer.on("request", function(request)
-		{
-			// if(!originIsAllowed(request.origin))
-			// {
-			// 	request.reject();
-			// 	console.log("Connection rejected: " + request.origin);
-			// 	return;
-			// }
-			
-			var connection = request.accept(null, request.origin);
-			if(connection && callback)
-			{
-				callback(connection);
-			}
-		});
-	};
+	var websocketWorker = new WebsocketWorker();
+	websocketWorker.serve(8080);
+	websocketWorker.updateInformations(["a", "b", "c"]);
+	setTimeout(function() { websocketWorker.updateInformations(["d", "e", "c"]); }, 3000);
 }
 
 module.exports = Websocket;
+
+Websocket();

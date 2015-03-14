@@ -5,14 +5,17 @@
 		<!-- <script src="js/initialize.js"></script>
 		<script src="js/particles.js"></script>
 		<script src="js/background.js"></script> -->
+		<script src="js/logo.js"></script>
 		<link rel="stylesheet" href="css/main.css" type="text/css" />
+		<link rel="stylesheet" href="css/informations.css" type="text/css" />
 		<script>
 			var connection = new WebSocket("ws://localhost:8080");
 			connection.onopen = function()
 			{
+				initLogo(); clearLogo(); drawLogo(); setTimeout(function() { hideLogo(); }, 5000);
 				console.log("Connection open");
-				connection.send("Das ist ein Test!");
-				setTimeout(function() { connection.close(); }, 2000);
+				// connection.send("Das ist ein Test!");
+				setTimeout(function() { connection.close(); }, 10000);
 			};
 			connection.onmessage = function(event)
 			{
@@ -30,15 +33,66 @@
 					console.log(error);
 				}
 			};
+			
+			// function drawLine(id, duration)
+			// {
+			// 	var path = document.getElementById(id);
+			// 	if(!path)
+			// 	{
+			// 		console.error("Failed to find element");
+					
+			// 		return;
+			// 	}
+				
+			// 	var length = path.getTotalLength();
+				
+			// 	path.style.transition = path.style.WebkitTransition = "none";
+			// 	path.style.strokeDasharray = length + " " + length;
+			// 	path.style.strokeDashoffset = length;
+			// 	path.getBoundingClientRect();
+			// 	path.style.transition = path.style.WebkitTransition = "stroke-dashoffset 1s cubic-bezier(.5,0,.16,1)";
+			// 	path.style.strokeDashoffset = "0";
+			// }
+			
+			// function draw2()
+			// {
+			// 	for(var i = 0; i < 18; i++)
+			// 	{
+			// 		setTimeout(function() { drawLine("line_" + this.i); }.bind({ i: i }), i * 50);
+			// 	}
+			// }
 		</script>
 	</head>
 	<body>
 		<!-- <canvas id="canvasParticles" style="z-index: 100;"></canvas>
 		<canvas id="canvasBackground" style="z-index: 1;"></canvas>
 		<button onClick="failed = false; render();" style="margin: 730px 0 0 10px;">Start rendering</button> <button onClick="failed = true;" style="margin: 730px 0 0 10px;">Stop rendering</button> -->
-		<section>
+		<div class="information">
 			<h1>Headline</h1>
 			<p>Description<br />Das ist ein Test mit sehr sehr sehr langem Text</p>
-		</section>
+		</div>
+		<svg id="svg" width="400" height="400">
+			<path id="circle_0" d="M 200.0,16.667 A 183.333,183.333 0 0,1 200.0,383.333" stroke="#FFFFFF" stroke-width="1" fill="none" stroke-dasharray="200%" stroke-dashoffset="200%" />
+			<path id="circle_1" d="M 200.0,383.333 A 183.333,183.333 0 0,1 200.0,16.667" stroke="#FFFFFF" stroke-width="1" fill="none" stroke-dasharray="200%" stroke-dashoffset="200%" />
+			<path id="line_0" d="M 200.0,16.667 L 358.333,108.333" stroke="#FFFFFF" stroke-width="1" fill="none" stroke-dasharray="100%" stroke-dashoffset="100%" />
+			<path id="line_1" d="M 41.667,108.333 L 200.0,16.667" stroke="#FFFFFF" stroke-width="1" fill="none" stroke-dasharray="100%" stroke-dashoffset="100%" />
+			<path id="line_2" d="M 41.667,291.667 L 41.667,108.333" stroke="#FFFFFF" stroke-width="1" fill="none" stroke-dasharray="100%" stroke-dashoffset="100%" />
+			<path id="line_3" d="M 200.0,383.333 L 41.667,291.667" stroke="#FFFFFF" stroke-width="1" fill="none" stroke-dasharray="100%" stroke-dashoffset="100%" />
+			<path id="line_4" d="M 358.333,291.667 L 200.0,383.333" stroke="#FFFFFF" stroke-width="1" fill="none" stroke-dasharray="100%" stroke-dashoffset="100%" />
+			<path id="line_5" d="M 358.333,108.333 L 358.333,291.667" stroke="#FFFFFF" stroke-width="1" fill="none" stroke-dasharray="100%" stroke-dashoffset="100%" />
+			<path id="line_6" d="M 200.0,108.333 L 280.0,154.167" stroke="#FFFFFF" stroke-width="1" fill="none" stroke-dasharray="100%" stroke-dashoffset="100%" />
+			<path id="line_7" d="M 120.0,154.167 L 200.0,108.333" stroke="#FFFFFF" stroke-width="1" fill="none" stroke-dasharray="100%" stroke-dashoffset="100%" />
+			<path id="line_8" d="M 120.0,245.833 L 120.0,154.167" stroke="#FFFFFF" stroke-width="1" fill="none" stroke-dasharray="100%" stroke-dashoffset="100%" />
+			<path id="line_9" d="M 200.0,291.667 L 120.0,245.833" stroke="#FFFFFF" stroke-width="1" fill="none" stroke-dasharray="100%" stroke-dashoffset="100%" />
+			<path id="line_10" d="M 280.0,245.833 L 200.0,291.667" stroke="#FFFFFF" stroke-width="1" fill="none" stroke-dasharray="100%" stroke-dashoffset="100%" />
+			<path id="line_11" d="M 280.0,154.167 L 280.0,245.833" stroke="#FFFFFF" stroke-width="1" fill="none" stroke-dasharray="100%" stroke-dashoffset="100%" />
+			<path id="line_12" d="M 280.0,154.167 L 358.333,108.333" stroke="#FFFFFF" stroke-width="1" fill="none" stroke-dasharray="100%" stroke-dashoffset="100%" />
+			<path id="line_13" d="M 120.0,154.167 L 41.667,108.333" stroke="#FFFFFF" stroke-width="1" fill="none" stroke-dasharray="100%" stroke-dashoffset="100%" />
+			<path id="line_14" d="M 200.0,291.667 L 200.0,383.333" stroke="#FFFFFF" stroke-width="1" fill="none" stroke-dasharray="100%" stroke-dashoffset="100%" />
+			<path id="line_15" d="M 200.0,200.0 L 200.0,108.333" stroke="#FFFFFF" stroke-width="1" fill="none" stroke-dasharray="100%" stroke-dashoffset="100%" />
+			<path id="line_16" d="M 200.0,200.0 L 120.0,245.833" stroke="#FFFFFF" stroke-width="1" fill="none" stroke-dasharray="100%" stroke-dashoffset="100%" />
+			<path id="line_17" d="M 200.0,200.0 L 280.0,245.833" stroke="#FFFFFF" stroke-width="1" fill="none" stroke-dasharray="100%" stroke-dashoffset="100%" />
+		</svg>
+		<h1 id="logoTitle">nipeScreen</h1>
 	</body>
 </html>
