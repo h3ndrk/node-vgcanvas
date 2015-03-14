@@ -1,24 +1,22 @@
-@-webkit-keyframes showFor15s
+@-webkit-keyframes showFor35s
 {
 	0%
 	{
 		opacity: 0;
-		margin-top: 0px;
+		margin-top: 0%;
 	}
 	5%
 	{
 		opacity: 1;
-		margin-top: 30px;
 	}
 	95%
 	{
 		opacity: 1;
-		margin-top: 470px;
 	}
 	100%
 	{
 		opacity: 0;
-		margin-top: 500px;
+		margin-top: 50%;
 	}
 }
 
@@ -28,13 +26,13 @@
 	top: 0;
 	left: 0;
 	opacity: 0;
-	/*transition: top 1s ease, left 1s cubic-bezier(.5,0,.3,1);*/
+	transition: opacity 1s ease;
 }
 
 .information.show
 {
-	-webkit-animation-duration: 15s;
-	-webkit-animation-name: showFor15s;
+	-webkit-animation-duration: 35s;
+	-webkit-animation-name: showFor35s;
 	-webkit-animation-iteration-count: 1;
 	-webkit-animation-timing-function: linear;
 }
@@ -47,10 +45,21 @@
 	text-transform: uppercase;
 	font-size: 25px;
 	color: #000000;
+	box-shadow: 0 1px 2px #000000;
 }
 
 .information p
 {
 	padding: 3px;
 	color: #FFFFFF;
+	text-shadow: 0 1px 1px #000000;
+}
+
+#informations
+{
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
 }

@@ -23,13 +23,13 @@ function Client()
 	
 	this.send = function(information)
 	{
+		console.log(information);
+		
 		this.connection.sendUTF(information);
 	};
 	
 	this.updateInformations = function(informations)
 	{
-		console.log(informations);
-		
 		// send removed informations
 		this.informations = this.informations.filter(function(value, key, array)
 		{

@@ -168,6 +168,8 @@ function hideLogo()
 	{
 		elementH1.style.opacity = 0;
 		elementH1.style.visibility = "hidden";
+		
+		informationsShowNext();
 	}, 1500);
 }
 

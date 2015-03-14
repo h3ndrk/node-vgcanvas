@@ -1,7 +1,7 @@
 var fs = require("fs");
 var RSSWorker = require("./rssWorker.js");
 
-function RSS(path)
+function RSS(path, callback)
 {
 	fs.readFile(path, function(error, data)
 	{
@@ -31,8 +31,13 @@ function RSS(path)
 			{
 				items.forEach(function(value, key, array)
 				{
-					console.log(title + ": " + value.title);
+					if(callback)
+					{
+						callback(title, value.title);
+					}
 				});
+				
+				callback();
 			});
 		});
 	});
