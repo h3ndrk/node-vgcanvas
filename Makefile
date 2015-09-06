@@ -32,7 +32,7 @@ LIBS += -lm
 
 .PHONY: all qr_code_generator init clean
 
-all: bin/obj/libshape.o bin/obj/oglinit.o
+all: bin/obj/libshapes.o bin/obj/oglinit.o
 
 #all: home-infoscreen
 
@@ -43,8 +43,8 @@ init:
 	mkdir -p bin
 	mkdir -p bin/obj
 
-bin/obj/libshape.o: src/libshape.c
-	$(CC) $(CFLAGS) -c -o bin/obj/libshape.o src/libshape.c $(LIBS)
+bin/obj/libshapes.o: src/libshapes.c
+	$(CC) $(CFLAGS) -c -o bin/obj/libshapes.o src/libshapes.c $(LIBS)
 
 bin/obj/oglinit.o: src/oglinit.c
 	$(CC) $(CFLAGS) -c -o bin/obj/oglinit.o src/oglinit.c $(LIBS)
