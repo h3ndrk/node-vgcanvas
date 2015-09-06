@@ -28,11 +28,14 @@ LIBS += -lm
 
 all: init home-infoscreen
 
-home-infoscreen: init bin/obj/libshapes.o bin/obj/oglinit.o
+home-infoscreen: init bin/obj/home-infoscreen.o bin/obj/libshapes.o bin/obj/oglinit.o
 	$(CC) $(CFLAGS) bin/obj/home-infoscreen.o -o bin/home-infoscreen $(LIBS)
 
 init:
 	mkdir -p bin/obj
+
+bin/obj/home-infoscreen.o: src/home-infoscreen.c
+	$(CC) $(CFLAGS) -c -o bin/obj/home-infoscreen.o src/home-infoscreen.c $(LIBS)
 
 bin/obj/libshapes.o: src/libshapes.c
 	$(CC) $(CFLAGS) -c -o bin/obj/libshapes.o src/libshapes.c $(LIBS)
