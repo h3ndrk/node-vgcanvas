@@ -17,31 +17,21 @@ CC = gcc
 
 CFLAGS += -Wall
 CFLAGS += -Wextra
-#CFLAGS += `pkg-config --cflags gtk+-2.0`
-#CFLAGS += `pkg-config --cflags libqrencode`
 CFLAGS += -I/opt/vc/include
 CFLAGS += -I/opt/vc/include/interface/vmcs_host/linux
 CFLAGS += -I/opt/vc/include/interface/vcos/pthreads
 CFLAGS += -I./etc
 
 LIBS += -lm
-#LIBS += `pkg-config --libs gtk+-2.0`
-#LIBS += `pkg-config --libs libqrencode`
 
-#gcc -O2 -Wall $(INCLUDEFLAGS) -c libshapes.c
-#gcc -O2 -Wall $(INCLUDEFLAGS) -c oglinit.c
+.PHONY: all home-infoscreen init clean
 
-.PHONY: all qr_code_generator init clean
+all: init home-infoscreen
 
-all: bin/obj/libshapes.o bin/obj/oglinit.o
-
-#all: home-infoscreen
-
-#home-infoscreen: init bin/obj/home-infoscreen.o
-#	$(CC) bin/obj/home-infoscreen.o $(CFLAGS) -o bin/home-infoscreen $(LIBS)
+home-infoscreen: init bin/obj/libshapes.o bin/obj/oglinit.o
+	$(CC) $(CFLAGS) bin/obj/home-infoscreen.o -o bin/home-infoscreen $(LIBS)
 
 init:
-	mkdir -p bin
 	mkdir -p bin/obj
 
 bin/obj/libshapes.o: src/libshapes.c
