@@ -23,6 +23,12 @@ CFLAGS += -I/opt/vc/include/interface/vcos/pthreads
 CFLAGS += -I./etc
 
 LIBS += -lm
+LIBS += -L/opt/vc/lib
+LIBS += -lGLESv2
+LIBS += -lEGL
+LIBS += -lbcm_host
+LIBS += -lpthread
+LIBS += -ljpeg
 
 .PHONY: all home-infoscreen init clean
 
