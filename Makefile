@@ -48,3 +48,6 @@ bin/obj/libshapes.o: src/libshapes.c
 
 bin/obj/oglinit.o: src/oglinit.c
 	$(CC) $(CFLAGS) -c -o bin/obj/oglinit.o src/oglinit.c $(LIBS)
+
+clean:
+	rm -Rf bin
