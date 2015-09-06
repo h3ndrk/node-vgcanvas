@@ -22,6 +22,7 @@ CFLAGS += -Wextra
 CFLAGS += -I/opt/vc/include
 CFLAGS += -I/opt/vc/include/interface/vmcs_host/linux
 CFLAGS += -I/opt/vc/include/interface/vcos/pthreads
+CFLAGS += -I./etc
 
 LIBS += -lm
 #LIBS += `pkg-config --libs gtk+-2.0`
