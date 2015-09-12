@@ -20,34 +20,38 @@ CFLAGS += -Wextra
 CFLAGS += -I/opt/vc/include
 CFLAGS += -I/opt/vc/include/interface/vmcs_host/linux
 CFLAGS += -I/opt/vc/include/interface/vcos/pthreads
-CFLAGS += -I./etc
+# CFLAGS += -I./etc
 
-LIBS += -lm
+# LIBS += -lm
 LIBS += -L/opt/vc/lib
 LIBS += -lGLESv2
 LIBS += -lEGL
-LIBS += -lbcm_host
-LIBS += -lpthread
-LIBS += -ljpeg
+# LIBS += -lbcm_host
+# LIBS += -lpthread
+# LIBS += -ljpeg
 
-.PHONY: all home-infoscreen init clean
+PROGRAM_NAME = home-infoscreen
 
-all: init home-infoscreen
+SRC += $(PROGRAM_NAME).c
+SRC += oglinit.c
+SRC += libshapes.c
 
-home-infoscreen: init bin/obj/home-infoscreen.o bin/obj/libshapes.o bin/obj/oglinit.o
-	$(CC) $(CFLAGS) bin/obj/home-infoscreen.o bin/obj/libshapes.o bin/obj/oglinit.o -o bin/home-infoscreen $(LIBS)
+# SRCS = $(addprefix src/, $(SRC))
+
+OBJS = $(addprefix bin/obj/, $(SRC:%.c=%.o))
+
+.PHONY: all $(PROGRAM_NAME) init clean
+
+all: init $(PROGRAM_NAME)
+
+$(PROGRAM_NAME): init $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -o bin/$(PROGRAM_NAME) $(LIBS)
 
 init:
 	mkdir -p bin/obj
 
-bin/obj/home-infoscreen.o: src/home-infoscreen.c
-	$(CC) $(CFLAGS) -c -o bin/obj/home-infoscreen.o src/home-infoscreen.c $(LIBS)
-
-bin/obj/libshapes.o: src/libshapes.c
-	$(CC) $(CFLAGS) -c -o bin/obj/libshapes.o src/libshapes.c $(LIBS)
-
-bin/obj/oglinit.o: src/oglinit.c
-	$(CC) $(CFLAGS) -c -o bin/obj/oglinit.o src/oglinit.c $(LIBS)
+bin/obj/%.o: src/%.c
+	$(CC) $(CFLAGS) -c $< -o $@ $(LIBS)
 
 clean:
 	rm -Rf bin
