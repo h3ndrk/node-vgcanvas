@@ -23,7 +23,7 @@
 #include "GLES/gl.h"
 #include "bcm_host.h"
 
-#include "egl-util.c"
+#include "egl-util.h"
 
 int main(void)
 {

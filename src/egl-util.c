@@ -23,6 +23,8 @@
 #include "GLES/gl.h"
 #include "bcm_host.h"
 
+#include "egl-util.h"
+
 static EGLDisplay display = NULL;
 static EGLContext context = NULL;
 static EGLSurface surface = NULL;
