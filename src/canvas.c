@@ -40,7 +40,7 @@ void fillRect(void)
 	
 	VGPath path = vgCreatePath(VG_PATH_FORMAT_STANDARD, VG_PATH_DATATYPE_F, 1.0f, 0.0f, 0, 0, VG_PATH_CAPABILITY_ALL);
 	vguRect(path, 0.25, 0.25, 0.75, 0.75);
-	vgDrawPath(path, VG_FILLPATH);
+	vgDrawPath(path, VG_FILL_PATH);
 	
 	vgDestroyPath(path);
 	vgDestroyPaint(paint);
