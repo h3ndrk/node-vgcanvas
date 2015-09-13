@@ -6,3 +6,4 @@
 - [ ] shadows
 - [ ] images
 - [ ] text
+- [ ] comments
