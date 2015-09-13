@@ -39,7 +39,7 @@ LIBS += -lrt
 PROGRAM_NAME = home-infoscreen
 
 SRC += $(PROGRAM_NAME).c
-# SRC += oglinit.c
+SRC += egl-util.c
 # SRC += libshapes.c
 
 OBJS = $(addprefix bin/obj/, $(SRC:%.c=%.o))

@@ -15,27 +15,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <assert.h>
-#include "EGL/egl.h"
-#include "GLES/gl.h"
-#include "bcm_host.h"
+#ifndef __GL_UTIL_H__
+#define __GL_UTIL_H__
 
-#include "egl-util.c"
+void egl_init(void);
+void egl_finish(void);
+void egl_error(char *file, unsigned long int line);
+void egl_swap_buffers(void);
+EGLDisplay egl_get_display(void);
+EGLSurface egl_get_display(void);
+EGLContext egl_get_display(void);
+uint32_t egl_get_width(void);
+uint32_t egl_get_height(void);
 
-int main(void)
-{
-	egl_init();
-	
-	printf("Started (%ix%i)\n", egl_get_width(), egl_get_height());
-	
-	sleep(5);
-	
-	printf("Shutting down.\n");
-	
-	egl_finish();
-	
-	return 0;
-}
+#endif /* __GL_UTIL_H__ */
