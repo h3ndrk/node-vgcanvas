@@ -185,12 +185,12 @@ EGLDisplay egl_get_display(void)
 	return display;
 }
 
-EGLSurface egl_get_display(void)
+EGLSurface egl_get_surface(void)
 {
 	return surface;
 }
 
-EGLContext egl_get_display(void)
+EGLContext egl_get_context(void)
 {
 	return context;
 }
