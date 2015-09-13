@@ -35,12 +35,26 @@ int main(void)
 	
 	canvas_clearRect(0, 0, egl_get_width(), egl_get_height());
 	
+	canvas_lineWidth(10);
+	
 	canvas_fillStyle_color(1, 0, 0, 1);
 	
 	canvas_fillRect(100, 100, 100, 100);
 	canvas_globalAlpha(0.5);
 	canvas_fillStyle_color(1, 1, 0, 1);
 	canvas_fillRect(150, 150, 100, 100);
+	
+	canvas_strokeStyle_color(1, 1, 1, 1);
+	canvas_globalAlpha(1);
+	
+	canvas_beginPath();
+	canvas_moveTo(300, 300);
+	canvas_lineTo(200, 200);
+	canvas_lineTo(200, -200);
+	canvas_lineTo(-200, -200);
+	canvas_closePath();
+	canvas_stroke();
+	canvas_fill();
 	
 	egl_swap_buffers();
 	
