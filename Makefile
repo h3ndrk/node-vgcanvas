@@ -17,15 +17,21 @@ CC = gcc
 
 CFLAGS += -Wall
 CFLAGS += -Wextra
-CFLAGS += -I/opt/vc/include
-CFLAGS += -I/opt/vc/include/interface/vmcs_host/linux
-CFLAGS += -I/opt/vc/include/interface/vcos/pthreads
+CFLAGS += -I /opt/vc/include
+CFLAGS += -I /opt/vc/include/interface/vmcs_host/linux
+CFLAGS += -I /opt/vc/include/interface/vcos/pthreads
 # CFLAGS += -I./etc
 
 # LIBS += -lm
-LIBS += -L/opt/vc/lib
+LIBS += -L /opt/vc/lib
 LIBS += -lGLESv2
 LIBS += -lEGL
+LIBS += -lopenmaxil
+LIBS += -lbcm_host
+LIBS += -lvcos
+LIBS += -lvchiq_arm
+LIBS += -lpthread
+LIBS += -lrt
 # LIBS += -lbcm_host
 # LIBS += -lpthread
 # LIBS += -ljpeg
