@@ -38,7 +38,7 @@ int main(void)
 	
 	printf("Shutting down.\n");
 	
-	egl_finish();
+	egl_cleanup();
 	
 	return 0;
 }
