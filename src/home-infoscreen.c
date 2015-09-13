@@ -24,12 +24,15 @@
 #include "bcm_host.h"
 
 #include "egl-util.h"
+#include "canvas.h"
 
 int main(void)
 {
 	egl_init();
 	
 	printf("Started (%ix%i)\n", egl_get_width(), egl_get_height());
+	
+	fillRect();
 	
 	sleep(5);
 	

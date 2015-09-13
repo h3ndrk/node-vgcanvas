@@ -15,17 +15,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __GL_UTIL_H__
-#define __GL_UTIL_H__
+#ifndef __OPENVG_H__
+#define __OPENVG_H__
 
-void egl_init(void);
-void egl_cleanup(void);
-void egl_error(void);
-void egl_swap_buffers(void);
-EGLDisplay egl_get_display(void);
-EGLSurface egl_get_display(void);
-EGLContext egl_get_display(void);
-uint32_t egl_get_width(void);
-uint32_t egl_get_height(void);
+void fillRect(void);
 
-#endif /* __GL_UTIL_H__ */
+#endif /* __OPENVG_H__ */

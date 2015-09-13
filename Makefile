@@ -40,7 +40,7 @@ PROGRAM_NAME = home-infoscreen
 
 SRC += $(PROGRAM_NAME).c
 SRC += egl-util.c
-# SRC += libshapes.c
+SRC += canvas.c
 
 OBJS = $(addprefix bin/obj/, $(SRC:%.c=%.o))
 

@@ -128,7 +128,7 @@ void egl_init(void)
 // 	glFrustumf(-ratio, ratio, -1.0f, 1.0f, 1.0f, 10.0f);
 // }
 
-void egl_finish(void)
+void egl_cleanup(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT);
 	eglSwapBuffers(display, surface);
@@ -140,36 +140,9 @@ void egl_finish(void)
 	bcm_host_deinit();
 }
 
-void egl_error(char *file, unsigned long int line)
+void egl_error(void)
 {
-	unsigned int gl_error_num = glGetError();
-	
-	if(gl_error_num == GL_NO_ERROR)
-	{
-		return;
-	}
-	
-	switch(gl_error_num)
-	{
-		case GL_INVALID_ENUM:
-			printf("GL ERROR: GL_INVALID_ENUM (%s:%li)\n", file, line);
-			break;
-		case GL_INVALID_VALUE:
-			printf("GL ERROR: GL_INVALID_VALUE (%s:%li)\n", file, line);
-			break;
-		case GL_INVALID_OPERATION:
-			printf("GL ERROR: GL_INVALID_OPERATION (%s:%li)\n", file, line);
-			break;
-		case GL_OUT_OF_MEMORY:
-			printf("GL ERROR: GL_OUT_OF_MEMORY (%s:%li)\n", file, line);
-			break;
-		case GL_STACK_UNDERFLOW:
-			printf("GL ERROR: GL_STACK_UNDERFLOW (%s:%li)\n", file, line);
-			break;
-		case GL_STACK_OVERFLOW:
-			printf("GL ERROR: GL_STACK_OVERFLOW (%s:%li)\n", file, line);
-			break;
-	}
+	return glGetError();
 }
 
 void egl_swap_buffers(void)

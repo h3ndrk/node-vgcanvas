@@ -15,17 +15,32 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __GL_UTIL_H__
-#define __GL_UTIL_H__
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <assert.h>
+#include "VG/openvg.h"
+#include "VG/vgu.h"
+#include "VG/vgext.h"
 
-void egl_init(void);
-void egl_cleanup(void);
-void egl_error(void);
-void egl_swap_buffers(void);
-EGLDisplay egl_get_display(void);
-EGLSurface egl_get_display(void);
-EGLContext egl_get_display(void);
-uint32_t egl_get_width(void);
-uint32_t egl_get_height(void);
+#include "egl-util.h"
+#include "canvas.h"
 
-#endif /* __GL_UTIL_H__ */
+void fillRect(void)
+{
+	VGFloat color[4] = { 1, 1, 1, 1 };
+	
+	VGPaint paint = vgCreatePaint();
+	vgSetParameteri(paint, VG_PAINT_TYPE, VG_PAINT_TYPE_COLOR);
+	vgSetParameterfv(paint, VG_PAINT_COLOR, 4, color);
+	vgSetPaint(paint, VG_FILL_PATH);
+	
+	VGPath path = vgCreatePath(VG_PATH_FORMAT_STANDARD, VG_PATH_DATATYPE_F, 1.0f, 0.0f, 0, 0, VG_PATH_CAPABILITY_ALL);
+	vguRect(path, 0.25, 0.25, 0.75, 0.75);
+	vgDrawPath(path, VG_FILLPATH);
+	
+	vgDestroyPath(path);
+	vgDestroyPaint(paint);
+	
+	egl_swap_buffers();
+}
