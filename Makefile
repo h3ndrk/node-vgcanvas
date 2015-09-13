@@ -21,6 +21,7 @@ CFLAGS += -I /opt/vc/include
 CFLAGS += -I /opt/vc/include/interface/vmcs_host/linux
 CFLAGS += -I /opt/vc/include/interface/vcos/pthreads
 # CFLAGS += -I./etc
+CFLAGS += -fgnu89-inline # fix for vcos compiler warnings
 
 # LIBS += -lm
 LIBS += -L /opt/vc/lib
@@ -41,6 +42,7 @@ PROGRAM_NAME = home-infoscreen
 SRC += $(PROGRAM_NAME).c
 SRC += egl-util.c
 SRC += canvas.c
+SRC += color.c
 
 OBJS = $(addprefix bin/obj/, $(SRC:%.c=%.o))
 

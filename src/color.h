@@ -15,38 +15,20 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <assert.h>
-#include "EGL/egl.h"
-#include "GLES/gl.h"
-#include "bcm_host.h"
-#include "VG/openvg.h"
-#include "VG/vgu.h"
-#include "VG/vgext.h"
+#ifndef __COLOR_H__
+#define __COLOR_H__
 
-#include "egl-util.h"
-#include "canvas.h"
-
-int main(void)
+typedef struct
 {
-	canvas__init();
-	
-	canvas_clearRect(0, 0, egl_get_width(), egl_get_height());
-	
-	canvas_fillStyle_color(1, 0, 0, 1);
-	
-	canvas_fillRect(100, 100, 100, 100);
-	canvas_globalAlpha(0.5);
-	canvas_fillStyle_color(1, 1, 0, 1);
-	canvas_fillRect(150, 150, 100, 100);
-	
-	egl_swap_buffers();
-	
-	sleep(3);
-	
-	canvas__cleanup();
-	
-	return 0;
-}
+	char color_type; // 0 = color
+	VGPaint paint;
+	VGfloat red;
+	VGfloat green;
+	VGfloat blue;
+	VGfloat alpha;
+} color_t;
+
+void color_set_rgb(color_t *color, float red, float green, float blue);
+void color_set_rgba(color_t *color, float red, float green, float blue, float alpha);
+
+#endif /* __COLOR_H__ */

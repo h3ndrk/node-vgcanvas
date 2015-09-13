@@ -22,6 +22,9 @@
 #include "EGL/egl.h"
 #include "GLES/gl.h"
 #include "bcm_host.h"
+#include "VG/openvg.h"
+#include "VG/vgu.h"
+#include "VG/vgext.h"
 
 #include "egl-util.h"
 
@@ -140,7 +143,7 @@ void egl_cleanup(void)
 	bcm_host_deinit();
 }
 
-void egl_error(void)
+EGLint egl_error(void)
 {
 	return glGetError();
 }

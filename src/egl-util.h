@@ -20,7 +20,7 @@
 
 void egl_init(void);
 void egl_cleanup(void);
-void egl_error(void);
+EGLint egl_error(void);
 void egl_swap_buffers(void);
 EGLDisplay egl_get_display(void);
 EGLSurface egl_get_display(void);

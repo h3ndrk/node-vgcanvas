@@ -26,27 +26,24 @@
 #include "VG/vgu.h"
 #include "VG/vgext.h"
 
-#include "egl-util.h"
-#include "canvas.h"
+#include "color.h"
 
-int main(void)
+void color_set_rgb(color_t *color, float red, float green, float blue)
 {
-	canvas__init();
+	color->color_type = 0; // type: color
 	
-	canvas_clearRect(0, 0, egl_get_width(), egl_get_height());
+	color->red = red;
+	color->green = green;
+	color->blue = blue;
+	color->alpha = 1;
+}
+
+void color_set_rgba(color_t *color, float red, float green, float blue, float alpha)
+{
+	color->color_type = 0; // type: color
 	
-	canvas_fillStyle_color(1, 0, 0, 1);
-	
-	canvas_fillRect(100, 100, 100, 100);
-	canvas_globalAlpha(0.5);
-	canvas_fillStyle_color(1, 1, 0, 1);
-	canvas_fillRect(150, 150, 100, 100);
-	
-	egl_swap_buffers();
-	
-	sleep(3);
-	
-	canvas__cleanup();
-	
-	return 0;
+	color->red = red;
+	color->green = green;
+	color->blue = blue;
+	color->alpha = alpha;
 }

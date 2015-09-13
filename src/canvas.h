@@ -15,9 +15,20 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __OPENVG_H__
-#define __OPENVG_H__
+#ifndef __CANVAS_H__
+#define __CANVAS_H__
 
-void fillRect(void);
+void canvas__init(void);
+void canvas__cleanup(void);
 
-#endif /* __OPENVG_H__ */
+void canvas_clearRect(VGfloat x, VGfloat y, VGfloat width, VGfloat height);
+void canvas_fillRect(VGfloat x, VGfloat y, VGfloat width, VGfloat height);
+void canvas_fillStyle_color(VGfloat red, VGfloat green, VGfloat blue, VGfloat alpha);
+void canvas_strokeRect(VGfloat x, VGfloat y, VGfloat width, VGfloat height);
+void canvas_strokeStyle_color(VGfloat red, VGfloat green, VGfloat blue, VGfloat alpha);
+void canvas_lineWidth(VGfloat width);
+void canvas_lineCap(char *cap_style);
+void canvas_lineJoin(char *cap_style);
+void canvas_globalAlpha(VGfloat alpha);
+
+#endif /* __CANVAS_H__ */
