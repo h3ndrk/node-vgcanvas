@@ -31,7 +31,7 @@
 
 void fillRect(void)
 {
-	VGFloat color[4] = { 1, 1, 1, 1 };
+	VGfloat color[4] = { 1, 1, 1, 1 };
 	
 	VGPaint paint = vgCreatePaint();
 	vgSetParameteri(paint, VG_PAINT_TYPE, VG_PAINT_TYPE_COLOR);
