@@ -31,7 +31,7 @@
 
 void fillRect(void)
 {
-	VGfloat color[4] = { 1, 1, 1, 1 };
+	VGfloat color[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
 	
 	VGPaint paint = vgCreatePaint();
 	vgSetParameteri(paint, VG_PAINT_TYPE, VG_PAINT_TYPE_COLOR);
@@ -39,7 +39,7 @@ void fillRect(void)
 	vgSetPaint(paint, VG_FILL_PATH);
 	
 	VGPath path = vgCreatePath(VG_PATH_FORMAT_STANDARD, VG_PATH_DATATYPE_F, 1.0f, 0.0f, 0, 0, VG_PATH_CAPABILITY_ALL);
-	vguRect(path, 0.25, 0.25, 0.75, 0.75);
+	vguRect(path, 0.25f, 0.25f, 0.1f, 0.1f);
 	vgDrawPath(path, VG_FILL_PATH);
 	
 	vgDestroyPath(path);
