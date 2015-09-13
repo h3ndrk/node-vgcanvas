@@ -19,6 +19,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <assert.h>
+#include <math.h>
 #include "EGL/egl.h"
 #include "GLES/gl.h"
 #include "bcm_host.h"
@@ -41,6 +42,11 @@ static VGfloat lineWidth = 1;
 static canvas_line_cap_t lineCap = CANVAS_LINE_CAP_BUTT;
 static canvas_line_join_t lineJoin = CANVAS_LINE_JOIN_MITER;
 static VGfloat globalAlpha = 1;
+
+static VGfloat canvas_ellipse_px = 0;
+static VGfloat canvas_ellipse_py = 0;
+static VGfloat canvas_ellipse_vg_rotation = 0;
+static VGfloat canvas_ellipse_angle = 0;
 
 void canvas__init(void)
 {
@@ -178,7 +184,7 @@ void canvas_beginPath(void)
 	vgClearPath(currentPath, VG_PATH_CAPABILITY_ALL);
 }
 
-void canvas_moveTo(GLfloat x, GLfloat y)
+void canvas_moveTo(VGfloat x, VGfloat y)
 {
 	VGubyte segment[1] = { VG_MOVE_TO_REL };
 	VGfloat data[2];
@@ -192,7 +198,7 @@ void canvas_moveTo(GLfloat x, GLfloat y)
 	vgAppendPathData(currentPath, 1, segment, (const void *)data);
 }
 
-void canvas_lineTo(GLfloat x, GLfloat y)
+void canvas_lineTo(VGfloat x, VGfloat y)
 {
 	VGubyte segment[1] = { VG_LINE_TO_REL };
 	VGfloat data[2];
@@ -203,7 +209,7 @@ void canvas_lineTo(GLfloat x, GLfloat y)
 	vgAppendPathData(currentPath, 1, segment, (const void *)data);
 }
 
-void canvas_quadraticCurveTo(GLfloat cpx, GLfloat cpy, GLfloat x, GLfloat y)
+void canvas_quadraticCurveTo(VGfloat cpx, VGfloat cpy, VGfloat x, VGfloat y)
 {
 	VGubyte segment[1] = { VG_QUAD_TO_REL };
 	VGfloat data[4];
@@ -216,10 +222,10 @@ void canvas_quadraticCurveTo(GLfloat cpx, GLfloat cpy, GLfloat x, GLfloat y)
 	vgAppendPathData(currentPath, 1, segment, (const void *)data);
 }
 
-void canvas_bezierCurveTo(GLfloat cp1x, GLfloat cp1y, GLfloat cp2x, GLfloat cp2y, GLfloat x, GLfloat y)
+void canvas_bezierCurveTo(VGfloat cp1x, VGfloat cp1y, VGfloat cp2x, VGfloat cp2y, VGfloat x, VGfloat y)
 {
 	VGubyte segment[1] = { VG_CUBIC_TO_REL };
-	VGfloat data[4];
+	VGfloat data[6];
 	
 	data[0] = cp1x;
 	data[1] = cp1y;
@@ -229,6 +235,107 @@ void canvas_bezierCurveTo(GLfloat cp1x, GLfloat cp1y, GLfloat cp2x, GLfloat cp2y
 	data[5] = y;
 	
 	vgAppendPathData(currentPath, 1, segment, (const void *)data);
+}
+
+static void canvas_ellipse_rotate_p(VGfloat rotation)
+{
+	VGfloat canvas_ellipse_tx = canvas_ellipse_px * cos(rotation) - canvas_ellipse_py * sin(rotation);
+	canvas_ellipse_py = canvas_ellipse_px * sin(rotation) + canvas_ellipse_py * cos(rotation);
+	canvas_ellipse_px = canvas_ellipse_tx;
+}
+
+static void canvas_ellipse_add_arc(VGPathCommand command, VGfloat x, VGfloat y, VGfloat rotation, VGfloat radius_x, VGfloat radius_y)
+{
+	VGubyte segment[1] = { command };
+	VGfloat data[5];
+	
+	data[0] = radius_x;
+	data[1] = radius_y;
+	data[2] = rotation;
+	data[3] = x;
+	data[4] = y;
+	
+	vgAppendPathData(currentPath, 1, segment, (const void *)data);
+}
+
+void canvas_ellipse(VGfloat x, VGfloat y, VGfloat radius_x, VGfloat radius_y, VGfloat rotation, VGfloat start_angle, VGfloat end_angle, VGboolean anticlockwise)
+{
+	canvas_ellipse_px = radius_x * cos(start_angle);
+	canvas_ellipse_py = radius_y * sin(start_angle);
+	
+	canvas_ellipse_rotate_p(rotation);
+	canvas_ellipse_vg_rotation = rotation * 180.0 / M_PI;
+	
+	canvas_moveTo(x + canvas_ellipse_px, y + canvas_ellipse_py);
+	
+	if(anticlockwise)
+	{
+		if(start_angle - end_angle >= 2 * M_PI)
+		{
+			start_angle = 2 * M_PI;
+			end_angle = 0;
+		}
+		
+		while(end_angle > start_angle)
+		{
+			end_angle -= 2 * M_PI;
+		}
+		
+		canvas_ellipse_angle = start_angle - M_PI;
+		
+		while(canvas_ellipse_angle > end_angle)
+		{
+			canvas_ellipse_px = radius_x * cos(canvas_ellipse_angle);
+			canvas_ellipse_py = radius_y * sin(canvas_ellipse_angle);
+			
+			canvas_ellipse_rotate_p(rotation);
+			
+			canvas_ellipse_add_arc(VG_SCWARC_TO_REL, x, y, rotation, radius_x, radius_y);
+			
+			canvas_ellipse_angle -= 2 * M_PI;
+		}
+		
+		canvas_ellipse_px = radius_x * cos(end_angle);
+		canvas_ellipse_py = radius_y * sin(end_angle);
+		
+		canvas_ellipse_rotate_p(rotation);
+		
+		canvas_ellipse_add_arc(VG_SCWARC_TO_REL, x, y, rotation, radius_x, radius_y);
+	}
+	else
+	{
+		if(end_angle - start_angle >= 2 * M_PI)
+		{
+			end_angle = 2 * M_PI;
+			start_angle = 0;
+		}
+		
+		while(end_angle < start_angle)
+		{
+			end_angle += 2 * M_PI;
+		}
+		
+		canvas_ellipse_angle = start_angle + M_PI;
+		
+		while(canvas_ellipse_angle < end_angle)
+		{
+			canvas_ellipse_px = radius_x * cos(canvas_ellipse_angle);
+			canvas_ellipse_py = radius_y * sin(canvas_ellipse_angle);
+			
+			canvas_ellipse_rotate_p(rotation);
+			
+			canvas_ellipse_add_arc(VG_SCCWARC_TO_REL, x, y, rotation, radius_x, radius_y);
+			
+			canvas_ellipse_angle += 2 * M_PI;
+		}
+		
+		canvas_ellipse_px = radius_x * cos(end_angle);
+		canvas_ellipse_py = radius_y * sin(end_angle);
+		
+		canvas_ellipse_rotate_p(rotation);
+		
+		canvas_ellipse_add_arc(VG_SCCWARC_TO_REL, x, y, rotation, radius_x, radius_y);
+	}
 }
 
 void canvas_closePath(void)

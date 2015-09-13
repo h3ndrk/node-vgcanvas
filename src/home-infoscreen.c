@@ -52,6 +52,7 @@ int main(void)
 	canvas_lineTo(200, 200);
 	canvas_quadraticCurveTo(100, -150, 200, -200);
 	canvas_bezierCurveTo(-100, -150, -110, -190, -200, -200);
+	canvas_ellipse(500, 500, 100, 200, 0, 0, 0, VG_FALSE);
 	canvas_closePath();
 	canvas_fill();
 	canvas_stroke();

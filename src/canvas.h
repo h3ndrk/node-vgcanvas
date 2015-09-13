@@ -50,6 +50,7 @@ void canvas_moveTo(GLfloat x, GLfloat y);
 void canvas_lineTo(GLfloat x, GLfloat y);
 void canvas_quadraticCurveTo(GLfloat cpx, GLfloat cpy, GLfloat x, GLfloat y);
 void canvas_bezierCurveTo(GLfloat cp1x, GLfloat cp1y, GLfloat cp2x, GLfloat cp2y, GLfloat x, GLfloat y);
+void canvas_ellipse(VGfloat x, VGfloat y, VGfloat radius_x, VGfloat radius_y, VGfloat rotation, VGfloat start_angle, VGfloat end_angle, VGboolean anticlockwise);
 void canvas_closePath(void);
 void canvas_stroke(void);
 void canvas_fill(void);

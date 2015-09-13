@@ -23,7 +23,7 @@ CFLAGS += -I /opt/vc/include/interface/vcos/pthreads
 # CFLAGS += -I./etc
 CFLAGS += -fgnu89-inline # fix for vcos compiler warnings
 
-# LIBS += -lm
+LIBS += -lm
 LIBS += -L /opt/vc/lib
 LIBS += -lGLESv2
 LIBS += -lEGL
