@@ -203,6 +203,34 @@ void canvas_lineTo(GLfloat x, GLfloat y)
 	vgAppendPathData(currentPath, 1, segment, (const void *)data);
 }
 
+void canvas_quadraticCurveTo(GLfloat cpx, GLfloat cpy, GLfloat x, GLfloat y)
+{
+	VGubyte segment[1] = { VG_QUAD_TO_REL };
+	VGfloat data[4];
+	
+	data[0] = cpx;
+	data[1] = cpy;
+	data[2] = x;
+	data[3] = y;
+	
+	vgAppendPathData(currentPath, 1, segment, (const void *)data);
+}
+
+void canvas_bezierCurveTo(GLfloat cp1x, GLfloat cp1y, GLfloat cp2x, GLfloat cp2y, GLfloat x, GLfloat y)
+{
+	VGubyte segment[1] = { VG_CUBIC_TO_REL };
+	VGfloat data[4];
+	
+	data[0] = cp1x;
+	data[1] = cp1y;
+	data[2] = cp2x;
+	data[3] = cp2y;
+	data[4] = x;
+	data[5] = y;
+	
+	vgAppendPathData(currentPath, 1, segment, (const void *)data);
+}
+
 void canvas_closePath(void)
 {
 	VGubyte segment[1] = { VG_CLOSE_PATH };

@@ -50,15 +50,15 @@ int main(void)
 	canvas_beginPath();
 	canvas_moveTo(300, 300);
 	canvas_lineTo(200, 200);
-	canvas_lineTo(200, -200);
-	canvas_lineTo(-200, -200);
+	canvas_quadraticCurveTo(100, -150, 200, -200);
+	canvas_bezierCurveTo(-100, -150, -110, -190, -200, -200);
 	canvas_closePath();
-	canvas_stroke();
 	canvas_fill();
+	canvas_stroke();
 	
 	egl_swap_buffers();
 	
-	sleep(3);
+	sleep(5);
 	
 	canvas__cleanup();
 	
