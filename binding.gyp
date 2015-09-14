@@ -28,7 +28,8 @@
         "library_dirs": [
           "/opt/vc/lib"
         ]
-      }
+      },
+      "cflags_c": [ "-fgnu89-inline" ]
     }
   ]
 }
