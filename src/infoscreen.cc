@@ -31,6 +31,7 @@ extern "C" {
   #include "canvas.h"
 }
 
+#include <iostream>
 #include <node.h>
 
 
