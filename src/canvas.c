@@ -1,6 +1,6 @@
 /**
  * Copyright (C) 2015 NIPE-SYSTEMS
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -52,20 +52,20 @@ void canvas__init(void)
 {
 	VGPaint clearPaint = 0;
 	VGfloat temp_color[4] = { 0.0f, 0.0f, 0.0f, 1.0f }; // black
-	
+
 	egl_init();
-	
+
 	printf("{ width: %i, height: %i }\n", egl_get_width(), egl_get_height());
-	
+
 	// immediate colors for fill and stroke
 	fill_color.paint = vgCreatePaint();
 	stroke_color.paint = vgCreatePaint();
-	
+
 	// clear color
 	clearPaint = vgCreatePaint();
 	vgSetfv(VG_CLEAR_COLOR, 4, temp_color);
 	vgDestroyPaint(clearPaint);
-	
+
 	// reset values
 	canvas_fillStyle_color(1, 1, 1, 1);
 	canvas_strokeStyle_color(1, 1, 1, 1);
@@ -73,15 +73,15 @@ void canvas__init(void)
 	canvas_lineCap(CANVAS_LINE_CAP_BUTT);
 	canvas_lineJoin(CANVAS_LINE_JOIN_MITER);
 	canvas_globalAlpha(1);
-	
+
 	// immediate path for drawing rects, etc.
 	immediatePath = vgCreatePath(VG_PATH_FORMAT_STANDARD, VG_PATH_DATATYPE_F, 1.0f, 0.0f, 0, 0, VG_PATH_CAPABILITY_ALL);
-	
+
 	// currentPath for path rendering (beginPath, etc.)
 	currentPath = vgCreatePath(VG_PATH_FORMAT_STANDARD, VG_PATH_DATATYPE_F, 1.0f, 0.0f, 0, 0, VG_PATH_CAPABILITY_ALL);
-	
+
 	vgSeti(VG_SCISSORING, VG_FALSE);
-	
+
 	vgLoadIdentity();
 }
 
@@ -89,10 +89,10 @@ void canvas__cleanup(void)
 {
 	vgDestroyPaint(fill_color.paint);
 	vgDestroyPaint(stroke_color.paint);
-	
+
 	vgDestroyPath(immediatePath);
 	vgDestroyPath(currentPath);
-	
+
 	egl_cleanup();
 }
 
@@ -105,16 +105,16 @@ void canvas_clearRect(VGfloat x, VGfloat y, VGfloat width, VGfloat height)
 void canvas_fillRect(VGfloat x, VGfloat y, VGfloat width, VGfloat height)
 {
 	VGfloat color_values[4];
-	
+
 	color_values[0] = fill_color.red;
 	color_values[1] = fill_color.green;
 	color_values[2] = fill_color.blue;
 	color_values[3] = fill_color.alpha * globalAlpha;
-	
+
 	vgSetParameteri(fill_color.paint, VG_PAINT_TYPE, VG_PAINT_TYPE_COLOR);
 	vgSetParameterfv(fill_color.paint, VG_PAINT_COLOR, 4, color_values);
 	vgSetPaint(fill_color.paint, VG_FILL_PATH);
-	
+
 	vgClearPath(immediatePath, VG_PATH_CAPABILITY_ALL);
 	vguRect(immediatePath, x, y, width, height);
 	vgDrawPath(immediatePath, VG_FILL_PATH);
@@ -128,16 +128,16 @@ void canvas_fillStyle_color(VGfloat red, VGfloat green, VGfloat blue, VGfloat al
 void canvas_strokeRect(VGfloat x, VGfloat y, VGfloat width, VGfloat height)
 {
 	VGfloat color_values[4];
-	
+
 	color_values[0] = stroke_color.red;
 	color_values[1] = stroke_color.green;
 	color_values[2] = stroke_color.blue;
 	color_values[3] = stroke_color.alpha * globalAlpha;
-	
+
 	vgSetParameteri(stroke_color.paint, VG_PAINT_TYPE, VG_PAINT_TYPE_COLOR);
 	vgSetParameterfv(stroke_color.paint, VG_PAINT_COLOR, 4, color_values);
 	vgSetPaint(stroke_color.paint, VG_STROKE_PATH);
-	
+
 	vgClearPath(immediatePath, VG_PATH_CAPABILITY_ALL);
 	vguRect(immediatePath, x, y, width, height);
 	vgDrawPath(immediatePath, VG_STROKE_PATH);
@@ -151,28 +151,28 @@ void canvas_strokeStyle_color(VGfloat red, VGfloat green, VGfloat blue, VGfloat 
 void canvas_lineWidth(VGfloat width)
 {
 	lineWidth = width;
-	
+
 	vgSetf(VG_STROKE_LINE_WIDTH, width);
 }
 
 void canvas_lineCap(canvas_line_cap_t line_cap)
 {
 	lineCap = line_cap;
-	
+
 	vgSeti(VG_STROKE_CAP_STYLE, line_cap);
 }
 
 void canvas_lineJoin(canvas_line_join_t line_join)
 {
 	lineJoin = line_join;
-	
+
 	vgSeti(VG_STROKE_CAP_STYLE, line_join);
 }
 
 void canvas_globalAlpha(VGfloat alpha)
 {
 	globalAlpha = alpha;
-	
+
 	if(globalAlpha > 1 || globalAlpha < 0)
 	{
 		globalAlpha = 1;
@@ -188,24 +188,24 @@ void canvas_moveTo(VGfloat x, VGfloat y)
 {
 	VGubyte segment[1] = { VG_MOVE_TO_REL };
 	VGfloat data[2];
-	
+
 	data[0] = x;
 	data[1] = y;
-	
+
 	currentPath_sx = x;
 	currentPath_sy = y;
-	
+
 	vgAppendPathData(currentPath, 1, segment, (const void *)data);
 }
 
 void canvas_lineTo(VGfloat x, VGfloat y)
 {
-	VGubyte segment[1] = { VG_LINE_TO_REL };
+	VGubyte segment[1] = { VG_LINE_TO_ABS };
 	VGfloat data[2];
-	
+
 	data[0] = x;
 	data[1] = y;
-	
+
 	vgAppendPathData(currentPath, 1, segment, (const void *)data);
 }
 
@@ -213,12 +213,12 @@ void canvas_quadraticCurveTo(VGfloat cpx, VGfloat cpy, VGfloat x, VGfloat y)
 {
 	VGubyte segment[1] = { VG_QUAD_TO_REL };
 	VGfloat data[4];
-	
+
 	data[0] = cpx;
 	data[1] = cpy;
 	data[2] = x;
 	data[3] = y;
-	
+
 	vgAppendPathData(currentPath, 1, segment, (const void *)data);
 }
 
@@ -226,14 +226,14 @@ void canvas_bezierCurveTo(VGfloat cp1x, VGfloat cp1y, VGfloat cp2x, VGfloat cp2y
 {
 	VGubyte segment[1] = { VG_CUBIC_TO_REL };
 	VGfloat data[6];
-	
+
 	data[0] = cp1x;
 	data[1] = cp1y;
 	data[2] = cp2x;
 	data[3] = cp2y;
 	data[4] = x;
 	data[5] = y;
-	
+
 	vgAppendPathData(currentPath, 1, segment, (const void *)data);
 }
 
@@ -248,13 +248,13 @@ static void canvas_ellipse_add_arc(VGPathCommand command, VGfloat x, VGfloat y, 
 {
 	VGubyte segment[1] = { command };
 	VGfloat data[5];
-	
+
 	data[0] = radius_x;
 	data[1] = radius_y;
 	data[2] = rotation;
 	data[3] = x;
 	data[4] = y;
-	
+
 	vgAppendPathData(currentPath, 1, segment, (const void *)data);
 }
 
@@ -262,12 +262,12 @@ void canvas_ellipse(VGfloat x, VGfloat y, VGfloat radius_x, VGfloat radius_y, VG
 {
 	canvas_ellipse_px = radius_x * cos(start_angle);
 	canvas_ellipse_py = radius_y * sin(start_angle);
-	
+
 	canvas_ellipse_rotate_p(rotation);
 	canvas_ellipse_vg_rotation = rotation * 180.0 / M_PI;
-	
+
 	canvas_moveTo(x + canvas_ellipse_px, y + canvas_ellipse_py);
-	
+
 	if(anticlockwise)
 	{
 		if(start_angle - end_angle >= 2 * M_PI)
@@ -275,31 +275,31 @@ void canvas_ellipse(VGfloat x, VGfloat y, VGfloat radius_x, VGfloat radius_y, VG
 			start_angle = 2 * M_PI;
 			end_angle = 0;
 		}
-		
+
 		while(end_angle > start_angle)
 		{
 			end_angle -= 2 * M_PI;
 		}
-		
+
 		canvas_ellipse_angle = start_angle - M_PI;
-		
+
 		while(canvas_ellipse_angle > end_angle)
 		{
 			canvas_ellipse_px = radius_x * cos(canvas_ellipse_angle);
 			canvas_ellipse_py = radius_y * sin(canvas_ellipse_angle);
-			
+
 			canvas_ellipse_rotate_p(rotation);
-			
+
 			canvas_ellipse_add_arc(VG_SCWARC_TO_REL, x, y, rotation, radius_x, radius_y);
-			
+
 			canvas_ellipse_angle -= 2 * M_PI;
 		}
-		
+
 		canvas_ellipse_px = radius_x * cos(end_angle);
 		canvas_ellipse_py = radius_y * sin(end_angle);
-		
+
 		canvas_ellipse_rotate_p(rotation);
-		
+
 		canvas_ellipse_add_arc(VG_SCWARC_TO_REL, x, y, rotation, radius_x, radius_y);
 	}
 	else
@@ -309,31 +309,31 @@ void canvas_ellipse(VGfloat x, VGfloat y, VGfloat radius_x, VGfloat radius_y, VG
 			end_angle = 2 * M_PI;
 			start_angle = 0;
 		}
-		
+
 		while(end_angle < start_angle)
 		{
 			end_angle += 2 * M_PI;
 		}
-		
+
 		canvas_ellipse_angle = start_angle + M_PI;
-		
+
 		while(canvas_ellipse_angle < end_angle)
 		{
 			canvas_ellipse_px = radius_x * cos(canvas_ellipse_angle);
 			canvas_ellipse_py = radius_y * sin(canvas_ellipse_angle);
-			
+
 			canvas_ellipse_rotate_p(rotation);
-			
+
 			canvas_ellipse_add_arc(VG_SCCWARC_TO_REL, x, y, rotation, radius_x, radius_y);
-			
+
 			canvas_ellipse_angle += 2 * M_PI;
 		}
-		
+
 		canvas_ellipse_px = radius_x * cos(end_angle);
 		canvas_ellipse_py = radius_y * sin(end_angle);
-		
+
 		canvas_ellipse_rotate_p(rotation);
-		
+
 		canvas_ellipse_add_arc(VG_SCCWARC_TO_REL, x, y, rotation, radius_x, radius_y);
 	}
 }
@@ -342,41 +342,41 @@ void canvas_closePath(void)
 {
 	VGubyte segment[1] = { VG_CLOSE_PATH };
 	VGfloat data[2];
-	
+
 	data[0] = currentPath_sx;
 	data[1] = currentPath_sy;
-	
+
 	vgAppendPathData(currentPath, 1, segment, (const void *)data);
 }
 
 void canvas_stroke(void)
 {
 	VGfloat color_values[4];
-	
+
 	color_values[0] = stroke_color.red;
 	color_values[1] = stroke_color.green;
 	color_values[2] = stroke_color.blue;
 	color_values[3] = stroke_color.alpha * globalAlpha;
-	
+
 	vgSetParameteri(stroke_color.paint, VG_PAINT_TYPE, VG_PAINT_TYPE_COLOR);
 	vgSetParameterfv(stroke_color.paint, VG_PAINT_COLOR, 4, color_values);
 	vgSetPaint(stroke_color.paint, VG_STROKE_PATH);
-	
+
 	vgDrawPath(currentPath, VG_STROKE_PATH);
 }
 
 void canvas_fill(void)
 {
 	VGfloat color_values[4];
-	
+
 	color_values[0] = fill_color.red;
 	color_values[1] = fill_color.green;
 	color_values[2] = fill_color.blue;
 	color_values[3] = fill_color.alpha * globalAlpha;
-	
+
 	vgSetParameteri(fill_color.paint, VG_PAINT_TYPE, VG_PAINT_TYPE_COLOR);
 	vgSetParameterfv(fill_color.paint, VG_PAINT_COLOR, 4, color_values);
 	vgSetPaint(fill_color.paint, VG_FILL_PATH);
-	
+
 	vgDrawPath(currentPath, VG_FILL_PATH);
 }

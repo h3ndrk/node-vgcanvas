@@ -96,6 +96,96 @@ void GetScreenHeight(const Nan::FunctionCallbackInfo<Value>& args) {
   args.GetReturnValue().Set(Nan::New(egl_get_height()));
 }
 
+void SetLineWidth(const Nan::FunctionCallbackInfo<Value>& args) {
+  if(!checkArgs(args, 1))
+    return;
+
+  canvas_lineWidth(args[0]->NumberValue());
+}
+
+void SetLineCap(const Nan::FunctionCallbackInfo<Value>& args) {
+  if(args.Length() != 1 || !args[0]->IsString()) {
+    Nan::ThrowTypeError("wrong arg");
+    return;
+  }
+
+  std::string value(*Nan::Utf8String(args[0]));
+  canvas_line_cap_t type = CANVAS_LINE_CAP_BUTT;
+
+  if(value == "round")
+    type = CANVAS_LINE_CAP_ROUND;
+  else if(value == "butt")
+    type = CANVAS_LINE_CAP_BUTT;
+  else if(value == "square")
+    type = CANVAS_LINE_CAP_SQUARE;
+
+  canvas_lineCap(type);
+}
+
+void SetLineJoin(const Nan::FunctionCallbackInfo<Value>& args) {
+  if(args.Length() != 1 || !args[0]->IsString()) {
+    Nan::ThrowTypeError("wrong arg");
+    return;
+  }
+
+  std::string value(*Nan::Utf8String(args[0]));
+  canvas_line_join_t type = CANVAS_LINE_JOIN_MITER;
+
+  if(value == "miter")
+    type = CANVAS_LINE_JOIN_MITER;
+  else if(value == "round")
+    type = CANVAS_LINE_JOIN_ROUND;
+  else if(value == "bevel")
+    type = CANVAS_LINE_JOIN_BEVEL;
+
+  canvas_lineJoin(type);
+}
+
+void SetStrokeStyle(const Nan::FunctionCallbackInfo<Value>& args) {
+  if(!checkArgs(args, 4))
+    return;
+
+  canvas_strokeStyle_color(args[0]->NumberValue(), args[1]->NumberValue(), args[2]->NumberValue(), args[3]->NumberValue());
+}
+
+void StrokeRect(const Nan::FunctionCallbackInfo<Value>& args) {
+  if(!checkArgs(args, 4))
+    return;
+
+  canvas_strokeRect(args[0]->NumberValue(), args[1]->NumberValue(), args[2]->NumberValue(), args[3]->NumberValue());
+
+}
+
+void BeginPath(const Nan::FunctionCallbackInfo<Value>& args) {
+  canvas_beginPath();
+}
+
+void ClosePath(const Nan::FunctionCallbackInfo<Value>& args) {
+  canvas_closePath();
+}
+
+void MoveTo(const Nan::FunctionCallbackInfo<Value>& args) {
+  if(!checkArgs(args, 2))
+    return;
+
+  canvas_moveTo(args[0]->NumberValue(), args[1]->NumberValue());
+}
+
+void LineTo(const Nan::FunctionCallbackInfo<Value>& args) {
+  if(!checkArgs(args, 2))
+    return;
+
+  canvas_lineTo(args[0]->NumberValue(), args[1]->NumberValue());
+}
+
+void Stroke(const Nan::FunctionCallbackInfo<Value>& args) {
+  canvas_stroke();
+}
+
+void Fill(const Nan::FunctionCallbackInfo<Value>& args) {
+  canvas_fill();
+}
+
 void ModuleInit(Local<Object> exports) {
   exports->Set(Nan::New("init").ToLocalChecked(), Nan::New<FunctionTemplate>(Init)->GetFunction());
   exports->Set(Nan::New("swapBuffers").ToLocalChecked(), Nan::New<FunctionTemplate>(SwapBuffers)->GetFunction());
@@ -103,13 +193,27 @@ void ModuleInit(Local<Object> exports) {
 
   exports->Set(Nan::New("fillRect").ToLocalChecked(), Nan::New<FunctionTemplate>(FillRect)->GetFunction());
   exports->Set(Nan::New("clearRect").ToLocalChecked(), Nan::New<FunctionTemplate>(ClearRect)->GetFunction());
+  exports->Set(Nan::New("strokeRect").ToLocalChecked(), Nan::New<FunctionTemplate>(StrokeRect)->GetFunction());
+
   exports->Set(Nan::New("setFillStyle").ToLocalChecked(), Nan::New<FunctionTemplate>(SetFillStyle)->GetFunction());
+  exports->Set(Nan::New("setStrokeStyle").ToLocalChecked(), Nan::New<FunctionTemplate>(SetStrokeStyle)->GetFunction());
 
   exports->Set(Nan::New("getScreenWidth").ToLocalChecked(), Nan::New<FunctionTemplate>(GetScreenWidth)->GetFunction());
   exports->Set(Nan::New("getScreenHeight").ToLocalChecked(), Nan::New<FunctionTemplate>(GetScreenHeight)->GetFunction());
 
+  exports->Set(Nan::New("setLineWidth").ToLocalChecked(), Nan::New<FunctionTemplate>(SetLineWidth)->GetFunction());
+  exports->Set(Nan::New("setLineCap").ToLocalChecked(), Nan::New<FunctionTemplate>(SetLineCap)->GetFunction());
+  exports->Set(Nan::New("setLineJoin").ToLocalChecked(), Nan::New<FunctionTemplate>(SetLineJoin)->GetFunction());
+
+  exports->Set(Nan::New("beginPath").ToLocalChecked(), Nan::New<FunctionTemplate>(BeginPath)->GetFunction());
+  exports->Set(Nan::New("closePath").ToLocalChecked(), Nan::New<FunctionTemplate>(ClosePath)->GetFunction());
+  exports->Set(Nan::New("moveTo").ToLocalChecked(), Nan::New<FunctionTemplate>(MoveTo)->GetFunction());
+  exports->Set(Nan::New("lineTo").ToLocalChecked(), Nan::New<FunctionTemplate>(LineTo)->GetFunction());
+  exports->Set(Nan::New("stroke").ToLocalChecked(), Nan::New<FunctionTemplate>(Stroke)->GetFunction());
+  exports->Set(Nan::New("fill").ToLocalChecked(), Nan::New<FunctionTemplate>(Fill)->GetFunction());
+
 }
 
-NODE_MODULE(vgcanvas, ModuleInit)
-
 }
+
+NODE_MODULE(vgcanvas, infoscreen::ModuleInit)
