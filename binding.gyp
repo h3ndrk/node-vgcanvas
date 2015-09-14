@@ -29,7 +29,7 @@
           "/opt/vc/lib"
         ]
       },
-      "cflags_c": [ "-fgnu89-inline" ]
+      "cflags_c": [ "-fgnu89-inline" ] # fix for vcos compiler warnings
     }
   ]
 }
