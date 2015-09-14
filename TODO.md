@@ -1,12 +1,12 @@
 # Todo
 
-- [ ] color strings: https://developer.mozilla.org/en-US/docs/Web/CSS/color_value (javascript code)
+- [x] color strings: https://developer.mozilla.org/en-US/docs/Web/CSS/color_value (javascript code)
     - [x] color names
     - [x] #-hexadecimal
-    - [ ] rgb()
-    - [ ] rgba()
-    - [ ] hsl()
-    - [ ] hsla()
+    - [x] rgb()
+    - [x] rgba()
+    - [x] hsl()
+    - [x] hsla()
 - [ ] gradients
 - [ ] patterns
 - [ ] shadows

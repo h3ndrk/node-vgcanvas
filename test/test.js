@@ -17,7 +17,7 @@ setInterval(function() {
   ctx.fillStyle = '#865656';
   ctx.fillRect(400, y2 + 400, 100, 100);
 
-  ctx.fillStyle = 'gold';
+  ctx.fillStyle = 'hsl(120, 75%, 75%)';
   ctx.fillRect(550, y2 * 0.5 + 400, 100, 100);
 
   ctx.swapBuffers();
