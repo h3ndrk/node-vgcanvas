@@ -31,25 +31,22 @@ extern "C" {
   #include "canvas.h"
 }
 
-#include <iostream>
-#include <node.h>
-
+#include <nan.h>
 
 using namespace v8;
 
 namespace infoscreen {
 
-bool checkArgs(const FunctionCallbackInfo<Value> &args, int expect) {
-  Isolate *isolate = args.GetIsolate();
+bool checkArgs(const Nan::FunctionCallbackInfo<Value> &args, int expect) {
 
   if(args.Length() != expect) {
-    isolate->ThrowException(Exception::TypeError(String::NewFromUtf8(isolate, "Wrong number of args")));
+    Nan::ThrowTypeError("Wrong number of args");
     return false;
   }
 
   for(int i = 0; i < expect; i++) {
     if(!args[i]->IsNumber()) {
-      isolate->ThrowException(Exception::TypeError(String::NewFromUtf8(isolate, "Wrong arg")));
+      Nan::ThrowTypeError("Wrong arg");
       return false;
     }
   }
@@ -58,57 +55,59 @@ bool checkArgs(const FunctionCallbackInfo<Value> &args, int expect) {
 
 }
 
-void Init(const FunctionCallbackInfo<Value>& args) {
+void Init(const Nan::FunctionCallbackInfo<Value>& args) {
   canvas__init();
 }
 
-void SwapBuffers(const FunctionCallbackInfo<Value>& args) {
+void SwapBuffers(const Nan::FunctionCallbackInfo<Value>& args) {
   egl_swap_buffers();
 }
 
-void Cleanup(const FunctionCallbackInfo<Value>& args) {
+void Cleanup(const Nan::FunctionCallbackInfo<Value>& args) {
   canvas__cleanup();
 }
 
-void FillRect(const FunctionCallbackInfo<Value>& args) {
+void FillRect(const Nan::FunctionCallbackInfo<Value>& args) {
   if(!checkArgs(args, 4))
     return;
 
   canvas_fillRect(args[0]->NumberValue(), args[1]->NumberValue(), args[2]->NumberValue(), args[3]->NumberValue());
 }
 
-void ClearRect(const FunctionCallbackInfo<Value>& args) {
+void ClearRect(const Nan::FunctionCallbackInfo<Value>& args) {
   if(!checkArgs(args, 4))
     return;
 
   canvas_clearRect(args[0]->NumberValue(), args[1]->NumberValue(), args[2]->NumberValue(), args[3]->NumberValue());
 }
 
-void SetFillStyle(const FunctionCallbackInfo<Value>& args) {
+void SetFillStyle(const Nan::FunctionCallbackInfo<Value>& args) {
   if(!checkArgs(args, 4))
     return;
 
   canvas_fillStyle_color(args[0]->NumberValue(), args[1]->NumberValue(), args[2]->NumberValue(), args[3]->NumberValue());
 }
 
-void GetScreenWidth(const FunctionCallbackInfo<Value>& args) {
-  args.GetReturnValue().Set(Number::New(args.GetIsolate(), egl_get_width()));
+void GetScreenWidth(const Nan::FunctionCallbackInfo<Value>& args) {
+  args.GetReturnValue().Set(Nan::New(egl_get_width()));
 }
 
-void GetScreenHeight(const FunctionCallbackInfo<Value>& args) {
-  args.GetReturnValue().Set(Number::New(args.GetIsolate(), egl_get_height()));
+void GetScreenHeight(const Nan::FunctionCallbackInfo<Value>& args) {
+  args.GetReturnValue().Set(Nan::New(egl_get_height()));
 }
 
 void ModuleInit(Local<Object> exports) {
-  NODE_SET_METHOD(exports, "init", Init);
-  NODE_SET_METHOD(exports, "swapBuffers", SwapBuffers);
-  NODE_SET_METHOD(exports, "cleanup", Cleanup);
-  NODE_SET_METHOD(exports, "fillRect", FillRect);
-  NODE_SET_METHOD(exports, "clearRect", ClearRect);
-  NODE_SET_METHOD(exports, "setFillStyle", SetFillStyle);
+  exports->Set(Nan::New("init").ToLocalChecked(), Nan::New<FunctionTemplate>(Init)->GetFunction());
+  exports->Set(Nan::New("swapBuffers").ToLocalChecked(), Nan::New<FunctionTemplate>(SwapBuffers)->GetFunction());
+  exports->Set(Nan::New("cleanup").ToLocalChecked(), Nan::New<FunctionTemplate>(Cleanup)->GetFunction());
 
-  NODE_SET_METHOD(exports, "getScreenWidth", GetScreenWidth);
-  NODE_SET_METHOD(exports, "getScreenHeight", GetScreenHeight);
+  exports->Set(Nan::New("fillRect").ToLocalChecked(), Nan::New<FunctionTemplate>(FillRect)->GetFunction());
+  exports->Set(Nan::New("clearRect").ToLocalChecked(), Nan::New<FunctionTemplate>(ClearRect)->GetFunction());
+  exports->Set(Nan::New("setFillStyle").ToLocalChecked(), Nan::New<FunctionTemplate>(SetFillStyle)->GetFunction());
+
+  exports->Set(Nan::New("getScreenWidth").ToLocalChecked(), Nan::New<FunctionTemplate>(GetScreenWidth)->GetFunction());
+  exports->Set(Nan::New("getScreenHeight").ToLocalChecked(), Nan::New<FunctionTemplate>(GetScreenHeight)->GetFunction());
+
 }
 
 NODE_MODULE(vgcanvas, ModuleInit)
