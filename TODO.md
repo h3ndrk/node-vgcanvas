@@ -13,3 +13,4 @@
 - [ ] images
 - [ ] text
 - [ ] comments
+- [ ] remove Makefile, remove "bin" from ".gitignore"
