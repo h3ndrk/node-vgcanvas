@@ -1,6 +1,6 @@
 {
-  "name": "infoscreen",
-  "version": "1.0.0",
+  "name": "vgcanvas",
+  "version": "0.0.1",
   "description": "Node.JS wrapper for HTML Canvas on the Raspberry Pi.",
   "main": "test.js",
   "scripts": {
@@ -9,13 +9,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/NIPE-SYSTEMS/infoscreen.git"
+    "url": "git+https://github.com/NIPE-SYSTEMS/node-vgcanvas.git"
   },
   "author": "NIPE-SYSTEMS <dev.nipe.systems@gmail.com>",
   "license": "GPL-3.0",
   "gypfile": true,
   "bugs": {
-    "url": "https://github.com/NIPE-SYSTEMS/infoscreen/issues"
+    "url": "https://github.com/NIPE-SYSTEMS/node-vgcanvas/issues"
   },
-  "homepage": "https://github.com/NIPE-SYSTEMS/infoscreen#readme"
+  "homepage": "https://github.com/NIPE-SYSTEMS/node-vgcanvas#readme"
 }
