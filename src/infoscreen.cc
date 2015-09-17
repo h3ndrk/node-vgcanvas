@@ -16,17 +16,6 @@
  */
 
 extern "C" {
-	#include <stdio.h>
-	#include <stdlib.h>
-	#include <unistd.h>
-	#include <assert.h>
-	#include "EGL/egl.h"
-	#include "GLES/gl.h"
-	#include "bcm_host.h"
-	#include "VG/openvg.h"
-	#include "VG/vgu.h"
-	#include "VG/vgext.h"
-
 	#include "egl-util.h"
 	#include "canvas.h"
 }
@@ -49,6 +38,7 @@ namespace infoscreen {
 				Nan::ThrowTypeError("Wrong arg");
 				return false;
 			}
+			
 		}
 
 		return true;

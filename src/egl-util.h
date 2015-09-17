@@ -1,6 +1,6 @@
 /**
  * Copyright (C) 2015 NIPE-SYSTEMS
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -17,6 +17,9 @@
 
 #ifndef __GL_UTIL_H__
 #define __GL_UTIL_H__
+
+#include <stdint.h>
+#include <EGL/egl.h>
 
 void egl_init(void);
 void egl_cleanup(void);
