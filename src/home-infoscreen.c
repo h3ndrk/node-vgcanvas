@@ -15,16 +15,20 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <stdio.h>
+
 #include "egl-util.h"
 #include "canvas.h"
 
 int main(void)
 {
+	char s[3];
+	
 	canvas__init();
 	
 	canvas_clearRect(0, 0, egl_get_width(), egl_get_height());
 	
-	canvas_lineWidth(10);
+	canvas_lineWidth(2);
 	
 	canvas_fillStyle_color(1, 0, 0, 1);
 	
@@ -37,18 +41,20 @@ int main(void)
 	canvas_globalAlpha(1);
 	
 	canvas_beginPath();
-	canvas_moveTo(300, 300);
-	canvas_lineTo(200, 200);
-	canvas_quadraticCurveTo(100, -150, 200, -200);
-	canvas_bezierCurveTo(-100, -150, -110, -190, -200, -200);
-	canvas_ellipse(500, 500, 100, 200, 0, 0, 0, VG_FALSE);
-	canvas_closePath();
-	canvas_fill();
+	canvas_moveTo(400, 500);
+	canvas_lineTo(600, 500);
+	canvas_moveTo(500, 400);
+	canvas_lineTo(500, 600);
 	canvas_stroke();
+	
+	// canvas_beginPath();
+	// canvas_ellipse(500, 500, 100, 50, 5, 0, 2 * M_PI, VG_FALSE);
+	// canvas_stroke();
 	
 	egl_swap_buffers();
 	
-	sleep(5);
+	printf("Press <Enter> to shutdown.\n");
+	fgets(s, 2, stdin);
 	
 	canvas__cleanup();
 	
