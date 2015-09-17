@@ -7,7 +7,7 @@
     - [x] rgba()
     - [x] hsl()
     - [x] hsla()
-- [ ] Rename "`src/infoscreen.cc`" to "`src/vgcanvas.cc`"
+- [x] Rename "`src/infoscreen.cc`" to "`src/vgcanvas.cc`"
 - [ ] gradients
 - [ ] patterns
 - [ ] shadows

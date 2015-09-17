@@ -3,7 +3,7 @@
     {
       "target_name": "vgcanvas",
       "sources": [
-        "src/infoscreen.cc",
+        "src/vgcanvas.cc",
         "src/egl-util.c",
         "src/canvas.c",
         "src/color.c"
