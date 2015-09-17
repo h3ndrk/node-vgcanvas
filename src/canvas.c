@@ -186,7 +186,7 @@ void canvas_beginPath(void)
 
 void canvas_moveTo(VGfloat x, VGfloat y)
 {
-	VGubyte segment[1] = { VG_MOVE_TO_REL };
+	VGubyte segment[1] = { VG_MOVE_TO_ABS };
 	VGfloat data[2];
 
 	data[0] = x;
@@ -211,7 +211,7 @@ void canvas_lineTo(VGfloat x, VGfloat y)
 
 void canvas_quadraticCurveTo(VGfloat cpx, VGfloat cpy, VGfloat x, VGfloat y)
 {
-	VGubyte segment[1] = { VG_QUAD_TO_REL };
+	VGubyte segment[1] = { VG_QUAD_TO_ABS };
 	VGfloat data[4];
 
 	data[0] = cpx;
@@ -224,7 +224,7 @@ void canvas_quadraticCurveTo(VGfloat cpx, VGfloat cpy, VGfloat x, VGfloat y)
 
 void canvas_bezierCurveTo(VGfloat cp1x, VGfloat cp1y, VGfloat cp2x, VGfloat cp2y, VGfloat x, VGfloat y)
 {
-	VGubyte segment[1] = { VG_CUBIC_TO_REL };
+	VGubyte segment[1] = { VG_CUBIC_TO_ABS };
 	VGfloat data[6];
 
 	data[0] = cp1x;
