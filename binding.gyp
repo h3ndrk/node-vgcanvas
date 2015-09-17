@@ -9,6 +9,7 @@
         "src/color.c"
       ],
       "include_dirs": [
+        "<!(node -e \"require('nan')\")",
         "/opt/vc/include",
         "/opt/vc/include/interface/vmcs_host/linux",
         "/opt/vc/include/interface/vcos/pthreads"
