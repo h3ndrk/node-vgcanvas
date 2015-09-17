@@ -7,11 +7,11 @@
     - [x] rgba()
     - [x] hsl()
     - [x] hsla()
-- [ ] Rename "infoscreen.cc" to "vgcanvas.cc"
+- [ ] Rename "`infoscreen.cc`" to "`vgcanvas.cc`"
 - [ ] gradients
 - [ ] patterns
 - [ ] shadows
 - [ ] images
 - [ ] text
 - [ ] comments
-- [ ] remove Makefile, remove "bin" from ".gitignore"
+- [ ] remove Makefile, remove "`bin`" from "`.gitignore`", remove "`src/home-infoscreen.c`"
