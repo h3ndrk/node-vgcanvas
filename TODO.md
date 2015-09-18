@@ -16,3 +16,5 @@
 - [ ] comments
 - [ ] remove Makefile, remove "`bin`" from "`.gitignore`", remove "`src/home-infoscreen.c`"
 - [ ] "`openSubPath`" in "`src/canvas.c`"
+- [ ] https://developer.mozilla.org/en-US/docs/Web/API/Path2D/Path2D
+- [ ] Remove "`src/color.*`"
