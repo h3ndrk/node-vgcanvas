@@ -44,6 +44,12 @@ setInterval(function() {
 	ctx.moveTo(100, 100);
 	ctx.bezierCurveTo(100, 150, 200, 150, 200, 100);
 	ctx.stroke();
+	
+	ctx.beginPath();
+	ctx.arc(800, 900, 100, 0, Math.PI * 0.5, false);
+	ctx.lineTo(800, 900);
+	ctx.closePath();
+	ctx.stroke();
 
 	ctx.swapBuffers();
 }, 20);
