@@ -31,6 +31,8 @@ int main(void)
 	
 	canvas_lineWidth(2);
 	
+	canvas_save();
+	
 	canvas_beginPath();
 	canvas_rect(125, 125, 50, 50);
 	canvas_clip();
@@ -41,6 +43,8 @@ int main(void)
 	canvas_globalAlpha(0.5);
 	canvas_fillStyle_color(1, 1, 0, 1);
 	canvas_fillRect(150, 150, 100, 100);
+	
+	canvas_restore();
 	
 	canvas_strokeStyle_color(1, 1, 1, 1);
 	canvas_globalAlpha(1);

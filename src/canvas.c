@@ -36,6 +36,7 @@ static VGPath immediatePath = 0;
 static VGPath currentPath = 0;
 static VGfloat currentPath_sx = 0;
 static VGfloat currentPath_sy = 0;
+static VGboolean clipping_enabled = VG_FALSE;
 
 static VGfloat lineWidth = 1;
 static canvas_line_cap_t lineCap = CANVAS_LINE_CAP_BUTT;
@@ -46,6 +47,9 @@ static VGfloat globalAlpha = 1;
 // static VGfloat canvas_ellipse_py = 0;
 // static VGfloat canvas_ellipse_vg_rotation = 0;
 // static VGfloat canvas_ellipse_angle = 0;
+
+static VGMaskLayer saved_state_clipping_mask = 0;
+static VGboolean saved_state_clipping_enabled = VG_FALSE;
 
 void canvas__init(void)
 {
@@ -80,12 +84,18 @@ void canvas__init(void)
 	currentPath = vgCreatePath(VG_PATH_FORMAT_STANDARD, VG_PATH_DATATYPE_F, 1.0f, 0.0f, 0, 0, VG_PATH_CAPABILITY_ALL);
 	
 	vgSeti(VG_SCISSORING, VG_FALSE);
+	vgSeti(VG_MASKING, VG_FALSE);
 	
 	vgLoadIdentity();
 }
 
 void canvas__cleanup(void)
 {
+	if(saved_state_clipping_mask != 0)
+	{
+		vgDestroyMaskLayer(saved_state_clipping_mask);
+	}
+	
 	vgDestroyPaint(fill_color.paint);
 	vgDestroyPaint(stroke_color.paint);
 	
@@ -448,11 +458,47 @@ void canvas_closePath(void)
 
 void canvas_clip(void)
 {
-	vgMask(VG_INVALID_HANDLE, VG_FILL_MASK, 0, 0, egl_get_width(), egl_get_height());
+	if(!clipping_enabled)
+	{
+		vgMask(VG_INVALID_HANDLE, VG_FILL_MASK, 0, 0, egl_get_width(), egl_get_height());
+	}
 	
 	vgRenderToMask(currentPath, VG_FILL_PATH, VG_INTERSECT_MASK);
 	
 	vgSeti(VG_MASKING, VG_TRUE);
+	
+	clipping_enabled = VG_TRUE;
+}
+
+void canvas_save(void)
+{
+	if(clipping_enabled)
+	{
+		if(saved_state_clipping_mask != 0)
+		{
+			vgDestroyMaskLayer(saved_state_clipping_mask);
+			saved_state_clipping_mask = 0;
+		}
+		
+		saved_state_clipping_mask = vgCreateMaskLayer(egl_get_width(), egl_get_height());
+		vgCopyMask(saved_state_clipping_mask, 0, 0, 0, 0, egl_get_width(), egl_get_height());
+		
+		saved_state_clipping_enabled = clipping_enabled;
+	}
+}
+
+void canvas_restore(void)
+{
+	if(saved_state_clipping_enabled == VG_TRUE && saved_state_clipping_mask != 0)
+	{
+		vgMask(saved_state_clipping_mask, VG_SET_MASK, 0, 0, egl_get_width(), egl_get_height());
+		vgDestroyMaskLayer(saved_state_clipping_mask);
+		saved_state_clipping_mask = 0;
+		
+		clipping_enabled = VG_TRUE;
+	}
+	
+	vgSeti(VG_MASKING, saved_state_clipping_enabled);
 }
 
 void canvas_stroke(void)

@@ -57,6 +57,8 @@ void canvas_arc(VGfloat x, VGfloat y, VGfloat radius, VGfloat start_angle, VGflo
 void canvas_rect(VGfloat x, VGfloat y, VGfloat width, VGfloat height);
 void canvas_closePath(void);
 void canvas_clip(void);
+void canvas_save(void);
+void canvas_restore(void);
 void canvas_stroke(void);
 void canvas_fill(void);
 
