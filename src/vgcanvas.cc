@@ -77,6 +77,19 @@ namespace infoscreen {
 
 		canvas_fillStyle_color(args[0]->NumberValue(), args[1]->NumberValue(), args[2]->NumberValue(), args[3]->NumberValue());
 	}
+	
+	void GetFillStyle(const Nan::FunctionCallbackInfo<Value>& args) {
+		color_t color = canvas_getState()->fillColor;
+		
+		Local<Array> array = Nan::New<Array>(4);
+		
+		array->Set(0, Nan::New(color.red));
+		array->Set(1, Nan::New(color.green));
+		array->Set(2, Nan::New(color.blue));
+		array->Set(3, Nan::New(color.alpha));
+		
+		args.GetReturnValue().Set(array);
+	}
 
 	void GetScreenWidth(const Nan::FunctionCallbackInfo<Value>& args) {
 		args.GetReturnValue().Set(Nan::New(egl_get_width()));
@@ -91,6 +104,12 @@ namespace infoscreen {
 		return;
 
 		canvas_lineWidth(args[0]->NumberValue());
+	}
+	
+	void GetLineWidth(const Nan::FunctionCallbackInfo<Value>& args) {
+		canvas_state_t *state = canvas_getState();
+		
+		args.GetReturnValue().Set(Nan::New(state->lineWidth));
 	}
 
 	void SetLineCap(const Nan::FunctionCallbackInfo<Value>& args) {
@@ -111,6 +130,24 @@ namespace infoscreen {
 
 		canvas_lineCap(type);
 	}
+	
+	void GetLineCap(const Nan::FunctionCallbackInfo<Value>& args) {
+		canvas_state_t *state = canvas_getState();
+		
+		switch(state->lineCap)
+		{
+			case CANVAS_LINE_CAP_ROUND:
+				args.GetReturnValue().Set(Nan::New("round").ToLocalChecked());
+				break;
+			case CANVAS_LINE_CAP_BUTT:
+				args.GetReturnValue().Set(Nan::New("butt").ToLocalChecked());
+				break;
+			case CANVAS_LINE_CAP_SQUARE:
+				args.GetReturnValue().Set(Nan::New("square").ToLocalChecked());
+				break;
+		}
+		
+	}
 
 	void SetLineJoin(const Nan::FunctionCallbackInfo<Value>& args) {
 		if(args.Length() != 1 || !args[0]->IsString()) {
@@ -130,12 +167,43 @@ namespace infoscreen {
 
 		canvas_lineJoin(type);
 	}
+	
+	void GetLineJoin(const Nan::FunctionCallbackInfo<Value>& args) {
+		canvas_state_t *state = canvas_getState();
+		
+		switch(state->lineJoin)
+		{
+			case CANVAS_LINE_JOIN_BEVEL:
+				args.GetReturnValue().Set(Nan::New("bevel").ToLocalChecked());
+				break;
+			case CANVAS_LINE_JOIN_MITER:
+				args.GetReturnValue().Set(Nan::New("miter").ToLocalChecked());
+				break;
+			case CANVAS_LINE_JOIN_ROUND:
+				args.GetReturnValue().Set(Nan::New("round").ToLocalChecked());
+				break;
+		}
+		
+	}
 
 	void SetStrokeStyle(const Nan::FunctionCallbackInfo<Value>& args) {
 		if(!checkArgs(args, 4))
 		return;
 
 		canvas_strokeStyle_color(args[0]->NumberValue(), args[1]->NumberValue(), args[2]->NumberValue(), args[3]->NumberValue());
+	}
+	
+	void GetStrokeStyle(const Nan::FunctionCallbackInfo<Value>& args) {
+		color_t color = canvas_getState()->strokeColor;
+		
+		Local<Array> array = Nan::New<Array>(4);
+		
+		array->Set(0, Nan::New(color.red));
+		array->Set(1, Nan::New(color.green));
+		array->Set(2, Nan::New(color.blue));
+		array->Set(3, Nan::New(color.alpha));
+		
+		args.GetReturnValue().Set(array);
 	}
 
 	void StrokeRect(const Nan::FunctionCallbackInfo<Value>& args) {
@@ -225,11 +293,54 @@ namespace infoscreen {
 		canvas_setLineDash(ar->Length(), data);
 	}
 	
+	void GetLineDash(const Nan::FunctionCallbackInfo<Value>& args) {
+		canvas_state_t *state = canvas_getState();
+		VGfloat *pattern = state->dashPattern;
+		VGint count = state->dashCount;
+		
+		Local<Array> array = Nan::New<Array>(count);
+		
+		for(int i = 0; i < count; i++) {
+			array->Set(i, Nan::New(pattern[i]));
+		}
+		
+		args.GetReturnValue().Set(array);
+	}
+	
 	void SetLineDashOffset(const Nan::FunctionCallbackInfo<Value>& args) {
 		if(!checkArgs(args, 1))
 			return;
 		
 		canvas_lineDashOffset(args[0]->NumberValue());
+	}
+	
+	void GetLineDashOffset(const Nan::FunctionCallbackInfo<Value>& args) {
+		canvas_state_t *state = canvas_getState();
+		
+		args.GetReturnValue().Set(Nan::New(state->dashOffset));
+	}
+	
+	void Clip(const Nan::FunctionCallbackInfo<Value>& args) {
+		canvas_clip();
+	}
+	
+	void Save(const Nan::FunctionCallbackInfo<Value>& args) {
+		canvas_save();
+	}
+	
+	void Restore(const Nan::FunctionCallbackInfo<Value>& args) {
+		canvas_restore();
+	}
+	
+	void SetGlobalAlpha(const Nan::FunctionCallbackInfo<Value>& args) {
+		if(!checkArgs(args, 1))
+			return;
+			
+		canvas_globalAlpha(args[0]->NumberValue());
+	}
+	
+	void GetGlobalAlpha(const Nan::FunctionCallbackInfo<Value>& args) {
+		args.GetReturnValue().Set(Nan::New(canvas_getState()->globalAlpha));
 	}
 
 	void ModuleInit(Local<Object> exports) {
@@ -243,6 +354,8 @@ namespace infoscreen {
 
 		exports->Set(Nan::New("setFillStyle").ToLocalChecked(), Nan::New<FunctionTemplate>(SetFillStyle)->GetFunction());
 		exports->Set(Nan::New("setStrokeStyle").ToLocalChecked(), Nan::New<FunctionTemplate>(SetStrokeStyle)->GetFunction());
+		exports->Set(Nan::New("getFillStyle").ToLocalChecked(), Nan::New<FunctionTemplate>(GetFillStyle)->GetFunction());
+		exports->Set(Nan::New("getStrokeStyle").ToLocalChecked(), Nan::New<FunctionTemplate>(GetStrokeStyle)->GetFunction());
 
 		exports->Set(Nan::New("getScreenWidth").ToLocalChecked(), Nan::New<FunctionTemplate>(GetScreenWidth)->GetFunction());
 		exports->Set(Nan::New("getScreenHeight").ToLocalChecked(), Nan::New<FunctionTemplate>(GetScreenHeight)->GetFunction());
@@ -252,6 +365,15 @@ namespace infoscreen {
 		exports->Set(Nan::New("setLineJoin").ToLocalChecked(), Nan::New<FunctionTemplate>(SetLineJoin)->GetFunction());
 		exports->Set(Nan::New("setLineDash").ToLocalChecked(), Nan::New<FunctionTemplate>(SetLineDash)->GetFunction());
 		exports->Set(Nan::New("setLineDashOffset").ToLocalChecked(), Nan::New<FunctionTemplate>(SetLineDashOffset)->GetFunction());
+
+		exports->Set(Nan::New("getLineWidth").ToLocalChecked(), Nan::New<FunctionTemplate>(GetLineWidth)->GetFunction());
+		exports->Set(Nan::New("getLineCap").ToLocalChecked(), Nan::New<FunctionTemplate>(GetLineCap)->GetFunction());
+		exports->Set(Nan::New("getLineJoin").ToLocalChecked(), Nan::New<FunctionTemplate>(GetLineJoin)->GetFunction());
+		exports->Set(Nan::New("getLineDash").ToLocalChecked(), Nan::New<FunctionTemplate>(GetLineDash)->GetFunction());
+		exports->Set(Nan::New("getLineDashOffset").ToLocalChecked(), Nan::New<FunctionTemplate>(GetLineDashOffset)->GetFunction());
+
+		exports->Set(Nan::New("setGlobalAlpha").ToLocalChecked(), Nan::New<FunctionTemplate>(SetGlobalAlpha)->GetFunction());
+		exports->Set(Nan::New("getGlobalAlpha").ToLocalChecked(), Nan::New<FunctionTemplate>(GetGlobalAlpha)->GetFunction());
 
 		exports->Set(Nan::New("beginPath").ToLocalChecked(), Nan::New<FunctionTemplate>(BeginPath)->GetFunction());
 		exports->Set(Nan::New("closePath").ToLocalChecked(), Nan::New<FunctionTemplate>(ClosePath)->GetFunction());
@@ -264,6 +386,11 @@ namespace infoscreen {
 		exports->Set(Nan::New("bezierCurveTo").ToLocalChecked(), Nan::New<FunctionTemplate>(BezierCurveTo)->GetFunction());
 		exports->Set(Nan::New("arc").ToLocalChecked(), Nan::New<FunctionTemplate>(Arc)->GetFunction());
 		exports->Set(Nan::New("rect").ToLocalChecked(), Nan::New<FunctionTemplate>(Rect)->GetFunction());
+		
+		exports->Set(Nan::New("clip").ToLocalChecked(), Nan::New<FunctionTemplate>(Clip)->GetFunction());
+		
+		exports->Set(Nan::New("save").ToLocalChecked(), Nan::New<FunctionTemplate>(Save)->GetFunction());
+		exports->Set(Nan::New("restore").ToLocalChecked(), Nan::New<FunctionTemplate>(Restore)->GetFunction());
 
 	}
 

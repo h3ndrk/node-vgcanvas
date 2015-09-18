@@ -19,6 +19,7 @@
 #define __CANVAS_H__
 
 #include <VG/openvg.h>
+#include "color.h"
 
 typedef enum
 {
@@ -34,8 +35,33 @@ typedef enum
 	CANVAS_LINE_JOIN_BEVEL = VG_JOIN_BEVEL
 } canvas_line_join_t;
 
+typedef struct canvas_state_t
+{
+	canvas_line_cap_t lineCap;
+	canvas_line_join_t lineJoin;
+	
+	color_t fillColor;
+	color_t strokeColor;
+	
+	VGfloat globalAlpha;
+	VGfloat lineWidth;
+	
+	VGint dashCount;
+	VGfloat *dashPattern;
+	VGfloat dashOffset;
+	
+	VGboolean clipping;
+	VGMaskLayer savedLayer;
+	
+	// The state which will be restored
+	struct canvas_state_t *next;
+} canvas_state_t;
+
 void canvas__init(void);
 void canvas__cleanup(void);
+
+void canvas_destroyState(canvas_state_t *state);
+canvas_state_t* canvas_getState(void);
 
 void canvas_clearRect(VGfloat x, VGfloat y, VGfloat width, VGfloat height);
 void canvas_fillRect(VGfloat x, VGfloat y, VGfloat width, VGfloat height);

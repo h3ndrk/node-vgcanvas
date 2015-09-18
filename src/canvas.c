@@ -30,26 +30,19 @@
 #include "canvas.h"
 #include "color.h"
 
-static color_t fill_color;
-static color_t stroke_color;
+static VGPaint fillColor;
+static VGPaint strokeColor;
 static VGPath immediatePath = 0;
 static VGPath currentPath = 0;
 static VGfloat currentPath_sx = 0;
 static VGfloat currentPath_sy = 0;
-static VGboolean clipping_enabled = VG_FALSE;
-
-static VGfloat lineWidth = 1;
-static canvas_line_cap_t lineCap = CANVAS_LINE_CAP_BUTT;
-static canvas_line_join_t lineJoin = CANVAS_LINE_JOIN_MITER;
-static VGfloat globalAlpha = 1;
 
 // static VGfloat canvas_ellipse_px = 0;
 // static VGfloat canvas_ellipse_py = 0;
 // static VGfloat canvas_ellipse_vg_rotation = 0;
 // static VGfloat canvas_ellipse_angle = 0;
 
-static VGMaskLayer saved_state_clipping_mask = 0;
-static VGboolean saved_state_clipping_enabled = VG_FALSE;
+static canvas_state_t *currentState;
 
 void canvas__init(void)
 {
@@ -60,9 +53,12 @@ void canvas__init(void)
 	
 	printf("{ width: %i, height: %i }\n", egl_get_width(), egl_get_height());
 	
+	currentState = malloc(sizeof(canvas_state_t));
+	currentState->next = 0;
+	
 	// immediate colors for fill and stroke
-	fill_color.paint = vgCreatePaint();
-	stroke_color.paint = vgCreatePaint();
+	fillColor = vgCreatePaint();
+	strokeColor = vgCreatePaint();
 	
 	// clear color
 	clearPaint = vgCreatePaint();
@@ -76,6 +72,10 @@ void canvas__init(void)
 	canvas_lineCap(CANVAS_LINE_CAP_BUTT);
 	canvas_lineJoin(CANVAS_LINE_JOIN_MITER);
 	canvas_globalAlpha(1);
+	currentState->clipping = VG_FALSE;
+	currentState->savedLayer = 0;
+	currentState->dashCount = 0;
+	currentState->dashPattern = 0;
 	
 	// immediate path for drawing rects, etc.
 	immediatePath = vgCreatePath(VG_PATH_FORMAT_STANDARD, VG_PATH_DATATYPE_F, 1.0f, 0.0f, 0, 0, VG_PATH_CAPABILITY_ALL);
@@ -91,18 +91,48 @@ void canvas__init(void)
 
 void canvas__cleanup(void)
 {
-	if(saved_state_clipping_mask != 0)
+	canvas_state_t *current = currentState;
+	while(current)
 	{
-		vgDestroyMaskLayer(saved_state_clipping_mask);
+		canvas_state_t *next = current->next;
+		canvas_destroyState(current);
+		current = next;
 	}
-	
-	vgDestroyPaint(fill_color.paint);
-	vgDestroyPaint(stroke_color.paint);
 	
 	vgDestroyPath(immediatePath);
 	vgDestroyPath(currentPath);
 	
+	vgDestroyPaint(fillColor);
+	vgDestroyPaint(strokeColor);
+	
 	egl_cleanup();
+}
+
+void canvas_destroyState(canvas_state_t *state)
+{
+	if(state->savedLayer)
+	{
+		vgDestroyMaskLayer(state->savedLayer);
+	}
+	
+	if(state->dashPattern)
+		free(state->dashPattern);
+	free(state);
+	
+}
+
+unsigned int canvas_stackSize(void)
+{
+	unsigned int size = 0;
+	canvas_state_t *current = currentState;
+	
+	while(current)
+	{
+		current = current->next;
+		size++;
+	}
+	
+	return size;
 }
 
 void canvas_clearRect(VGfloat x, VGfloat y, VGfloat width, VGfloat height)
@@ -115,14 +145,14 @@ void canvas_fillRect(VGfloat x, VGfloat y, VGfloat width, VGfloat height)
 {
 	VGfloat color_values[4];
 	
-	color_values[0] = fill_color.red;
-	color_values[1] = fill_color.green;
-	color_values[2] = fill_color.blue;
-	color_values[3] = fill_color.alpha * globalAlpha;
+	color_values[0] = currentState->fillColor.red;
+	color_values[1] = currentState->fillColor.green;
+	color_values[2] = currentState->fillColor.blue;
+	color_values[3] = currentState->fillColor.alpha * currentState->globalAlpha;
 	
-	vgSetParameteri(fill_color.paint, VG_PAINT_TYPE, VG_PAINT_TYPE_COLOR);
-	vgSetParameterfv(fill_color.paint, VG_PAINT_COLOR, 4, color_values);
-	vgSetPaint(fill_color.paint, VG_FILL_PATH);
+	vgSetParameteri(fillColor, VG_PAINT_TYPE, VG_PAINT_TYPE_COLOR);
+	vgSetParameterfv(fillColor, VG_PAINT_COLOR, 4, color_values);
+	vgSetPaint(fillColor, VG_FILL_PATH);
 	
 	vgClearPath(immediatePath, VG_PATH_CAPABILITY_ALL);
 	vguRect(immediatePath, x, y, width, height);
@@ -131,21 +161,21 @@ void canvas_fillRect(VGfloat x, VGfloat y, VGfloat width, VGfloat height)
 
 void canvas_fillStyle_color(VGfloat red, VGfloat green, VGfloat blue, VGfloat alpha)
 {
-	color_set_rgba(&fill_color, red, green, blue, alpha);
+	color_set_rgba(&currentState->fillColor, red, green, blue, alpha);
 }
 
 void canvas_strokeRect(VGfloat x, VGfloat y, VGfloat width, VGfloat height)
 {
 	VGfloat color_values[4];
 	
-	color_values[0] = stroke_color.red;
-	color_values[1] = stroke_color.green;
-	color_values[2] = stroke_color.blue;
-	color_values[3] = stroke_color.alpha * globalAlpha;
+	color_values[0] = currentState->strokeColor.red;
+	color_values[1] = currentState->strokeColor.green;
+	color_values[2] = currentState->strokeColor.blue;
+	color_values[3] = currentState->strokeColor.alpha * currentState->globalAlpha;
 	
-	vgSetParameteri(stroke_color.paint, VG_PAINT_TYPE, VG_PAINT_TYPE_COLOR);
-	vgSetParameterfv(stroke_color.paint, VG_PAINT_COLOR, 4, color_values);
-	vgSetPaint(stroke_color.paint, VG_STROKE_PATH);
+	vgSetParameteri(strokeColor, VG_PAINT_TYPE, VG_PAINT_TYPE_COLOR);
+	vgSetParameterfv(strokeColor, VG_PAINT_COLOR, 4, color_values);
+	vgSetPaint(strokeColor, VG_STROKE_PATH);
 	
 	vgClearPath(immediatePath, VG_PATH_CAPABILITY_ALL);
 	vguRect(immediatePath, x, y, width, height);
@@ -154,38 +184,38 @@ void canvas_strokeRect(VGfloat x, VGfloat y, VGfloat width, VGfloat height)
 
 void canvas_strokeStyle_color(VGfloat red, VGfloat green, VGfloat blue, VGfloat alpha)
 {
-	color_set_rgba(&stroke_color, red, green, blue, alpha);
+	color_set_rgba(&currentState->strokeColor, red, green, blue, alpha);
 }
 
 void canvas_lineWidth(VGfloat width)
 {
-	lineWidth = width;
+	currentState->lineWidth = width;
 	
 	vgSetf(VG_STROKE_LINE_WIDTH, width);
 }
 
 void canvas_lineCap(canvas_line_cap_t line_cap)
 {
-	lineCap = line_cap;
+	currentState->lineCap = line_cap;
 	
 	vgSeti(VG_STROKE_CAP_STYLE, line_cap);
 }
 
 void canvas_lineJoin(canvas_line_join_t line_join)
 {
-	lineJoin = line_join;
+	currentState->lineJoin = line_join;
 	
 	vgSeti(VG_STROKE_CAP_STYLE, line_join);
 }
 
 void canvas_globalAlpha(VGfloat alpha)
 {
-	globalAlpha = alpha;
-	
-	if(globalAlpha > 1 || globalAlpha < 0)
+	if(alpha > 1 || alpha < 0)
 	{
-		globalAlpha = 1;
+		alpha = 1;
 	}
+	
+	currentState->globalAlpha = alpha;
 }
 
 void canvas_beginPath(void)
@@ -447,11 +477,23 @@ void canvas_rect(VGfloat x, VGfloat y, VGfloat width, VGfloat height)
 
 void canvas_setLineDash(VGint count, const VGfloat *data)
 {
+	currentState->dashCount = count;
+	if(count > 0)
+	{
+		currentState->dashPattern = realloc(currentState->dashPattern, count * sizeof(data));
+		memcpy(currentState->dashPattern, data, count * sizeof(VGfloat));
+	}
+	else
+	{
+		currentState->dashPattern = 0;
+	}
+		
 	vgSetfv(VG_STROKE_DASH_PATTERN, count, data);
 }
 
 void canvas_lineDashOffset(VGfloat offset)
 {
+	currentState->dashOffset = offset;
 	vgSetf(VG_STROKE_DASH_PHASE, offset);
 }
 
@@ -468,7 +510,7 @@ void canvas_closePath(void)
 
 void canvas_clip(void)
 {
-	if(!clipping_enabled)
+	if(!currentState->clipping)
 	{
 		vgMask(VG_INVALID_HANDLE, VG_FILL_MASK, 0, 0, egl_get_width(), egl_get_height());
 	}
@@ -477,52 +519,73 @@ void canvas_clip(void)
 	
 	vgSeti(VG_MASKING, VG_TRUE);
 	
-	clipping_enabled = VG_TRUE;
+	currentState->clipping = VG_TRUE;
 }
 
 void canvas_save(void)
 {
-	if(clipping_enabled)
-	{
-		if(saved_state_clipping_mask != 0)
-		{
-			vgDestroyMaskLayer(saved_state_clipping_mask);
-			saved_state_clipping_mask = 0;
-		}
-		
-		saved_state_clipping_mask = vgCreateMaskLayer(egl_get_width(), egl_get_height());
-		vgCopyMask(saved_state_clipping_mask, 0, 0, 0, 0, egl_get_width(), egl_get_height());
-		
-		saved_state_clipping_enabled = clipping_enabled;
+	canvas_state_t *newState = malloc(sizeof(canvas_state_t));
+	memcpy(newState, currentState, sizeof(canvas_state_t));
+	
+	newState->next = currentState;
+	if(currentState->clipping)
+	{	
+		currentState->savedLayer = vgCreateMaskLayer(egl_get_width(), egl_get_height());
+		vgCopyMask(currentState->savedLayer, 0, 0, 0, 0, egl_get_width(), egl_get_height());
 	}
+	
+	if(currentState->dashCount > 0)
+	{
+		newState->dashPattern = malloc(currentState->dashCount * sizeof(VGfloat));
+		memcpy(newState->dashPattern, currentState->dashPattern, currentState->dashCount * sizeof(VGfloat));
+	}
+	
+	currentState = newState;
 }
 
 void canvas_restore(void)
 {
-	if(saved_state_clipping_enabled == VG_TRUE && saved_state_clipping_mask != 0)
+	if(canvas_stackSize() < 2) 
 	{
-		vgMask(saved_state_clipping_mask, VG_SET_MASK, 0, 0, egl_get_width(), egl_get_height());
-		vgDestroyMaskLayer(saved_state_clipping_mask);
-		saved_state_clipping_mask = 0;
-		
-		clipping_enabled = VG_TRUE;
+		printf("Can't restore state. Stack size is 1.\n");
+		return;
 	}
 	
-	vgSeti(VG_MASKING, saved_state_clipping_enabled);
+	canvas_state_t *restore = currentState->next;
+	
+	if(restore->clipping)
+	{
+		vgMask(restore->savedLayer, VG_SET_MASK, 0, 0, egl_get_width(), egl_get_height());
+		vgDestroyMaskLayer(restore->savedLayer);
+	}
+	
+	vgSeti(VG_MASKING, restore->clipping);
+	canvas_lineWidth(restore->lineWidth);
+	canvas_lineCap(restore->lineCap);
+	canvas_lineJoin(restore->lineJoin);
+	canvas_globalAlpha(restore->globalAlpha);
+	
+	canvas_destroyState(currentState);
+	currentState = restore;
+}
+
+canvas_state_t* canvas_getState(void)
+{
+	return currentState;
 }
 
 void canvas_stroke(void)
 {
 	VGfloat color_values[4];
 	
-	color_values[0] = stroke_color.red;
-	color_values[1] = stroke_color.green;
-	color_values[2] = stroke_color.blue;
-	color_values[3] = stroke_color.alpha * globalAlpha;
+	color_values[0] = currentState->strokeColor.red;
+	color_values[1] = currentState->strokeColor.green;
+	color_values[2] = currentState->strokeColor.blue;
+	color_values[3] = currentState->strokeColor.alpha * currentState->globalAlpha;
 	
-	vgSetParameteri(stroke_color.paint, VG_PAINT_TYPE, VG_PAINT_TYPE_COLOR);
-	vgSetParameterfv(stroke_color.paint, VG_PAINT_COLOR, 4, color_values);
-	vgSetPaint(stroke_color.paint, VG_STROKE_PATH);
+	vgSetParameteri(strokeColor, VG_PAINT_TYPE, VG_PAINT_TYPE_COLOR);
+	vgSetParameterfv(strokeColor, VG_PAINT_COLOR, 4, color_values);
+	vgSetPaint(strokeColor, VG_STROKE_PATH);
 	
 	vgDrawPath(currentPath, VG_STROKE_PATH);
 }
@@ -531,14 +594,14 @@ void canvas_fill(void)
 {
 	VGfloat color_values[4];
 	
-	color_values[0] = fill_color.red;
-	color_values[1] = fill_color.green;
-	color_values[2] = fill_color.blue;
-	color_values[3] = fill_color.alpha * globalAlpha;
+	color_values[0] = currentState->fillColor.red;
+	color_values[1] = currentState->fillColor.green;
+	color_values[2] = currentState->fillColor.blue;
+	color_values[3] = currentState->fillColor.alpha * currentState->globalAlpha;
 	
-	vgSetParameteri(fill_color.paint, VG_PAINT_TYPE, VG_PAINT_TYPE_COLOR);
-	vgSetParameterfv(fill_color.paint, VG_PAINT_COLOR, 4, color_values);
-	vgSetPaint(fill_color.paint, VG_FILL_PATH);
+	vgSetParameteri(fillColor, VG_PAINT_TYPE, VG_PAINT_TYPE_COLOR);
+	vgSetParameterfv(fillColor, VG_PAINT_COLOR, 4, color_values);
+	vgSetPaint(fillColor, VG_FILL_PATH);
 	
 	vgDrawPath(currentPath, VG_FILL_PATH);
 }

@@ -55,6 +55,40 @@ setInterval(function() {
 	ctx.lineTo(800, 900);
 	ctx.closePath();
 	ctx.stroke();
+	
+	ctx.save();
+	ctx.beginPath();
+	ctx.arc(200, 900, 100, 0, Math.PI, false);
+	ctx.clip();
+	
+	ctx.fillStyle = 'blue';
+	ctx.strokeStyle = 'red';
+	ctx.fillRect(100, 800, 200, 200);
+	ctx.save();
+	
+	ctx.beginPath();
+	ctx.fillStyle = 'green';
+	ctx.strokeStyle = '#fff';
+	ctx.arc(150, 850, 20, 0, Math.PI * 2);
+	ctx.stroke();
+	ctx.fillRect(175, 800, 50, 50);
+	ctx.restore();
+	
+	// red
+	ctx.strokeRect(250, 850, 20, 50);
+	
+	ctx.restore();
+	
+	// fillStyle: gold
+	ctx.fillRect(400, 800, 50, 50);
+	
+	// red
+	ctx.lineWidth = 10;
+	ctx.lineCap = 'round';
+	ctx.beginPath();
+	ctx.setLineDash([30, 30, 80, 30]);
+	ctx.arc(500, 500, 200, 0, Math.PI * 2);
+	ctx.stroke();
 
 	ctx.swapBuffers();
 }, 20);
