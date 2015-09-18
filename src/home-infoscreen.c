@@ -52,6 +52,14 @@ int main(void)
 	canvas_arc(500, 500, 100, 0, 0.5 * M_PI, VG_TRUE);
 	canvas_stroke();
 	
+	VGfloat dash[4];
+	dash[0] = 1;
+	dash[1] = 10;
+	dash[2] = 3;
+	dash[3] = 10;
+	
+	canvas_setLineDash(4, dash);
+	
 	canvas_beginPath();
 	canvas_rect(400, 400, 200, 200);
 	canvas_stroke();

@@ -46,6 +46,8 @@ void canvas_lineWidth(VGfloat width);
 void canvas_lineCap(canvas_line_cap_t line_cap);
 void canvas_lineJoin(canvas_line_join_t line_join);
 void canvas_globalAlpha(VGfloat alpha);
+void canvas_setLineDash(VGint count, const VGfloat *data);
+void canvas_lineDashOffset(VGfloat offset);
 
 void canvas_beginPath(void);
 void canvas_moveTo(VGfloat x, VGfloat y);

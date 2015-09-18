@@ -195,10 +195,41 @@ namespace infoscreen {
 			return;
 			
 		bool acw = false;
-		if(args[5]->IsBoolean())
+		if(args.Length() > 5 && args[5]->IsBoolean())
 			acw = args[5]->BooleanValue();
 			
 		canvas_arc(args[0]->NumberValue(), args[1]->NumberValue(), args[2]->NumberValue(), args[3]->NumberValue(), args[4]->NumberValue(), acw);
+	}
+	
+	void Rect(const Nan::FunctionCallbackInfo<Value>& args) {
+		if(!checkArgs(args, 4))
+			return;
+			
+		canvas_rect(args[0]->NumberValue(), args[1]->NumberValue(), args[2]->NumberValue(), args[3]->NumberValue());
+	}
+	
+	void SetLineDash(const Nan::FunctionCallbackInfo<Value>& args) {
+		if(args.Length() != 1 || !args[0]->IsArray()) {
+			Nan::ThrowTypeError("wrong arg");
+			return;
+		}
+		
+		Local<Array> ar = Local<Array>::Cast(args[0]);
+		
+		VGfloat data[ar->Length()];
+		
+		for(uint32_t i = 0; i < ar->Length(); i++) {
+			data[i] = ar->Get(i)->NumberValue();
+		}
+		
+		canvas_setLineDash(ar->Length(), data);
+	}
+	
+	void SetLineDashOffset(const Nan::FunctionCallbackInfo<Value>& args) {
+		if(!checkArgs(args, 1))
+			return;
+		
+		canvas_lineDashOffset(args[0]->NumberValue());
 	}
 
 	void ModuleInit(Local<Object> exports) {
@@ -219,6 +250,8 @@ namespace infoscreen {
 		exports->Set(Nan::New("setLineWidth").ToLocalChecked(), Nan::New<FunctionTemplate>(SetLineWidth)->GetFunction());
 		exports->Set(Nan::New("setLineCap").ToLocalChecked(), Nan::New<FunctionTemplate>(SetLineCap)->GetFunction());
 		exports->Set(Nan::New("setLineJoin").ToLocalChecked(), Nan::New<FunctionTemplate>(SetLineJoin)->GetFunction());
+		exports->Set(Nan::New("setLineDash").ToLocalChecked(), Nan::New<FunctionTemplate>(SetLineDash)->GetFunction());
+		exports->Set(Nan::New("setLineDashOffset").ToLocalChecked(), Nan::New<FunctionTemplate>(SetLineDashOffset)->GetFunction());
 
 		exports->Set(Nan::New("beginPath").ToLocalChecked(), Nan::New<FunctionTemplate>(BeginPath)->GetFunction());
 		exports->Set(Nan::New("closePath").ToLocalChecked(), Nan::New<FunctionTemplate>(ClosePath)->GetFunction());
@@ -230,6 +263,7 @@ namespace infoscreen {
 		exports->Set(Nan::New("quadraticCurveTo").ToLocalChecked(), Nan::New<FunctionTemplate>(QuadraticCurveTo)->GetFunction());
 		exports->Set(Nan::New("bezierCurveTo").ToLocalChecked(), Nan::New<FunctionTemplate>(BezierCurveTo)->GetFunction());
 		exports->Set(Nan::New("arc").ToLocalChecked(), Nan::New<FunctionTemplate>(Arc)->GetFunction());
+		exports->Set(Nan::New("rect").ToLocalChecked(), Nan::New<FunctionTemplate>(Rect)->GetFunction());
 
 	}
 

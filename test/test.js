@@ -2,10 +2,6 @@ var canvas = require('../lib/canvas')
 
 var ctx = canvas.getContext('2d');
 
-ctx.lineWidth = 10.0;
-ctx.lineCap = 'round';
-ctx.lineJoin = 'round';
-
 var x = 0;
 var y2 = 0, x2 = 0;
 
@@ -13,6 +9,11 @@ setInterval(function() {
 	x++;
 	y2 = Math.sin(x * 0.1) * 50;
 	x2 = Math.cos(x * 0.1) * 50;
+
+	ctx.lineWidth = 10.0;
+	ctx.lineCap = 'round';
+	ctx.lineJoin = 'round';
+	ctx.setLineDash([]);
 
 	ctx.clearRect(0, 0, ctx.getScreenWidth(), ctx.getScreenHeight());
 
@@ -45,6 +46,10 @@ setInterval(function() {
 	ctx.bezierCurveTo(100, 150, 200, 150, 200, 100);
 	ctx.stroke();
 	
+	ctx.lineCap = 'butt';
+	ctx.lineWidth = 1.0;
+	ctx.lineDashOffset = x;
+	ctx.setLineDash([20, 10, 3, 10]);
 	ctx.beginPath();
 	ctx.arc(800, 900, 100, 0, Math.PI * 0.5, false);
 	ctx.lineTo(800, 900);
