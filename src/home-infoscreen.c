@@ -31,6 +31,10 @@ int main(void)
 	
 	canvas_lineWidth(2);
 	
+	canvas_beginPath();
+	canvas_rect(125, 125, 50, 50);
+	canvas_clip();
+	
 	canvas_fillStyle_color(1, 0, 0, 1);
 	
 	canvas_fillRect(100, 100, 100, 100);

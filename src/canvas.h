@@ -56,6 +56,7 @@ void canvas_bezierCurveTo(VGfloat cp1x, VGfloat cp1y, VGfloat cp2x, VGfloat cp2y
 void canvas_arc(VGfloat x, VGfloat y, VGfloat radius, VGfloat start_angle, VGfloat end_angle, VGboolean anticlockwise);
 void canvas_rect(VGfloat x, VGfloat y, VGfloat width, VGfloat height);
 void canvas_closePath(void);
+void canvas_clip(void);
 void canvas_stroke(void);
 void canvas_fill(void);
 

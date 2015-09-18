@@ -446,6 +446,15 @@ void canvas_closePath(void)
 	vgAppendPathData(currentPath, 1, segment, (const void *)data);
 }
 
+void canvas_clip(void)
+{
+	vgMask(VG_INVALID_HANDLE, VG_FILL_MASK, 0, 0, egl_get_width(), egl_get_height());
+	
+	vgRenderToMask(currentPath, VG_FILL_PATH, VG_INTERSECT_MASK);
+	
+	vgSeti(VG_MASKING, VG_TRUE);
+}
+
 void canvas_stroke(void)
 {
 	VGfloat color_values[4];
