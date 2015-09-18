@@ -415,6 +415,21 @@ void canvas_arc(VGfloat x, VGfloat y, VGfloat radius, VGfloat start_angle, VGflo
 	vguArc(currentPath, x, y, radius * 2, radius * 2, start_angle, angle_extent, VGU_ARC_OPEN);
 }
 
+// static canvas_arcTo_transform(VGfloat px, VGfloat py, VGfloat *x, VGfloat *y)
+// {
+// 	*x = (px * cos_rotation - py * sin_rotation) * scale_x;
+// }
+
+// // radius_y must default to radius_x, rotation must default to 0
+// void canvas_arcTo(VGfloat x1, VGfloat y1, VGfloat x2, VGfloat y2, VGfloat radius_x, VGfloat radius_y, VGfloat rotation)
+// {
+// 	VGfloat scale_x = radius_x / radius_y;
+// 	VGfloat cos_rotation = cos(-rotation);
+// 	VGfloat sin_rotation = sin(-rotation);
+	
+// 	VGfloat p0_x = (x * cos_rotation - py * sin_rotation) * scale_x;
+// }
+
 void canvas_closePath(void)
 {
 	VGubyte segment[1] = { VG_CLOSE_PATH };
