@@ -430,6 +430,11 @@ void canvas_arc(VGfloat x, VGfloat y, VGfloat radius, VGfloat start_angle, VGflo
 // 	VGfloat p0_x = (x * cos_rotation - py * sin_rotation) * scale_x;
 // }
 
+void canvas_rect(VGfloat x, VGfloat y, VGfloat width, VGfloat height)
+{
+	vguRect(currentPath, x, y, width, height);
+}
+
 void canvas_closePath(void)
 {
 	VGubyte segment[1] = { VG_CLOSE_PATH };

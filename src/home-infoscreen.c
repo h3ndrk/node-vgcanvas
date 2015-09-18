@@ -52,6 +52,10 @@ int main(void)
 	canvas_arc(500, 500, 100, 0, 0.5 * M_PI, VG_TRUE);
 	canvas_stroke();
 	
+	canvas_beginPath();
+	canvas_rect(400, 400, 200, 200);
+	canvas_stroke();
+	
 	egl_swap_buffers();
 	
 	printf("Press <Enter> to shutdown.\n");
