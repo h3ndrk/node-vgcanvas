@@ -16,6 +16,7 @@
  */
 
 #include <stdio.h>
+#include <math.h>
 
 #include "egl-util.h"
 #include "canvas.h"
@@ -47,9 +48,9 @@ int main(void)
 	canvas_lineTo(500, 600);
 	canvas_stroke();
 	
-	// canvas_beginPath();
-	// canvas_ellipse(500, 500, 100, 50, 5, 0, 2 * M_PI, VG_FALSE);
-	// canvas_stroke();
+	canvas_beginPath();
+	canvas_arc(500, 500, 100, 0, 0.5 * M_PI, VG_TRUE);
+	canvas_stroke();
 	
 	egl_swap_buffers();
 	

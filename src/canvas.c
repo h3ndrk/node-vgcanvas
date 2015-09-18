@@ -398,9 +398,14 @@ void canvas_arc(VGfloat x, VGfloat y, VGfloat radius, VGfloat start_angle, VGflo
 {
 	VGfloat angle_extent = 0;
 	
-	if(anticlockwise)
+	// radian to degrees
+	start_angle *= 180 / M_PI;
+	end_angle *= 180 / M_PI;
+	
+	// calculate angle extent
+	if(anticlockwise == VG_TRUE)
 	{
-		angle_extent = end_angle - start_angle;
+		angle_extent = 360 - (end_angle - start_angle);
 	}
 	else
 	{
