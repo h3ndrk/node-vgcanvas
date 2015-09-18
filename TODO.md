@@ -15,3 +15,4 @@
 - [ ] text
 - [ ] comments
 - [ ] remove Makefile, remove "`bin`" from "`.gitignore`", remove "`src/home-infoscreen.c`"
+- [ ] "`openSubPath`" in "`src/canvas.c`"
