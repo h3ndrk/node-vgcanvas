@@ -28,8 +28,8 @@ namespace infoscreen {
 
 	bool checkArgs(const Nan::FunctionCallbackInfo<Value> &args, int expect) {
 
-		if(args.Length() != expect) {
-			Nan::ThrowTypeError("Wrong number of args");
+		if(args.Length() < expect) {
+			Nan::ThrowTypeError("Not enough args");
 			return false;
 		}
 
@@ -189,6 +189,17 @@ namespace infoscreen {
 
 		canvas_bezierCurveTo(args[0]->NumberValue(), args[1]->NumberValue(), args[2]->NumberValue(), args[3]->NumberValue(), args[4]->NumberValue(), args[5]->NumberValue());
 	}
+	
+	void Arc(const Nan::FunctionCallbackInfo<Value>& args) {
+		if(!checkArgs(args, 5))
+			return;
+			
+		bool acw = false;
+		if(args[5]->IsBoolean())
+			acw = args[5]->BooleanValue();
+			
+		canvas_arc(args[0]->NumberValue(), args[1]->NumberValue(), args[2]->NumberValue(), args[3]->NumberValue(), args[4]->NumberValue(), acw);
+	}
 
 	void ModuleInit(Local<Object> exports) {
 		exports->Set(Nan::New("init").ToLocalChecked(), Nan::New<FunctionTemplate>(Init)->GetFunction());
@@ -218,6 +229,7 @@ namespace infoscreen {
 
 		exports->Set(Nan::New("quadraticCurveTo").ToLocalChecked(), Nan::New<FunctionTemplate>(QuadraticCurveTo)->GetFunction());
 		exports->Set(Nan::New("bezierCurveTo").ToLocalChecked(), Nan::New<FunctionTemplate>(BezierCurveTo)->GetFunction());
+		exports->Set(Nan::New("arc").ToLocalChecked(), Nan::New<FunctionTemplate>(Arc)->GetFunction());
 
 	}
 
