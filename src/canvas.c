@@ -42,10 +42,10 @@ static canvas_line_cap_t lineCap = CANVAS_LINE_CAP_BUTT;
 static canvas_line_join_t lineJoin = CANVAS_LINE_JOIN_MITER;
 static VGfloat globalAlpha = 1;
 
-static VGfloat canvas_ellipse_px = 0;
-static VGfloat canvas_ellipse_py = 0;
-static VGfloat canvas_ellipse_vg_rotation = 0;
-static VGfloat canvas_ellipse_angle = 0;
+// static VGfloat canvas_ellipse_px = 0;
+// static VGfloat canvas_ellipse_py = 0;
+// static VGfloat canvas_ellipse_vg_rotation = 0;
+// static VGfloat canvas_ellipse_angle = 0;
 
 void canvas__init(void)
 {
