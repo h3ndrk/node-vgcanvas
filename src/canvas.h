@@ -53,14 +53,13 @@ typedef struct canvas_state_t
 	VGboolean clipping;
 	VGMaskLayer savedLayer;
 	
-	// The state which will be restored
+	// The state which will be restored next
 	struct canvas_state_t *next;
 } canvas_state_t;
 
 void canvas__init(void);
 void canvas__cleanup(void);
 
-void canvas_destroyState(canvas_state_t *state);
 canvas_state_t* canvas_getState(void);
 
 void canvas_clearRect(VGfloat x, VGfloat y, VGfloat width, VGfloat height);

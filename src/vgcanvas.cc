@@ -342,7 +342,7 @@ namespace infoscreen {
 	void GetGlobalAlpha(const Nan::FunctionCallbackInfo<Value>& args) {
 		args.GetReturnValue().Set(Nan::New(canvas_getState()->globalAlpha));
 	}
-
+	
 	void ModuleInit(Local<Object> exports) {
 		exports->Set(Nan::New("init").ToLocalChecked(), Nan::New<FunctionTemplate>(Init)->GetFunction());
 		exports->Set(Nan::New("swapBuffers").ToLocalChecked(), Nan::New<FunctionTemplate>(SwapBuffers)->GetFunction());
