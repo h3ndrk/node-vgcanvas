@@ -19,7 +19,7 @@
 #include "include-openvg.h"
 // #include "include-freetype.h"
 #include "canvas-beginPath.h"
-#include "canvas-lineTo.h"
+#include "canvas-quadraticCurveTo.h"
 
 /**
  * The lineTo() method connects the last point in the sub-path to the x, y
@@ -27,13 +27,15 @@
  * @param x The x axis of the coordinate for the end of the line.
  * @param y The y axis of the coordinate for the end of the line.
  */
-void canvas_lineTo(VGfloat x, VGfloat y)
+void canvas_lineTo(VGfloat cpx, VGfloat cpy, VGfloat x, VGfloat y)
 {
-	VGubyte segment[1] = { VG_LINE_TO_ABS };
-	VGfloat data[2];
+	VGubyte segment[1] = { VG_QUAD_TO_ABS };
+	VGfloat data[4];
 	
-	data[0] = x;
-	data[1] = y;
+	data[0] = cpx;
+	data[1] = cpy;
+	data[2] = x;
+	data[3] = y;
 	
 	vgAppendPathData(canvas_beginPath_get(), 1, segment, (const void *)data);
 }

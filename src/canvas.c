@@ -264,29 +264,29 @@ void canvas_strokeStyle_color(VGfloat red, VGfloat green, VGfloat blue, VGfloat 
 // 	vgAppendPathData(currentPath, 1, segment, (const void *)data);
 // }
 
-void canvas_lineTo(VGfloat x, VGfloat y)
-{
-	VGubyte segment[1] = { VG_LINE_TO_ABS };
-	VGfloat data[2];
+// void canvas_lineTo(VGfloat x, VGfloat y)
+// {
+// 	VGubyte segment[1] = { VG_LINE_TO_ABS };
+// 	VGfloat data[2];
 	
-	data[0] = x;
-	data[1] = y;
+// 	data[0] = x;
+// 	data[1] = y;
 	
-	vgAppendPathData(currentPath, 1, segment, (const void *)data);
-}
+// 	vgAppendPathData(currentPath, 1, segment, (const void *)data);
+// }
 
-void canvas_quadraticCurveTo(VGfloat cpx, VGfloat cpy, VGfloat x, VGfloat y)
-{
-	VGubyte segment[1] = { VG_QUAD_TO_ABS };
-	VGfloat data[4];
+// void canvas_quadraticCurveTo(VGfloat cpx, VGfloat cpy, VGfloat x, VGfloat y)
+// {
+// 	VGubyte segment[1] = { VG_QUAD_TO_ABS };
+// 	VGfloat data[4];
 	
-	data[0] = cpx;
-	data[1] = cpy;
-	data[2] = x;
-	data[3] = y;
+// 	data[0] = cpx;
+// 	data[1] = cpy;
+// 	data[2] = x;
+// 	data[3] = y;
 	
-	vgAppendPathData(currentPath, 1, segment, (const void *)data);
-}
+// 	vgAppendPathData(currentPath, 1, segment, (const void *)data);
+// }
 
 void canvas_bezierCurveTo(VGfloat cp1x, VGfloat cp1y, VGfloat cp2x, VGfloat cp2y, VGfloat x, VGfloat y)
 {
