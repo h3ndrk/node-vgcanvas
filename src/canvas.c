@@ -250,19 +250,19 @@ void canvas_strokeStyle_color(VGfloat red, VGfloat green, VGfloat blue, VGfloat 
 // 	vgClearPath(currentPath, VG_PATH_CAPABILITY_ALL);
 // }
 
-void canvas_moveTo(VGfloat x, VGfloat y)
-{
-	VGubyte segment[1] = { VG_MOVE_TO_ABS };
-	VGfloat data[2];
+// void canvas_moveTo(VGfloat x, VGfloat y)
+// {
+// 	VGubyte segment[1] = { VG_MOVE_TO_ABS };
+// 	VGfloat data[2];
 	
-	data[0] = x;
-	data[1] = y;
+// 	data[0] = x;
+// 	data[1] = y;
 	
-	currentPath_sx = x;
-	currentPath_sy = y;
+// 	currentPath_sx = x;
+// 	currentPath_sy = y;
 	
-	vgAppendPathData(currentPath, 1, segment, (const void *)data);
-}
+// 	vgAppendPathData(currentPath, 1, segment, (const void *)data);
+// }
 
 void canvas_lineTo(VGfloat x, VGfloat y)
 {
