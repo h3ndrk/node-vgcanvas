@@ -1,0 +1,37 @@
+\hypertarget{canvas-lineDashOffset_8c}{}\section{src/canvas-\/line\+Dash\+Offset.c File Reference}
+\label{canvas-lineDashOffset_8c}\index{src/canvas-\/line\+Dash\+Offset.\+c@{src/canvas-\/line\+Dash\+Offset.\+c}}
+{\ttfamily \#include \char`\"{}include-\/core.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}include-\/openvg.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}canvas-\/line\+Dash\+Offset.\+h\char`\"{}}\\*
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{canvas-lineDashOffset_8c_abc44d04f7224655fefab57c3be8d3dd5}{canvas\+\_\+line\+Width} (V\+Gfloat line\+\_\+dash\+\_\+offset)
+\item 
+V\+Gfloat \hyperlink{canvas-lineDashOffset_8c_a5cde8ee38e4872455613674691ceca8a}{canvas\+\_\+line\+Width\+\_\+get} (void)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{canvas-lineDashOffset_8c_abc44d04f7224655fefab57c3be8d3dd5}{}\index{canvas-\/line\+Dash\+Offset.\+c@{canvas-\/line\+Dash\+Offset.\+c}!canvas\+\_\+line\+Width@{canvas\+\_\+line\+Width}}
+\index{canvas\+\_\+line\+Width@{canvas\+\_\+line\+Width}!canvas-\/line\+Dash\+Offset.\+c@{canvas-\/line\+Dash\+Offset.\+c}}
+\subsubsection[{canvas\+\_\+line\+Width(\+V\+Gfloat line\+\_\+dash\+\_\+offset)}]{\setlength{\rightskip}{0pt plus 5cm}void canvas\+\_\+line\+Width (
+\begin{DoxyParamCaption}
+\item[{V\+Gfloat}]{line\+\_\+dash\+\_\+offset}
+\end{DoxyParamCaption}
+)}\label{canvas-lineDashOffset_8c_abc44d04f7224655fefab57c3be8d3dd5}
+The line\+Dash\+Offset property sets the line dash pattern offset or \char`\"{}phase\char`\"{} to achieve a \char`\"{}marching ants\char`\"{} effect, for example. 
+\begin{DoxyParams}{Parameters}
+{\em line\+\_\+dash\+\_\+offset} & A float specifying the amount of the offset. Initially 0.\+0. \\
+\hline
+\end{DoxyParams}
+\hypertarget{canvas-lineDashOffset_8c_a5cde8ee38e4872455613674691ceca8a}{}\index{canvas-\/line\+Dash\+Offset.\+c@{canvas-\/line\+Dash\+Offset.\+c}!canvas\+\_\+line\+Width\+\_\+get@{canvas\+\_\+line\+Width\+\_\+get}}
+\index{canvas\+\_\+line\+Width\+\_\+get@{canvas\+\_\+line\+Width\+\_\+get}!canvas-\/line\+Dash\+Offset.\+c@{canvas-\/line\+Dash\+Offset.\+c}}
+\subsubsection[{canvas\+\_\+line\+Width\+\_\+get(void)}]{\setlength{\rightskip}{0pt plus 5cm}V\+Gfloat canvas\+\_\+line\+Width\+\_\+get (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{canvas-lineDashOffset_8c_a5cde8ee38e4872455613674691ceca8a}
+It returns the current value (0.\+0 by default). \begin{DoxyReturn}{Returns}
+A number specifying the current line dash offset in space units. 
+\end{DoxyReturn}

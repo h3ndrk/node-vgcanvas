@@ -1,0 +1,86 @@
+\hypertarget{fonttoopenvg_8cpp}{}\section{src/fonttoopenvg.cpp File Reference}
+\label{fonttoopenvg_8cpp}\index{src/fonttoopenvg.\+cpp@{src/fonttoopenvg.\+cpp}}
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include $<$fstream$>$}\\*
+{\ttfamily \#include $<$vector$>$}\\*
+{\ttfamily \#include $<$float.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}ft2build.\+h\char`\"{}}\\*
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classVector2}{Vector2}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{fonttoopenvg_8cpp_a2aa0c61959a649f907900e5854965146}{O\+U\+T\+P\+U\+T\+\_\+\+I\+N\+T\+S}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classVector2}{Vector2} \hyperlink{fonttoopenvg_8cpp_a43adb85199fdc6ae1f9ba0397660ad9a}{operator+} (const \hyperlink{classVector2}{Vector2} \&a, const \hyperlink{classVector2}{Vector2} \&b)
+\item 
+\hyperlink{classVector2}{Vector2} \hyperlink{fonttoopenvg_8cpp_a030e4fa78f70cce660547f7143a93cca}{operator$\ast$} (const \hyperlink{classVector2}{Vector2} \&a, float b)
+\item 
+float \hyperlink{fonttoopenvg_8cpp_a8ac571e97accf35a83da087247d5fc76}{conv\+F\+T\+Fixed} (const F\+T\+\_\+\+Pos \&x)
+\item 
+\hyperlink{classVector2}{Vector2} \hyperlink{fonttoopenvg_8cpp_aa8c985bcdfe89a8c0c02268486196f45}{conv\+F\+T\+Vector} (const F\+T\+\_\+\+Vector \&v)
+\item 
+bool \hyperlink{fonttoopenvg_8cpp_a82611d93cfed78526b1ab3b173e74467}{is\+On} (char b)
+\item 
+int \hyperlink{fonttoopenvg_8cpp_af3ed9c200de85b53c94cd18764b246a2}{main} (int argc, char $\ast$const argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\hypertarget{fonttoopenvg_8cpp_a2aa0c61959a649f907900e5854965146}{}\index{fonttoopenvg.\+cpp@{fonttoopenvg.\+cpp}!O\+U\+T\+P\+U\+T\+\_\+\+I\+N\+T\+S@{O\+U\+T\+P\+U\+T\+\_\+\+I\+N\+T\+S}}
+\index{O\+U\+T\+P\+U\+T\+\_\+\+I\+N\+T\+S@{O\+U\+T\+P\+U\+T\+\_\+\+I\+N\+T\+S}!fonttoopenvg.\+cpp@{fonttoopenvg.\+cpp}}
+\subsubsection[{O\+U\+T\+P\+U\+T\+\_\+\+I\+N\+T\+S}]{\setlength{\rightskip}{0pt plus 5cm}\#define O\+U\+T\+P\+U\+T\+\_\+\+I\+N\+T\+S}\label{fonttoopenvg_8cpp_a2aa0c61959a649f907900e5854965146}
+
+
+\subsection{Function Documentation}
+\hypertarget{fonttoopenvg_8cpp_a8ac571e97accf35a83da087247d5fc76}{}\index{fonttoopenvg.\+cpp@{fonttoopenvg.\+cpp}!conv\+F\+T\+Fixed@{conv\+F\+T\+Fixed}}
+\index{conv\+F\+T\+Fixed@{conv\+F\+T\+Fixed}!fonttoopenvg.\+cpp@{fonttoopenvg.\+cpp}}
+\subsubsection[{conv\+F\+T\+Fixed(const F\+T\+\_\+\+Pos \&x)}]{\setlength{\rightskip}{0pt plus 5cm}float conv\+F\+T\+Fixed (
+\begin{DoxyParamCaption}
+\item[{const F\+T\+\_\+\+Pos \&}]{x}
+\end{DoxyParamCaption}
+)}\label{fonttoopenvg_8cpp_a8ac571e97accf35a83da087247d5fc76}
+\hypertarget{fonttoopenvg_8cpp_aa8c985bcdfe89a8c0c02268486196f45}{}\index{fonttoopenvg.\+cpp@{fonttoopenvg.\+cpp}!conv\+F\+T\+Vector@{conv\+F\+T\+Vector}}
+\index{conv\+F\+T\+Vector@{conv\+F\+T\+Vector}!fonttoopenvg.\+cpp@{fonttoopenvg.\+cpp}}
+\subsubsection[{conv\+F\+T\+Vector(const F\+T\+\_\+\+Vector \&v)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector2} conv\+F\+T\+Vector (
+\begin{DoxyParamCaption}
+\item[{const F\+T\+\_\+\+Vector \&}]{v}
+\end{DoxyParamCaption}
+)}\label{fonttoopenvg_8cpp_aa8c985bcdfe89a8c0c02268486196f45}
+\hypertarget{fonttoopenvg_8cpp_a82611d93cfed78526b1ab3b173e74467}{}\index{fonttoopenvg.\+cpp@{fonttoopenvg.\+cpp}!is\+On@{is\+On}}
+\index{is\+On@{is\+On}!fonttoopenvg.\+cpp@{fonttoopenvg.\+cpp}}
+\subsubsection[{is\+On(char b)}]{\setlength{\rightskip}{0pt plus 5cm}bool is\+On (
+\begin{DoxyParamCaption}
+\item[{char}]{b}
+\end{DoxyParamCaption}
+)}\label{fonttoopenvg_8cpp_a82611d93cfed78526b1ab3b173e74467}
+\hypertarget{fonttoopenvg_8cpp_af3ed9c200de85b53c94cd18764b246a2}{}\index{fonttoopenvg.\+cpp@{fonttoopenvg.\+cpp}!main@{main}}
+\index{main@{main}!fonttoopenvg.\+cpp@{fonttoopenvg.\+cpp}}
+\subsubsection[{main(int argc, char $\ast$const argv[])}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$const}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\label{fonttoopenvg_8cpp_af3ed9c200de85b53c94cd18764b246a2}
+\hypertarget{fonttoopenvg_8cpp_a030e4fa78f70cce660547f7143a93cca}{}\index{fonttoopenvg.\+cpp@{fonttoopenvg.\+cpp}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!fonttoopenvg.\+cpp@{fonttoopenvg.\+cpp}}
+\subsubsection[{operator$\ast$(const Vector2 \&a, float b)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector2} operator$\ast$ (
+\begin{DoxyParamCaption}
+\item[{const {\bf Vector2} \&}]{a, }
+\item[{float}]{b}
+\end{DoxyParamCaption}
+)}\label{fonttoopenvg_8cpp_a030e4fa78f70cce660547f7143a93cca}
+\hypertarget{fonttoopenvg_8cpp_a43adb85199fdc6ae1f9ba0397660ad9a}{}\index{fonttoopenvg.\+cpp@{fonttoopenvg.\+cpp}!operator+@{operator+}}
+\index{operator+@{operator+}!fonttoopenvg.\+cpp@{fonttoopenvg.\+cpp}}
+\subsubsection[{operator+(const Vector2 \&a, const Vector2 \&b)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector2} operator+ (
+\begin{DoxyParamCaption}
+\item[{const {\bf Vector2} \&}]{a, }
+\item[{const {\bf Vector2} \&}]{b}
+\end{DoxyParamCaption}
+)}\label{fonttoopenvg_8cpp_a43adb85199fdc6ae1f9ba0397660ad9a}

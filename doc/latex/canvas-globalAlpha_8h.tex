@@ -1,0 +1,42 @@
+\hypertarget{canvas-globalAlpha_8h}{}\section{src/canvas-\/global\+Alpha.h File Reference}
+\label{canvas-globalAlpha_8h}\index{src/canvas-\/global\+Alpha.\+h@{src/canvas-\/global\+Alpha.\+h}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{canvas-globalAlpha_8h_a8610df8d07d153c5f5723f646c52887c}{canvas\+\_\+global\+Alpha} (V\+Gfloat global\+\_\+alpha)
+\item 
+V\+Gfloat \hyperlink{canvas-globalAlpha_8h_aa97dd7621c4e59c763330a0ae7fa82a8}{canvas\+\_\+global\+Alpha\+\_\+get} (void)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{canvas-globalAlpha_8h_a8610df8d07d153c5f5723f646c52887c}{}\index{canvas-\/global\+Alpha.\+h@{canvas-\/global\+Alpha.\+h}!canvas\+\_\+global\+Alpha@{canvas\+\_\+global\+Alpha}}
+\index{canvas\+\_\+global\+Alpha@{canvas\+\_\+global\+Alpha}!canvas-\/global\+Alpha.\+h@{canvas-\/global\+Alpha.\+h}}
+\subsubsection[{canvas\+\_\+global\+Alpha(\+V\+Gfloat global\+\_\+alpha)}]{\setlength{\rightskip}{0pt plus 5cm}void canvas\+\_\+global\+Alpha (
+\begin{DoxyParamCaption}
+\item[{V\+Gfloat}]{global\+\_\+alpha}
+\end{DoxyParamCaption}
+)}\label{canvas-globalAlpha_8h_a8610df8d07d153c5f5723f646c52887c}
+Copyright (C) 2015 N\+I\+P\+E-\/\+S\+Y\+S\+T\+E\+M\+S
+
+This program is free software\+: you can redistribute it and/or modify it under the terms of the G\+N\+U General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+U\+T A\+N\+Y W\+A\+R\+R\+A\+N\+T\+Y; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+T\+Y or F\+I\+T\+N\+E\+S\+S F\+O\+R A P\+A\+R\+T\+I\+C\+U\+L\+A\+R P\+U\+R\+P\+O\+S\+E. See the G\+N\+U General Public License for more details.
+
+You should have received a copy of the G\+N\+U General Public License along with this program. If not, see \href{http://www.gnu.org/licenses/}{\tt http\+://www.\+gnu.\+org/licenses/}.
+
+The global\+Alpha property specifies the alpha value that is applied to shapes and images before they are drawn onto the canvas. The value is in the range from 0.\+0 (fully transparent) to 1.\+0 (fully opaque) 
+\begin{DoxyParams}{Parameters}
+{\em global\+\_\+alpha} & A number between 0.\+0 (fully transparent) and 1.\+0 (fully opaque). The default value is 1.\+0 Values outside the range, including Infinity and Na\+N will not be set and global\+Alpha will retain its previous value. \\
+\hline
+\end{DoxyParams}
+\hypertarget{canvas-globalAlpha_8h_aa97dd7621c4e59c763330a0ae7fa82a8}{}\index{canvas-\/global\+Alpha.\+h@{canvas-\/global\+Alpha.\+h}!canvas\+\_\+global\+Alpha\+\_\+get@{canvas\+\_\+global\+Alpha\+\_\+get}}
+\index{canvas\+\_\+global\+Alpha\+\_\+get@{canvas\+\_\+global\+Alpha\+\_\+get}!canvas-\/global\+Alpha.\+h@{canvas-\/global\+Alpha.\+h}}
+\subsubsection[{canvas\+\_\+global\+Alpha\+\_\+get(void)}]{\setlength{\rightskip}{0pt plus 5cm}V\+Gfloat canvas\+\_\+global\+Alpha\+\_\+get (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{canvas-globalAlpha_8h_aa97dd7621c4e59c763330a0ae7fa82a8}
+It returns the current value (1.\+0 by default). \begin{DoxyReturn}{Returns}
+A number specifying the current global\+Alpha property. 
+\end{DoxyReturn}
