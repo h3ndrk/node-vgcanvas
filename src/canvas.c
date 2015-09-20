@@ -36,6 +36,10 @@
 #include "color.h"
 // #include "font.h"
 #include "canvas-clearRect.h"
+#include "canvas-lineWidth.h"
+#include "canvas-lineCap.h"
+#include "canvas-lineJoin.h"
+#include "canvas-globalAlpha.h"
 
 static VGPaint fillColor;
 static VGPaint strokeColor;
@@ -83,8 +87,8 @@ void canvas__init(void)
 	canvas_fillStyle_color(1, 1, 1, 1);
 	canvas_strokeStyle_color(1, 1, 1, 1);
 	canvas_lineWidth(1);
-	canvas_lineCap(CANVAS_LINE_CAP_BUTT);
-	canvas_lineJoin(CANVAS_LINE_JOIN_MITER);
+	canvas_lineCap("butt");
+	canvas_lineJoin("miter");
 	canvas_globalAlpha(1);
 	canvas_lineDashOffset(0);
 	canvas_setLineDash(0, NULL);
@@ -167,7 +171,7 @@ void canvas_fillRect(VGfloat x, VGfloat y, VGfloat width, VGfloat height)
 	color_values[0] = currentState.fillColor.red;
 	color_values[1] = currentState.fillColor.green;
 	color_values[2] = currentState.fillColor.blue;
-	color_values[3] = currentState.fillColor.alpha * currentState.globalAlpha;
+	color_values[3] = currentState.fillColor.alpha * canvas_globalAlpha_get();
 	
 	vgSetParameteri(fillColor, VG_PAINT_TYPE, VG_PAINT_TYPE_COLOR);
 	vgSetParameterfv(fillColor, VG_PAINT_COLOR, 4, color_values);
@@ -190,7 +194,7 @@ void canvas_strokeRect(VGfloat x, VGfloat y, VGfloat width, VGfloat height)
 	color_values[0] = currentState.strokeColor.red;
 	color_values[1] = currentState.strokeColor.green;
 	color_values[2] = currentState.strokeColor.blue;
-	color_values[3] = currentState.strokeColor.alpha * currentState.globalAlpha;
+	color_values[3] = currentState.strokeColor.alpha * canvas_globalAlpha_get();
 	
 	vgSetParameteri(strokeColor, VG_PAINT_TYPE, VG_PAINT_TYPE_COLOR);
 	vgSetParameterfv(strokeColor, VG_PAINT_COLOR, 4, color_values);
@@ -227,15 +231,15 @@ void canvas_strokeStyle_color(VGfloat red, VGfloat green, VGfloat blue, VGfloat 
 // 	vgSeti(VG_STROKE_CAP_STYLE, line_join);
 // }
 
-void canvas_globalAlpha(VGfloat alpha)
-{
-	if(alpha > 1 || alpha < 0)
-	{
-		alpha = 1;
-	}
+// void canvas_globalAlpha(VGfloat alpha)
+// {
+// 	if(alpha > 1 || alpha < 0)
+// 	{
+// 		alpha = 1;
+// 	}
 	
-	currentState.globalAlpha = alpha;
-}
+// 	canvas_globalAlpha_get() = alpha;
+// }
 
 void canvas_beginPath(void)
 {
@@ -602,10 +606,10 @@ void canvas_restore(void)
 	
 	vgSeti(VG_MASKING, restore->clipping);
 	currentState.clipping = restore->clipping;
-	canvas_lineWidth(restore->lineWidth);
-	canvas_lineCap(restore->lineCap);
-	canvas_lineJoin(restore->lineJoin);
-	canvas_globalAlpha(restore->globalAlpha);
+	// canvas_lineWidth(restore->lineWidth);
+	// canvas_lineCap(restore->lineCap);
+	// canvas_lineJoin(restore->lineJoin);
+	// canvas_globalAlpha(restore->globalAlpha);
 	canvas_lineDashOffset(restore->dashOffset);
 	currentState.fillColor = restore->fillColor;
 	currentState.strokeColor = restore->strokeColor;
@@ -633,7 +637,7 @@ void canvas_stroke(void)
 	color_values[0] = currentState.strokeColor.red;
 	color_values[1] = currentState.strokeColor.green;
 	color_values[2] = currentState.strokeColor.blue;
-	color_values[3] = currentState.strokeColor.alpha * currentState.globalAlpha;
+	color_values[3] = currentState.strokeColor.alpha * canvas_globalAlpha_get();
 	
 	vgSetParameteri(strokeColor, VG_PAINT_TYPE, VG_PAINT_TYPE_COLOR);
 	vgSetParameterfv(strokeColor, VG_PAINT_COLOR, 4, color_values);
@@ -649,7 +653,7 @@ void canvas_fill(void)
 	color_values[0] = currentState.fillColor.red;
 	color_values[1] = currentState.fillColor.green;
 	color_values[2] = currentState.fillColor.blue;
-	color_values[3] = currentState.fillColor.alpha * currentState.globalAlpha;
+	color_values[3] = currentState.fillColor.alpha * canvas_globalAlpha_get();
 	
 	vgSetParameteri(fillColor, VG_PAINT_TYPE, VG_PAINT_TYPE_COLOR);
 	vgSetParameterfv(fillColor, VG_PAINT_COLOR, 4, color_values);
@@ -839,7 +843,7 @@ void canvas_render_text_fill(char *path, char *text, float x, float y, unsigned 
 	color_values[0] = currentState.fillColor.red;
 	color_values[1] = currentState.fillColor.green;
 	color_values[2] = currentState.fillColor.blue;
-	color_values[3] = currentState.fillColor.alpha * currentState.globalAlpha;
+	color_values[3] = currentState.fillColor.alpha * canvas_globalAlpha_get();
 	
 	if(fonts == NULL)
 	{
@@ -907,7 +911,7 @@ void canvas_render_text_stroke(char *path, char *text, float x, float y, unsigne
 	color_values[0] = currentState.strokeColor.red;
 	color_values[1] = currentState.strokeColor.green;
 	color_values[2] = currentState.strokeColor.blue;
-	color_values[3] = currentState.strokeColor.alpha * currentState.globalAlpha;
+	color_values[3] = currentState.strokeColor.alpha * canvas_globalAlpha_get();
 	
 	if(fonts == NULL)
 	{
