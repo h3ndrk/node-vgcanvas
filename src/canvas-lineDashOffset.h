@@ -15,10 +15,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __CANVAS_LINEWIDTH_H__
-#define __CANVAS_LINEWIDTH_H__
+#ifndef __CANVAS_LINEDASHOFFSET_H__
+#define __CANVAS_LINEDASHOFFSET_H__
 
-void canvas_lineWidth(VGfloat line_width);
-VGfloat canvas_lineWidth_get(void);
+void canvas_lineDashOffset(VGfloat line_dash_offset);
+VGfloat canvas_lineDashOffset_get(void);
 
-#endif /* __CANVAS_LINEWIDTH_H__ */
+#endif /* __CANVAS_LINEDASHOFFSET_H__ */

@@ -26,7 +26,7 @@ static VGfloat canvas_globalAlpha_value = 1;
  * The globalAlpha property specifies the alpha value that is applied to shapes
  * and images before they are drawn onto the canvas. The value is in the range
  * from 0.0 (fully transparent) to 1.0 (fully opaque)
- * @param globalAlpha A number between 0.0 (fully transparent) and 1.0 (fully
+ * @param global_alpha A number between 0.0 (fully transparent) and 1.0 (fully
  *                    opaque). The default value is 1.0 Values outside the
  *                    range, including Infinity and NaN will not be set and
  *                    globalAlpha will retain its previous value.

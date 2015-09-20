@@ -16,7 +16,7 @@ Canvas 2D Method | C implementation | C++ wrapper implementation | Node.JS imple
 `VGContext.globalCompositeOperation` |   |   |   
 `VGContext.imageSmoothingEnabled` |   |   |   
 `VGContext.lineCap` | implemented |   |   
-`VGContext.lineDashOffset` |   |   |   
+`VGContext.lineDashOffset` | implemented |   |   
 `VGContext.lineJoin` | implemented |   |   
 `VGContext.lineWidth` | implemented |   |   
 `VGContext.miterLimit` |   |   |   
@@ -35,7 +35,7 @@ Canvas 2D Method | C implementation | C++ wrapper implementation | Node.JS imple
 `VGContext.beginPath()` |   |   |   
 `VGContext.bezierCurveTo()` |   |   |   
 `VGContext.clearHitRegion()` |   |   |   
-`VGContext.clearRect()` |   |   |   
+`VGContext.clearRect()` | implemented |   |   
 `VGContext.clip()` |   |   |   
 `VGContext.closePath()` |   |   |   
 `VGContext.createImageData()` |   |   |   

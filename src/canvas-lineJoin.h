@@ -18,7 +18,7 @@
 #ifndef __CANVAS_LINEJOIN_H__
 #define __CANVAS_LINEJOIN_H__
 
-void canvas_lineJoin(char *line_cap);
+void canvas_lineJoin(char *line_join);
 char *canvas_lineJoin_get(void);
 
 #endif /* __CANVAS_LINEJOIN_H__ */

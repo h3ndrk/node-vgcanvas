@@ -520,11 +520,11 @@ void canvas_setLineDash(VGint count, const VGfloat *data)
 	vgSetfv(VG_STROKE_DASH_PATTERN, count, data);
 }
 
-void canvas_lineDashOffset(VGfloat offset)
-{
-	currentState.dashOffset = offset;
-	vgSetf(VG_STROKE_DASH_PHASE, offset);
-}
+// void canvas_lineDashOffset(VGfloat offset)
+// {
+// 	currentState.dashOffset = offset;
+// 	vgSetf(VG_STROKE_DASH_PHASE, offset);
+// }
 
 void canvas_closePath(void)
 {

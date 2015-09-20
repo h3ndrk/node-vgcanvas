@@ -18,32 +18,27 @@
 #include "include-core.h"
 #include "include-openvg.h"
 // #include "include-freetype.h"
-#include "canvas-lineWidth.h"
+#include "canvas-lineDashOffset.h"
 
-static VGfloat canvas_lineWidth_value = 1;
+static VGfloat canvas_lineDashOffset_value = 0;
 
 /**
- * The lineWidth property sets the thickness of lines in space units. Setting
- * zero and negative values are ignored; otherwise the current value is set to
- * the new value.
- * @param line_width A number specifying the line width in space units. Zero,
- *                  negative, Infinity and NaN values are ignored.
+ * The lineDashOffset property sets the line dash pattern offset or "phase" to
+ * achieve a "marching ants" effect, for example.
+ * @param line_dash_offset A float specifying the amount of the offset. Initially 0.0.
  */
-void canvas_lineWidth(VGfloat line_width)
+void canvas_lineWidth(VGfloat line_dash_offset)
 {
-	if(line_width > 0)
-	{
-		canvas_lineWidth_value = line_width;
-		
-		vgSetf(VG_STROKE_LINE_WIDTH, line_width);
-	}
+	canvas_lineDashOffset_value = line_dash_offset;
+	
+	vgSetf(VG_STROKE_DASH_PHASE, line_dash_offset);
 }
 
 /**
- * It returns the current value (1.0 by default).
- * @return A number specifying the current line width in space units.
+ * It returns the current value (0.0 by default).
+ * @return A number specifying the current line dash offset in space units.
  */
 VGfloat canvas_lineWidth_get(void)
 {
-	return canvas_lineWidth_value;
+	return canvas_lineDashOffset_value;
 }
