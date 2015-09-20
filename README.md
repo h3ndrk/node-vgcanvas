@@ -32,7 +32,7 @@ Canvas 2D Method | C implementation | C++ wrapper implementation | Node.JS imple
 `VGContext.arc()` |   |   |   
 `VGContext.arcTo()` |   |   |   
 `VGContext.asyncDrawXULElement()` |   |   |   
-`VGContext.beginPath()` |   |   |   
+`VGContext.beginPath()` | implemented |   |   
 `VGContext.bezierCurveTo()` |   |   |   
 `VGContext.clearHitRegion()` |   |   |   
 `VGContext.clearRect()` | implemented |   |   
