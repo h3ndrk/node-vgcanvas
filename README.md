@@ -53,7 +53,7 @@ Canvas 2D Method | C implementation | C++ wrapper implementation | Node.JS imple
 `VGContext.getLineDash()` |   |   |   
 `VGContext.isPointInPath()` |   |   |   
 `VGContext.isPointInStroke()` |   |   |   
-`VGContext.lineTo()` |   |   |   
+`VGContext.lineTo()` | implemented |   |   
 `VGContext.measureText()` |   |   |   
 `VGContext.moveTo()` | implemented |   |   
 `VGContext.putImageData()` |   |   |   
