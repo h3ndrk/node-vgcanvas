@@ -21,7 +21,7 @@
 #include "canvas-clearRect.h"
 
 /**
- * Initializes "clearRect". Sets the clear color and disables scissoring.
+ * Initializes clearRect(). Sets the clear color and disables scissoring.
  */
 void canvas_clearRect_init(void)
 {
@@ -36,7 +36,7 @@ void canvas_clearRect_init(void)
 }
 
 /**
- * The function sets all pixels in the rectangle defined by starting point
+ * The method sets all pixels in the rectangle defined by starting point
  * (x, y) and size (width, height) to transparent black, erasing any previously
  * drawn content.
  * @param x The x axis of the coordinate for the rectangle starting point.

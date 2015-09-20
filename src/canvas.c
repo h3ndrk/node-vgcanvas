@@ -96,6 +96,8 @@ void canvas__init(void)
 	currentState.savedLayer = 0;
 	currentState.next = NULL;
 	
+	canvas_beginPath_init();
+	
 	// immediate path for drawing rects, etc.
 	immediatePath = vgCreatePath(VG_PATH_FORMAT_STANDARD, VG_PATH_DATATYPE_F, 1.0f, 0.0f, 0, 0, VG_PATH_CAPABILITY_ALL);
 	
@@ -138,6 +140,8 @@ void canvas__cleanup(void)
 		current = next;
 	}
 	canvas__destroyState(&currentState);
+	
+	canvas_beginPath_cleanup();
 	
 	vgDestroyPath(immediatePath);
 	vgDestroyPath(currentPath);
@@ -241,10 +245,10 @@ void canvas_strokeStyle_color(VGfloat red, VGfloat green, VGfloat blue, VGfloat 
 // 	canvas_globalAlpha_get() = alpha;
 // }
 
-void canvas_beginPath(void)
-{
-	vgClearPath(currentPath, VG_PATH_CAPABILITY_ALL);
-}
+// void canvas_beginPath(void)
+// {
+// 	vgClearPath(currentPath, VG_PATH_CAPABILITY_ALL);
+// }
 
 void canvas_moveTo(VGfloat x, VGfloat y)
 {
