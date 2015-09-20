@@ -12,13 +12,13 @@ Canvas 2D Method | C implementation | C++ wrapper implementation | Node.JS imple
 `VGContext.fillStyle` |   |   |   
 `VGContext.filter` |   |   |   
 `VGContext.font` |   |   |   
-`VGContext.globalAlpha` |   |   |   
+`VGContext.globalAlpha` | implemented |   |   
 `VGContext.globalCompositeOperation` |   |   |   
 `VGContext.imageSmoothingEnabled` |   |   |   
-`VGContext.lineCap` |   |   |   
+`VGContext.lineCap` | implemented |   |   
 `VGContext.lineDashOffset` |   |   |   
-`VGContext.lineJoin` |   |   |   
-`VGContext.lineWidth` |   |   |   
+`VGContext.lineJoin` | implemented |   |   
+`VGContext.lineWidth` | implemented |   |   
 `VGContext.miterLimit` |   |   |   
 `VGContext.shadowBlur` |   |   |   
 `VGContext.shadowColor` |   |   |   
