@@ -48,6 +48,7 @@ SRC += color.c
 SRC += canvas-clearRect.c
 SRC += canvas-lineWidth.c
 SRC += canvas-lineCap.c
+SRC += canvas-lineJoin.c
 # SRC += font.c
 
 OBJS = $(addprefix bin/obj/, $(SRC:%.c=%.o))

@@ -20,33 +20,33 @@
 // #include "include-freetype.h"
 #include "canvas-lineCap.h"
 
-static VGCapStyle canvas_lineCap_value = CANVAS_LINE_CAP_BUTT;
+static VGCapStyle canvas_lineCap_value = VG_CAP_BUTT;
 
 /**
  * The lineCap property determines how the end points of every line are drawn.
  * There are three possible values for this property and those are: butt, round
  * and square. By default this property is set to butt.
- * @param lineCap A string specifying the style of the end point.
+ * @param line_cap A string specifying the style of the end point.
  */
 void canvas_lineCap(char *line_cap)
 {
 	if(!strcmp(line_cap, "butt"))
 	{
-		canvas_lineCap_value = CANVAS_LINE_CAP_BUTT;
+		canvas_lineCap_value = VG_CAP_BUTT;
 		
-		vgSeti(VG_STROKE_CAP_STYLE, CANVAS_LINE_CAP_BUTT);
+		vgSeti(VG_STROKE_CAP_STYLE, VG_CAP_BUTT);
 	}
 	else if(!strcmp(line_cap, "round"))
 	{
-		canvas_lineCap_value = CANVAS_LINE_CAP_ROUND;
+		canvas_lineCap_value = VG_CAP_ROUND;
 		
-		vgSeti(VG_STROKE_CAP_STYLE, CANVAS_LINE_CAP_ROUND);
+		vgSeti(VG_STROKE_CAP_STYLE, VG_CAP_ROUND);
 	}
 	else if(!strcmp(line_cap, "square"))
 	{
-		canvas_lineCap_value = CANVAS_LINE_CAP_SQUARE;
+		canvas_lineCap_value = VG_CAP_SQUARE;
 		
-		vgSeti(VG_STROKE_CAP_STYLE, CANVAS_LINE_CAP_SQUARE);
+		vgSeti(VG_STROKE_CAP_STYLE, VG_CAP_SQUARE);
 	}
 }
 
@@ -58,21 +58,27 @@ char *canvas_lineCap_get(void)
 {
 	switch(canvas_lineCap_value)
 	{
-		case CANVAS_LINE_CAP_BUTT:
+		case VG_CAP_BUTT:
 		{
 			return "butt";
 			
 			break;
 		}
-		case CANVAS_LINE_CAP_ROUND:
+		case VG_CAP_ROUND:
 		{
 			return "round";
 			
 			break;
 		}
-		case CANVAS_LINE_CAP_SQUARE:
+		case VG_CAP_SQUARE:
 		{
 			return "square";
+			
+			break;
+		}
+		default:
+		{
+			return "";
 			
 			break;
 		}

@@ -23,9 +23,9 @@
 static VGfloat canvas_lineWidth_value = 1;
 
 /**
- * The lineWidth property sets the thickness of lines in space units. Setting zero
- * and negative values are ignored; otherwise the current value is set to the
- * new value.
+ * The lineWidth property sets the thickness of lines in space units. Setting
+ * zero and negative values are ignored; otherwise the current value is set to
+ * the new value.
  * @param lineWidth A number specifying the line width in space units. Zero,
  *                  negative, Infinity and NaN values are ignored.
  */

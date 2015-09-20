@@ -28,6 +28,7 @@
 #include "canvas-clearRect.h"
 #include "canvas-lineWidth.h"
 #include "canvas-lineCap.h"
+#include "canvas-lineJoin.h"
 
 int main(void)
 {

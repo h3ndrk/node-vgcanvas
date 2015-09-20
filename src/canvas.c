@@ -213,19 +213,19 @@ void canvas_strokeStyle_color(VGfloat red, VGfloat green, VGfloat blue, VGfloat 
 // 	vgSetf(VG_STROKE_LINE_WIDTH, width);
 // }
 
-void canvas_lineCap(canvas_line_cap_t line_cap)
-{
-	currentState.lineCap = line_cap;
+// void canvas_lineCap(canvas_line_cap_t line_cap)
+// {
+// 	currentState.lineCap = line_cap;
 	
-	vgSeti(VG_STROKE_CAP_STYLE, line_cap);
-}
+// 	vgSeti(VG_STROKE_CAP_STYLE, line_cap);
+// }
 
-void canvas_lineJoin(canvas_line_join_t line_join)
-{
-	currentState.lineJoin = line_join;
+// void canvas_lineJoin(canvas_line_join_t line_join)
+// {
+// 	currentState.lineJoin = line_join;
 	
-	vgSeti(VG_STROKE_CAP_STYLE, line_join);
-}
+// 	vgSeti(VG_STROKE_CAP_STYLE, line_join);
+// }
 
 void canvas_globalAlpha(VGfloat alpha)
 {
