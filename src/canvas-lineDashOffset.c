@@ -27,7 +27,7 @@ static VGfloat canvas_lineDashOffset_value = 0;
  * achieve a "marching ants" effect, for example.
  * @param line_dash_offset A float specifying the amount of the offset. Initially 0.0.
  */
-void canvas_lineWidth(VGfloat line_dash_offset)
+void canvas_lineDashOffset(VGfloat line_dash_offset)
 {
 	canvas_lineDashOffset_value = line_dash_offset;
 	
@@ -38,7 +38,7 @@ void canvas_lineWidth(VGfloat line_dash_offset)
  * It returns the current value (0.0 by default).
  * @return A number specifying the current line dash offset in space units.
  */
-VGfloat canvas_lineWidth_get(void)
+VGfloat canvas_lineDashOffset_get(void)
 {
 	return canvas_lineDashOffset_value;
 }

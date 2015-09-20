@@ -32,7 +32,7 @@
  * @param x The x axis of the coordinate for the end point.
  * @param y The y axis of the coordinate for the end point.
  */
-void canvas_lineTo(VGfloat cpx, VGfloat cpy, VGfloat x, VGfloat y)
+void canvas_quadraticCurveTo(VGfloat cpx, VGfloat cpy, VGfloat x, VGfloat y)
 {
 	VGubyte segment[1] = { VG_QUAD_TO_ABS };
 	VGfloat data[4];

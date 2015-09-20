@@ -42,15 +42,20 @@ LIBS += -lfreetype
 PROGRAM_NAME = home-infoscreen
 
 SRC += $(PROGRAM_NAME).c
-SRC += egl-util.c
+SRC += canvas-beginPath.c
+SRC += canvas-bezierCurveTo.c
+SRC += canvas-clearRect.c
+SRC += canvas-globalAlpha.c
+SRC += canvas-lineCap.c
+SRC += canvas-lineDashOffset.c
+SRC += canvas-lineJoin.c
+SRC += canvas-lineTo.c
+SRC += canvas-lineWidth.c
+SRC += canvas-moveTo.c
+SRC += canvas-quadraticCurveTo.c
 SRC += canvas.c
 SRC += color.c
-SRC += canvas-clearRect.c
-SRC += canvas-lineWidth.c
-SRC += canvas-lineCap.c
-SRC += canvas-lineJoin.c
-SRC += canvas-globalAlpha.c
-# SRC += font.c
+SRC += egl-util.c
 
 OBJS = $(addprefix bin/obj/, $(SRC:%.c=%.o))
 
