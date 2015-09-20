@@ -206,12 +206,12 @@ void canvas_strokeStyle_color(VGfloat red, VGfloat green, VGfloat blue, VGfloat 
 	color_set_rgba(&currentState.strokeColor, red, green, blue, alpha);
 }
 
-void canvas_lineWidth(VGfloat width)
-{
-	currentState.lineWidth = width;
+// void canvas_lineWidth(VGfloat width)
+// {
+// 	currentState.lineWidth = width;
 	
-	vgSetf(VG_STROKE_LINE_WIDTH, width);
-}
+// 	vgSetf(VG_STROKE_LINE_WIDTH, width);
+// }
 
 void canvas_lineCap(canvas_line_cap_t line_cap)
 {

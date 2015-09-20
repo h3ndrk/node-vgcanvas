@@ -26,6 +26,7 @@
 #include "canvas.h"
 // #include "font.h"
 #include "canvas-clearRect.h"
+#include "canvas-lineWidth.h"
 
 int main(void)
 {

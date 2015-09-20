@@ -75,7 +75,7 @@ void canvas_fillRect(VGfloat x, VGfloat y, VGfloat width, VGfloat height);
 void canvas_fillStyle_color(VGfloat red, VGfloat green, VGfloat blue, VGfloat alpha);
 void canvas_strokeRect(VGfloat x, VGfloat y, VGfloat width, VGfloat height);
 void canvas_strokeStyle_color(VGfloat red, VGfloat green, VGfloat blue, VGfloat alpha);
-void canvas_lineWidth(VGfloat width);
+// void canvas_lineWidth(VGfloat width);
 void canvas_lineCap(canvas_line_cap_t line_cap);
 void canvas_lineJoin(canvas_line_join_t line_join);
 void canvas_globalAlpha(VGfloat alpha);
