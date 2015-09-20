@@ -22,25 +22,29 @@
 #include "canvas-quadraticCurveTo.h"
 
 /**
- * The quadraticCurveTo() method adds a quadratic Bézier curve to the path. It
- * requires two points. The first point is a control point and the second one is
- * the end point. The starting point is the last point in the current path,
- * which can be changed using moveTo() before creating the quadratic Bézier
- * curve.
- * @param cpx The x axis of the coordinate for the control point.
- * @param cpy The y axis of the coordinate for the control point.
+ * The bezierCurveTo() method of the Canvas 2D API adds a cubic Bézier curve to
+ * the path. It requires three points. The first two points are control points
+ * and the third one is the end point. The starting point is the last point in
+ * the current path, which can be changed using moveTo() before creating the
+ * Bézier curve.
+ * @param cp1x The x axis of the coordinate for the first control point.
+ * @param cp1y The y axis of the coordinate for the first control point.
+ * @param cp2x The x axis of the coordinate for the second control point.
+ * @param cp2y The y axis of the coordinate for the second control point.
  * @param x The x axis of the coordinate for the end point.
  * @param y The y axis of the coordinate for the end point.
  */
-void canvas_lineTo(VGfloat cpx, VGfloat cpy, VGfloat x, VGfloat y)
+void canvas_bezierCurveTo(VGfloat cp1x, VGfloat cp1y, VGfloat cp2x, VGfloat cp2y, VGfloat x, VGfloat y)
 {
-	VGubyte segment[1] = { VG_QUAD_TO_ABS };
-	VGfloat data[4];
+	VGubyte segment[1] = { VG_CUBIC_TO_ABS };
+	VGfloat data[6];
 	
-	data[0] = cpx;
-	data[1] = cpy;
-	data[2] = x;
-	data[3] = y;
+	data[0] = cp1x;
+	data[1] = cp1y;
+	data[2] = cp2x;
+	data[3] = cp2y;
+	data[4] = x;
+	data[5] = y;
 	
 	vgAppendPathData(canvas_beginPath_get(), 1, segment, (const void *)data);
 }
