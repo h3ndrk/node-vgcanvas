@@ -1,0 +1,270 @@
+# node-vgcanvas
+
+Node.JS wrapper for Canvas 2D API targeting the Raspberry Pi.
+
+## Canvas 2D API implementation status
+
+- `VGContext.canvas`
+    - [ ] C
+    - [ ] C++ wrapper
+    - [ ] Node.JS wrapper
+- `VGContext.currentTransform`
+    - [ ] C
+    - [ ] C++ wrapper
+    - [ ] Node.JS wrapper
+- `VGContext.direction`
+    - [ ] C
+    - [ ] C++ wrapper
+    - [ ] Node.JS wrapper
+- `VGContext.fillStyle`
+    - [ ] C
+    - [ ] C++ wrapper
+    - [ ] Node.JS wrapper
+- `VGContext.filter`
+    - [ ] C
+    - [ ] C++ wrapper
+    - [ ] Node.JS wrapper
+- `VGContext.font`
+    - [ ] C
+    - [ ] C++ wrapper
+    - [ ] Node.JS wrapper
+- `VGContext.globalAlpha`
+    - [x] C
+    - [ ] C++ wrapper
+    - [ ] Node.JS wrapper
+- `VGContext.globalCompositeOperation`
+    - [ ] C
+    - [ ] C++ wrapper
+    - [ ] Node.JS wrapper
+- `VGContext.imageSmoothingEnabled`
+    - [ ] C
+    - [ ] C++ wrapper
+    - [ ] Node.JS wrapper
+- `VGContext.lineCap`
+    - [x] C
+    - [ ] C++ wrapper
+    - [ ] Node.JS wrapper
+- `VGContext.lineDashOffset`
+    - [x] C
+    - [ ] C++ wrapper
+    - [ ] Node.JS wrapper
+- `VGContext.lineJoin`
+    - [x] C
+    - [ ] C++ wrapper
+    - [ ] Node.JS wrapper
+- `VGContext.lineWidth`
+    - [x] C
+    - [ ] C++ wrapper
+    - [ ] Node.JS wrapper
+- `VGContext.miterLimit`
+    - [ ] C
+    - [ ] C++ wrapper
+    - [ ] Node.JS wrapper
+- `VGContext.shadowBlur`
+    - [ ] C
+    - [ ] C++ wrapper
+    - [ ] Node.JS wrapper
+- `VGContext.shadowColor`
+    - [ ] C
+    - [ ] C++ wrapper
+    - [ ] Node.JS wrapper
+- `VGContext.shadowOffsetX`
+    - [ ] C
+    - [ ] C++ wrapper
+    - [ ] Node.JS wrapper
+- `VGContext.shadowOffsetY`
+    - [ ] C
+    - [ ] C++ wrapper
+    - [ ] Node.JS wrapper
+- `VGContext.strokeStyle`
+    - [ ] C
+    - [ ] C++ wrapper
+    - [ ] Node.JS wrapper
+- `VGContext.textAlign`
+    - [ ] C
+    - [ ] C++ wrapper
+    - [ ] Node.JS wrapper
+- `VGContext.textBaseline`
+    - [ ] C
+    - [ ] C++ wrapper
+    - [ ] Node.JS wrapper
+- `VGContext.textBaseline`
+    - [ ] C
+    - [ ] C++ wrapper
+    - [ ] Node.JS wrapper
+- `VGContext.addHitRegion()`
+    - [ ] C
+    - [ ] C++ wrapper
+    - [ ] Node.JS wrapper
+- `VGContext.arc()`
+    - [ ] C
+    - [ ] C++ wrapper
+    - [ ] Node.JS wrapper
+- `VGContext.arcTo()`
+    - [ ] C
+    - [ ] C++ wrapper
+    - [ ] Node.JS wrapper
+- `VGContext.asyncDrawXULElement()`
+    - [ ] C
+    - [ ] C++ wrapper
+    - [ ] Node.JS wrapper
+- `VGContext.beginPath()`
+    - [ ] C
+    - [ ] C++ wrapper
+    - [ ] Node.JS wrapper
+- `VGContext.bezierCurveTo()`
+    - [ ] C
+    - [ ] C++ wrapper
+    - [ ] Node.JS wrapper
+- `VGContext.clearHitRegion()`
+    - [ ] C
+    - [ ] C++ wrapper
+    - [ ] Node.JS wrapper
+- `VGContext.clearRect()`
+    - [x] C
+    - [ ] C++ wrapper
+    - [ ] Node.JS wrapper
+- `VGContext.clip()`
+    - [ ] C
+    - [ ] C++ wrapper
+    - [ ] Node.JS wrapper
+- `VGContext.closePath()`
+    - [ ] C
+    - [ ] C++ wrapper
+    - [ ] Node.JS wrapper
+- `VGContext.createImageData()`
+    - [ ] C
+    - [ ] C++ wrapper
+    - [ ] Node.JS wrapper
+- `VGContext.createLinearGradient()`
+    - [ ] C
+    - [ ] C++ wrapper
+    - [ ] Node.JS wrapper
+- `VGContext.createPattern()`
+    - [ ] C
+    - [ ] C++ wrapper
+    - [ ] Node.JS wrapper
+- `VGContext.createRadialGradient()`
+    - [ ] C
+    - [ ] C++ wrapper
+    - [ ] Node.JS wrapper
+- `VGContext.drawFocusIfNeeded()`
+    - [ ] C
+    - [ ] C++ wrapper
+    - [ ] Node.JS wrapper
+- `VGContext.drawImage()`
+    - [ ] C
+    - [ ] C++ wrapper
+    - [ ] Node.JS wrapper
+- `VGContext.drawWindow()`
+    - [ ] C
+    - [ ] C++ wrapper
+    - [ ] Node.JS wrapper
+- `VGContext.ellipse()`
+    - [ ] C
+    - [ ] C++ wrapper
+    - [ ] Node.JS wrapper
+- `VGContext.fill()`
+    - [ ] C
+    - [ ] C++ wrapper
+    - [ ] Node.JS wrapper
+- `VGContext.fillRect()`
+    - [ ] C
+    - [ ] C++ wrapper
+    - [ ] Node.JS wrapper
+- `VGContext.fillText()`
+    - [ ] C
+    - [ ] C++ wrapper
+    - [ ] Node.JS wrapper
+- `VGContext.getImageData()`
+    - [ ] C
+    - [ ] C++ wrapper
+    - [ ] Node.JS wrapper
+- `VGContext.getLineDash()`
+    - [ ] C
+    - [ ] C++ wrapper
+    - [ ] Node.JS wrapper
+- `VGContext.isPointInPath()`
+    - [ ] C
+    - [ ] C++ wrapper
+    - [ ] Node.JS wrapper
+- `VGContext.isPointInStroke()`
+    - [ ] C
+    - [ ] C++ wrapper
+    - [ ] Node.JS wrapper
+- `VGContext.lineTo()`
+    - [ ] C
+    - [ ] C++ wrapper
+    - [ ] Node.JS wrapper
+- `VGContext.measureText()`
+    - [ ] C
+    - [ ] C++ wrapper
+    - [ ] Node.JS wrapper
+- `VGContext.moveTo()`
+    - [ ] C
+    - [ ] C++ wrapper
+    - [ ] Node.JS wrapper
+- `VGContext.putImageData()`
+    - [ ] C
+    - [ ] C++ wrapper
+    - [ ] Node.JS wrapper
+- `VGContext.quadraticCurveTo()`
+    - [ ] C
+    - [ ] C++ wrapper
+    - [ ] Node.JS wrapper
+- `VGContext.rect()`
+    - [ ] C
+    - [ ] C++ wrapper
+    - [ ] Node.JS wrapper
+- `VGContext.removeHitRegion()`
+    - [ ] C
+    - [ ] C++ wrapper
+    - [ ] Node.JS wrapper
+- `VGContext.resetTransform()`
+    - [ ] C
+    - [ ] C++ wrapper
+    - [ ] Node.JS wrapper
+- `VGContext.restore()`
+    - [ ] C
+    - [ ] C++ wrapper
+    - [ ] Node.JS wrapper
+- `VGContext.rotate()`
+    - [ ] C
+    - [ ] C++ wrapper
+    - [ ] Node.JS wrapper
+- `VGContext.save()`
+    - [ ] C
+    - [ ] C++ wrapper
+    - [ ] Node.JS wrapper
+- `VGContext.scrollPathIntoView()`
+    - [ ] C
+    - [ ] C++ wrapper
+    - [ ] Node.JS wrapper
+- `VGContext.setLineDash()`
+    - [ ] C
+    - [ ] C++ wrapper
+    - [ ] Node.JS wrapper
+- `VGContext.setTransform()`
+    - [ ] C
+    - [ ] C++ wrapper
+    - [ ] Node.JS wrapper
+- `VGContext.stroke()`
+    - [ ] C
+    - [ ] C++ wrapper
+    - [ ] Node.JS wrapper
+- `VGContext.strokeRect()`
+    - [ ] C
+    - [ ] C++ wrapper
+    - [ ] Node.JS wrapper
+- `VGContext.strokeText()`
+    - [ ] C
+    - [ ] C++ wrapper
+    - [ ] Node.JS wrapper
+- `VGContext.transform()`
+    - [ ] C
+    - [ ] C++ wrapper
+    - [ ] Node.JS wrapper
+- `VGContext.translate()`
+    - [ ] C
+    - [ ] C++ wrapper
+    - [ ] Node.JS wrapper
