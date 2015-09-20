@@ -35,6 +35,7 @@
 #include "canvas.h"
 #include "color.h"
 // #include "font.h"
+#include "canvas-clearRect.h"
 
 static VGPaint fillColor;
 static VGPaint strokeColor;
@@ -68,9 +69,6 @@ static VGfloat coords[COORDS_COUNT_MAX];
 
 void canvas__init(void)
 {
-	VGPaint clearPaint = 0;
-	VGfloat temp_color[4] = { 0.0f, 0.0f, 0.0f, 1.0f }; // black
-	
 	font_init();
 	
 	egl_init();
@@ -80,11 +78,6 @@ void canvas__init(void)
 	// immediate colors for fill and stroke
 	fillColor = vgCreatePaint();
 	strokeColor = vgCreatePaint();
-	
-	// clear color
-	clearPaint = vgCreatePaint();
-	vgSetfv(VG_CLEAR_COLOR, 4, temp_color);
-	vgDestroyPaint(clearPaint);
 	
 	// reset values
 	canvas_fillStyle_color(1, 1, 1, 1);
@@ -111,6 +104,8 @@ void canvas__init(void)
 	vgLoadIdentity();
 	
 	init = 1;
+	
+	canvas_clearRect_init();
 }
 
 static void canvas__destroyState(canvas_state_t *state)
@@ -163,12 +158,6 @@ unsigned int canvas_stackSize(void)
 	}
 	
 	return size;
-}
-
-void canvas_clearRect(VGfloat x, VGfloat y, VGfloat width, VGfloat height)
-{
-	vgSeti(VG_SCISSORING, VG_FALSE);
-	vgClear(x, y, width, height);
 }
 
 void canvas_fillRect(VGfloat x, VGfloat y, VGfloat width, VGfloat height)
@@ -847,10 +836,10 @@ void canvas_render_text_fill(char *path, char *text, float x, float y, unsigned 
 	VGfloat offset_x = 0;
 	VGfloat color_values[4];
 	
-	color_values[0] = currentState->fillColor.red;
-	color_values[1] = currentState->fillColor.green;
-	color_values[2] = currentState->fillColor.blue;
-	color_values[3] = currentState->fillColor.alpha * currentState->globalAlpha;
+	color_values[0] = currentState.fillColor.red;
+	color_values[1] = currentState.fillColor.green;
+	color_values[2] = currentState.fillColor.blue;
+	color_values[3] = currentState.fillColor.alpha * currentState.globalAlpha;
 	
 	if(fonts == NULL)
 	{
@@ -902,23 +891,23 @@ void canvas_render_text_stroke(char *path, char *text, float x, float y, unsigne
 	VGfloat offset_x = 0;
 	VGfloat color_values[4];
 	int lineDashPattern_index = 0;
-	VGfloat lineDashOffset = currentState->dashOffset;
-	VGfloat lineWidth = currentState->lineWidth;
-	VGint lineDashCount = currentState->dashCount;
-	VGfloat *lineDashPattern = malloc(currentState->dashCount * sizeof(VGfloat));
-	VGfloat *lineDashPattern2 = malloc(currentState->dashCount * sizeof(VGfloat));
+	VGfloat lineDashOffset = currentState.dashOffset;
+	VGfloat lineWidth = currentState.lineWidth;
+	VGint lineDashCount = currentState.dashCount;
+	VGfloat *lineDashPattern = malloc(currentState.dashCount * sizeof(VGfloat));
+	VGfloat *lineDashPattern2 = malloc(currentState.dashCount * sizeof(VGfloat));
 	if(lineDashPattern == NULL || lineDashPattern2 == NULL)
 	{
 		printf("Failed to copy dash pattern.\n");
 		return;
 	}
 	
-	memcpy(lineDashPattern, currentState->dashPattern, currentState->dashCount * sizeof(VGfloat));
+	memcpy(lineDashPattern, currentState.dashPattern, currentState.dashCount * sizeof(VGfloat));
 	
-	color_values[0] = currentState->strokeColor.red;
-	color_values[1] = currentState->strokeColor.green;
-	color_values[2] = currentState->strokeColor.blue;
-	color_values[3] = currentState->strokeColor.alpha * currentState->globalAlpha;
+	color_values[0] = currentState.strokeColor.red;
+	color_values[1] = currentState.strokeColor.green;
+	color_values[2] = currentState.strokeColor.blue;
+	color_values[3] = currentState.strokeColor.alpha * currentState.globalAlpha;
 	
 	if(fonts == NULL)
 	{

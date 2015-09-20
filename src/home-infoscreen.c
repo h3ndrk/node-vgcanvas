@@ -25,6 +25,7 @@
 #include "egl-util.h"
 #include "canvas.h"
 // #include "font.h"
+#include "canvas-clearRect.h"
 
 int main(void)
 {

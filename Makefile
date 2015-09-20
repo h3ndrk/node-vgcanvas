@@ -45,6 +45,7 @@ SRC += $(PROGRAM_NAME).c
 SRC += egl-util.c
 SRC += canvas.c
 SRC += color.c
+SRC += canvas-clearRect.c
 # SRC += font.c
 
 OBJS = $(addprefix bin/obj/, $(SRC:%.c=%.o))
