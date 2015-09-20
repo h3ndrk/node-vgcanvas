@@ -57,6 +57,14 @@ typedef struct canvas_state_t
 	struct canvas_state_t *next;
 } canvas_state_t;
 
+typedef struct
+{
+	char *path;
+	FT_Face face;
+} font_t;
+
+extern VGPath currentPath;
+
 void canvas__init(void);
 void canvas__cleanup(void);
 
@@ -89,5 +97,13 @@ void canvas_save(void);
 void canvas_restore(void);
 void canvas_stroke(void);
 void canvas_fill(void);
+void canvas_text(char ch);
+
+void canvas_render_text_fill(char *path, char *text, float x, float y, unsigned int size);
+void canvas_render_text_stroke(char *path, char *text, float x, float y, unsigned int size);
+void font_init(void);
+void font_cleanup(void);
+void font_new(char *path);
+void font_remove(char *path);
 
 #endif /* __CANVAS_H__ */

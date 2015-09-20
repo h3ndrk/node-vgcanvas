@@ -18,8 +18,13 @@
 #include <stdio.h>
 #include <math.h>
 
+#include "ft2build.h"
+#include FT_FREETYPE_H
+#include FT_OUTLINE_H
+
 #include "egl-util.h"
 #include "canvas.h"
+// #include "font.h"
 
 int main(void)
 {
@@ -27,9 +32,11 @@ int main(void)
 	
 	canvas__init();
 	
+	font_new("/root/home-infoscreen/font.ttf");
+	
 	canvas_clearRect(0, 0, egl_get_width(), egl_get_height());
 	
-	canvas_lineWidth(2);
+	canvas_lineWidth(1);
 	
 	canvas_save();
 	
@@ -60,17 +67,36 @@ int main(void)
 	canvas_arc(500, 500, 100, 0, 0.5 * M_PI, VG_TRUE);
 	canvas_stroke();
 	
-	VGfloat dash[4];
-	dash[0] = 1;
+	VGfloat dash[2];
+	dash[0] = 5;
 	dash[1] = 10;
-	dash[2] = 3;
-	dash[3] = 10;
 	
-	canvas_setLineDash(4, dash);
+	canvas_setLineDash(2, dash);
 	
 	canvas_beginPath();
 	canvas_rect(400, 400, 200, 200);
 	canvas_stroke();
+	
+	canvas_render_text_stroke("/root/home-infoscreen/font.ttf", "Test", 100, 100, 650);
+	
+	canvas_beginPath();
+	canvas_rect(800, 400, 200, 200);
+	canvas_stroke();
+	
+	canvas_setLineDash(0, NULL);
+	
+	// canvas_beginPath();
+	// vgTranslate(100, 100);
+	// font_render_character("/root/home-infoscreen/font.ttf", 'H');
+	// canvas_fill();
+	// canvas_beginPath();
+	// vgTranslate(70, 0);
+	// font_render_character("/root/home-infoscreen/font.ttf", 'i');
+	// canvas_fill();
+	// vgTranslate(-150, -100);
+	
+	
+	canvas_fillRect(60, 100, 10, 64);
 	
 	egl_swap_buffers();
 	
