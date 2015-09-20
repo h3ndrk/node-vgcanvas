@@ -29,13 +29,13 @@ static VGfloat canvas_lineWidth_value = 1;
  * @param lineWidth A number specifying the line width in space units. Zero,
  *                  negative, Infinity and NaN values are ignored.
  */
-void canvas_lineWidth(VGfloat lineWidth)
+void canvas_lineWidth(VGfloat line_width)
 {
-	if(lineWidth > 0)
+	if(line_width > 0)
 	{
-		canvas_lineWidth_value = lineWidth;
+		canvas_lineWidth_value = line_width;
 		
-		vgSetf(VG_STROKE_LINE_WIDTH, lineWidth);
+		vgSetf(VG_STROKE_LINE_WIDTH, line_width);
 	}
 }
 
