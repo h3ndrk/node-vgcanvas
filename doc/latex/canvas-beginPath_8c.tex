@@ -1,0 +1,51 @@
+\hypertarget{canvas-beginPath_8c}{}\section{src/canvas-\/begin\+Path.c File Reference}
+\label{canvas-beginPath_8c}\index{src/canvas-\/begin\+Path.\+c@{src/canvas-\/begin\+Path.\+c}}
+{\ttfamily \#include \char`\"{}include-\/core.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}include-\/openvg.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}canvas-\/begin\+Path.\+h\char`\"{}}\\*
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{canvas-beginPath_8c_a05fa3eb0308658819292e53fe7934ea8}{canvas\+\_\+begin\+Path\+\_\+init} (void)
+\item 
+void \hyperlink{canvas-beginPath_8c_a9004235aaee7c6310b0669d6475935fc}{canvas\+\_\+begin\+Path\+\_\+cleanup} (void)
+\item 
+void \hyperlink{canvas-beginPath_8c_ae50eacfa82cdf55290a72533aec448d6}{canvas\+\_\+begin\+Path} (void)
+\item 
+V\+G\+Path \hyperlink{canvas-beginPath_8c_a954d77e2e1d669ed2e3c51b4f1f7df5d}{canvas\+\_\+begin\+Path\+\_\+get} (void)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{canvas-beginPath_8c_ae50eacfa82cdf55290a72533aec448d6}{}\index{canvas-\/begin\+Path.\+c@{canvas-\/begin\+Path.\+c}!canvas\+\_\+begin\+Path@{canvas\+\_\+begin\+Path}}
+\index{canvas\+\_\+begin\+Path@{canvas\+\_\+begin\+Path}!canvas-\/begin\+Path.\+c@{canvas-\/begin\+Path.\+c}}
+\subsubsection[{canvas\+\_\+begin\+Path(void)}]{\setlength{\rightskip}{0pt plus 5cm}void canvas\+\_\+begin\+Path (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{canvas-beginPath_8c_ae50eacfa82cdf55290a72533aec448d6}
+The begin\+Path() method starts a new path by emptying the list of sub-\/paths. Call this method when you want to create a new path. \hypertarget{canvas-beginPath_8c_a9004235aaee7c6310b0669d6475935fc}{}\index{canvas-\/begin\+Path.\+c@{canvas-\/begin\+Path.\+c}!canvas\+\_\+begin\+Path\+\_\+cleanup@{canvas\+\_\+begin\+Path\+\_\+cleanup}}
+\index{canvas\+\_\+begin\+Path\+\_\+cleanup@{canvas\+\_\+begin\+Path\+\_\+cleanup}!canvas-\/begin\+Path.\+c@{canvas-\/begin\+Path.\+c}}
+\subsubsection[{canvas\+\_\+begin\+Path\+\_\+cleanup(void)}]{\setlength{\rightskip}{0pt plus 5cm}void canvas\+\_\+begin\+Path\+\_\+cleanup (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{canvas-beginPath_8c_a9004235aaee7c6310b0669d6475935fc}
+Cleans up begin\+Path(). Destroys the immediate path. \hypertarget{canvas-beginPath_8c_a954d77e2e1d669ed2e3c51b4f1f7df5d}{}\index{canvas-\/begin\+Path.\+c@{canvas-\/begin\+Path.\+c}!canvas\+\_\+begin\+Path\+\_\+get@{canvas\+\_\+begin\+Path\+\_\+get}}
+\index{canvas\+\_\+begin\+Path\+\_\+get@{canvas\+\_\+begin\+Path\+\_\+get}!canvas-\/begin\+Path.\+c@{canvas-\/begin\+Path.\+c}}
+\subsubsection[{canvas\+\_\+begin\+Path\+\_\+get(void)}]{\setlength{\rightskip}{0pt plus 5cm}V\+G\+Path canvas\+\_\+begin\+Path\+\_\+get (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{canvas-beginPath_8c_a954d77e2e1d669ed2e3c51b4f1f7df5d}
+Returns the immediate path for drawing. \begin{DoxyReturn}{Returns}
+The immediate path for drawing rects, paths, text, etc. 
+\end{DoxyReturn}
+\hypertarget{canvas-beginPath_8c_a05fa3eb0308658819292e53fe7934ea8}{}\index{canvas-\/begin\+Path.\+c@{canvas-\/begin\+Path.\+c}!canvas\+\_\+begin\+Path\+\_\+init@{canvas\+\_\+begin\+Path\+\_\+init}}
+\index{canvas\+\_\+begin\+Path\+\_\+init@{canvas\+\_\+begin\+Path\+\_\+init}!canvas-\/begin\+Path.\+c@{canvas-\/begin\+Path.\+c}}
+\subsubsection[{canvas\+\_\+begin\+Path\+\_\+init(void)}]{\setlength{\rightskip}{0pt plus 5cm}void canvas\+\_\+begin\+Path\+\_\+init (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{canvas-beginPath_8c_a05fa3eb0308658819292e53fe7934ea8}
+Initializes begin\+Path(). Generates a new immediate path for drawing rects, paths, text, etc. 
