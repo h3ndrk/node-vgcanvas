@@ -288,20 +288,20 @@ void canvas_strokeStyle_color(VGfloat red, VGfloat green, VGfloat blue, VGfloat 
 // 	vgAppendPathData(currentPath, 1, segment, (const void *)data);
 // }
 
-void canvas_bezierCurveTo(VGfloat cp1x, VGfloat cp1y, VGfloat cp2x, VGfloat cp2y, VGfloat x, VGfloat y)
-{
-	VGubyte segment[1] = { VG_CUBIC_TO_ABS };
-	VGfloat data[6];
+// void canvas_bezierCurveTo(VGfloat cp1x, VGfloat cp1y, VGfloat cp2x, VGfloat cp2y, VGfloat x, VGfloat y)
+// {
+// 	VGubyte segment[1] = { VG_CUBIC_TO_ABS };
+// 	VGfloat data[6];
 	
-	data[0] = cp1x;
-	data[1] = cp1y;
-	data[2] = cp2x;
-	data[3] = cp2y;
-	data[4] = x;
-	data[5] = y;
+// 	data[0] = cp1x;
+// 	data[1] = cp1y;
+// 	data[2] = cp2x;
+// 	data[3] = cp2y;
+// 	data[4] = x;
+// 	data[5] = y;
 	
-	vgAppendPathData(currentPath, 1, segment, (const void *)data);
-}
+// 	vgAppendPathData(currentPath, 1, segment, (const void *)data);
+// }
 
 // static void canvas_ellipse_rotate_p(VGfloat rotation)
 // {
