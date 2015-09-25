@@ -55,6 +55,7 @@ SRC += canvas-moveTo.c
 SRC += canvas-quadraticCurveTo.c
 SRC += canvas-arc.c
 SRC += canvas-rect.c
+SRC += canvas-setLineDash.c
 SRC += canvas.c
 SRC += color.c
 SRC += egl-util.c

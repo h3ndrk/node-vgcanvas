@@ -40,6 +40,7 @@
 #include "canvas-lineCap.h"
 #include "canvas-lineJoin.h"
 #include "canvas-globalAlpha.h"
+#include "canvas-setLineDash.h"
 
 static VGPaint fillColor;
 static VGPaint strokeColor;
@@ -142,6 +143,7 @@ void canvas__cleanup(void)
 	canvas__destroyState(&currentState);
 	
 	canvas_beginPath_cleanup();
+	canvas_setLineDash_cleanup();
 	
 	vgDestroyPath(immediatePath);
 	vgDestroyPath(currentPath);
@@ -513,14 +515,14 @@ void canvas_setLineDash(VGint count, const VGfloat *data)
 			printf("realloc failed\n");
 			exit(1);
 		}
-			
+		
 		memcpy(currentState.dashPattern, data, count * sizeof(VGfloat));
 	}
 	else
 	{
 		currentState.dashPattern = 0;
 	}
-		
+	
 	vgSetfv(VG_STROKE_DASH_PATTERN, count, data);
 }
 
