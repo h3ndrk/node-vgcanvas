@@ -19,3 +19,4 @@
 - [ ] https://developer.mozilla.org/en-US/docs/Web/API/Path2D/Path2D
 - [ ] Remove "`src/color.*`"
 - [ ] Adjust coordinates
+- [ ] `eprintf` for errors
