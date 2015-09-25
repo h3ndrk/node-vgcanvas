@@ -29,7 +29,7 @@ Canvas 2D Method | C implementation | C++ wrapper implementation | Node.JS imple
 `VGContext.textBaseline` |   |   |   
 `VGContext.textBaseline` |   |   |   
 `VGContext.addHitRegion()` |   |   |   
-`VGContext.arc()` |   |   |   
+`VGContext.arc()` | implemented |   |   
 `VGContext.arcTo()` |   |   |   
 `VGContext.asyncDrawXULElement()` |   |   |   
 `VGContext.beginPath()` | implemented |   |   
