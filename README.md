@@ -58,7 +58,7 @@ Canvas 2D Method | C implementation | C++ wrapper implementation | Node.JS imple
 `VGContext.moveTo()` | implemented |   |   
 `VGContext.putImageData()` |   |   |   
 `VGContext.quadraticCurveTo()` | implemented |   |   
-`VGContext.rect()` |   |   |   
+`VGContext.rect()` | implemented |   |   
 `VGContext.removeHitRegion()` |   |   |   
 `VGContext.resetTransform()` |   |   |   
 `VGContext.restore()` |   |   |   

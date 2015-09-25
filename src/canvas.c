@@ -461,26 +461,26 @@ void canvas_strokeStyle_color(VGfloat red, VGfloat green, VGfloat blue, VGfloat 
 	// }
 //}
 
-void canvas_arc(VGfloat x, VGfloat y, VGfloat radius, VGfloat start_angle, VGfloat end_angle, VGboolean anticlockwise)
-{
-	VGfloat angle_extent = 0;
+// void canvas_arc(VGfloat x, VGfloat y, VGfloat radius, VGfloat start_angle, VGfloat end_angle, VGboolean anticlockwise)
+// {
+// 	VGfloat angle_extent = 0;
 	
-	// radian to degrees
-	start_angle *= 180 / M_PI;
-	end_angle *= 180 / M_PI;
+// 	// radian to degrees
+// 	start_angle *= 180 / M_PI;
+// 	end_angle *= 180 / M_PI;
 	
-	// calculate angle extent
-	if(anticlockwise == VG_TRUE)
-	{
-		angle_extent = 360 - (end_angle - start_angle);
-	}
-	else
-	{
-		angle_extent = 0 - (end_angle - start_angle);
-	}
+// 	// calculate angle extent
+// 	if(anticlockwise == VG_TRUE)
+// 	{
+// 		angle_extent = 360 - (end_angle - start_angle);
+// 	}
+// 	else
+// 	{
+// 		angle_extent = 0 - (end_angle - start_angle);
+// 	}
 	
-	vguArc(currentPath, x, y, radius * 2, radius * 2, start_angle, angle_extent, VGU_ARC_OPEN);
-}
+// 	vguArc(currentPath, x, y, radius * 2, radius * 2, start_angle, angle_extent, VGU_ARC_OPEN);
+// }
 
 // static canvas_arcTo_transform(VGfloat px, VGfloat py, VGfloat *x, VGfloat *y)
 // {
@@ -497,10 +497,10 @@ void canvas_arc(VGfloat x, VGfloat y, VGfloat radius, VGfloat start_angle, VGflo
 // 	VGfloat p0_x = (x * cos_rotation - py * sin_rotation) * scale_x;
 // }
 
-void canvas_rect(VGfloat x, VGfloat y, VGfloat width, VGfloat height)
-{
-	vguRect(currentPath, x, y, width, height);
-}
+// void canvas_rect(VGfloat x, VGfloat y, VGfloat width, VGfloat height)
+// {
+// 	vguRect(currentPath, x, y, width, height);
+// }
 
 void canvas_setLineDash(VGint count, const VGfloat *data)
 {
