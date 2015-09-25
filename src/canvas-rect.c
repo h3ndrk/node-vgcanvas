@@ -33,5 +33,5 @@
  */
 void canvas_rect(VGfloat x, VGfloat y, VGfloat width, VGfloat height)
 {
-	vguRect(currentPath, x, y, width, height);
+	vguRect(canvas_beginPath_get(), x, y, width, height);
 }
