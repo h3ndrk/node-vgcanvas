@@ -1,6 +1,6 @@
 # node-vgcanvas
 
-Node.JS wrapper for Canvas 2D API targeting the Raspberry Pi.
+Node.js wrapper for Canvas 2D API targeting the Raspberry Pi. This wrapper uses OpenVG for performant GPU rendering.
 
 ## Canvas 2D API implementation status
 
