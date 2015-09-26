@@ -20,3 +20,4 @@
 - [ ] Remove "`src/color.*`"
 - [ ] Adjust coordinates
 - [ ] `eprintf` for errors
+- [ ] coordinates for closePath?
