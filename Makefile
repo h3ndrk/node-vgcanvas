@@ -60,6 +60,7 @@ SRC += canvas-closePath.c
 SRC += canvas-clip.c
 SRC += canvas-save.c
 SRC += canvas-restore.c
+SRC += canvas-miterLimit.c
 SRC += canvas.c
 SRC += color.c
 SRC += egl-util.c

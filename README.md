@@ -19,7 +19,7 @@ Canvas 2D Method | C implementation | C++ wrapper implementation | Node.JS imple
 `VGContext.lineDashOffset` | implemented |   |   
 `VGContext.lineJoin` | implemented |   |   
 `VGContext.lineWidth` | implemented |   |   
-`VGContext.miterLimit` |   |   |   
+`VGContext.miterLimit` | implemented |   |   
 `VGContext.shadowBlur` |   |   |   
 `VGContext.shadowColor` |   |   |   
 `VGContext.shadowOffsetX` |   |   |   

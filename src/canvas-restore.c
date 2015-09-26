@@ -66,7 +66,7 @@ void canvas_restore(void)
 	canvas_lineWidth(state_top->lineWidth);
 	canvas_lineCap(state_top->lineCap);
 	canvas_lineJoin(state_top->lineJoin);
-	// TODO: miterLimit missing
+	canvas_miterLimit(state_top->miterLimit);
 	canvas_lineDashOffset(state_top->lineDash_offset);
 	
 	// TODO: shadowOffsetX missing

@@ -93,7 +93,7 @@ void canvas_save(void)
 	canvas_save_stack_top->lineWidth = canvas_lineWidth_get();
 	canvas_save_stack_top->lineCap = canvas_lineCap_get();
 	canvas_save_stack_top->lineJoin = canvas_lineJoin_get();
-	// TODO: miterLimit missing
+	canvas_save_stack_top->miterLimit = canvas_miterLimit_get();
 	canvas_save_stack_top->lineDash_offset = canvas_lineDashOffset_get();
 	
 	// TODO: shadowOffsetX missing
