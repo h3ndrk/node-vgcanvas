@@ -18,17 +18,27 @@
 #ifndef __COLOR_H__
 #define __COLOR_H__
 
+#include <VG/openvg.h>
+
+typedef enum
+{
+	PAINT_TYPE_COLOR = VG_PAINT_TYPE_COLOR,
+	PAINT_TYPE_LINEAR_GRADIENT = VG_PAINT_TYPE_LINEAR_GRADIENT
+} paint_type_t;
+
 typedef struct
 {
-	char color_type; // 0 = color
+	paint_type_t paintType;
 	VGPaint paint;
-	VGfloat red;
-	VGfloat green;
-	VGfloat blue;
-	VGfloat alpha;
-} color_t;
+	VGint count;
+	VGfloat *data;
+} paint_t;
 
-void color_set_rgb(color_t *color, float red, float green, float blue);
-void color_set_rgba(color_t *color, float red, float green, float blue, float alpha);
+void paint_createColor(paint_t *paint, float red, float green, float blue, float alpha);
+void paint_createLinearGradient(paint_t *paint, float x1, float y1, float x2, float y2);
+void paint_destroy(paint_t *paint);
+void paint_activate(paint_t *paint, VGbitfield mode);
+void paint_setRGBA(paint_t *color, float red, float green, float blue, float alpha);
+void paint_addColorStop(paint_t *paint, VGfloat pos, VGfloat red, VGfloat green, VGfloat blue, VGfloat alpha);
 
 #endif /* __COLOR_H__ */

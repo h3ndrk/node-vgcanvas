@@ -20,6 +20,7 @@
 
 #include "egl-util.h"
 #include "canvas.h"
+#include "color.h"
 
 int main(void)
 {
@@ -28,55 +29,35 @@ int main(void)
 	canvas__init();
 	
 	canvas_clearRect(0, 0, egl_get_width(), egl_get_height());
-	
 	canvas_lineWidth(2);
 	
-	canvas_save();
+	paint_t paint;
+	paint_createColor(&paint, 1, 0, 0, 1);
+	canvas_fillStyle(&paint);
 	
-	canvas_beginPath();
-	canvas_rect(125, 125, 50, 50);
-	canvas_clip();
+	canvas_fillRect(250, 100, 100, 100);
 	
-	canvas_fillStyle_color(1, 0, 0, 1);
+	paint_t gradient;
+	paint_createLinearGradient(&gradient, 0, 0, 100, 0);
+	paint_addColorStop(&gradient, 0, 0, 0, 1, 1);
+	paint_addColorStop(&gradient, 0.5f, 1, 0, 0, 1);
+	paint_addColorStop(&gradient, 1, 0, 1, 1, 1);
+	canvas_fillStyle(&gradient);
+	canvas_fillRect(100, 250, 500, 100);
 	
-	canvas_fillRect(100, 100, 100, 100);
-	canvas_globalAlpha(0.5);
-	canvas_fillStyle_color(1, 1, 0, 1);
-	canvas_fillRect(150, 150, 100, 100);
+	canvas_strokeStyle(&gradient);
+	canvas_strokeRect(100, 100, 100, 100);
 	
-	canvas_restore();
-	
-	canvas_strokeStyle_color(1, 1, 1, 1);
-	canvas_globalAlpha(1);
-	
-	canvas_beginPath();
-	canvas_moveTo(400, 500);
-	canvas_lineTo(600, 500);
-	canvas_moveTo(500, 400);
-	canvas_lineTo(500, 600);
-	canvas_stroke();
-	
-	canvas_beginPath();
-	canvas_arc(500, 500, 100, 0, 0.5 * M_PI, VG_TRUE);
-	canvas_stroke();
-	
-	VGfloat dash[4];
-	dash[0] = 1;
-	dash[1] = 10;
-	dash[2] = 3;
-	dash[3] = 10;
-	
-	canvas_setLineDash(4, dash);
-	
-	canvas_beginPath();
-	canvas_rect(400, 400, 200, 200);
-	canvas_stroke();
+	canvas_fillStyle(&paint);
+	canvas_fillRect(400, 100, 100, 100);
 	
 	egl_swap_buffers();
 	
 	printf("Press <Enter> to shutdown.\n");
 	fgets(s, 2, stdin);
 	
+	paint_destroy(&paint);
+	paint_destroy(&gradient);
 	canvas__cleanup();
 	
 	return 0;

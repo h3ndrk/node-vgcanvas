@@ -40,8 +40,8 @@ typedef struct canvas_state_t
 	canvas_line_cap_t lineCap;
 	canvas_line_join_t lineJoin;
 	
-	color_t fillColor;
-	color_t strokeColor;
+	paint_t *fillPaint;
+	paint_t *strokePaint;
 	
 	VGfloat globalAlpha;
 	VGfloat lineWidth;
@@ -64,9 +64,9 @@ canvas_state_t* canvas_getState(void);
 
 void canvas_clearRect(VGfloat x, VGfloat y, VGfloat width, VGfloat height);
 void canvas_fillRect(VGfloat x, VGfloat y, VGfloat width, VGfloat height);
-void canvas_fillStyle_color(VGfloat red, VGfloat green, VGfloat blue, VGfloat alpha);
+void canvas_fillStyle(paint_t *paint);
 void canvas_strokeRect(VGfloat x, VGfloat y, VGfloat width, VGfloat height);
-void canvas_strokeStyle_color(VGfloat red, VGfloat green, VGfloat blue, VGfloat alpha);
+void canvas_strokeStyle(paint_t *paint);
 void canvas_lineWidth(VGfloat width);
 void canvas_lineCap(canvas_line_cap_t line_cap);
 void canvas_lineJoin(canvas_line_join_t line_join);

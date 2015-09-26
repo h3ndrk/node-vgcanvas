@@ -58,22 +58,25 @@ namespace infoscreen {
 	}
 
 	void FillRect(const Nan::FunctionCallbackInfo<Value>& args) {
-		if(!checkArgs(args, 4))
-		return;
+		if(!checkArgs(args, 4)) {
+			return;
+		}
 
 		canvas_fillRect(args[0]->NumberValue(), args[1]->NumberValue(), args[2]->NumberValue(), args[3]->NumberValue());
 	}
 
 	void ClearRect(const Nan::FunctionCallbackInfo<Value>& args) {
-		if(!checkArgs(args, 4))
-		return;
+		if(!checkArgs(args, 4)) {
+			return;
+		}
 
 		canvas_clearRect(args[0]->NumberValue(), args[1]->NumberValue(), args[2]->NumberValue(), args[3]->NumberValue());
 	}
 
 	void SetFillStyle(const Nan::FunctionCallbackInfo<Value>& args) {
-		if(!checkArgs(args, 4))
-		return;
+		if(!checkArgs(args, 4)) {
+			return;
+		}
 
 		canvas_fillStyle_color(args[0]->NumberValue(), args[1]->NumberValue(), args[2]->NumberValue(), args[3]->NumberValue());
 	}
@@ -100,8 +103,9 @@ namespace infoscreen {
 	}
 
 	void SetLineWidth(const Nan::FunctionCallbackInfo<Value>& args) {
-		if(!checkArgs(args, 1))
-		return;
+		if(!checkArgs(args, 1)) {
+			return;
+		}
 
 		canvas_lineWidth(args[0]->NumberValue());
 	}
@@ -121,12 +125,13 @@ namespace infoscreen {
 		std::string value(*Nan::Utf8String(args[0]));
 		canvas_line_cap_t type = CANVAS_LINE_CAP_BUTT;
 
-		if(value == "round")
-		type = CANVAS_LINE_CAP_ROUND;
-		else if(value == "butt")
-		type = CANVAS_LINE_CAP_BUTT;
-		else if(value == "square")
-		type = CANVAS_LINE_CAP_SQUARE;
+		if(value == "round") {
+			type = CANVAS_LINE_CAP_ROUND;
+		} else if(value == "butt") {
+			type = CANVAS_LINE_CAP_BUTT;
+		} else if(value == "square") {
+			type = CANVAS_LINE_CAP_SQUARE;
+		}
 
 		canvas_lineCap(type);
 	}
@@ -158,12 +163,13 @@ namespace infoscreen {
 		std::string value(*Nan::Utf8String(args[0]));
 		canvas_line_join_t type = CANVAS_LINE_JOIN_MITER;
 
-		if(value == "miter")
-		type = CANVAS_LINE_JOIN_MITER;
-		else if(value == "round")
-		type = CANVAS_LINE_JOIN_ROUND;
-		else if(value == "bevel")
-		type = CANVAS_LINE_JOIN_BEVEL;
+		if(value == "miter") {
+			type = CANVAS_LINE_JOIN_MITER;
+		} else if(value == "round") {
+			type = CANVAS_LINE_JOIN_ROUND;
+		} else if(value == "bevel") {
+			type = CANVAS_LINE_JOIN_BEVEL;
+		}
 
 		canvas_lineJoin(type);
 	}
@@ -187,8 +193,9 @@ namespace infoscreen {
 	}
 
 	void SetStrokeStyle(const Nan::FunctionCallbackInfo<Value>& args) {
-		if(!checkArgs(args, 4))
-		return;
+		if(!checkArgs(args, 4)) {
+			return;
+		}
 
 		canvas_strokeStyle_color(args[0]->NumberValue(), args[1]->NumberValue(), args[2]->NumberValue(), args[3]->NumberValue());
 	}
@@ -207,8 +214,9 @@ namespace infoscreen {
 	}
 
 	void StrokeRect(const Nan::FunctionCallbackInfo<Value>& args) {
-		if(!checkArgs(args, 4))
-		return;
+		if(!checkArgs(args, 4)) {
+			return;
+		}
 
 		canvas_strokeRect(args[0]->NumberValue(), args[1]->NumberValue(), args[2]->NumberValue(), args[3]->NumberValue());
 
@@ -223,15 +231,17 @@ namespace infoscreen {
 	}
 
 	void MoveTo(const Nan::FunctionCallbackInfo<Value>& args) {
-		if(!checkArgs(args, 2))
-		return;
+		if(!checkArgs(args, 2)) {
+			return;
+		}
 
 		canvas_moveTo(args[0]->NumberValue(), args[1]->NumberValue());
 	}
 
 	void LineTo(const Nan::FunctionCallbackInfo<Value>& args) {
-		if(!checkArgs(args, 2))
-		return;
+		if(!checkArgs(args, 2)) {
+			return;
+		}
 
 		canvas_lineTo(args[0]->NumberValue(), args[1]->NumberValue());
 	}
@@ -245,33 +255,38 @@ namespace infoscreen {
 	}
 
 	void QuadraticCurveTo(const Nan::FunctionCallbackInfo<Value>& args) {
-		if(!checkArgs(args, 4))
+		if(!checkArgs(args, 4)) {
 			return;
+		}
 
 		canvas_quadraticCurveTo(args[0]->NumberValue(), args[1]->NumberValue(), args[2]->NumberValue(), args[3]->NumberValue());
 	}
 
 	void BezierCurveTo(const Nan::FunctionCallbackInfo<Value>& args) {
-		if(!checkArgs(args, 6))
+		if(!checkArgs(args, 6)) {
 			return;
+		}
 
 		canvas_bezierCurveTo(args[0]->NumberValue(), args[1]->NumberValue(), args[2]->NumberValue(), args[3]->NumberValue(), args[4]->NumberValue(), args[5]->NumberValue());
 	}
 	
 	void Arc(const Nan::FunctionCallbackInfo<Value>& args) {
-		if(!checkArgs(args, 5))
+		if(!checkArgs(args, 5)) {
 			return;
+		}
 			
 		bool acw = false;
-		if(args.Length() > 5 && args[5]->IsBoolean())
+		if(args.Length() > 5 && args[5]->IsBoolean()) {
 			acw = args[5]->BooleanValue();
+		}
 			
 		canvas_arc(args[0]->NumberValue(), args[1]->NumberValue(), args[2]->NumberValue(), args[3]->NumberValue(), args[4]->NumberValue(), acw);
 	}
 	
 	void Rect(const Nan::FunctionCallbackInfo<Value>& args) {
-		if(!checkArgs(args, 4))
+		if(!checkArgs(args, 4)) {
 			return;
+		}
 			
 		canvas_rect(args[0]->NumberValue(), args[1]->NumberValue(), args[2]->NumberValue(), args[3]->NumberValue());
 	}
@@ -308,8 +323,9 @@ namespace infoscreen {
 	}
 	
 	void SetLineDashOffset(const Nan::FunctionCallbackInfo<Value>& args) {
-		if(!checkArgs(args, 1))
+		if(!checkArgs(args, 1)) {
 			return;
+		}
 		
 		canvas_lineDashOffset(args[0]->NumberValue());
 	}
@@ -333,8 +349,9 @@ namespace infoscreen {
 	}
 	
 	void SetGlobalAlpha(const Nan::FunctionCallbackInfo<Value>& args) {
-		if(!checkArgs(args, 1))
+		if(!checkArgs(args, 1)) {
 			return;
+		}
 			
 		canvas_globalAlpha(args[0]->NumberValue());
 	}

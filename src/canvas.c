@@ -30,8 +30,10 @@
 #include "canvas.h"
 #include "color.h"
 
-static VGPaint fillColor;
-static VGPaint strokeColor;
+// Current fill and stroke paint
+static paint_t fillPaint;
+static paint_t strokePaint;
+
 static VGPath immediatePath = 0;
 static VGPath currentPath = 0;
 static VGfloat currentPath_sx = 0;
@@ -49,25 +51,19 @@ static int init = 0;
 
 void canvas__init(void)
 {
-	VGPaint clearPaint = 0;
-	VGfloat temp_color[4] = { 0.0f, 0.0f, 0.0f, 1.0f }; // black
-	
 	egl_init();
 	
 	printf("{ width: %i, height: %i }\n", egl_get_width(), egl_get_height());
 	
 	// immediate colors for fill and stroke
-	fillColor = vgCreatePaint();
-	strokeColor = vgCreatePaint();
+	//paint_createColor(&fillPaint, 1, 1, 1, 1);
+	//paint_createColor(&strokePaint, 1, 1, 1, 1);
 	
 	// clear color
-	clearPaint = vgCreatePaint();
-	vgSetfv(VG_CLEAR_COLOR, 4, temp_color);
-	vgDestroyPaint(clearPaint);
+	VGfloat clearColor[4] = { 0.0f, 0.0f, 0.0f, 1.0f }; // black
+	vgSetfv(VG_CLEAR_COLOR, 4, clearColor);
 	
 	// reset values
-	canvas_fillStyle_color(1, 1, 1, 1);
-	canvas_strokeStyle_color(1, 1, 1, 1);
 	canvas_lineWidth(1);
 	canvas_lineCap(CANVAS_LINE_CAP_BUTT);
 	canvas_lineJoin(CANVAS_LINE_JOIN_MITER);
@@ -100,14 +96,18 @@ static void canvas__destroyState(canvas_state_t *state)
 	}
 	
 	if(state->dashPattern)
+	{
 		free(state->dashPattern);
-	
+	}
+		
 }
 
 void canvas__cleanup(void)
 {
 	if(!init)
+	{
 		return;
+	}
 	
 	canvas_state_t *current = stateStack;
 	while(current)
@@ -121,9 +121,6 @@ void canvas__cleanup(void)
 	
 	vgDestroyPath(immediatePath);
 	vgDestroyPath(currentPath);
-	
-	vgDestroyPaint(fillColor);
-	vgDestroyPaint(strokeColor);
 	
 	egl_cleanup();
 }
@@ -150,48 +147,31 @@ void canvas_clearRect(VGfloat x, VGfloat y, VGfloat width, VGfloat height)
 
 void canvas_fillRect(VGfloat x, VGfloat y, VGfloat width, VGfloat height)
 {
-	VGfloat color_values[4];
-	
-	color_values[0] = currentState.fillColor.red;
-	color_values[1] = currentState.fillColor.green;
-	color_values[2] = currentState.fillColor.blue;
-	color_values[3] = currentState.fillColor.alpha * currentState.globalAlpha;
-	
-	vgSetParameteri(fillColor, VG_PAINT_TYPE, VG_PAINT_TYPE_COLOR);
-	vgSetParameterfv(fillColor, VG_PAINT_COLOR, 4, color_values);
-	vgSetPaint(fillColor, VG_FILL_PATH);
+	paint_activate(&fillPaint, VG_FILL_PATH);
 	
 	vgClearPath(immediatePath, VG_PATH_CAPABILITY_ALL);
 	vguRect(immediatePath, x, y, width, height);
 	vgDrawPath(immediatePath, VG_FILL_PATH);
+	
 }
 
-void canvas_fillStyle_color(VGfloat red, VGfloat green, VGfloat blue, VGfloat alpha)
+void canvas_fillStyle(paint_t *paint)
 {
-	color_set_rgba(&currentState.fillColor, red, green, blue, alpha);
+	fillPaint = *paint;
+}
+
+void canvas_strokeStyle(paint_t *paint)
+{
+	strokePaint = *paint;
 }
 
 void canvas_strokeRect(VGfloat x, VGfloat y, VGfloat width, VGfloat height)
 {
-	VGfloat color_values[4];
-	
-	color_values[0] = currentState.strokeColor.red;
-	color_values[1] = currentState.strokeColor.green;
-	color_values[2] = currentState.strokeColor.blue;
-	color_values[3] = currentState.strokeColor.alpha * currentState.globalAlpha;
-	
-	vgSetParameteri(strokeColor, VG_PAINT_TYPE, VG_PAINT_TYPE_COLOR);
-	vgSetParameterfv(strokeColor, VG_PAINT_COLOR, 4, color_values);
-	vgSetPaint(strokeColor, VG_STROKE_PATH);
+	paint_activate(&strokePaint, VG_STROKE_PATH);
 	
 	vgClearPath(immediatePath, VG_PATH_CAPABILITY_ALL);
 	vguRect(immediatePath, x, y, width, height);
 	vgDrawPath(immediatePath, VG_STROKE_PATH);
-}
-
-void canvas_strokeStyle_color(VGfloat red, VGfloat green, VGfloat blue, VGfloat alpha)
-{
-	color_set_rgba(&currentState.strokeColor, red, green, blue, alpha);
 }
 
 void canvas_lineWidth(VGfloat width)
@@ -212,7 +192,7 @@ void canvas_lineJoin(canvas_line_join_t line_join)
 {
 	currentState.lineJoin = line_join;
 	
-	vgSeti(VG_STROKE_CAP_STYLE, line_join);
+	vgSeti(VG_STROKE_JOIN_STYLE, line_join);
 }
 
 void canvas_globalAlpha(VGfloat alpha)
@@ -595,8 +575,8 @@ void canvas_restore(void)
 	canvas_lineJoin(restore->lineJoin);
 	canvas_globalAlpha(restore->globalAlpha);
 	canvas_lineDashOffset(restore->dashOffset);
-	currentState.fillColor = restore->fillColor;
-	currentState.strokeColor = restore->strokeColor;
+	//currentState.fillPaint = restore->fillPaint;
+	//currentState.strokeColor = restore->strokeColor;
 	
 	if(currentState.dashPattern)
 		free(currentState.dashPattern);
@@ -614,34 +594,18 @@ canvas_state_t* canvas_getState(void)
 	return &currentState;
 }
 
+
+
 void canvas_stroke(void)
 {
-	VGfloat color_values[4];
-	
-	color_values[0] = currentState.strokeColor.red;
-	color_values[1] = currentState.strokeColor.green;
-	color_values[2] = currentState.strokeColor.blue;
-	color_values[3] = currentState.strokeColor.alpha * currentState.globalAlpha;
-	
-	vgSetParameteri(strokeColor, VG_PAINT_TYPE, VG_PAINT_TYPE_COLOR);
-	vgSetParameterfv(strokeColor, VG_PAINT_COLOR, 4, color_values);
-	vgSetPaint(strokeColor, VG_STROKE_PATH);
+	paint_activate(&strokePaint, VG_STROKE_PATH);
 	
 	vgDrawPath(currentPath, VG_STROKE_PATH);
 }
 
 void canvas_fill(void)
 {
-	VGfloat color_values[4];
-	
-	color_values[0] = currentState.fillColor.red;
-	color_values[1] = currentState.fillColor.green;
-	color_values[2] = currentState.fillColor.blue;
-	color_values[3] = currentState.fillColor.alpha * currentState.globalAlpha;
-	
-	vgSetParameteri(fillColor, VG_PAINT_TYPE, VG_PAINT_TYPE_COLOR);
-	vgSetParameterfv(fillColor, VG_PAINT_COLOR, 4, color_values);
-	vgSetPaint(fillColor, VG_FILL_PATH);
+	paint_activate(&fillPaint, VG_FILL_PATH);
 	
 	vgDrawPath(currentPath, VG_FILL_PATH);
 }

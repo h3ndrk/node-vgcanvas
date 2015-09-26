@@ -18,7 +18,7 @@ setInterval(function() {
 	ctx.clearRect(0, 0, ctx.getScreenWidth(), ctx.getScreenHeight());
 
 	ctx.fillStyle = '#fff';
-	ctx.fillRect(x, 100, 100, 100);
+	ctx.fillRect(Math.cos(x * 0.01) * ctx.getScreenWidth() / 2 + ctx.getScreenWidth() / 2, 100, 100, 100);
 
 	ctx.fillStyle = '#865656';
 	ctx.fillRect(400 + x2, y2 + 400, 100, 100);
@@ -91,4 +91,4 @@ setInterval(function() {
 	ctx.stroke();
 
 	ctx.swapBuffers();
-}, 20);
+}, 16);
