@@ -9,9 +9,9 @@ Canvas 2D Method | C implementation | C++ wrapper implementation | Node.JS imple
 `VGContext.canvas` |   |   |   
 `VGContext.currentTransform` |   |   |   
 `VGContext.direction` |   |   |   
-`VGContext.fillStyle` |   |   |   
+`VGContext.fillStyle` | API unfinished |   |   
 `VGContext.filter` |   |   |   
-`VGContext.font` |   |   |   
+`VGContext.font` | API unfinished |   |   
 `VGContext.globalAlpha` | implemented |   |   
 `VGContext.globalCompositeOperation` |   |   |   
 `VGContext.imageSmoothingEnabled` |   |   |   
@@ -24,7 +24,7 @@ Canvas 2D Method | C implementation | C++ wrapper implementation | Node.JS imple
 `VGContext.shadowColor` |   |   |   
 `VGContext.shadowOffsetX` |   |   |   
 `VGContext.shadowOffsetY` |   |   |   
-`VGContext.strokeStyle` |   |   |   
+`VGContext.strokeStyle` | API unfinished |   |   
 `VGContext.textAlign` |   |   |   
 `VGContext.textBaseline` |   |   |   
 `VGContext.textBaseline` |   |   |   
@@ -46,11 +46,11 @@ Canvas 2D Method | C implementation | C++ wrapper implementation | Node.JS imple
 `VGContext.drawImage()` |   |   |   
 `VGContext.drawWindow()` |   |   |   
 `VGContext.ellipse()` |   |   |   
-`VGContext.fill()` |   |   |   
-`VGContext.fillRect()` |   |   |   
-`VGContext.fillText()` |   |   |   
+`VGContext.fill()` | API unfinished |   |   
+`VGContext.fillRect()` | API unfinished |   |   
+`VGContext.fillText()` | API unfinished |   |   
 `VGContext.getImageData()` |   |   |   
-`VGContext.getLineDash()` |   |   |   
+`VGContext.getLineDash()` | API unfinished |   |   
 `VGContext.isPointInPath()` |   |   |   
 `VGContext.isPointInStroke()` |   |   |   
 `VGContext.lineTo()` | implemented |   |   
@@ -67,8 +67,8 @@ Canvas 2D Method | C implementation | C++ wrapper implementation | Node.JS imple
 `VGContext.scrollPathIntoView()` |   |   |   
 `VGContext.setLineDash()` | implemented |   |   
 `VGContext.setTransform()` |   |   |   
-`VGContext.stroke()` |   |   |   
-`VGContext.strokeRect()` |   |   |   
-`VGContext.strokeText()` |   |   |   
+`VGContext.stroke()` | API unfinished |   |   
+`VGContext.strokeRect()` | API unfinished |   |   
+`VGContext.strokeText()` | API unfinished |   |   
 `VGContext.transform()` |   |   |   
 `VGContext.translate()` |   |   |   
