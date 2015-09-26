@@ -37,7 +37,7 @@ Canvas 2D Method | C implementation | C++ wrapper implementation | Node.JS imple
 `VGContext.clearHitRegion()` |   |   |   
 `VGContext.clearRect()` | implemented |   |   
 `VGContext.clip()` |   |   |   
-`VGContext.closePath()` |   |   |   
+`VGContext.closePath()` | implemented |   |   
 `VGContext.createImageData()` |   |   |   
 `VGContext.createLinearGradient()` |   |   |   
 `VGContext.createPattern()` |   |   |   

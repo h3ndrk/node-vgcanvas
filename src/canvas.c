@@ -504,27 +504,27 @@ void canvas_strokeStyle_color(VGfloat red, VGfloat green, VGfloat blue, VGfloat 
 // 	vguRect(currentPath, x, y, width, height);
 // }
 
-void canvas_setLineDash(VGint count, const VGfloat *data)
-{
-	currentState.dashCount = count;
-	if(count > 0)
-	{
-		currentState.dashPattern = realloc(currentState.dashPattern, count * sizeof(data));
-		if(!currentState.dashPattern) 
-		{
-			printf("realloc failed\n");
-			exit(1);
-		}
+// void canvas_setLineDash(VGint count, const VGfloat *data)
+// {
+// 	currentState.dashCount = count;
+// 	if(count > 0)
+// 	{
+// 		currentState.dashPattern = realloc(currentState.dashPattern, count * sizeof(data));
+// 		if(!currentState.dashPattern) 
+// 		{
+// 			printf("realloc failed\n");
+// 			exit(1);
+// 		}
 		
-		memcpy(currentState.dashPattern, data, count * sizeof(VGfloat));
-	}
-	else
-	{
-		currentState.dashPattern = 0;
-	}
+// 		memcpy(currentState.dashPattern, data, count * sizeof(VGfloat));
+// 	}
+// 	else
+// 	{
+// 		currentState.dashPattern = 0;
+// 	}
 	
-	vgSetfv(VG_STROKE_DASH_PATTERN, count, data);
-}
+// 	vgSetfv(VG_STROKE_DASH_PATTERN, count, data);
+// }
 
 // void canvas_lineDashOffset(VGfloat offset)
 // {
