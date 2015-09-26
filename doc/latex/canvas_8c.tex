@@ -1,0 +1,247 @@
+\hypertarget{canvas_8c}{}\section{src/canvas.c File Reference}
+\label{canvas_8c}\index{src/canvas.\+c@{src/canvas.\+c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\\*
+{\ttfamily \#include $<$stdlib.\+h$>$}\\*
+{\ttfamily \#include $<$unistd.\+h$>$}\\*
+{\ttfamily \#include $<$assert.\+h$>$}\\*
+{\ttfamily \#include $<$math.\+h$>$}\\*
+{\ttfamily \#include $<$sys/time.\+h$>$}\\*
+{\ttfamily \#include $<$E\+G\+L/egl.\+h$>$}\\*
+{\ttfamily \#include $<$bcm\+\_\+host.\+h$>$}\\*
+{\ttfamily \#include $<$V\+G/openvg.\+h$>$}\\*
+{\ttfamily \#include $<$V\+G/vgu.\+h$>$}\\*
+{\ttfamily \#include $<$V\+G/vgext.\+h$>$}\\*
+{\ttfamily \#include $<$ft2build.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}egl-\/util.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}canvas.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}color.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}canvas-\/clear\+Rect.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}canvas-\/line\+Width.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}canvas-\/line\+Cap.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}canvas-\/line\+Join.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}canvas-\/global\+Alpha.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}canvas-\/set\+Line\+Dash.\+h\char`\"{}}\\*
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{canvas_8c_a8bf9a10d3231b69eaffed4017b90aa8a}{S\+E\+G\+M\+E\+N\+T\+S\+\_\+\+C\+O\+U\+N\+T\+\_\+\+M\+A\+X}~256
+\item 
+\#define \hyperlink{canvas_8c_a3328f7792ae2c0722a0ad16bce879029}{C\+O\+O\+R\+D\+S\+\_\+\+C\+O\+U\+N\+T\+\_\+\+M\+A\+X}~1024
+\item 
+\#define \hyperlink{canvas_8c_a879da8d8ac74b55e73b8725d4161fdc5}{F\+O\+N\+T\+\_\+\+F\+L\+O\+A\+T\+\_\+\+F\+R\+O\+M\+\_\+26\+\_\+6}(x)~((V\+Gfloat)x / 64.\+0f)
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{canvas_8c_acb1a6f1da30f2570e87e97a4752d074f}{canvas\+\_\+\+\_\+init} (void)
+\item 
+void \hyperlink{canvas_8c_a46ef9e838c1e07c63f628ece6619e801}{canvas\+\_\+\+\_\+cleanup} (void)
+\item 
+unsigned int \hyperlink{canvas_8c_a402867a24a60621b9028ce0520e6f522}{canvas\+\_\+stack\+Size} (void)
+\item 
+void \hyperlink{canvas_8c_ad643f83db27f2150aa3915b6e6d00afb}{canvas\+\_\+fill\+Rect} (V\+Gfloat x, V\+Gfloat y, V\+Gfloat width, V\+Gfloat height)
+\item 
+void \hyperlink{canvas_8c_a829bb44fbc54c0ab04d9a306f95f1578}{canvas\+\_\+fill\+Style\+\_\+color} (V\+Gfloat red, V\+Gfloat green, V\+Gfloat blue, V\+Gfloat alpha)
+\item 
+void \hyperlink{canvas_8c_a75cdd36359ab8d1fa8ffed8ece5cd9bb}{canvas\+\_\+stroke\+Rect} (V\+Gfloat x, V\+Gfloat y, V\+Gfloat width, V\+Gfloat height)
+\item 
+void \hyperlink{canvas_8c_a3849524cf904f77ae7930bea5965884d}{canvas\+\_\+stroke\+Style\+\_\+color} (V\+Gfloat red, V\+Gfloat green, V\+Gfloat blue, V\+Gfloat alpha)
+\item 
+void \hyperlink{canvas_8c_ae82cc37b7b2b1c9148a08032a0c7cc40}{canvas\+\_\+save} (void)
+\item 
+void \hyperlink{canvas_8c_a7ba84be939498d5a979aa5c0bc72030a}{canvas\+\_\+restore} (void)
+\item 
+\hyperlink{structcanvas__state__t}{canvas\+\_\+state\+\_\+t} $\ast$ \hyperlink{canvas_8c_a4ea0a1f591da41fc08834db947ca6b97}{canvas\+\_\+get\+State} (void)
+\item 
+void \hyperlink{canvas_8c_a2c5346df933951fda1e8404eb817c907}{canvas\+\_\+stroke} (void)
+\item 
+void \hyperlink{canvas_8c_a73f1c2a2b8663e01dbb1472c9172bf46}{canvas\+\_\+fill} (void)
+\item 
+void \hyperlink{canvas_8c_ae3bb49cd03b02cac95a2748cfd50c8f6}{canvas\+\_\+render\+\_\+text\+\_\+fill} (char $\ast$path, char $\ast$text, float x, float y, unsigned int size)
+\item 
+void \hyperlink{canvas_8c_a0beaa53ffa53d09c2ae9b6848dd24cc7}{canvas\+\_\+render\+\_\+text\+\_\+stroke} (char $\ast$path, char $\ast$text, float x, float y, unsigned int size)
+\item 
+void \hyperlink{canvas_8c_a669b357bedc37be27d7549bd3b8b36f8}{font\+\_\+init} (void)
+\item 
+void \hyperlink{canvas_8c_a10be0bd82203d8a8b471752915ac73d7}{font\+\_\+cleanup} (void)
+\item 
+void \hyperlink{canvas_8c_a8860cee077ba27edc442a3fdf9440bdc}{font\+\_\+new} (char $\ast$path)
+\item 
+void \hyperlink{canvas_8c_a7f5555363a802647a1a2cfdd67891922}{font\+\_\+remove} (char $\ast$path)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+V\+G\+Path \hyperlink{canvas_8c_a30ccdc6defc4b85039783939569dff7f}{current\+Path} = 0
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\hypertarget{canvas_8c_a3328f7792ae2c0722a0ad16bce879029}{}\index{canvas.\+c@{canvas.\+c}!C\+O\+O\+R\+D\+S\+\_\+\+C\+O\+U\+N\+T\+\_\+\+M\+A\+X@{C\+O\+O\+R\+D\+S\+\_\+\+C\+O\+U\+N\+T\+\_\+\+M\+A\+X}}
+\index{C\+O\+O\+R\+D\+S\+\_\+\+C\+O\+U\+N\+T\+\_\+\+M\+A\+X@{C\+O\+O\+R\+D\+S\+\_\+\+C\+O\+U\+N\+T\+\_\+\+M\+A\+X}!canvas.\+c@{canvas.\+c}}
+\subsubsection[{C\+O\+O\+R\+D\+S\+\_\+\+C\+O\+U\+N\+T\+\_\+\+M\+A\+X}]{\setlength{\rightskip}{0pt plus 5cm}\#define C\+O\+O\+R\+D\+S\+\_\+\+C\+O\+U\+N\+T\+\_\+\+M\+A\+X~1024}\label{canvas_8c_a3328f7792ae2c0722a0ad16bce879029}
+\hypertarget{canvas_8c_a879da8d8ac74b55e73b8725d4161fdc5}{}\index{canvas.\+c@{canvas.\+c}!F\+O\+N\+T\+\_\+\+F\+L\+O\+A\+T\+\_\+\+F\+R\+O\+M\+\_\+26\+\_\+6@{F\+O\+N\+T\+\_\+\+F\+L\+O\+A\+T\+\_\+\+F\+R\+O\+M\+\_\+26\+\_\+6}}
+\index{F\+O\+N\+T\+\_\+\+F\+L\+O\+A\+T\+\_\+\+F\+R\+O\+M\+\_\+26\+\_\+6@{F\+O\+N\+T\+\_\+\+F\+L\+O\+A\+T\+\_\+\+F\+R\+O\+M\+\_\+26\+\_\+6}!canvas.\+c@{canvas.\+c}}
+\subsubsection[{F\+O\+N\+T\+\_\+\+F\+L\+O\+A\+T\+\_\+\+F\+R\+O\+M\+\_\+26\+\_\+6}]{\setlength{\rightskip}{0pt plus 5cm}\#define F\+O\+N\+T\+\_\+\+F\+L\+O\+A\+T\+\_\+\+F\+R\+O\+M\+\_\+26\+\_\+6(
+\begin{DoxyParamCaption}
+\item[{}]{x}
+\end{DoxyParamCaption}
+)~((V\+Gfloat)x / 64.\+0f)}\label{canvas_8c_a879da8d8ac74b55e73b8725d4161fdc5}
+\hypertarget{canvas_8c_a8bf9a10d3231b69eaffed4017b90aa8a}{}\index{canvas.\+c@{canvas.\+c}!S\+E\+G\+M\+E\+N\+T\+S\+\_\+\+C\+O\+U\+N\+T\+\_\+\+M\+A\+X@{S\+E\+G\+M\+E\+N\+T\+S\+\_\+\+C\+O\+U\+N\+T\+\_\+\+M\+A\+X}}
+\index{S\+E\+G\+M\+E\+N\+T\+S\+\_\+\+C\+O\+U\+N\+T\+\_\+\+M\+A\+X@{S\+E\+G\+M\+E\+N\+T\+S\+\_\+\+C\+O\+U\+N\+T\+\_\+\+M\+A\+X}!canvas.\+c@{canvas.\+c}}
+\subsubsection[{S\+E\+G\+M\+E\+N\+T\+S\+\_\+\+C\+O\+U\+N\+T\+\_\+\+M\+A\+X}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\+E\+G\+M\+E\+N\+T\+S\+\_\+\+C\+O\+U\+N\+T\+\_\+\+M\+A\+X~256}\label{canvas_8c_a8bf9a10d3231b69eaffed4017b90aa8a}
+
+
+\subsection{Function Documentation}
+\hypertarget{canvas_8c_a46ef9e838c1e07c63f628ece6619e801}{}\index{canvas.\+c@{canvas.\+c}!canvas\+\_\+\+\_\+cleanup@{canvas\+\_\+\+\_\+cleanup}}
+\index{canvas\+\_\+\+\_\+cleanup@{canvas\+\_\+\+\_\+cleanup}!canvas.\+c@{canvas.\+c}}
+\subsubsection[{canvas\+\_\+\+\_\+cleanup(void)}]{\setlength{\rightskip}{0pt plus 5cm}void canvas\+\_\+\+\_\+cleanup (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{canvas_8c_a46ef9e838c1e07c63f628ece6619e801}
+\hypertarget{canvas_8c_acb1a6f1da30f2570e87e97a4752d074f}{}\index{canvas.\+c@{canvas.\+c}!canvas\+\_\+\+\_\+init@{canvas\+\_\+\+\_\+init}}
+\index{canvas\+\_\+\+\_\+init@{canvas\+\_\+\+\_\+init}!canvas.\+c@{canvas.\+c}}
+\subsubsection[{canvas\+\_\+\+\_\+init(void)}]{\setlength{\rightskip}{0pt plus 5cm}void canvas\+\_\+\+\_\+init (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{canvas_8c_acb1a6f1da30f2570e87e97a4752d074f}
+\hypertarget{canvas_8c_a73f1c2a2b8663e01dbb1472c9172bf46}{}\index{canvas.\+c@{canvas.\+c}!canvas\+\_\+fill@{canvas\+\_\+fill}}
+\index{canvas\+\_\+fill@{canvas\+\_\+fill}!canvas.\+c@{canvas.\+c}}
+\subsubsection[{canvas\+\_\+fill(void)}]{\setlength{\rightskip}{0pt plus 5cm}void canvas\+\_\+fill (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{canvas_8c_a73f1c2a2b8663e01dbb1472c9172bf46}
+\hypertarget{canvas_8c_ad643f83db27f2150aa3915b6e6d00afb}{}\index{canvas.\+c@{canvas.\+c}!canvas\+\_\+fill\+Rect@{canvas\+\_\+fill\+Rect}}
+\index{canvas\+\_\+fill\+Rect@{canvas\+\_\+fill\+Rect}!canvas.\+c@{canvas.\+c}}
+\subsubsection[{canvas\+\_\+fill\+Rect(\+V\+Gfloat x, V\+Gfloat y, V\+Gfloat width, V\+Gfloat height)}]{\setlength{\rightskip}{0pt plus 5cm}void canvas\+\_\+fill\+Rect (
+\begin{DoxyParamCaption}
+\item[{V\+Gfloat}]{x, }
+\item[{V\+Gfloat}]{y, }
+\item[{V\+Gfloat}]{width, }
+\item[{V\+Gfloat}]{height}
+\end{DoxyParamCaption}
+)}\label{canvas_8c_ad643f83db27f2150aa3915b6e6d00afb}
+\hypertarget{canvas_8c_a829bb44fbc54c0ab04d9a306f95f1578}{}\index{canvas.\+c@{canvas.\+c}!canvas\+\_\+fill\+Style\+\_\+color@{canvas\+\_\+fill\+Style\+\_\+color}}
+\index{canvas\+\_\+fill\+Style\+\_\+color@{canvas\+\_\+fill\+Style\+\_\+color}!canvas.\+c@{canvas.\+c}}
+\subsubsection[{canvas\+\_\+fill\+Style\+\_\+color(\+V\+Gfloat red, V\+Gfloat green, V\+Gfloat blue, V\+Gfloat alpha)}]{\setlength{\rightskip}{0pt plus 5cm}void canvas\+\_\+fill\+Style\+\_\+color (
+\begin{DoxyParamCaption}
+\item[{V\+Gfloat}]{red, }
+\item[{V\+Gfloat}]{green, }
+\item[{V\+Gfloat}]{blue, }
+\item[{V\+Gfloat}]{alpha}
+\end{DoxyParamCaption}
+)}\label{canvas_8c_a829bb44fbc54c0ab04d9a306f95f1578}
+\hypertarget{canvas_8c_a4ea0a1f591da41fc08834db947ca6b97}{}\index{canvas.\+c@{canvas.\+c}!canvas\+\_\+get\+State@{canvas\+\_\+get\+State}}
+\index{canvas\+\_\+get\+State@{canvas\+\_\+get\+State}!canvas.\+c@{canvas.\+c}}
+\subsubsection[{canvas\+\_\+get\+State(void)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf canvas\+\_\+state\+\_\+t}$\ast$ canvas\+\_\+get\+State (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{canvas_8c_a4ea0a1f591da41fc08834db947ca6b97}
+\hypertarget{canvas_8c_ae3bb49cd03b02cac95a2748cfd50c8f6}{}\index{canvas.\+c@{canvas.\+c}!canvas\+\_\+render\+\_\+text\+\_\+fill@{canvas\+\_\+render\+\_\+text\+\_\+fill}}
+\index{canvas\+\_\+render\+\_\+text\+\_\+fill@{canvas\+\_\+render\+\_\+text\+\_\+fill}!canvas.\+c@{canvas.\+c}}
+\subsubsection[{canvas\+\_\+render\+\_\+text\+\_\+fill(char $\ast$path, char $\ast$text, float x, float y, unsigned int size)}]{\setlength{\rightskip}{0pt plus 5cm}void canvas\+\_\+render\+\_\+text\+\_\+fill (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{path, }
+\item[{char $\ast$}]{text, }
+\item[{float}]{x, }
+\item[{float}]{y, }
+\item[{unsigned int}]{size}
+\end{DoxyParamCaption}
+)}\label{canvas_8c_ae3bb49cd03b02cac95a2748cfd50c8f6}
+\hypertarget{canvas_8c_a0beaa53ffa53d09c2ae9b6848dd24cc7}{}\index{canvas.\+c@{canvas.\+c}!canvas\+\_\+render\+\_\+text\+\_\+stroke@{canvas\+\_\+render\+\_\+text\+\_\+stroke}}
+\index{canvas\+\_\+render\+\_\+text\+\_\+stroke@{canvas\+\_\+render\+\_\+text\+\_\+stroke}!canvas.\+c@{canvas.\+c}}
+\subsubsection[{canvas\+\_\+render\+\_\+text\+\_\+stroke(char $\ast$path, char $\ast$text, float x, float y, unsigned int size)}]{\setlength{\rightskip}{0pt plus 5cm}void canvas\+\_\+render\+\_\+text\+\_\+stroke (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{path, }
+\item[{char $\ast$}]{text, }
+\item[{float}]{x, }
+\item[{float}]{y, }
+\item[{unsigned int}]{size}
+\end{DoxyParamCaption}
+)}\label{canvas_8c_a0beaa53ffa53d09c2ae9b6848dd24cc7}
+\hypertarget{canvas_8c_a7ba84be939498d5a979aa5c0bc72030a}{}\index{canvas.\+c@{canvas.\+c}!canvas\+\_\+restore@{canvas\+\_\+restore}}
+\index{canvas\+\_\+restore@{canvas\+\_\+restore}!canvas.\+c@{canvas.\+c}}
+\subsubsection[{canvas\+\_\+restore(void)}]{\setlength{\rightskip}{0pt plus 5cm}void canvas\+\_\+restore (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{canvas_8c_a7ba84be939498d5a979aa5c0bc72030a}
+\hypertarget{canvas_8c_ae82cc37b7b2b1c9148a08032a0c7cc40}{}\index{canvas.\+c@{canvas.\+c}!canvas\+\_\+save@{canvas\+\_\+save}}
+\index{canvas\+\_\+save@{canvas\+\_\+save}!canvas.\+c@{canvas.\+c}}
+\subsubsection[{canvas\+\_\+save(void)}]{\setlength{\rightskip}{0pt plus 5cm}void canvas\+\_\+save (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{canvas_8c_ae82cc37b7b2b1c9148a08032a0c7cc40}
+\hypertarget{canvas_8c_a402867a24a60621b9028ce0520e6f522}{}\index{canvas.\+c@{canvas.\+c}!canvas\+\_\+stack\+Size@{canvas\+\_\+stack\+Size}}
+\index{canvas\+\_\+stack\+Size@{canvas\+\_\+stack\+Size}!canvas.\+c@{canvas.\+c}}
+\subsubsection[{canvas\+\_\+stack\+Size(void)}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int canvas\+\_\+stack\+Size (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{canvas_8c_a402867a24a60621b9028ce0520e6f522}
+\hypertarget{canvas_8c_a2c5346df933951fda1e8404eb817c907}{}\index{canvas.\+c@{canvas.\+c}!canvas\+\_\+stroke@{canvas\+\_\+stroke}}
+\index{canvas\+\_\+stroke@{canvas\+\_\+stroke}!canvas.\+c@{canvas.\+c}}
+\subsubsection[{canvas\+\_\+stroke(void)}]{\setlength{\rightskip}{0pt plus 5cm}void canvas\+\_\+stroke (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{canvas_8c_a2c5346df933951fda1e8404eb817c907}
+\hypertarget{canvas_8c_a75cdd36359ab8d1fa8ffed8ece5cd9bb}{}\index{canvas.\+c@{canvas.\+c}!canvas\+\_\+stroke\+Rect@{canvas\+\_\+stroke\+Rect}}
+\index{canvas\+\_\+stroke\+Rect@{canvas\+\_\+stroke\+Rect}!canvas.\+c@{canvas.\+c}}
+\subsubsection[{canvas\+\_\+stroke\+Rect(\+V\+Gfloat x, V\+Gfloat y, V\+Gfloat width, V\+Gfloat height)}]{\setlength{\rightskip}{0pt plus 5cm}void canvas\+\_\+stroke\+Rect (
+\begin{DoxyParamCaption}
+\item[{V\+Gfloat}]{x, }
+\item[{V\+Gfloat}]{y, }
+\item[{V\+Gfloat}]{width, }
+\item[{V\+Gfloat}]{height}
+\end{DoxyParamCaption}
+)}\label{canvas_8c_a75cdd36359ab8d1fa8ffed8ece5cd9bb}
+\hypertarget{canvas_8c_a3849524cf904f77ae7930bea5965884d}{}\index{canvas.\+c@{canvas.\+c}!canvas\+\_\+stroke\+Style\+\_\+color@{canvas\+\_\+stroke\+Style\+\_\+color}}
+\index{canvas\+\_\+stroke\+Style\+\_\+color@{canvas\+\_\+stroke\+Style\+\_\+color}!canvas.\+c@{canvas.\+c}}
+\subsubsection[{canvas\+\_\+stroke\+Style\+\_\+color(\+V\+Gfloat red, V\+Gfloat green, V\+Gfloat blue, V\+Gfloat alpha)}]{\setlength{\rightskip}{0pt plus 5cm}void canvas\+\_\+stroke\+Style\+\_\+color (
+\begin{DoxyParamCaption}
+\item[{V\+Gfloat}]{red, }
+\item[{V\+Gfloat}]{green, }
+\item[{V\+Gfloat}]{blue, }
+\item[{V\+Gfloat}]{alpha}
+\end{DoxyParamCaption}
+)}\label{canvas_8c_a3849524cf904f77ae7930bea5965884d}
+\hypertarget{canvas_8c_a10be0bd82203d8a8b471752915ac73d7}{}\index{canvas.\+c@{canvas.\+c}!font\+\_\+cleanup@{font\+\_\+cleanup}}
+\index{font\+\_\+cleanup@{font\+\_\+cleanup}!canvas.\+c@{canvas.\+c}}
+\subsubsection[{font\+\_\+cleanup(void)}]{\setlength{\rightskip}{0pt plus 5cm}void font\+\_\+cleanup (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{canvas_8c_a10be0bd82203d8a8b471752915ac73d7}
+\hypertarget{canvas_8c_a669b357bedc37be27d7549bd3b8b36f8}{}\index{canvas.\+c@{canvas.\+c}!font\+\_\+init@{font\+\_\+init}}
+\index{font\+\_\+init@{font\+\_\+init}!canvas.\+c@{canvas.\+c}}
+\subsubsection[{font\+\_\+init(void)}]{\setlength{\rightskip}{0pt plus 5cm}void font\+\_\+init (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{canvas_8c_a669b357bedc37be27d7549bd3b8b36f8}
+\hypertarget{canvas_8c_a8860cee077ba27edc442a3fdf9440bdc}{}\index{canvas.\+c@{canvas.\+c}!font\+\_\+new@{font\+\_\+new}}
+\index{font\+\_\+new@{font\+\_\+new}!canvas.\+c@{canvas.\+c}}
+\subsubsection[{font\+\_\+new(char $\ast$path)}]{\setlength{\rightskip}{0pt plus 5cm}void font\+\_\+new (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{path}
+\end{DoxyParamCaption}
+)}\label{canvas_8c_a8860cee077ba27edc442a3fdf9440bdc}
+\hypertarget{canvas_8c_a7f5555363a802647a1a2cfdd67891922}{}\index{canvas.\+c@{canvas.\+c}!font\+\_\+remove@{font\+\_\+remove}}
+\index{font\+\_\+remove@{font\+\_\+remove}!canvas.\+c@{canvas.\+c}}
+\subsubsection[{font\+\_\+remove(char $\ast$path)}]{\setlength{\rightskip}{0pt plus 5cm}void font\+\_\+remove (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{path}
+\end{DoxyParamCaption}
+)}\label{canvas_8c_a7f5555363a802647a1a2cfdd67891922}
+
+
+\subsection{Variable Documentation}
+\hypertarget{canvas_8c_a30ccdc6defc4b85039783939569dff7f}{}\index{canvas.\+c@{canvas.\+c}!current\+Path@{current\+Path}}
+\index{current\+Path@{current\+Path}!canvas.\+c@{canvas.\+c}}
+\subsubsection[{current\+Path}]{\setlength{\rightskip}{0pt plus 5cm}V\+G\+Path current\+Path = 0}\label{canvas_8c_a30ccdc6defc4b85039783939569dff7f}

@@ -1,0 +1,37 @@
+\hypertarget{canvas-globalAlpha_8c}{}\section{src/canvas-\/global\+Alpha.c File Reference}
+\label{canvas-globalAlpha_8c}\index{src/canvas-\/global\+Alpha.\+c@{src/canvas-\/global\+Alpha.\+c}}
+{\ttfamily \#include \char`\"{}include-\/core.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}include-\/openvg.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}canvas-\/global\+Alpha.\+h\char`\"{}}\\*
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{canvas-globalAlpha_8c_a8610df8d07d153c5f5723f646c52887c}{canvas\+\_\+global\+Alpha} (V\+Gfloat global\+\_\+alpha)
+\item 
+V\+Gfloat \hyperlink{canvas-globalAlpha_8c_aa97dd7621c4e59c763330a0ae7fa82a8}{canvas\+\_\+global\+Alpha\+\_\+get} (void)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{canvas-globalAlpha_8c_a8610df8d07d153c5f5723f646c52887c}{}\index{canvas-\/global\+Alpha.\+c@{canvas-\/global\+Alpha.\+c}!canvas\+\_\+global\+Alpha@{canvas\+\_\+global\+Alpha}}
+\index{canvas\+\_\+global\+Alpha@{canvas\+\_\+global\+Alpha}!canvas-\/global\+Alpha.\+c@{canvas-\/global\+Alpha.\+c}}
+\subsubsection[{canvas\+\_\+global\+Alpha(\+V\+Gfloat global\+\_\+alpha)}]{\setlength{\rightskip}{0pt plus 5cm}void canvas\+\_\+global\+Alpha (
+\begin{DoxyParamCaption}
+\item[{V\+Gfloat}]{global\+\_\+alpha}
+\end{DoxyParamCaption}
+)}\label{canvas-globalAlpha_8c_a8610df8d07d153c5f5723f646c52887c}
+The global\+Alpha property specifies the alpha value that is applied to shapes and images before they are drawn onto the canvas. The value is in the range from 0.\+0 (fully transparent) to 1.\+0 (fully opaque) 
+\begin{DoxyParams}{Parameters}
+{\em global\+\_\+alpha} & A number between 0.\+0 (fully transparent) and 1.\+0 (fully opaque). The default value is 1.\+0 Values outside the range, including Infinity and Na\+N will not be set and global\+Alpha will retain its previous value. \\
+\hline
+\end{DoxyParams}
+\hypertarget{canvas-globalAlpha_8c_aa97dd7621c4e59c763330a0ae7fa82a8}{}\index{canvas-\/global\+Alpha.\+c@{canvas-\/global\+Alpha.\+c}!canvas\+\_\+global\+Alpha\+\_\+get@{canvas\+\_\+global\+Alpha\+\_\+get}}
+\index{canvas\+\_\+global\+Alpha\+\_\+get@{canvas\+\_\+global\+Alpha\+\_\+get}!canvas-\/global\+Alpha.\+c@{canvas-\/global\+Alpha.\+c}}
+\subsubsection[{canvas\+\_\+global\+Alpha\+\_\+get(void)}]{\setlength{\rightskip}{0pt plus 5cm}V\+Gfloat canvas\+\_\+global\+Alpha\+\_\+get (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{canvas-globalAlpha_8c_aa97dd7621c4e59c763330a0ae7fa82a8}
+It returns the current value (1.\+0 by default). \begin{DoxyReturn}{Returns}
+A number specifying the current global\+Alpha property. 
+\end{DoxyReturn}

@@ -21,10 +21,10 @@
 #include <stdlib.h>
 #include <memory.h>
 #include <assert.h>
-#include "color.h"
-#include "canvas.h"
+#include "canvas-paint.h"
+#include "canvas-globalAlpha.h"
 
-void paint_createColor(paint_t *paint, float red, float green, float blue, float alpha)
+void paint_createColor(paint_t *paint, VGfloat red, VGfloat green, VGfloat blue, VGfloat alpha)
 {
 	paint->paintType = PAINT_TYPE_COLOR;
 	paint->count = 0;
@@ -36,7 +36,7 @@ void paint_createColor(paint_t *paint, float red, float green, float blue, float
 	paint_setRGBA(paint, red, green, blue, alpha);
 }
 
-void paint_createLinearGradient(paint_t *paint, float x1, float y1, float x2, float y2)
+void paint_createLinearGradient(paint_t *paint, VGfloat x1, VGfloat y1, VGfloat x2, VGfloat y2)
 {
 	paint->paintType = PAINT_TYPE_LINEAR_GRADIENT;
 	paint->count = 0;
@@ -47,6 +47,20 @@ void paint_createLinearGradient(paint_t *paint, float x1, float y1, float x2, fl
 	paint->paint = vgCreatePaint();
 	vgSetParameteri(paint->paint, VG_PAINT_TYPE, VG_PAINT_TYPE_LINEAR_GRADIENT);
 	vgSetParameterfv(paint->paint, VG_PAINT_LINEAR_GRADIENT, 4, params);
+	
+}
+
+void paint_createRadialGradient(paint_t *paint, VGfloat cx, VGfloat cy, VGfloat r, VGfloat fx, VGfloat fy)
+{
+	paint->paintType = PAINT_TYPE_RADIAL_GRADIENT;
+	paint->count = 0;
+	paint->data = NULL;
+	
+	VGfloat params[5] = {cx, cy, fx, fy, r};
+	
+	paint->paint = vgCreatePaint();
+	vgSetParameteri(paint->paint, VG_PAINT_TYPE, VG_PAINT_TYPE_RADIAL_GRADIENT);
+	vgSetParameterfv(paint->paint, VG_PAINT_RADIAL_GRADIENT, 5, params);
 	
 }
 
@@ -81,7 +95,7 @@ void paint_setRGBA(paint_t *paint, VGfloat red, VGfloat green, VGfloat blue, VGf
 
 void paint_addColorStop(paint_t *paint, VGfloat position, VGfloat red, VGfloat green, VGfloat blue, VGfloat alpha)
 {
-	assert(paint->paintType == PAINT_TYPE_LINEAR_GRADIENT);
+	assert(paint->paintType == PAINT_TYPE_LINEAR_GRADIENT || paint->paintType == PAINT_TYPE_RADIAL_GRADIENT);
 	
 	paint->count += 5;
 	paint->data = realloc(paint->data, paint->count * sizeof(VGfloat));
@@ -107,13 +121,14 @@ void paint_activate(paint_t *paint, VGbitfield mode)
 			VGfloat data[4];
 			memcpy(data, paint->data, 4 * sizeof(VGfloat));
 			
-			data[3] *= canvas_getState()->globalAlpha;
+			data[3] *= canvas_globalAlpha_get();
 			
 			vgSetParameterfv(paint->paint, VG_PAINT_COLOR, 4, data);
 		
 			break;
 		}
 		case PAINT_TYPE_LINEAR_GRADIENT:
+		case PAINT_TYPE_RADIAL_GRADIENT:
 		{
 			assert(paint->count % 5 == 0);
 		
@@ -121,11 +136,11 @@ void paint_activate(paint_t *paint, VGbitfield mode)
 			memcpy(data, paint->data, paint->count * sizeof(VGfloat));
 			
 			for(int i = 4; i < paint->count; i += 5) {
-				data[i] *= canvas_getState()->globalAlpha;
+				data[i] *= canvas_globalAlpha_get();
 			}
 			
 			vgSetParameterfv(paint->paint, VG_PAINT_COLOR_RAMP_STOPS, paint->count, data);
-			vgSetParameteri(paint->paint, VG_PAINT_COLOR_RAMP_SPREAD_MODE, VG_COLOR_RAMP_SPREAD_REPEAT);
+			vgSetParameteri(paint->paint, VG_PAINT_COLOR_RAMP_SPREAD_MODE, VG_COLOR_RAMP_SPREAD_PAD);
 			vgSetParameteri(paint->paint, VG_PAINT_COLOR_RAMP_PREMULTIPLIED, VG_FALSE);
 			break;
 		}

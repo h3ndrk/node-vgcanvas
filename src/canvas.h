@@ -19,7 +19,7 @@
 #define __CANVAS_H__
 
 #include <VG/openvg.h>
-#include "color.h"
+#include "canvas-paint.h"
 
 typedef enum
 {
@@ -57,6 +57,14 @@ typedef struct canvas_state_t
 	struct canvas_state_t *next;
 } canvas_state_t;
 
+typedef struct
+{
+	char *path;
+	FT_Face face;
+} font_t;
+
+extern VGPath currentPath;
+
 void canvas__init(void);
 void canvas__cleanup(void);
 
@@ -67,26 +75,20 @@ void canvas_fillRect(VGfloat x, VGfloat y, VGfloat width, VGfloat height);
 void canvas_fillStyle(paint_t *paint);
 void canvas_strokeRect(VGfloat x, VGfloat y, VGfloat width, VGfloat height);
 void canvas_strokeStyle(paint_t *paint);
-void canvas_lineWidth(VGfloat width);
-void canvas_lineCap(canvas_line_cap_t line_cap);
-void canvas_lineJoin(canvas_line_join_t line_join);
-void canvas_globalAlpha(VGfloat alpha);
-void canvas_setLineDash(VGint count, const VGfloat *data);
-void canvas_lineDashOffset(VGfloat offset);
 
-void canvas_beginPath(void);
-void canvas_moveTo(VGfloat x, VGfloat y);
-void canvas_lineTo(VGfloat x, VGfloat y);
-void canvas_quadraticCurveTo(VGfloat cpx, VGfloat cpy, VGfloat x, VGfloat y);
-void canvas_bezierCurveTo(VGfloat cp1x, VGfloat cp1y, VGfloat cp2x, VGfloat cp2y, VGfloat x, VGfloat y);
-//void canvas_ellipse(VGfloat x, VGfloat y, VGfloat radius_x, VGfloat radius_y, VGfloat rotation, VGfloat start_angle, VGfloat end_angle, VGboolean anticlockwise);
 void canvas_arc(VGfloat x, VGfloat y, VGfloat radius, VGfloat start_angle, VGfloat end_angle, VGboolean anticlockwise);
-void canvas_rect(VGfloat x, VGfloat y, VGfloat width, VGfloat height);
-void canvas_closePath(void);
 void canvas_clip(void);
 void canvas_save(void);
 void canvas_restore(void);
 void canvas_stroke(void);
 void canvas_fill(void);
+void canvas_text(char ch);
+
+void canvas_render_text_fill(char *path, char *text, float x, float y, unsigned int size);
+void canvas_render_text_stroke(char *path, char *text, float x, float y, unsigned int size);
+void font_init(void);
+void font_cleanup(void);
+void font_new(char *path);
+void font_remove(char *path);
 
 #endif /* __CANVAS_H__ */

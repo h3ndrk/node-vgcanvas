@@ -1,0 +1,104 @@
+\hypertarget{font-util_8c}{}\section{src/font-\/util.c File Reference}
+\label{font-util_8c}\index{src/font-\/util.\+c@{src/font-\/util.\+c}}
+{\ttfamily \#include \char`\"{}include-\/core.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}include-\/openvg.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}include-\/freetype.\+h\char`\"{}}\\*
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{font-util_8c_a8bf9a10d3231b69eaffed4017b90aa8a}{S\+E\+G\+M\+E\+N\+T\+S\+\_\+\+C\+O\+U\+N\+T\+\_\+\+M\+A\+X}~256
+\item 
+\#define \hyperlink{font-util_8c_a3328f7792ae2c0722a0ad16bce879029}{C\+O\+O\+R\+D\+S\+\_\+\+C\+O\+U\+N\+T\+\_\+\+M\+A\+X}~1024
+\item 
+\#define \hyperlink{font-util_8c_a879da8d8ac74b55e73b8725d4161fdc5}{F\+O\+N\+T\+\_\+\+F\+L\+O\+A\+T\+\_\+\+F\+R\+O\+M\+\_\+26\+\_\+6}(x)~((V\+Gfloat)x / 64.\+0f)
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{font-util_8c_ae3bb49cd03b02cac95a2748cfd50c8f6}{canvas\+\_\+render\+\_\+text\+\_\+fill} (char $\ast$path, char $\ast$text, float x, float y, unsigned int size)
+\item 
+void \hyperlink{font-util_8c_a0beaa53ffa53d09c2ae9b6848dd24cc7}{canvas\+\_\+render\+\_\+text\+\_\+stroke} (char $\ast$path, char $\ast$text, float x, float y, unsigned int size)
+\item 
+void \hyperlink{font-util_8c_a669b357bedc37be27d7549bd3b8b36f8}{font\+\_\+init} (void)
+\item 
+void \hyperlink{font-util_8c_a10be0bd82203d8a8b471752915ac73d7}{font\+\_\+cleanup} (void)
+\item 
+void \hyperlink{font-util_8c_a8860cee077ba27edc442a3fdf9440bdc}{font\+\_\+new} (char $\ast$path)
+\item 
+void \hyperlink{font-util_8c_a7f5555363a802647a1a2cfdd67891922}{font\+\_\+remove} (char $\ast$path)
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\hypertarget{font-util_8c_a3328f7792ae2c0722a0ad16bce879029}{}\index{font-\/util.\+c@{font-\/util.\+c}!C\+O\+O\+R\+D\+S\+\_\+\+C\+O\+U\+N\+T\+\_\+\+M\+A\+X@{C\+O\+O\+R\+D\+S\+\_\+\+C\+O\+U\+N\+T\+\_\+\+M\+A\+X}}
+\index{C\+O\+O\+R\+D\+S\+\_\+\+C\+O\+U\+N\+T\+\_\+\+M\+A\+X@{C\+O\+O\+R\+D\+S\+\_\+\+C\+O\+U\+N\+T\+\_\+\+M\+A\+X}!font-\/util.\+c@{font-\/util.\+c}}
+\subsubsection[{C\+O\+O\+R\+D\+S\+\_\+\+C\+O\+U\+N\+T\+\_\+\+M\+A\+X}]{\setlength{\rightskip}{0pt plus 5cm}\#define C\+O\+O\+R\+D\+S\+\_\+\+C\+O\+U\+N\+T\+\_\+\+M\+A\+X~1024}\label{font-util_8c_a3328f7792ae2c0722a0ad16bce879029}
+\hypertarget{font-util_8c_a879da8d8ac74b55e73b8725d4161fdc5}{}\index{font-\/util.\+c@{font-\/util.\+c}!F\+O\+N\+T\+\_\+\+F\+L\+O\+A\+T\+\_\+\+F\+R\+O\+M\+\_\+26\+\_\+6@{F\+O\+N\+T\+\_\+\+F\+L\+O\+A\+T\+\_\+\+F\+R\+O\+M\+\_\+26\+\_\+6}}
+\index{F\+O\+N\+T\+\_\+\+F\+L\+O\+A\+T\+\_\+\+F\+R\+O\+M\+\_\+26\+\_\+6@{F\+O\+N\+T\+\_\+\+F\+L\+O\+A\+T\+\_\+\+F\+R\+O\+M\+\_\+26\+\_\+6}!font-\/util.\+c@{font-\/util.\+c}}
+\subsubsection[{F\+O\+N\+T\+\_\+\+F\+L\+O\+A\+T\+\_\+\+F\+R\+O\+M\+\_\+26\+\_\+6}]{\setlength{\rightskip}{0pt plus 5cm}\#define F\+O\+N\+T\+\_\+\+F\+L\+O\+A\+T\+\_\+\+F\+R\+O\+M\+\_\+26\+\_\+6(
+\begin{DoxyParamCaption}
+\item[{}]{x}
+\end{DoxyParamCaption}
+)~((V\+Gfloat)x / 64.\+0f)}\label{font-util_8c_a879da8d8ac74b55e73b8725d4161fdc5}
+\hypertarget{font-util_8c_a8bf9a10d3231b69eaffed4017b90aa8a}{}\index{font-\/util.\+c@{font-\/util.\+c}!S\+E\+G\+M\+E\+N\+T\+S\+\_\+\+C\+O\+U\+N\+T\+\_\+\+M\+A\+X@{S\+E\+G\+M\+E\+N\+T\+S\+\_\+\+C\+O\+U\+N\+T\+\_\+\+M\+A\+X}}
+\index{S\+E\+G\+M\+E\+N\+T\+S\+\_\+\+C\+O\+U\+N\+T\+\_\+\+M\+A\+X@{S\+E\+G\+M\+E\+N\+T\+S\+\_\+\+C\+O\+U\+N\+T\+\_\+\+M\+A\+X}!font-\/util.\+c@{font-\/util.\+c}}
+\subsubsection[{S\+E\+G\+M\+E\+N\+T\+S\+\_\+\+C\+O\+U\+N\+T\+\_\+\+M\+A\+X}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\+E\+G\+M\+E\+N\+T\+S\+\_\+\+C\+O\+U\+N\+T\+\_\+\+M\+A\+X~256}\label{font-util_8c_a8bf9a10d3231b69eaffed4017b90aa8a}
+Copyright (C) 2015 N\+I\+P\+E-\/\+S\+Y\+S\+T\+E\+M\+S
+
+This program is free software\+: you can redistribute it and/or modify it under the terms of the G\+N\+U General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+U\+T A\+N\+Y W\+A\+R\+R\+A\+N\+T\+Y; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+T\+Y or F\+I\+T\+N\+E\+S\+S F\+O\+R A P\+A\+R\+T\+I\+C\+U\+L\+A\+R P\+U\+R\+P\+O\+S\+E. See the G\+N\+U General Public License for more details.
+
+You should have received a copy of the G\+N\+U General Public License along with this program. If not, see \href{http://www.gnu.org/licenses/}{\tt http\+://www.\+gnu.\+org/licenses/}. 
+
+\subsection{Function Documentation}
+\hypertarget{font-util_8c_ae3bb49cd03b02cac95a2748cfd50c8f6}{}\index{font-\/util.\+c@{font-\/util.\+c}!canvas\+\_\+render\+\_\+text\+\_\+fill@{canvas\+\_\+render\+\_\+text\+\_\+fill}}
+\index{canvas\+\_\+render\+\_\+text\+\_\+fill@{canvas\+\_\+render\+\_\+text\+\_\+fill}!font-\/util.\+c@{font-\/util.\+c}}
+\subsubsection[{canvas\+\_\+render\+\_\+text\+\_\+fill(char $\ast$path, char $\ast$text, float x, float y, unsigned int size)}]{\setlength{\rightskip}{0pt plus 5cm}void canvas\+\_\+render\+\_\+text\+\_\+fill (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{path, }
+\item[{char $\ast$}]{text, }
+\item[{float}]{x, }
+\item[{float}]{y, }
+\item[{unsigned int}]{size}
+\end{DoxyParamCaption}
+)}\label{font-util_8c_ae3bb49cd03b02cac95a2748cfd50c8f6}
+\hypertarget{font-util_8c_a0beaa53ffa53d09c2ae9b6848dd24cc7}{}\index{font-\/util.\+c@{font-\/util.\+c}!canvas\+\_\+render\+\_\+text\+\_\+stroke@{canvas\+\_\+render\+\_\+text\+\_\+stroke}}
+\index{canvas\+\_\+render\+\_\+text\+\_\+stroke@{canvas\+\_\+render\+\_\+text\+\_\+stroke}!font-\/util.\+c@{font-\/util.\+c}}
+\subsubsection[{canvas\+\_\+render\+\_\+text\+\_\+stroke(char $\ast$path, char $\ast$text, float x, float y, unsigned int size)}]{\setlength{\rightskip}{0pt plus 5cm}void canvas\+\_\+render\+\_\+text\+\_\+stroke (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{path, }
+\item[{char $\ast$}]{text, }
+\item[{float}]{x, }
+\item[{float}]{y, }
+\item[{unsigned int}]{size}
+\end{DoxyParamCaption}
+)}\label{font-util_8c_a0beaa53ffa53d09c2ae9b6848dd24cc7}
+\hypertarget{font-util_8c_a10be0bd82203d8a8b471752915ac73d7}{}\index{font-\/util.\+c@{font-\/util.\+c}!font\+\_\+cleanup@{font\+\_\+cleanup}}
+\index{font\+\_\+cleanup@{font\+\_\+cleanup}!font-\/util.\+c@{font-\/util.\+c}}
+\subsubsection[{font\+\_\+cleanup(void)}]{\setlength{\rightskip}{0pt plus 5cm}void font\+\_\+cleanup (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{font-util_8c_a10be0bd82203d8a8b471752915ac73d7}
+\hypertarget{font-util_8c_a669b357bedc37be27d7549bd3b8b36f8}{}\index{font-\/util.\+c@{font-\/util.\+c}!font\+\_\+init@{font\+\_\+init}}
+\index{font\+\_\+init@{font\+\_\+init}!font-\/util.\+c@{font-\/util.\+c}}
+\subsubsection[{font\+\_\+init(void)}]{\setlength{\rightskip}{0pt plus 5cm}void font\+\_\+init (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{font-util_8c_a669b357bedc37be27d7549bd3b8b36f8}
+\hypertarget{font-util_8c_a8860cee077ba27edc442a3fdf9440bdc}{}\index{font-\/util.\+c@{font-\/util.\+c}!font\+\_\+new@{font\+\_\+new}}
+\index{font\+\_\+new@{font\+\_\+new}!font-\/util.\+c@{font-\/util.\+c}}
+\subsubsection[{font\+\_\+new(char $\ast$path)}]{\setlength{\rightskip}{0pt plus 5cm}void font\+\_\+new (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{path}
+\end{DoxyParamCaption}
+)}\label{font-util_8c_a8860cee077ba27edc442a3fdf9440bdc}
+\hypertarget{font-util_8c_a7f5555363a802647a1a2cfdd67891922}{}\index{font-\/util.\+c@{font-\/util.\+c}!font\+\_\+remove@{font\+\_\+remove}}
+\index{font\+\_\+remove@{font\+\_\+remove}!font-\/util.\+c@{font-\/util.\+c}}
+\subsubsection[{font\+\_\+remove(char $\ast$path)}]{\setlength{\rightskip}{0pt plus 5cm}void font\+\_\+remove (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{path}
+\end{DoxyParamCaption}
+)}\label{font-util_8c_a7f5555363a802647a1a2cfdd67891922}

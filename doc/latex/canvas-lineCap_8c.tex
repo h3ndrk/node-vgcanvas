@@ -1,0 +1,37 @@
+\hypertarget{canvas-lineCap_8c}{}\section{src/canvas-\/line\+Cap.c File Reference}
+\label{canvas-lineCap_8c}\index{src/canvas-\/line\+Cap.\+c@{src/canvas-\/line\+Cap.\+c}}
+{\ttfamily \#include \char`\"{}include-\/core.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}include-\/openvg.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}canvas-\/line\+Cap.\+h\char`\"{}}\\*
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{canvas-lineCap_8c_afdc5a0828b7efbf598439978c5393874}{canvas\+\_\+line\+Cap} (char $\ast$line\+\_\+cap)
+\item 
+char $\ast$ \hyperlink{canvas-lineCap_8c_a912f202fa0b9bcd335de69e4a4976828}{canvas\+\_\+line\+Cap\+\_\+get} (void)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{canvas-lineCap_8c_afdc5a0828b7efbf598439978c5393874}{}\index{canvas-\/line\+Cap.\+c@{canvas-\/line\+Cap.\+c}!canvas\+\_\+line\+Cap@{canvas\+\_\+line\+Cap}}
+\index{canvas\+\_\+line\+Cap@{canvas\+\_\+line\+Cap}!canvas-\/line\+Cap.\+c@{canvas-\/line\+Cap.\+c}}
+\subsubsection[{canvas\+\_\+line\+Cap(char $\ast$line\+\_\+cap)}]{\setlength{\rightskip}{0pt plus 5cm}void canvas\+\_\+line\+Cap (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{line\+\_\+cap}
+\end{DoxyParamCaption}
+)}\label{canvas-lineCap_8c_afdc5a0828b7efbf598439978c5393874}
+The line\+Cap property determines how the end points of every line are drawn. There are three possible values for this property and those are\+: butt, round and square. By default this property is set to butt. 
+\begin{DoxyParams}{Parameters}
+{\em line\+\_\+cap} & A string specifying the style of the end point. \\
+\hline
+\end{DoxyParams}
+\hypertarget{canvas-lineCap_8c_a912f202fa0b9bcd335de69e4a4976828}{}\index{canvas-\/line\+Cap.\+c@{canvas-\/line\+Cap.\+c}!canvas\+\_\+line\+Cap\+\_\+get@{canvas\+\_\+line\+Cap\+\_\+get}}
+\index{canvas\+\_\+line\+Cap\+\_\+get@{canvas\+\_\+line\+Cap\+\_\+get}!canvas-\/line\+Cap.\+c@{canvas-\/line\+Cap.\+c}}
+\subsubsection[{canvas\+\_\+line\+Cap\+\_\+get(void)}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ canvas\+\_\+line\+Cap\+\_\+get (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{canvas-lineCap_8c_a912f202fa0b9bcd335de69e4a4976828}
+It returns the current value (butt by default). \begin{DoxyReturn}{Returns}
+A string specifying the current style of the end point. 
+\end{DoxyReturn}

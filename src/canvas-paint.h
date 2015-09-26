@@ -15,15 +15,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __COLOR_H__
-#define __COLOR_H__
+#ifndef __CANVAS_PAINT_H__
+#define __CANVAS_PAINT_H__
 
 #include <VG/openvg.h>
 
 typedef enum
 {
 	PAINT_TYPE_COLOR = VG_PAINT_TYPE_COLOR,
-	PAINT_TYPE_LINEAR_GRADIENT = VG_PAINT_TYPE_LINEAR_GRADIENT
+	PAINT_TYPE_LINEAR_GRADIENT = VG_PAINT_TYPE_LINEAR_GRADIENT,
+	PAINT_TYPE_RADIAL_GRADIENT = VG_PAINT_TYPE_RADIAL_GRADIENT
 } paint_type_t;
 
 typedef struct
@@ -34,11 +35,12 @@ typedef struct
 	VGfloat *data;
 } paint_t;
 
-void paint_createColor(paint_t *paint, float red, float green, float blue, float alpha);
-void paint_createLinearGradient(paint_t *paint, float x1, float y1, float x2, float y2);
+void paint_createColor(paint_t *paint, VGfloat red, VGfloat green, VGfloat blue, VGfloat alpha);
+void paint_createLinearGradient(paint_t *paint, VGfloat x1, VGfloat y1, VGfloat x2, VGfloat y2);
+void paint_createRadialGradient(paint_t *paint, VGfloat cx, VGfloat cy, VGfloat r, VGfloat fx, VGfloat fy);
 void paint_destroy(paint_t *paint);
 void paint_activate(paint_t *paint, VGbitfield mode);
-void paint_setRGBA(paint_t *color, float red, float green, float blue, float alpha);
+void paint_setRGBA(paint_t *color, VGfloat red, VGfloat green, VGfloat blue, VGfloat alpha);
 void paint_addColorStop(paint_t *paint, VGfloat pos, VGfloat red, VGfloat green, VGfloat blue, VGfloat alpha);
 
-#endif /* __COLOR_H__ */
+#endif /* __CANVAS_PAINT_H__ */

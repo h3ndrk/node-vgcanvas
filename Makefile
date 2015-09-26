@@ -20,6 +20,7 @@ CFLAGS += -Wextra
 CFLAGS += -I /opt/vc/include
 CFLAGS += -I /opt/vc/include/interface/vmcs_host/linux
 CFLAGS += -I /opt/vc/include/interface/vcos/pthreads
+CFLAGS += -I /usr/include/freetype2
 # CFLAGS += -I./etc
 CFLAGS += -fgnu89-inline # fix for vcos compiler warnings
 
@@ -33,6 +34,7 @@ LIBS += -lvcos
 LIBS += -lvchiq_arm
 LIBS += -lpthread
 LIBS += -lrt
+LIBS += -lfreetype
 # LIBS += -lbcm_host
 # LIBS += -lpthread
 # LIBS += -ljpeg
@@ -40,15 +42,38 @@ LIBS += -lrt
 PROGRAM_NAME = home-infoscreen
 
 SRC += $(PROGRAM_NAME).c
-SRC += egl-util.c
+SRC += canvas-beginPath.c
+SRC += canvas-bezierCurveTo.c
+SRC += canvas-clearRect.c
+SRC += canvas-globalAlpha.c
+SRC += canvas-lineCap.c
+SRC += canvas-lineDashOffset.c
+SRC += canvas-lineJoin.c
+SRC += canvas-lineTo.c
+SRC += canvas-lineWidth.c
+SRC += canvas-moveTo.c
+SRC += canvas-quadraticCurveTo.c
+SRC += canvas-arc.c
+SRC += canvas-rect.c
+SRC += canvas-setLineDash.c
+SRC += canvas-closePath.c
+SRC += canvas-clip.c
+SRC += canvas-save.c
 SRC += canvas.c
 SRC += color.c
+SRC += egl-util.c
 
 OBJS = $(addprefix bin/obj/, $(SRC:%.c=%.o))
 
-.PHONY: all $(PROGRAM_NAME) init clean
+.PHONY: all $(PROGRAM_NAME) fonttoopenvg init clean
 
 all: init $(PROGRAM_NAME)
+
+fonttoopenvg: src/fonttoopenvg.cpp
+	g++ -I/usr/include/freetype2 src/fonttoopenvg.cpp -o font2openvg -lfreetype
+	
+font: src/font.c
+	gcc -I/usr/include/freetype2 src/font.c -o font -lfreetype
 
 $(PROGRAM_NAME): init $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o bin/$(PROGRAM_NAME) $(LIBS)
