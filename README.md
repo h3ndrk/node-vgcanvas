@@ -9,9 +9,9 @@ Canvas 2D Method | C implementation | C++ wrapper implementation | Node.JS imple
 `VGContext.canvas` |   |   |   
 `VGContext.currentTransform` |   |   |   
 `VGContext.direction` |   |   |   
-`VGContext.fillStyle` |   |   |   
+`VGContext.fillStyle` | API unfinished |   |   
 `VGContext.filter` |   |   |   
-`VGContext.font` |   |   |   
+`VGContext.font` | API unfinished |   |   
 `VGContext.globalAlpha` | implemented |   |   
 `VGContext.globalCompositeOperation` |   |   |   
 `VGContext.imageSmoothingEnabled` |   |   |   
@@ -19,12 +19,12 @@ Canvas 2D Method | C implementation | C++ wrapper implementation | Node.JS imple
 `VGContext.lineDashOffset` | implemented |   |   
 `VGContext.lineJoin` | implemented |   |   
 `VGContext.lineWidth` | implemented |   |   
-`VGContext.miterLimit` |   |   |   
+`VGContext.miterLimit` | implemented |   |   
 `VGContext.shadowBlur` |   |   |   
 `VGContext.shadowColor` |   |   |   
 `VGContext.shadowOffsetX` |   |   |   
 `VGContext.shadowOffsetY` |   |   |   
-`VGContext.strokeStyle` |   |   |   
+`VGContext.strokeStyle` | API unfinished |   |   
 `VGContext.textAlign` |   |   |   
 `VGContext.textBaseline` |   |   |   
 `VGContext.textBaseline` |   |   |   
@@ -36,7 +36,7 @@ Canvas 2D Method | C implementation | C++ wrapper implementation | Node.JS imple
 `VGContext.bezierCurveTo()` | implemented |   |   
 `VGContext.clearHitRegion()` |   |   |   
 `VGContext.clearRect()` | implemented |   |   
-`VGContext.clip()` | partly implemented (`save` and `restore` missing) |   |   
+`VGContext.clip()` | implemented |   |   
 `VGContext.closePath()` | implemented |   |   
 `VGContext.createImageData()` |   |   |   
 `VGContext.createLinearGradient()` |   |   |   
@@ -46,11 +46,11 @@ Canvas 2D Method | C implementation | C++ wrapper implementation | Node.JS imple
 `VGContext.drawImage()` |   |   |   
 `VGContext.drawWindow()` |   |   |   
 `VGContext.ellipse()` |   |   |   
-`VGContext.fill()` |   |   |   
-`VGContext.fillRect()` |   |   |   
-`VGContext.fillText()` |   |   |   
+`VGContext.fill()` | API unfinished |   |   
+`VGContext.fillRect()` | API unfinished |   |   
+`VGContext.fillText()` | API unfinished |   |   
 `VGContext.getImageData()` |   |   |   
-`VGContext.getLineDash()` |   |   |   
+`VGContext.getLineDash()` | API unfinished |   |   
 `VGContext.isPointInPath()` |   |   |   
 `VGContext.isPointInStroke()` |   |   |   
 `VGContext.lineTo()` | implemented |   |   
@@ -61,14 +61,14 @@ Canvas 2D Method | C implementation | C++ wrapper implementation | Node.JS imple
 `VGContext.rect()` | implemented |   |   
 `VGContext.removeHitRegion()` |   |   |   
 `VGContext.resetTransform()` |   |   |   
-`VGContext.restore()` |   |   |   
+`VGContext.restore()` | partly implemented |   |   
 `VGContext.rotate()` |   |   |   
-`VGContext.save()` | partly implemented (`restore` missing) |   |   
+`VGContext.save()` | partly implemented |   |   
 `VGContext.scrollPathIntoView()` |   |   |   
 `VGContext.setLineDash()` | implemented |   |   
 `VGContext.setTransform()` |   |   |   
-`VGContext.stroke()` |   |   |   
-`VGContext.strokeRect()` |   |   |   
-`VGContext.strokeText()` |   |   |   
+`VGContext.stroke()` | API unfinished |   |   
+`VGContext.strokeRect()` | API unfinished |   |   
+`VGContext.strokeText()` | API unfinished |   |   
 `VGContext.transform()` |   |   |   
 `VGContext.translate()` |   |   |   

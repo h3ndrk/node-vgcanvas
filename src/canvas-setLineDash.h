@@ -21,6 +21,6 @@
 void canvas_setLineDash(VGint count, VGfloat *data);
 void canvas_setLineDash_cleanup(void);
 VGfloat *canvas_setLineDash_get_data(void);
-VGfloat canvas_setLineDash_get_count(void);
+VGint canvas_setLineDash_get_count(void);
 
 #endif /* __CANVAS_SETLINEDASH_H__ */

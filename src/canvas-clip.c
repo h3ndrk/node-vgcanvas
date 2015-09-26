@@ -55,7 +55,7 @@ void canvas_clip(void)
  * Returns the clipping state.
  * @return The clipping state.
  */
-void canvas_clip_get_clipping(void)
+VGboolean canvas_clip_get_clipping(void)
 {
 	return canvas_clip_clipping;
 }
@@ -77,7 +77,7 @@ void canvas_clip_set_clipping(VGboolean clipping)
  * @return The newly created clipping mask layer. This mask must be destroyed by
  *         canvas_clip_cleanup_mask().
  */
-void canvas_clip_get_mask(void)
+VGMaskLayer canvas_clip_get_mask(void)
 {
 	VGMaskLayer mask = vgCreateMaskLayer(egl_get_width(), egl_get_height());
 	vgCopyMask(mask, 0, 0, 0, 0, egl_get_width(), egl_get_height());

@@ -18,6 +18,9 @@
 #include "include-core.h"
 #include "include-openvg.h"
 // #include "include-freetype.h"
+#include "canvas-clip.h"
+#include "canvas-setLineDash.h"
+#include "canvas-globalAlpha.h"
 #include "canvas-save.h"
 
 static canvas_save_stack_t *canvas_save_stack_top = NULL;
@@ -49,23 +52,77 @@ void canvas_save(void)
 		canvas_save_stack_top = state;
 	}
 	
-	// save properties to stack top
+	// save properties to top state of stack
+	// TODO: transformation matrix missing
 	
-	// canvas_save_stack_top->property = something;
+	canvas_save_stack_top->clip_clipping = canvas_clip_get_clipping();
+	if(canvas_save_stack_top->clip_clipping == VG_TRUE)
+	{
+		canvas_save_stack_top->clip_mask = canvas_clip_get_mask();
+	}
+	else
+	{
+		canvas_save_stack_top->clip_mask = NULL;
+	}
+	
+	canvas_save_stack_top->lineDash_count = canvas_setLineDash_get_count();
+	if(canvas_save_stack_top->lineDash_count > 0)
+	{
+		canvas_save_stack_top->lineDash_data = malloc(canvas_save_stack_top->lineDash_count * sizeof(VGfloat));
+		
+		if(canvas_save_stack_top->lineDash_data == NULL)
+		{
+			printf("Failed to add stack element: Copying lineDash data failed.\n");
+			
+			canvas_save_stack_top->lineDash_count = 0;
+		}
+		else
+		{
+			memcpy(canvas_save_stack_top->lineDash_data, canvas_setLineDash_get_data(), canvas_save_stack_top->lineDash_count * sizeof(VGfloat));
+		}
+	}
+	else
+	{
+		canvas_save_stack_top->lineDash_data = NULL;
+	}
+	
+	// TODO: strokeStyle missing
+	// TODO: fillStyle missing
+	canvas_save_stack_top->globalAlpha = canvas_globalAlpha_get();
+	
+	canvas_save_stack_top->lineWidth = canvas_lineWidth_get();
+	canvas_save_stack_top->lineCap = canvas_lineCap_get();
+	canvas_save_stack_top->lineJoin = canvas_lineJoin_get();
+	canvas_save_stack_top->miterLimit = canvas_miterLimit_get();
+	canvas_save_stack_top->lineDash_offset = canvas_lineDashOffset_get();
+	
+	// TODO: shadowOffsetX missing
+	// TODO: shadowOffsetY missing
+	// TODO: shadowOffsetBlur missing
+	// TODO: shadowOffsetColor missing
+	
+	// TODO: globalCompositeOperation missing
+	
+	// TODO: font missing
+	// TODO: textAlign missing
+	// TODO: textBaseline missing
+	// TODO: direction missing
+	
+	// TODO: imageSmoothingEnabled missing
 }
 
 /**
  * Cleans up specific stack states. Destroys the given state of the stack.
  * @param state The state to be destroyed.
  */
-static canvas_save_cleanup_state(canvas_save_stack_t *state)
+void canvas_save_cleanup_state(canvas_save_stack_t *state)
 {
 	if(state->next != NULL)
 	{
 		canvas_save_cleanup_state(state->next);
 	}
 	
-	// cleanup properties of stack top
+	// cleanup properties of top state of stack
 	
 	// free(canvas_save_stack_top->property);
 	// free(canvas_save_stack_top);
@@ -91,4 +148,13 @@ void canvas_save_cleanup(void)
 canvas_save_stack_t *canvas_save_get(void)
 {
 	return canvas_save_stack_top;
+}
+
+/**
+ * Sets the stack.
+ * @param stack The stack.
+ */
+void canvas_save_set(canvas_save_stack_t *stack)
+{
+	canvas_save_stack_top = stack;
 }

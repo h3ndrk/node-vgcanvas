@@ -59,8 +59,10 @@ SRC += canvas-setLineDash.c
 SRC += canvas-closePath.c
 SRC += canvas-clip.c
 SRC += canvas-save.c
+SRC += canvas-restore.c
+SRC += canvas-miterLimit.c
 SRC += canvas.c
-SRC += color.c
+SRC += canvas-paint.c
 SRC += egl-util.c
 
 OBJS = $(addprefix bin/obj/, $(SRC:%.c=%.o))

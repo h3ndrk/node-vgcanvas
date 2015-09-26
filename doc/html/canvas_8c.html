@@ -114,6 +114,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <code>#include &quot;<a class="el" href="canvas-lineJoin_8h_source.html">canvas-lineJoin.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="canvas-globalAlpha_8h_source.html">canvas-globalAlpha.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="canvas-setLineDash_8h_source.html">canvas-setLineDash.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="canvas-save_8h_source.html">canvas-save.h</a>&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
@@ -140,12 +141,6 @@ Functions</h2></td></tr>
 <tr class="separator:a75cdd36359ab8d1fa8ffed8ece5cd9bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3849524cf904f77ae7930bea5965884d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canvas_8c.html#a3849524cf904f77ae7930bea5965884d">canvas_strokeStyle_color</a> (VGfloat red, VGfloat green, VGfloat blue, VGfloat alpha)</td></tr>
 <tr class="separator:a3849524cf904f77ae7930bea5965884d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae82cc37b7b2b1c9148a08032a0c7cc40"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canvas_8c.html#ae82cc37b7b2b1c9148a08032a0c7cc40">canvas_save</a> (void)</td></tr>
-<tr class="separator:ae82cc37b7b2b1c9148a08032a0c7cc40"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7ba84be939498d5a979aa5c0bc72030a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canvas_8c.html#a7ba84be939498d5a979aa5c0bc72030a">canvas_restore</a> (void)</td></tr>
-<tr class="separator:a7ba84be939498d5a979aa5c0bc72030a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4ea0a1f591da41fc08834db947ca6b97"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcanvas__state__t.html">canvas_state_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canvas_8c.html#a4ea0a1f591da41fc08834db947ca6b97">canvas_getState</a> (void)</td></tr>
-<tr class="separator:a4ea0a1f591da41fc08834db947ca6b97"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2c5346df933951fda1e8404eb817c907"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canvas_8c.html#a2c5346df933951fda1e8404eb817c907">canvas_stroke</a> (void)</td></tr>
 <tr class="separator:a2c5346df933951fda1e8404eb817c907"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a73f1c2a2b8663e01dbb1472c9172bf46"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canvas_8c.html#a73f1c2a2b8663e01dbb1472c9172bf46">canvas_fill</a> (void)</td></tr>
@@ -334,22 +329,6 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a4ea0a1f591da41fc08834db947ca6b97"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structcanvas__state__t.html">canvas_state_t</a>* canvas_getState </td>
-          <td>(</td>
-          <td class="paramtype">void&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="ae3bb49cd03b02cac95a2748cfd50c8f6"></a>
 <div class="memitem">
 <div class="memproto">
@@ -432,38 +411,6 @@ Variables</h2></td></tr>
           <td></td>
           <td>)</td>
           <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a7ba84be939498d5a979aa5c0bc72030a"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void canvas_restore </td>
-          <td>(</td>
-          <td class="paramtype">void&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ae82cc37b7b2b1c9148a08032a0c7cc40"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void canvas_save </td>
-          <td>(</td>
-          <td class="paramtype">void&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -658,7 +605,7 @@ Variables</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Sep 26 2015 06:07:42 for node-vgcanvas by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Sep 26 2015 16:15:20 for node-vgcanvas by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.10
 </small></address>

@@ -33,7 +33,7 @@
 
 #include "egl-util.h"
 #include "canvas.h"
-#include "color.h"
+#include "canvas-paint.h"
 // #include "font.h"
 #include "canvas-clearRect.h"
 #include "canvas-lineWidth.h"
@@ -186,43 +186,6 @@ void canvas_strokeRect(VGfloat x, VGfloat y, VGfloat width, VGfloat height)
 	vgClearPath(immediatePath, VG_PATH_CAPABILITY_ALL);
 	vguRect(immediatePath, x, y, width, height);
 	vgDrawPath(immediatePath, VG_STROKE_PATH);
-}
-
-void canvas_restore(void)
-{
-	if(!stateStack) 
-	{
-		printf("Can't restore state. No state on stack.\n");
-		return;
-	}
-	
-	canvas_state_t *restore = stateStack;
-	
-	if(restore->clipping)
-	{
-		vgMask(restore->savedLayer, VG_SET_MASK, 0, 0, egl_get_width(), egl_get_height());
-		vgDestroyMaskLayer(restore->savedLayer);
-	}
-	
-	vgSeti(VG_MASKING, restore->clipping);
-	currentState.clipping = restore->clipping;
-	// canvas_lineWidth(restore->lineWidth);
-	// canvas_lineCap(restore->lineCap);
-	// canvas_lineJoin(restore->lineJoin);
-	// canvas_globalAlpha(restore->globalAlpha);
-	canvas_lineDashOffset(restore->dashOffset);
-	//currentState.fillPaint = restore->fillPaint;
-	//currentState.strokeColor = restore->strokeColor;
-	
-	if(currentState.dashPattern)
-		free(currentState.dashPattern);
-	
-	currentState.dashPattern = restore->dashPattern;
-	currentState.dashCount = restore->dashCount;
-	
-	stateStack = restore->next;
-	free(restore);
-	
 }
 
 void canvas_stroke(void)

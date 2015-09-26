@@ -21,6 +21,7 @@
 {\ttfamily \#include \char`\"{}canvas-\/line\+Join.\+h\char`\"{}}\\*
 {\ttfamily \#include \char`\"{}canvas-\/global\+Alpha.\+h\char`\"{}}\\*
 {\ttfamily \#include \char`\"{}canvas-\/set\+Line\+Dash.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}canvas-\/save.\+h\char`\"{}}\\*
 \subsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
@@ -46,12 +47,6 @@ void \hyperlink{canvas_8c_a829bb44fbc54c0ab04d9a306f95f1578}{canvas\+\_\+fill\+S
 void \hyperlink{canvas_8c_a75cdd36359ab8d1fa8ffed8ece5cd9bb}{canvas\+\_\+stroke\+Rect} (V\+Gfloat x, V\+Gfloat y, V\+Gfloat width, V\+Gfloat height)
 \item 
 void \hyperlink{canvas_8c_a3849524cf904f77ae7930bea5965884d}{canvas\+\_\+stroke\+Style\+\_\+color} (V\+Gfloat red, V\+Gfloat green, V\+Gfloat blue, V\+Gfloat alpha)
-\item 
-void \hyperlink{canvas_8c_ae82cc37b7b2b1c9148a08032a0c7cc40}{canvas\+\_\+save} (void)
-\item 
-void \hyperlink{canvas_8c_a7ba84be939498d5a979aa5c0bc72030a}{canvas\+\_\+restore} (void)
-\item 
-\hyperlink{structcanvas__state__t}{canvas\+\_\+state\+\_\+t} $\ast$ \hyperlink{canvas_8c_a4ea0a1f591da41fc08834db947ca6b97}{canvas\+\_\+get\+State} (void)
 \item 
 void \hyperlink{canvas_8c_a2c5346df933951fda1e8404eb817c907}{canvas\+\_\+stroke} (void)
 \item 
@@ -134,13 +129,6 @@ V\+G\+Path \hyperlink{canvas_8c_a30ccdc6defc4b85039783939569dff7f}{current\+Path
 \item[{V\+Gfloat}]{alpha}
 \end{DoxyParamCaption}
 )}\label{canvas_8c_a829bb44fbc54c0ab04d9a306f95f1578}
-\hypertarget{canvas_8c_a4ea0a1f591da41fc08834db947ca6b97}{}\index{canvas.\+c@{canvas.\+c}!canvas\+\_\+get\+State@{canvas\+\_\+get\+State}}
-\index{canvas\+\_\+get\+State@{canvas\+\_\+get\+State}!canvas.\+c@{canvas.\+c}}
-\subsubsection[{canvas\+\_\+get\+State(void)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf canvas\+\_\+state\+\_\+t}$\ast$ canvas\+\_\+get\+State (
-\begin{DoxyParamCaption}
-\item[{void}]{}
-\end{DoxyParamCaption}
-)}\label{canvas_8c_a4ea0a1f591da41fc08834db947ca6b97}
 \hypertarget{canvas_8c_ae3bb49cd03b02cac95a2748cfd50c8f6}{}\index{canvas.\+c@{canvas.\+c}!canvas\+\_\+render\+\_\+text\+\_\+fill@{canvas\+\_\+render\+\_\+text\+\_\+fill}}
 \index{canvas\+\_\+render\+\_\+text\+\_\+fill@{canvas\+\_\+render\+\_\+text\+\_\+fill}!canvas.\+c@{canvas.\+c}}
 \subsubsection[{canvas\+\_\+render\+\_\+text\+\_\+fill(char $\ast$path, char $\ast$text, float x, float y, unsigned int size)}]{\setlength{\rightskip}{0pt plus 5cm}void canvas\+\_\+render\+\_\+text\+\_\+fill (
@@ -163,20 +151,6 @@ V\+G\+Path \hyperlink{canvas_8c_a30ccdc6defc4b85039783939569dff7f}{current\+Path
 \item[{unsigned int}]{size}
 \end{DoxyParamCaption}
 )}\label{canvas_8c_a0beaa53ffa53d09c2ae9b6848dd24cc7}
-\hypertarget{canvas_8c_a7ba84be939498d5a979aa5c0bc72030a}{}\index{canvas.\+c@{canvas.\+c}!canvas\+\_\+restore@{canvas\+\_\+restore}}
-\index{canvas\+\_\+restore@{canvas\+\_\+restore}!canvas.\+c@{canvas.\+c}}
-\subsubsection[{canvas\+\_\+restore(void)}]{\setlength{\rightskip}{0pt plus 5cm}void canvas\+\_\+restore (
-\begin{DoxyParamCaption}
-\item[{void}]{}
-\end{DoxyParamCaption}
-)}\label{canvas_8c_a7ba84be939498d5a979aa5c0bc72030a}
-\hypertarget{canvas_8c_ae82cc37b7b2b1c9148a08032a0c7cc40}{}\index{canvas.\+c@{canvas.\+c}!canvas\+\_\+save@{canvas\+\_\+save}}
-\index{canvas\+\_\+save@{canvas\+\_\+save}!canvas.\+c@{canvas.\+c}}
-\subsubsection[{canvas\+\_\+save(void)}]{\setlength{\rightskip}{0pt plus 5cm}void canvas\+\_\+save (
-\begin{DoxyParamCaption}
-\item[{void}]{}
-\end{DoxyParamCaption}
-)}\label{canvas_8c_ae82cc37b7b2b1c9148a08032a0c7cc40}
 \hypertarget{canvas_8c_a402867a24a60621b9028ce0520e6f522}{}\index{canvas.\+c@{canvas.\+c}!canvas\+\_\+stack\+Size@{canvas\+\_\+stack\+Size}}
 \index{canvas\+\_\+stack\+Size@{canvas\+\_\+stack\+Size}!canvas.\+c@{canvas.\+c}}
 \subsubsection[{canvas\+\_\+stack\+Size(void)}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int canvas\+\_\+stack\+Size (

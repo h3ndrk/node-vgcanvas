@@ -20,9 +20,9 @@
 
 void canvas_clip_init(void);
 void canvas_clip(void);
-void canvas_clip_get_clipping(void);
+VGboolean canvas_clip_get_clipping(void);
 void canvas_clip_set_clipping(VGboolean clipping);
-void canvas_clip_get_mask(void);
+VGMaskLayer canvas_clip_get_mask(void);
 void canvas_clip_set_mask(VGMaskLayer mask);
 void canvas_clip_cleanup_mask(VGMaskLayer mask);
 

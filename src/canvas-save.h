@@ -20,27 +20,45 @@
 
 typedef struct canvas_save_stack_t
 {
-	// canvas_line_cap_t lineCap;
-	// canvas_line_join_t lineJoin;
+	// TODO: transformation matrix missing
 	
-	// color_t fillColor;
-	// color_t strokeColor;
+	VGboolean clip_clipping;
+	VGMaskLayer clip_mask;
 	
-	// VGfloat globalAlpha;
-	// VGfloat lineWidth;
+	VGint lineDash_count;
+	VGfloat *lineDash_data;
+	VGfloat lineDash_offset;
 	
-	// VGint dashCount;
-	// VGfloat *dashPattern;
-	// VGfloat dashOffset;
+	// TODO: strokeStyle missing
+	// TODO: fillStyle missing
+	VGfloat globalAlpha;
 	
-	// VGboolean clipping;
-	// VGMaskLayer savedLayer;
+	VGfloat lineWidth;
+	VGfloat lineCap;
+	VGfloat lineJoin;
+	VGfloat miterLimit;
+	
+	// TODO: shadowOffsetX missing
+	// TODO: shadowOffsetY missing
+	// TODO: shadowOffsetBlur missing
+	// TODO: shadowOffsetColor missing
+	
+	// TODO: globalCompositeOperation missing
+	
+	// TODO: font missing
+	// TODO: textAlign missing
+	// TODO: textBaseline missing
+	// TODO: direction missing
+	
+	// TODO: imageSmoothingEnabled missing
 	
 	struct canvas_save_stack_t *next;
 } canvas_save_stack_t;
 
 void canvas_save(void);
+void canvas_save_cleanup_state(canvas_save_stack_t *state);
 void canvas_save_cleanup(void);
 canvas_save_stack_t *canvas_save_get(void);
+void canvas_clip_set(canvas_save_stack_t *mask);
 
 #endif /* __CANVAS_SAVE_H__ */
