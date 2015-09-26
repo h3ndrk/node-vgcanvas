@@ -112,6 +112,8 @@ void egl_init(void)
 	
 	// preserve color buffer when swapping
 	eglSurfaceAttrib(display, surface, EGL_SWAP_BEHAVIOR, EGL_BUFFER_PRESERVED);
+	
+	vgLoadIdentity();
 }
 
 // Code from https://github.com/ajstarks/openvg/blob/master/oglinit.c doesn't

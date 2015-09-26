@@ -108,8 +108,6 @@ void canvas__init(void)
 	vgSeti(VG_SCISSORING, VG_FALSE);
 	vgSeti(VG_MASKING, VG_FALSE);
 	
-	vgLoadIdentity();
-	
 	init = 1;
 	
 	canvas_clearRect_init();
@@ -532,30 +530,30 @@ void canvas_strokeStyle_color(VGfloat red, VGfloat green, VGfloat blue, VGfloat 
 // 	vgSetf(VG_STROKE_DASH_PHASE, offset);
 // }
 
-void canvas_closePath(void)
-{
-	VGubyte segment[1] = { VG_CLOSE_PATH };
-	VGfloat data[2];
+// void canvas_closePath(void)
+// {
+// 	VGubyte segment[1] = { VG_CLOSE_PATH };
+// 	VGfloat data[2];
 	
-	data[0] = currentPath_sx;
-	data[1] = currentPath_sy;
+// 	data[0] = currentPath_sx;
+// 	data[1] = currentPath_sy;
 	
-	vgAppendPathData(currentPath, 1, segment, (const void *)data);
-}
+// 	vgAppendPathData(currentPath, 1, segment, (const void *)data);
+// }
 
-void canvas_clip(void)
-{
-	if(!currentState.clipping)
-	{
-		vgMask(VG_INVALID_HANDLE, VG_FILL_MASK, 0, 0, egl_get_width(), egl_get_height());
-	}
+// void canvas_clip(void)
+// {
+// 	if(!currentState.clipping)
+// 	{
+// 		vgMask(VG_INVALID_HANDLE, VG_FILL_MASK, 0, 0, egl_get_width(), egl_get_height());
+// 	}
 	
-	vgRenderToMask(currentPath, VG_FILL_PATH, VG_INTERSECT_MASK);
+// 	vgRenderToMask(currentPath, VG_FILL_PATH, VG_INTERSECT_MASK);
 	
-	vgSeti(VG_MASKING, VG_TRUE);
+// 	vgSeti(VG_MASKING, VG_TRUE);
 	
-	currentState.clipping = VG_TRUE;
-}
+// 	currentState.clipping = VG_TRUE;
+// }
 
 void canvas_save(void)
 {

@@ -57,6 +57,7 @@ SRC += canvas-arc.c
 SRC += canvas-rect.c
 SRC += canvas-setLineDash.c
 SRC += canvas-closePath.c
+SRC += canvas-clip.c
 SRC += canvas.c
 SRC += color.c
 SRC += egl-util.c
