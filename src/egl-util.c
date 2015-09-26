@@ -132,6 +132,8 @@ void egl_init(void)
 
 void egl_cleanup(void)
 {
+	printf("Cleaning up EGL...\n");
+	
 	glClear(GL_COLOR_BUFFER_BIT);
 	eglSwapBuffers(display, surface);
 	eglMakeCurrent(display, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);

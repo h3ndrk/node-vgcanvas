@@ -63,7 +63,7 @@ Canvas 2D Method | C implementation | C++ wrapper implementation | Node.JS imple
 `VGContext.resetTransform()` |   |   |   
 `VGContext.restore()` |   |   |   
 `VGContext.rotate()` |   |   |   
-`VGContext.save()` |   |   |   
+`VGContext.save()` | partly implemented (`restore` missing) |   |   
 `VGContext.scrollPathIntoView()` |   |   |   
 `VGContext.setLineDash()` | implemented |   |   
 `VGContext.setTransform()` |   |   |   

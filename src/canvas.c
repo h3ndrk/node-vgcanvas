@@ -41,6 +41,7 @@
 #include "canvas-lineJoin.h"
 #include "canvas-globalAlpha.h"
 #include "canvas-setLineDash.h"
+#include "canvas-save.h"
 
 static VGPaint fillColor;
 static VGPaint strokeColor;
@@ -142,6 +143,7 @@ void canvas__cleanup(void)
 	
 	canvas_beginPath_cleanup();
 	canvas_setLineDash_cleanup();
+	canvas_save_cleanup();
 	
 	vgDestroyPath(immediatePath);
 	vgDestroyPath(currentPath);
@@ -555,42 +557,42 @@ void canvas_strokeStyle_color(VGfloat red, VGfloat green, VGfloat blue, VGfloat 
 // 	currentState.clipping = VG_TRUE;
 // }
 
-void canvas_save(void)
-{
-	canvas_state_t *savedState = malloc(sizeof(canvas_state_t));
-	if(!savedState)
-	{
-		printf("malloc failed\n");
-		exit(1);
-	}
+// void canvas_save(void)
+// {
+// 	canvas_state_t *savedState = malloc(sizeof(canvas_state_t));
+// 	if(!savedState)
+// 	{
+// 		printf("malloc failed\n");
+// 		exit(1);
+// 	}
 	
-	memcpy(savedState, &currentState, sizeof(canvas_state_t));
+// 	memcpy(savedState, &currentState, sizeof(canvas_state_t));
 	
-	// may be NULL
-	savedState->next = stateStack;
+// 	// may be NULL
+// 	savedState->next = stateStack;
 	
-	stateStack = savedState;
+// 	stateStack = savedState;
 	
-	if(currentState.clipping)
-	{	
-		savedState->savedLayer = vgCreateMaskLayer(egl_get_width(), egl_get_height());
-		vgCopyMask(savedState->savedLayer, 0, 0, 0, 0, egl_get_width(), egl_get_height());
-	}
+// 	if(currentState.clipping)
+// 	{	
+// 		savedState->savedLayer = vgCreateMaskLayer(egl_get_width(), egl_get_height());
+// 		vgCopyMask(savedState->savedLayer, 0, 0, 0, 0, egl_get_width(), egl_get_height());
+// 	}
 	
-	if(currentState.dashCount > 0)
-	{
-		savedState->dashPattern = malloc(currentState.dashCount * sizeof(VGfloat));
-		if(!savedState->dashPattern)
-		{
-			printf("malloc failed\n");
-			exit(1);
-		}
+// 	if(currentState.dashCount > 0)
+// 	{
+// 		savedState->dashPattern = malloc(currentState.dashCount * sizeof(VGfloat));
+// 		if(!savedState->dashPattern)
+// 		{
+// 			printf("malloc failed\n");
+// 			exit(1);
+// 		}
 		
-		memcpy(savedState->dashPattern, &currentState.dashPattern, currentState.dashCount * sizeof(VGfloat));
-	}
+// 		memcpy(savedState->dashPattern, &currentState.dashPattern, currentState.dashCount * sizeof(VGfloat));
+// 	}
 	
 	
-}
+// }
 
 void canvas_restore(void)
 {
