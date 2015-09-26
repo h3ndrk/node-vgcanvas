@@ -1,0 +1,66 @@
+\hypertarget{canvas-setLineDash_8h}{}\section{src/canvas-\/set\+Line\+Dash.h File Reference}
+\label{canvas-setLineDash_8h}\index{src/canvas-\/set\+Line\+Dash.\+h@{src/canvas-\/set\+Line\+Dash.\+h}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{canvas-setLineDash_8h_ad9a61343ebe550729606465767eadf8f}{canvas\+\_\+set\+Line\+Dash} (V\+Gint count, V\+Gfloat $\ast$data)
+\item 
+void \hyperlink{canvas-setLineDash_8h_ae54e972b2cf53e6178968d2b25a56d07}{canvas\+\_\+set\+Line\+Dash\+\_\+cleanup} (void)
+\item 
+V\+Gfloat $\ast$ \hyperlink{canvas-setLineDash_8h_af5a4ac39592594db4dc40f11c9ec3f9d}{canvas\+\_\+set\+Line\+Dash\+\_\+get\+\_\+data} (void)
+\item 
+V\+Gfloat $\ast$ \hyperlink{canvas-setLineDash_8h_a1426b7a10eed35919f7ac179dc3be118}{canvas\+\_\+set\+Line\+Dash\+\_\+get\+\_\+count} (void)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{canvas-setLineDash_8h_ad9a61343ebe550729606465767eadf8f}{}\index{canvas-\/set\+Line\+Dash.\+h@{canvas-\/set\+Line\+Dash.\+h}!canvas\+\_\+set\+Line\+Dash@{canvas\+\_\+set\+Line\+Dash}}
+\index{canvas\+\_\+set\+Line\+Dash@{canvas\+\_\+set\+Line\+Dash}!canvas-\/set\+Line\+Dash.\+h@{canvas-\/set\+Line\+Dash.\+h}}
+\subsubsection[{canvas\+\_\+set\+Line\+Dash(\+V\+Gint count, V\+Gfloat $\ast$data)}]{\setlength{\rightskip}{0pt plus 5cm}void canvas\+\_\+set\+Line\+Dash (
+\begin{DoxyParamCaption}
+\item[{V\+Gint}]{count, }
+\item[{V\+Gfloat $\ast$}]{data}
+\end{DoxyParamCaption}
+)}\label{canvas-setLineDash_8h_ad9a61343ebe550729606465767eadf8f}
+Copyright (C) 2015 N\+I\+P\+E-\/\+S\+Y\+S\+T\+E\+M\+S
+
+This program is free software\+: you can redistribute it and/or modify it under the terms of the G\+N\+U General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+U\+T A\+N\+Y W\+A\+R\+R\+A\+N\+T\+Y; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+T\+Y or F\+I\+T\+N\+E\+S\+S F\+O\+R A P\+A\+R\+T\+I\+C\+U\+L\+A\+R P\+U\+R\+P\+O\+S\+E. See the G\+N\+U General Public License for more details.
+
+You should have received a copy of the G\+N\+U General Public License along with this program. If not, see \href{http://www.gnu.org/licenses/}{\tt http\+://www.\+gnu.\+org/licenses/}.
+
+The set\+Line\+Dash() method sets the line dash pattern. 
+\begin{DoxyParams}{Parameters}
+{\em count} & The size of the array. \\
+\hline
+{\em data} & An Array. A list of numbers that specifies distances to alternately draw a line and a gap (in coordinate space units). If the number of elements in the array is odd, the elements of the array get copied and concatenated. For example, \mbox{[}5, 15, 25\mbox{]} will become \mbox{[}5, 15, 25, 5, 15, 25\mbox{]}. This argument is irrelevant when count is 0. \\
+\hline
+\end{DoxyParams}
+\hypertarget{canvas-setLineDash_8h_ae54e972b2cf53e6178968d2b25a56d07}{}\index{canvas-\/set\+Line\+Dash.\+h@{canvas-\/set\+Line\+Dash.\+h}!canvas\+\_\+set\+Line\+Dash\+\_\+cleanup@{canvas\+\_\+set\+Line\+Dash\+\_\+cleanup}}
+\index{canvas\+\_\+set\+Line\+Dash\+\_\+cleanup@{canvas\+\_\+set\+Line\+Dash\+\_\+cleanup}!canvas-\/set\+Line\+Dash.\+h@{canvas-\/set\+Line\+Dash.\+h}}
+\subsubsection[{canvas\+\_\+set\+Line\+Dash\+\_\+cleanup(void)}]{\setlength{\rightskip}{0pt plus 5cm}void canvas\+\_\+set\+Line\+Dash\+\_\+cleanup (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{canvas-setLineDash_8h_ae54e972b2cf53e6178968d2b25a56d07}
+Cleans up set\+Line\+Dash(). Destroys saved dash pattern. \hypertarget{canvas-setLineDash_8h_a1426b7a10eed35919f7ac179dc3be118}{}\index{canvas-\/set\+Line\+Dash.\+h@{canvas-\/set\+Line\+Dash.\+h}!canvas\+\_\+set\+Line\+Dash\+\_\+get\+\_\+count@{canvas\+\_\+set\+Line\+Dash\+\_\+get\+\_\+count}}
+\index{canvas\+\_\+set\+Line\+Dash\+\_\+get\+\_\+count@{canvas\+\_\+set\+Line\+Dash\+\_\+get\+\_\+count}!canvas-\/set\+Line\+Dash.\+h@{canvas-\/set\+Line\+Dash.\+h}}
+\subsubsection[{canvas\+\_\+set\+Line\+Dash\+\_\+get\+\_\+count(void)}]{\setlength{\rightskip}{0pt plus 5cm}V\+Gfloat$\ast$ canvas\+\_\+set\+Line\+Dash\+\_\+get\+\_\+count (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{canvas-setLineDash_8h_a1426b7a10eed35919f7ac179dc3be118}
+Returns the saved dash pattern array size. \begin{DoxyReturn}{Returns}
+The saved dash pattern array size. 
+\end{DoxyReturn}
+\hypertarget{canvas-setLineDash_8h_af5a4ac39592594db4dc40f11c9ec3f9d}{}\index{canvas-\/set\+Line\+Dash.\+h@{canvas-\/set\+Line\+Dash.\+h}!canvas\+\_\+set\+Line\+Dash\+\_\+get\+\_\+data@{canvas\+\_\+set\+Line\+Dash\+\_\+get\+\_\+data}}
+\index{canvas\+\_\+set\+Line\+Dash\+\_\+get\+\_\+data@{canvas\+\_\+set\+Line\+Dash\+\_\+get\+\_\+data}!canvas-\/set\+Line\+Dash.\+h@{canvas-\/set\+Line\+Dash.\+h}}
+\subsubsection[{canvas\+\_\+set\+Line\+Dash\+\_\+get\+\_\+data(void)}]{\setlength{\rightskip}{0pt plus 5cm}V\+Gfloat$\ast$ canvas\+\_\+set\+Line\+Dash\+\_\+get\+\_\+data (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{canvas-setLineDash_8h_af5a4ac39592594db4dc40f11c9ec3f9d}
+Returns the saved dash pattern data. \begin{DoxyReturn}{Returns}
+The saved dash pattern data. 
+\end{DoxyReturn}

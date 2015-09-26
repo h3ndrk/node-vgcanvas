@@ -165,6 +165,27 @@ You should have received a copy of the G\+N\+U General Public License along with
 \item[{V\+Gboolean}]{anticlockwise}
 \end{DoxyParamCaption}
 )}\label{canvas_8h_ac60ce504adbe3e8bfbd672a06195607d}
+Copyright (C) 2015 N\+I\+P\+E-\/\+S\+Y\+S\+T\+E\+M\+S
+
+This program is free software\+: you can redistribute it and/or modify it under the terms of the G\+N\+U General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+U\+T A\+N\+Y W\+A\+R\+R\+A\+N\+T\+Y; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+T\+Y or F\+I\+T\+N\+E\+S\+S F\+O\+R A P\+A\+R\+T\+I\+C\+U\+L\+A\+R P\+U\+R\+P\+O\+S\+E. See the G\+N\+U General Public License for more details.
+
+You should have received a copy of the G\+N\+U General Public License along with this program. If not, see \href{http://www.gnu.org/licenses/}{\tt http\+://www.\+gnu.\+org/licenses/}. The arc() method adds an arc to the path which is centered at (x, y) position with radius r starting at start\+Angle and ending at end\+Angle going in the given direction by anticlockwise (defaulting to clockwise). 
+\begin{DoxyParams}{Parameters}
+{\em x} & The x coordinate of the arc\textquotesingle{}s center. \\
+\hline
+{\em y} & The y coordinate of the arc\textquotesingle{}s center. \\
+\hline
+{\em radius} & The arc\textquotesingle{}s radius. \\
+\hline
+{\em start\+\_\+angle} & The angle at which the arc starts, measured clockwise from the positive x axis and expressed in radians. \\
+\hline
+{\em end\+\_\+angle} & The angle at which the arc ends, measured clockwise from the positive x axis and expressed in radians. \\
+\hline
+{\em anticlockwise} & A Boolean which, if true, causes the arc to be drawn counter-\/clockwise between the two angles. \\
+\hline
+\end{DoxyParams}
 \hypertarget{canvas_8h_ae50eacfa82cdf55290a72533aec448d6}{}\index{canvas.\+h@{canvas.\+h}!canvas\+\_\+begin\+Path@{canvas\+\_\+begin\+Path}}
 \index{canvas\+\_\+begin\+Path@{canvas\+\_\+begin\+Path}!canvas.\+h@{canvas.\+h}}
 \subsubsection[{canvas\+\_\+begin\+Path(void)}]{\setlength{\rightskip}{0pt plus 5cm}void canvas\+\_\+begin\+Path (
@@ -233,14 +254,20 @@ The method sets all pixels in the rectangle defined by starting point (x, y) and
 \item[{void}]{}
 \end{DoxyParamCaption}
 )}\label{canvas_8h_ade0def031a2b4c1dcb342cb19c1ed695}
-\hypertarget{canvas_8h_a81315a8d6727ba368238372b796fd987}{}\index{canvas.\+h@{canvas.\+h}!canvas\+\_\+close\+Path@{canvas\+\_\+close\+Path}}
+The close\+Path() method causes the point of the pen to move back to the start of the current sub-\/path. It tries to add a straight line (but does not actually draw it) from the current point to the start. If the shape has already been closed or has only one point, this function does nothing. \hypertarget{canvas_8h_a81315a8d6727ba368238372b796fd987}{}\index{canvas.\+h@{canvas.\+h}!canvas\+\_\+close\+Path@{canvas\+\_\+close\+Path}}
 \index{canvas\+\_\+close\+Path@{canvas\+\_\+close\+Path}!canvas.\+h@{canvas.\+h}}
 \subsubsection[{canvas\+\_\+close\+Path(void)}]{\setlength{\rightskip}{0pt plus 5cm}void canvas\+\_\+close\+Path (
 \begin{DoxyParamCaption}
 \item[{void}]{}
 \end{DoxyParamCaption}
 )}\label{canvas_8h_a81315a8d6727ba368238372b796fd987}
-\hypertarget{canvas_8h_a73f1c2a2b8663e01dbb1472c9172bf46}{}\index{canvas.\+h@{canvas.\+h}!canvas\+\_\+fill@{canvas\+\_\+fill}}
+Copyright (C) 2015 N\+I\+P\+E-\/\+S\+Y\+S\+T\+E\+M\+S
+
+This program is free software\+: you can redistribute it and/or modify it under the terms of the G\+N\+U General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+U\+T A\+N\+Y W\+A\+R\+R\+A\+N\+T\+Y; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+T\+Y or F\+I\+T\+N\+E\+S\+S F\+O\+R A P\+A\+R\+T\+I\+C\+U\+L\+A\+R P\+U\+R\+P\+O\+S\+E. See the G\+N\+U General Public License for more details.
+
+You should have received a copy of the G\+N\+U General Public License along with this program. If not, see \href{http://www.gnu.org/licenses/}{\tt http\+://www.\+gnu.\+org/licenses/}. The close\+Path() method causes the point of the pen to move back to the start of the current sub-\/path. It tries to add a straight line (but does not actually draw it) from the current point to the start. If the shape has already been closed or has only one point, this function does nothing. \hypertarget{canvas_8h_a73f1c2a2b8663e01dbb1472c9172bf46}{}\index{canvas.\+h@{canvas.\+h}!canvas\+\_\+fill@{canvas\+\_\+fill}}
 \index{canvas\+\_\+fill@{canvas\+\_\+fill}!canvas.\+h@{canvas.\+h}}
 \subsubsection[{canvas\+\_\+fill(void)}]{\setlength{\rightskip}{0pt plus 5cm}void canvas\+\_\+fill (
 \begin{DoxyParamCaption}
@@ -353,6 +380,23 @@ You should have received a copy of the G\+N\+U General Public License along with
 \item[{V\+Gfloat}]{height}
 \end{DoxyParamCaption}
 )}\label{canvas_8h_a71f54620490bd9b84d777cae2050141d}
+Copyright (C) 2015 N\+I\+P\+E-\/\+S\+Y\+S\+T\+E\+M\+S
+
+This program is free software\+: you can redistribute it and/or modify it under the terms of the G\+N\+U General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+U\+T A\+N\+Y W\+A\+R\+R\+A\+N\+T\+Y; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+T\+Y or F\+I\+T\+N\+E\+S\+S F\+O\+R A P\+A\+R\+T\+I\+C\+U\+L\+A\+R P\+U\+R\+P\+O\+S\+E. See the G\+N\+U General Public License for more details.
+
+You should have received a copy of the G\+N\+U General Public License along with this program. If not, see \href{http://www.gnu.org/licenses/}{\tt http\+://www.\+gnu.\+org/licenses/}. The rect() method creates a path for a rectangle at position (x, y) with a size that is determined by width and height. Those four points are connected by straight lines and the sub-\/path is marked as closed, so that you can fill or stroke this rectangle. 
+\begin{DoxyParams}{Parameters}
+{\em x} & The x axis of the coordinate for the rectangle starting point. \\
+\hline
+{\em y} & The y axis of the coordinate for the rectangle starting point. \\
+\hline
+{\em width} & The rectangle\textquotesingle{}s width. \\
+\hline
+{\em height} & The rectangle\textquotesingle{}s height. \\
+\hline
+\end{DoxyParams}
 \hypertarget{canvas_8h_ae3bb49cd03b02cac95a2748cfd50c8f6}{}\index{canvas.\+h@{canvas.\+h}!canvas\+\_\+render\+\_\+text\+\_\+fill@{canvas\+\_\+render\+\_\+text\+\_\+fill}}
 \index{canvas\+\_\+render\+\_\+text\+\_\+fill@{canvas\+\_\+render\+\_\+text\+\_\+fill}!canvas.\+h@{canvas.\+h}}
 \subsubsection[{canvas\+\_\+render\+\_\+text\+\_\+fill(char $\ast$path, char $\ast$text, float x, float y, unsigned int size)}]{\setlength{\rightskip}{0pt plus 5cm}void canvas\+\_\+render\+\_\+text\+\_\+fill (

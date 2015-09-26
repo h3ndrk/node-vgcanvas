@@ -62,7 +62,7 @@ void canvas_clip_get_clipping(void)
 
 /**
  * Sets the clipping state.
- * @param The clipping state.
+ * @param clipping The clipping state.
  */
 void canvas_clip_set_clipping(Vboolean clipping)
 {
@@ -87,7 +87,7 @@ void canvas_clip_get_mask(void)
 
 /**
  * Sets the clipping mask layer.
- * @param The clipping mask layer.
+ * @param mask The clipping mask layer.
  */
 void canvas_clip_set_mask(VGMaskLayer mask)
 {
