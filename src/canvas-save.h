@@ -41,5 +41,6 @@ typedef struct canvas_save_stack_t
 
 void canvas_save(void);
 void canvas_save_cleanup(void);
+canvas_save_stack_t *canvas_save_get(void);
 
 #endif /* __CANVAS_SAVE_H__ */

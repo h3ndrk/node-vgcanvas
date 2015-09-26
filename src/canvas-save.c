@@ -83,3 +83,12 @@ void canvas_save_cleanup(void)
 		canvas_save_cleanup_state(canvas_save_stack_top);
 	}
 }
+
+/**
+ * Returns the stack.
+ * @return The stack.
+ */
+canvas_save_stack_t *canvas_save_get(void)
+{
+	return canvas_save_stack_top;
+}
