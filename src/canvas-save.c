@@ -49,7 +49,7 @@ void canvas_save(void)
 		canvas_save_stack_top = state;
 	}
 	
-	// save properties to stack top
+	// save properties to top state of stack
 	
 	// canvas_save_stack_top->property = something;
 }
@@ -58,14 +58,14 @@ void canvas_save(void)
  * Cleans up specific stack states. Destroys the given state of the stack.
  * @param state The state to be destroyed.
  */
-static canvas_save_cleanup_state(canvas_save_stack_t *state)
+void canvas_save_cleanup_state(canvas_save_stack_t *state)
 {
 	if(state->next != NULL)
 	{
 		canvas_save_cleanup_state(state->next);
 	}
 	
-	// cleanup properties of stack top
+	// cleanup properties of top state of stack
 	
 	// free(canvas_save_stack_top->property);
 	// free(canvas_save_stack_top);
@@ -91,4 +91,13 @@ void canvas_save_cleanup(void)
 canvas_save_stack_t *canvas_save_get(void)
 {
 	return canvas_save_stack_top;
+}
+
+/**
+ * Sets the stack.
+ * @param stack The stack.
+ */
+void canvas_clip_set(canvas_save_stack_t *stack)
+{
+	canvas_save_stack_top = stack;
 }

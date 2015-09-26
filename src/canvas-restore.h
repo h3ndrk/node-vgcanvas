@@ -15,34 +15,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __CANVAS_SAVE_H__
-#define __CANVAS_SAVE_H__
+#ifndef __CANVAS_RESTORE_H__
+#define __CANVAS_RESTORE_H__
 
-typedef struct canvas_save_stack_t
-{
-	// canvas_line_cap_t lineCap;
-	// canvas_line_join_t lineJoin;
-	
-	// color_t fillColor;
-	// color_t strokeColor;
-	
-	// VGfloat globalAlpha;
-	// VGfloat lineWidth;
-	
-	// VGint dashCount;
-	// VGfloat *dashPattern;
-	// VGfloat dashOffset;
-	
-	// VGboolean clipping;
-	// VGMaskLayer savedLayer;
-	
-	struct canvas_save_stack_t *next;
-} canvas_save_stack_t;
+void canvas_restore(void);
 
-void canvas_save(void);
-void canvas_save_cleanup_state(canvas_save_stack_t *state);
-void canvas_save_cleanup(void);
-canvas_save_stack_t *canvas_save_get(void);
-void canvas_clip_set(canvas_save_stack_t *mask);
-
-#endif /* __CANVAS_SAVE_H__ */
+#endif /* __CANVAS_RESTORE_H__ */
