@@ -61,7 +61,7 @@ Canvas 2D Method | C implementation | C++ wrapper implementation | Node.JS imple
 `VGContext.rect()` | implemented |   |   
 `VGContext.removeHitRegion()` |   |   |   
 `VGContext.resetTransform()` |   |   |   
-`VGContext.restore()` |   |   |   
+`VGContext.restore()` | implemented |   |   
 `VGContext.rotate()` |   |   |   
 `VGContext.save()` | partly implemented (`restore` missing) |   |   
 `VGContext.scrollPathIntoView()` |   |   |   
