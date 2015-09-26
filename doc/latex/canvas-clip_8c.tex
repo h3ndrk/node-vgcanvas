@@ -11,11 +11,11 @@ void \hyperlink{canvas-clip_8c_a2d531b09936a3622973c6902f251a8b7}{canvas\+\_\+cl
 \item 
 void \hyperlink{canvas-clip_8c_ade0def031a2b4c1dcb342cb19c1ed695}{canvas\+\_\+clip} (void)
 \item 
-void \hyperlink{canvas-clip_8c_a3229367be84c7c738ed9865f1f69f30d}{canvas\+\_\+clip\+\_\+get\+\_\+clipping} (void)
+V\+Gboolean \hyperlink{canvas-clip_8c_a39b862c177870905789aefcf1cffb4ef}{canvas\+\_\+clip\+\_\+get\+\_\+clipping} (void)
 \item 
 void \hyperlink{canvas-clip_8c_ac84b32c692c901fade9dc96c2bf0efd6}{canvas\+\_\+clip\+\_\+set\+\_\+clipping} (Vboolean clipping)
 \item 
-void \hyperlink{canvas-clip_8c_a53daf46605efccfba6c61f98f97bb1a3}{canvas\+\_\+clip\+\_\+get\+\_\+mask} (void)
+V\+G\+Mask\+Layer \hyperlink{canvas-clip_8c_ade2b0675d3365ea8b81c8b31eed3f907}{canvas\+\_\+clip\+\_\+get\+\_\+mask} (void)
 \item 
 void \hyperlink{canvas-clip_8c_af889b304af28cd66095499ee7a2a2635}{canvas\+\_\+clip\+\_\+set\+\_\+mask} (V\+G\+Mask\+Layer mask)
 \item 
@@ -43,23 +43,23 @@ Cleans up the given clipping mask layer.
 {\em mask} & The clipping mask layer. \\
 \hline
 \end{DoxyParams}
-\hypertarget{canvas-clip_8c_a3229367be84c7c738ed9865f1f69f30d}{}\index{canvas-\/clip.\+c@{canvas-\/clip.\+c}!canvas\+\_\+clip\+\_\+get\+\_\+clipping@{canvas\+\_\+clip\+\_\+get\+\_\+clipping}}
+\hypertarget{canvas-clip_8c_a39b862c177870905789aefcf1cffb4ef}{}\index{canvas-\/clip.\+c@{canvas-\/clip.\+c}!canvas\+\_\+clip\+\_\+get\+\_\+clipping@{canvas\+\_\+clip\+\_\+get\+\_\+clipping}}
 \index{canvas\+\_\+clip\+\_\+get\+\_\+clipping@{canvas\+\_\+clip\+\_\+get\+\_\+clipping}!canvas-\/clip.\+c@{canvas-\/clip.\+c}}
-\subsubsection[{canvas\+\_\+clip\+\_\+get\+\_\+clipping(void)}]{\setlength{\rightskip}{0pt plus 5cm}void canvas\+\_\+clip\+\_\+get\+\_\+clipping (
+\subsubsection[{canvas\+\_\+clip\+\_\+get\+\_\+clipping(void)}]{\setlength{\rightskip}{0pt plus 5cm}V\+Gboolean canvas\+\_\+clip\+\_\+get\+\_\+clipping (
 \begin{DoxyParamCaption}
 \item[{void}]{}
 \end{DoxyParamCaption}
-)}\label{canvas-clip_8c_a3229367be84c7c738ed9865f1f69f30d}
+)}\label{canvas-clip_8c_a39b862c177870905789aefcf1cffb4ef}
 Returns the clipping state. \begin{DoxyReturn}{Returns}
 The clipping state. 
 \end{DoxyReturn}
-\hypertarget{canvas-clip_8c_a53daf46605efccfba6c61f98f97bb1a3}{}\index{canvas-\/clip.\+c@{canvas-\/clip.\+c}!canvas\+\_\+clip\+\_\+get\+\_\+mask@{canvas\+\_\+clip\+\_\+get\+\_\+mask}}
+\hypertarget{canvas-clip_8c_ade2b0675d3365ea8b81c8b31eed3f907}{}\index{canvas-\/clip.\+c@{canvas-\/clip.\+c}!canvas\+\_\+clip\+\_\+get\+\_\+mask@{canvas\+\_\+clip\+\_\+get\+\_\+mask}}
 \index{canvas\+\_\+clip\+\_\+get\+\_\+mask@{canvas\+\_\+clip\+\_\+get\+\_\+mask}!canvas-\/clip.\+c@{canvas-\/clip.\+c}}
-\subsubsection[{canvas\+\_\+clip\+\_\+get\+\_\+mask(void)}]{\setlength{\rightskip}{0pt plus 5cm}void canvas\+\_\+clip\+\_\+get\+\_\+mask (
+\subsubsection[{canvas\+\_\+clip\+\_\+get\+\_\+mask(void)}]{\setlength{\rightskip}{0pt plus 5cm}V\+G\+Mask\+Layer canvas\+\_\+clip\+\_\+get\+\_\+mask (
 \begin{DoxyParamCaption}
 \item[{void}]{}
 \end{DoxyParamCaption}
-)}\label{canvas-clip_8c_a53daf46605efccfba6c61f98f97bb1a3}
+)}\label{canvas-clip_8c_ade2b0675d3365ea8b81c8b31eed3f907}
 Returns a newly created clipping mask layer. This mask must be destroyed by \hyperlink{canvas-clip_8c_a39e21e3c386f34eb80c2ea8dd437af23}{canvas\+\_\+clip\+\_\+cleanup\+\_\+mask()}. \begin{DoxyReturn}{Returns}
 The newly created clipping mask layer. This mask must be destroyed by \hyperlink{canvas-clip_8c_a39e21e3c386f34eb80c2ea8dd437af23}{canvas\+\_\+clip\+\_\+cleanup\+\_\+mask()}. 
 \end{DoxyReturn}
