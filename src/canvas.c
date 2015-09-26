@@ -594,47 +594,47 @@ void canvas_strokeStyle_color(VGfloat red, VGfloat green, VGfloat blue, VGfloat 
 	
 // }
 
-void canvas_restore(void)
-{
-	if(!stateStack) 
-	{
-		printf("Can't restore state. No state on stack.\n");
-		return;
-	}
+// void canvas_restore(void)
+// {
+// 	if(!stateStack) 
+// 	{
+// 		printf("Can't restore state. No state on stack.\n");
+// 		return;
+// 	}
 	
-	canvas_state_t *restore = stateStack;
+// 	canvas_state_t *restore = stateStack;
 	
-	if(restore->clipping)
-	{
-		vgMask(restore->savedLayer, VG_SET_MASK, 0, 0, egl_get_width(), egl_get_height());
-		vgDestroyMaskLayer(restore->savedLayer);
-	}
+// 	if(restore->clipping)
+// 	{
+// 		vgMask(restore->savedLayer, VG_SET_MASK, 0, 0, egl_get_width(), egl_get_height());
+// 		vgDestroyMaskLayer(restore->savedLayer);
+// 	}
 	
-	vgSeti(VG_MASKING, restore->clipping);
-	currentState.clipping = restore->clipping;
-	// canvas_lineWidth(restore->lineWidth);
-	// canvas_lineCap(restore->lineCap);
-	// canvas_lineJoin(restore->lineJoin);
-	// canvas_globalAlpha(restore->globalAlpha);
-	canvas_lineDashOffset(restore->dashOffset);
-	currentState.fillColor = restore->fillColor;
-	currentState.strokeColor = restore->strokeColor;
+// 	vgSeti(VG_MASKING, restore->clipping);
+// 	currentState.clipping = restore->clipping;
+// 	// canvas_lineWidth(restore->lineWidth);
+// 	// canvas_lineCap(restore->lineCap);
+// 	// canvas_lineJoin(restore->lineJoin);
+// 	// canvas_globalAlpha(restore->globalAlpha);
+// 	canvas_lineDashOffset(restore->dashOffset);
+// 	currentState.fillColor = restore->fillColor;
+// 	currentState.strokeColor = restore->strokeColor;
 	
-	if(currentState.dashPattern)
-		free(currentState.dashPattern);
+// 	if(currentState.dashPattern)
+// 		free(currentState.dashPattern);
 	
-	currentState.dashPattern = restore->dashPattern;
-	currentState.dashCount = restore->dashCount;
+// 	currentState.dashPattern = restore->dashPattern;
+// 	currentState.dashCount = restore->dashCount;
 	
-	stateStack = restore->next;
-	free(restore);
+// 	stateStack = restore->next;
+// 	free(restore);
 	
-}
+// }
 
-canvas_state_t* canvas_getState(void)
-{
-	return &currentState;
-}
+// canvas_state_t* canvas_getState(void)
+// {
+// 	return &currentState;
+// }
 
 void canvas_stroke(void)
 {
