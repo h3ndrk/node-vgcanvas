@@ -36,7 +36,7 @@ Canvas 2D Method | C implementation | C++ wrapper implementation | Node.JS imple
 `VGContext.bezierCurveTo()` | implemented |   |   
 `VGContext.clearHitRegion()` |   |   |   
 `VGContext.clearRect()` | implemented |   |   
-`VGContext.clip()` | partly implemented (`save` and `restore` missing) |   |   
+`VGContext.clip()` | implemented |   |   
 `VGContext.closePath()` | implemented |   |   
 `VGContext.createImageData()` |   |   |   
 `VGContext.createLinearGradient()` |   |   |   
@@ -61,9 +61,9 @@ Canvas 2D Method | C implementation | C++ wrapper implementation | Node.JS imple
 `VGContext.rect()` | implemented |   |   
 `VGContext.removeHitRegion()` |   |   |   
 `VGContext.resetTransform()` |   |   |   
-`VGContext.restore()` | implemented |   |   
+`VGContext.restore()` | partly implemented |   |   
 `VGContext.rotate()` |   |   |   
-`VGContext.save()` | partly implemented (`restore` missing) |   |   
+`VGContext.save()` | partly implemented |   |   
 `VGContext.scrollPathIntoView()` |   |   |   
 `VGContext.setLineDash()` | implemented |   |   
 `VGContext.setTransform()` |   |   |   

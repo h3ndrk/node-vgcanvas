@@ -22,7 +22,7 @@
 #include "canvas-setLineDash.h"
 
 static VGfloat *canvas_setLineDash_data = NULL;
-static VGfloat canvas_setLineDash_count = 0;
+static VGint canvas_setLineDash_count = 0;
 
 /**
  * The setLineDash() method sets the line dash pattern.
@@ -112,7 +112,7 @@ VGfloat *canvas_setLineDash_get_data(void)
  * Returns the saved dash pattern array size.
  * @return The saved dash pattern array size.
  */
-VGfloat *canvas_setLineDash_get_count(void)
+VGint *canvas_setLineDash_get_count(void)
 {
 	return canvas_setLineDash_count;
 }

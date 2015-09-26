@@ -18,6 +18,9 @@
 #include "include-core.h"
 #include "include-openvg.h"
 // #include "include-freetype.h"
+#include "canvas-clip.h"
+#include "canvas-setLineDash.h"
+#include "canvas-globalAlpha.h"
 #include "canvas-save.h"
 #include "canvas-restore.h"
 
@@ -44,8 +47,41 @@ void canvas_restore(void)
 	canvas_save_set(state_beneath);
 	
 	// restore properties from top state in stack
+	// TODO: transformation matrix missing
 	
-	// something(canvas_save_stack_top->property);
+	if(state_top->clip_clipping == VG_TRUE)
+	{
+		canvas_clip_set_mask(state_top->clip_mask);
+		canvas_clip_cleanup_mask(state_top->clip_mask);
+	}
+	canvas_clip_set_clipping(state_top->clip_clipping);
+	
+	canvas_setLineDash(state_top->lineDash_count, state_top->lineDash_data);
+	free(state_top->lineDash_data);
+	
+	// TODO: strokeStyle missing
+	// TODO: fillStyle missing
+	canvas_globalAlpha(state_top->globalAlpha);
+	
+	canvas_lineWidth(state_top->lineWidth);
+	canvas_lineCap(state_top->lineCap);
+	canvas_lineJoin(state_top->lineJoin);
+	// TODO: miterLimit missing
+	canvas_lineDashOffset(state_top->lineDash_offset);
+	
+	// TODO: shadowOffsetX missing
+	// TODO: shadowOffsetY missing
+	// TODO: shadowOffsetBlur missing
+	// TODO: shadowOffsetColor missing
+	
+	// TODO: globalCompositeOperation missing
+	
+	// TODO: font missing
+	// TODO: textAlign missing
+	// TODO: textBaseline missing
+	// TODO: direction missing
+	
+	// TODO: imageSmoothingEnabled missing
 	
 	canvas_save_cleanup_state(state_top);
 }

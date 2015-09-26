@@ -18,6 +18,9 @@
 #include "include-core.h"
 #include "include-openvg.h"
 // #include "include-freetype.h"
+#include "canvas-clip.h"
+#include "canvas-setLineDash.h"
+#include "canvas-globalAlpha.h"
 #include "canvas-save.h"
 
 static canvas_save_stack_t *canvas_save_stack_top = NULL;
@@ -50,8 +53,62 @@ void canvas_save(void)
 	}
 	
 	// save properties to top state of stack
+	// TODO: transformation matrix missing
 	
-	// canvas_save_stack_top->property = something;
+	canvas_save_stack_top->clip_clipping = canvas_clip_get_clipping();
+	if(canvas_save_stack_top->clip_clipping == VG_TRUE)
+	{
+		canvas_save_stack_top->clip_mask = canvas_clip_get_mask();
+	}
+	else
+	{
+		canvas_save_stack_top->clip_mask = NULL;
+	}
+	
+	canvas_save_stack_top->lineDash_count = canvas_setLineDash_get_count();
+	if(canvas_save_stack_top->lineDash_count > 0)
+	{
+		canvas_save_stack_top->lineDash_data = malloc(canvas_save_stack_top->lineDash_count * sizeof(VGfloat));
+		
+		if(canvas_save_stack_top->lineDash_data == NULL)
+		{
+			printf("Failed to add stack element: Copying lineDash data failed.\n");
+			
+			canvas_save_stack_top->lineDash_count = 0;
+		}
+		else
+		{
+			memcpy(canvas_save_stack_top->lineDash_data, canvas_setLineDash_get_data(), canvas_save_stack_top->lineDash_count * sizeof(VGfloat));
+		}
+	}
+	else
+	{
+		canvas_save_stack_top->lineDash_data = NULL;
+	}
+	
+	// TODO: strokeStyle missing
+	// TODO: fillStyle missing
+	canvas_save_stack_top->globalAlpha = canvas_globalAlpha_get();
+	
+	canvas_save_stack_top->lineWidth = canvas_lineWidth_get();
+	canvas_save_stack_top->lineCap = canvas_lineCap_get();
+	canvas_save_stack_top->lineJoin = canvas_lineJoin_get();
+	// TODO: miterLimit missing
+	canvas_save_stack_top->lineDash_offset = canvas_lineDashOffset_get();
+	
+	// TODO: shadowOffsetX missing
+	// TODO: shadowOffsetY missing
+	// TODO: shadowOffsetBlur missing
+	// TODO: shadowOffsetColor missing
+	
+	// TODO: globalCompositeOperation missing
+	
+	// TODO: font missing
+	// TODO: textAlign missing
+	// TODO: textBaseline missing
+	// TODO: direction missing
+	
+	// TODO: imageSmoothingEnabled missing
 }
 
 /**
