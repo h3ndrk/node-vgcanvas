@@ -22,3 +22,4 @@
 - [ ] `eprintf` for errors
 - [ ] coordinates for closePath?
 - [ ] replace all `void`-return-types with `int`-return-types
+- [ ] eventually handle V8 Fatal Errors
