@@ -169,15 +169,15 @@ unsigned int canvas_stackSize(void)
 	
 // }
 
-void canvas_fillStyle(paint_t *paint)
-{
-	fillPaint = paint;
-}
+// void canvas_fillStyle(paint_t *paint)
+// {
+// 	fillPaint = paint;
+// }
 
-void canvas_strokeStyle(paint_t *paint)
-{
-	strokePaint = paint;
-}
+// void canvas_strokeStyle(paint_t *paint)
+// {
+// 	strokePaint = paint;
+// }
 
 // void canvas_strokeRect(VGfloat x, VGfloat y, VGfloat width, VGfloat height)
 // {
