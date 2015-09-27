@@ -24,6 +24,15 @@
 #include "canvas-paint.h"
 #include "canvas-globalAlpha.h"
 
+/**
+ * Creates a new RGBA color paint
+ * 
+ * @param paint Pointer to paint struct
+ * @param red Red component (0..1)
+ * @param green Green component (0..1)
+ * @param blue Blue component (0..1)
+ * @param alpha Alpha component (0..1)
+ */
 void paint_createColor(paint_t *paint, VGfloat red, VGfloat green, VGfloat blue, VGfloat alpha)
 {
 	paint->paintType = PAINT_TYPE_COLOR;
@@ -36,6 +45,15 @@ void paint_createColor(paint_t *paint, VGfloat red, VGfloat green, VGfloat blue,
 	paint_setRGBA(paint, red, green, blue, alpha);
 }
 
+/**
+ * Creates a new linear gradient paint
+ * 
+ * @param paint Pointer to paint struct
+ * @param x1 The x axis of the coordinate of the start point
+ * @param y1 The y axis of the coordinate of the start point
+ * @param x2 The x axis of the coordinate of the end point
+ * @param y2 The y axis of the coordinate of the end point
+ */
 void paint_createLinearGradient(paint_t *paint, VGfloat x1, VGfloat y1, VGfloat x2, VGfloat y2)
 {
 	paint->paintType = PAINT_TYPE_LINEAR_GRADIENT;
@@ -50,6 +68,16 @@ void paint_createLinearGradient(paint_t *paint, VGfloat x1, VGfloat y1, VGfloat 
 	
 }
 
+/**
+ * Creates a new linear gradient paint
+ * 
+ * @param paint Pointer to paint struct
+ * @param cx The x axis of the coordinate of the start circle
+ * @param cy The y axis of the coordinate of the start circle
+ * @param r The radius of the start circle
+ * @param fx The x axis of the coordinate of the end circle
+ * @param fy The y axis of the coordinate of the end circle
+ */
 void paint_createRadialGradient(paint_t *paint, VGfloat cx, VGfloat cy, VGfloat r, VGfloat fx, VGfloat fy)
 {
 	paint->paintType = PAINT_TYPE_RADIAL_GRADIENT;
@@ -64,6 +92,12 @@ void paint_createRadialGradient(paint_t *paint, VGfloat cx, VGfloat cy, VGfloat 
 	
 }
 
+/**
+ * Destroys a paint.
+ * Deallocates memory and releases the OpenVG paint.
+ *
+ * @param paint Pointer to paint struct
+ */
 void paint_destroy(paint_t *paint)
 {
 	if(paint->data)
@@ -74,6 +108,16 @@ void paint_destroy(paint_t *paint)
 	vgDestroyPaint(paint->paint);
 }
 
+/**
+ * Sets RGBA values of a color paint. 
+ * Expects the paint type to be PAINT_TYPE_COLOR.
+ *
+ * @param paint Pointer to paint struct
+ * @param red Red component (0..1)
+ * @param green Green component (0..1)
+ * @param blue Blue component (0..1)
+ * @param alpha Alpha component (0..1)
+ */
 void paint_setRGBA(paint_t *paint, VGfloat red, VGfloat green, VGfloat blue, VGfloat alpha)
 {
 	assert(paint->paintType == PAINT_TYPE_COLOR);
@@ -93,6 +137,17 @@ void paint_setRGBA(paint_t *paint, VGfloat red, VGfloat green, VGfloat blue, VGf
 	
 }
 
+/**
+ * Adds a color stop to a gradient paint. 
+ * Expects the paint type to be PAINT_TYPE_LINEAR_GRADIENT or PAINT_TYPE_RADIAL_GRADIENT.
+ *
+ * @param paint Pointer to paint struct
+ * @param position Position of the point (0..1)
+ * @param red Red component (0..1)
+ * @param green Green component (0..1)
+ * @param blue Blue component (0..1)
+ * @param alpha Alpha component (0..1)
+ */
 void paint_addColorStop(paint_t *paint, VGfloat position, VGfloat red, VGfloat green, VGfloat blue, VGfloat alpha)
 {
 	assert(paint->paintType == PAINT_TYPE_LINEAR_GRADIENT || paint->paintType == PAINT_TYPE_RADIAL_GRADIENT);
@@ -113,6 +168,13 @@ void paint_addColorStop(paint_t *paint, VGfloat position, VGfloat red, VGfloat g
 	
 }
 
+/**
+ * Activates the paint. 
+ * Multiplies alpha values by globalAlpha and sets the paint of the specified modes.
+ * 
+ * @param paint Pointer to paint struct
+ * @param mode bitwise OR of {VG_FILL_PATH | VG_STROKE_PATH}
+ */
 void paint_activate(paint_t *paint, VGbitfield mode)
 {
 	switch(paint->paintType) {
