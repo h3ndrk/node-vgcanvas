@@ -188,19 +188,19 @@ void canvas_strokeStyle(paint_t *paint)
 // 	vgDrawPath(immediatePath, VG_STROKE_PATH);
 // }
 
-void canvas_stroke(void)
-{
-	paint_activate(strokePaint, VG_STROKE_PATH);
+// void canvas_stroke(void)
+// {
+// 	paint_activate(strokePaint, VG_STROKE_PATH);
 	
-	vgDrawPath(canvas_beginPath_get(), VG_STROKE_PATH);
-}
+// 	vgDrawPath(canvas_beginPath_get(), VG_STROKE_PATH);
+// }
 
-void canvas_fill(void)
-{
-	paint_activate(fillPaint, VG_FILL_PATH);
+// void canvas_fill(void)
+// {
+// 	paint_activate(fillPaint, VG_FILL_PATH);
 	
-	vgDrawPath(canvas_beginPath_get(), VG_FILL_PATH);
-}
+// 	vgDrawPath(canvas_beginPath_get(), VG_FILL_PATH);
+// }
 
 // static void convert_contour(const FT_Vector *points, const char *tags, short points_count)
 // {
