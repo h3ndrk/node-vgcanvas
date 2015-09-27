@@ -159,15 +159,15 @@ unsigned int canvas_stackSize(void)
 	return size;
 }
 
-void canvas_fillRect(VGfloat x, VGfloat y, VGfloat width, VGfloat height)
-{
-	paint_activate(fillPaint, VG_FILL_PATH);
+// void canvas_fillRect(VGfloat x, VGfloat y, VGfloat width, VGfloat height)
+// {
+// 	paint_activate(fillPaint, VG_FILL_PATH);
 
-	vgClearPath(immediatePath, VG_PATH_CAPABILITY_ALL);
-	vguRect(immediatePath, x, y, width, height);
-	vgDrawPath(immediatePath, VG_FILL_PATH);
+// 	vgClearPath(immediatePath, VG_PATH_CAPABILITY_ALL);
+// 	vguRect(immediatePath, x, y, width, height);
+// 	vgDrawPath(immediatePath, VG_FILL_PATH);
 	
-}
+// }
 
 void canvas_fillStyle(paint_t *paint)
 {
@@ -179,14 +179,14 @@ void canvas_strokeStyle(paint_t *paint)
 	strokePaint = paint;
 }
 
-void canvas_strokeRect(VGfloat x, VGfloat y, VGfloat width, VGfloat height)
-{
-	paint_activate(strokePaint, VG_STROKE_PATH);
+// void canvas_strokeRect(VGfloat x, VGfloat y, VGfloat width, VGfloat height)
+// {
+// 	paint_activate(strokePaint, VG_STROKE_PATH);
 	
-	vgClearPath(immediatePath, VG_PATH_CAPABILITY_ALL);
-	vguRect(immediatePath, x, y, width, height);
-	vgDrawPath(immediatePath, VG_STROKE_PATH);
-}
+// 	vgClearPath(immediatePath, VG_PATH_CAPABILITY_ALL);
+// 	vguRect(immediatePath, x, y, width, height);
+// 	vgDrawPath(immediatePath, VG_STROKE_PATH);
+// }
 
 void canvas_stroke(void)
 {

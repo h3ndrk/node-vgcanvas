@@ -47,8 +47,8 @@ Canvas 2D Method | C implementation | C++ wrapper implementation | Node.JS imple
 `VGContext.drawWindow()` |   |   |   
 `VGContext.ellipse()` |   |   |   
 `VGContext.fill()` | API unfinished |   |   
-`VGContext.fillRect()` | API unfinished |   |   
-`VGContext.fillText()` | API unfinished |   |   
+`VGContext.fillRect()` | implemented |   |   
+`VGContext.fillText()` | implemented |   |   
 `VGContext.getImageData()` |   |   |   
 `VGContext.getLineDash()` | API unfinished |   |   
 `VGContext.isPointInPath()` |   |   |   
@@ -68,7 +68,7 @@ Canvas 2D Method | C implementation | C++ wrapper implementation | Node.JS imple
 `VGContext.setLineDash()` | implemented |   |   
 `VGContext.setTransform()` |   |   |   
 `VGContext.stroke()` | API unfinished |   |   
-`VGContext.strokeRect()` | API unfinished |   |   
-`VGContext.strokeText()` | API unfinished |   |   
+`VGContext.strokeRect()` | implemented |   |   
+`VGContext.strokeText()` | implemented |   |   
 `VGContext.transform()` |   |   |   
 `VGContext.translate()` |   |   |   
