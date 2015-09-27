@@ -26,3 +26,4 @@
 - [ ] remove anonymous structs
 - [ ] `miterLimit`: what values does effect what? OpenVG documentation does not inform well about that topic.
 - [ ] set standard values at initialization
+- [ ] create font if it is firstly used
