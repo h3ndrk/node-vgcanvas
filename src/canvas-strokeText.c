@@ -97,7 +97,7 @@ void canvas_strokeText(char *text, float x, float y)
 			vgTranslate(x, y);
 			vgScale((VGfloat)size / 64, (VGfloat)size / 64);
 			
-			vgDrawPath(canvas_beginPath_get(), VG_FILL_PATH);
+			vgDrawPath(canvas_beginPath_get(), VG_STROKE_PATH);
 			
 			vgScale((VGfloat)64 / size, (VGfloat)64 / size);
 			vgTranslate(-x, -y);
