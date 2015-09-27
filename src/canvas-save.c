@@ -27,6 +27,9 @@
 #include "canvas-lineJoin.h"
 #include "canvas-miterLimit.h"
 #include "canvas-lineDashOffset.h"
+#include "canvas-paint.h"
+#include "canvas-fillStyle.h"
+#include "canvas-strokeStyle.h"
 #include "canvas-save.h"
 
 static canvas_save_stack_t *canvas_save_stack_top = NULL;
@@ -38,6 +41,8 @@ static canvas_save_stack_t *canvas_save_stack_top = NULL;
 void canvas_save(void)
 {
 	canvas_save_stack_t *state = NULL;
+	
+	printf("Saving to stack...\n");
 	
 	state = malloc(sizeof(canvas_save_stack_t));
 	
@@ -92,8 +97,54 @@ void canvas_save(void)
 		canvas_save_stack_top->lineDash_data = NULL;
 	}
 	
-	// TODO: strokeStyle missing
-	// TODO: fillStyle missing
+	canvas_save_stack_top->fillStyle = canvas_fillStyle_get();
+	if(canvas_save_stack_top->fillStyle->paintType == PAINT_TYPE_COLOR)
+	{
+		canvas_save_stack_top->fillStyle_data = malloc(canvas_save_stack_top->fillStyle->count * sizeof(VGfloat));
+		
+		if(canvas_save_stack_top->fillStyle_data == NULL)
+		{
+			printf("Failed to add stack element: Failed to save fillStyle.\n");
+			
+			canvas_save_stack_top->fillStyle_count = 0;
+		}
+		else
+		{
+			printf("Saving color...\n");
+			
+			memcpy(canvas_save_stack_top->fillStyle_data, canvas_save_stack_top->fillStyle->data, canvas_save_stack_top->fillStyle->count * sizeof(VGfloat));
+			canvas_save_stack_top->fillStyle_count = canvas_save_stack_top->fillStyle->count;
+		}
+	}
+	else
+	{
+		canvas_save_stack_top->fillStyle_data = NULL;
+		canvas_save_stack_top->fillStyle_count = 0;
+	}
+	canvas_save_stack_top->strokeStyle = canvas_strokeStyle_get();
+	if(canvas_save_stack_top->strokeStyle->paintType == PAINT_TYPE_COLOR)
+	{
+		canvas_save_stack_top->strokeStyle_data = malloc(canvas_save_stack_top->strokeStyle->count * sizeof(VGfloat));
+		
+		if(canvas_save_stack_top->strokeStyle_data == NULL)
+		{
+			printf("Failed to add stack element: Failed to save strokeStyle.\n");
+			
+			canvas_save_stack_top->strokeStyle_count = 0;
+		}
+		else
+		{
+			printf("Saving color...\n");
+			
+			memcpy(canvas_save_stack_top->strokeStyle_data, canvas_save_stack_top->strokeStyle->data, canvas_save_stack_top->strokeStyle->count * sizeof(VGfloat));
+			canvas_save_stack_top->strokeStyle_count = canvas_save_stack_top->strokeStyle->count;
+		}
+	}
+	else
+	{
+		canvas_save_stack_top->strokeStyle_data = NULL;
+		canvas_save_stack_top->strokeStyle_count = 0;
+	}
 	canvas_save_stack_top->globalAlpha = canvas_globalAlpha_get();
 	
 	canvas_save_stack_top->lineWidth = canvas_lineWidth_get();
@@ -129,9 +180,27 @@ void canvas_save_cleanup_state(canvas_save_stack_t *state)
 	}
 	
 	// cleanup properties of top state of stack
+	if(state->clip_clipping == VG_TRUE)
+	{
+		canvas_clip_cleanup_mask(state->clip_mask);
+	}
 	
-	// free(canvas_save_stack_top->property);
-	// free(canvas_save_stack_top);
+	if(state->fillStyle_data != NULL)
+	{
+		free(state->fillStyle_data);
+	}
+	
+	if(state->strokeStyle_data != NULL)
+	{
+		free(state->strokeStyle_data);
+	}
+	
+	if(state->lineDash_data != NULL)
+	{
+		free(state->lineDash_data);
+	}
+	
+	free(state);
 }
 
 /**

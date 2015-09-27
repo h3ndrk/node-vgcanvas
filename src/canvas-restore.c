@@ -26,6 +26,9 @@
 #include "canvas-lineJoin.h"
 #include "canvas-miterLimit.h"
 #include "canvas-lineDashOffset.h"
+#include "canvas-paint.h"
+#include "canvas-fillStyle.h"
+#include "canvas-strokeStyle.h"
 #include "canvas-save.h"
 #include "canvas-restore.h"
 
@@ -38,6 +41,8 @@ void canvas_restore(void)
 {
 	canvas_save_stack_t *state_top = canvas_save_get();
 	canvas_save_stack_t *state_beneath = NULL;
+	
+	printf("Restoring from stack...\n");
 	
 	if(state_top == NULL)
 	{
@@ -57,15 +62,27 @@ void canvas_restore(void)
 	if(state_top->clip_clipping == VG_TRUE)
 	{
 		canvas_clip_set_mask(state_top->clip_mask);
-		canvas_clip_cleanup_mask(state_top->clip_mask);
 	}
 	canvas_clip_set_clipping(state_top->clip_clipping);
 	
 	canvas_setLineDash(state_top->lineDash_count, state_top->lineDash_data);
-	free(state_top->lineDash_data);
 	
-	// TODO: strokeStyle missing
-	// TODO: fillStyle missing
+	canvas_fillStyle(state_top->fillStyle);
+	if(state_top->fillStyle_count != 0 && state_top->fillStyle_data != NULL)
+	{
+		printf("Restoring color...\n");
+		
+		memcpy(canvas_fillStyle_get()->data, state_top->fillStyle_data, state_top->fillStyle_count * sizeof(VGfloat));
+		canvas_fillStyle_get()->count = state_top->fillStyle_count;
+	}
+	canvas_strokeStyle(state_top->strokeStyle);
+	if(state_top->strokeStyle_count != 0 && state_top->strokeStyle_data != NULL)
+	{
+		printf("Restoring color...\n");
+		
+		memcpy(canvas_strokeStyle_get()->data, state_top->strokeStyle_data, state_top->strokeStyle_count * sizeof(VGfloat));
+		canvas_strokeStyle_get()->count = state_top->strokeStyle_count;
+	}
 	canvas_globalAlpha(state_top->globalAlpha);
 	
 	canvas_lineWidth(state_top->lineWidth);

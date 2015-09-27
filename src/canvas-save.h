@@ -29,8 +29,12 @@ typedef struct canvas_save_stack_t
 	VGfloat *lineDash_data;
 	VGfloat lineDash_offset;
 	
-	// TODO: strokeStyle missing
-	// TODO: fillStyle missing
+	paint_t *fillStyle;
+	VGint fillStyle_count;
+	VGfloat *fillStyle_data;
+	paint_t *strokeStyle;
+	VGint strokeStyle_count;
+	VGfloat *strokeStyle_data;
 	VGfloat globalAlpha;
 	
 	VGfloat lineWidth;
