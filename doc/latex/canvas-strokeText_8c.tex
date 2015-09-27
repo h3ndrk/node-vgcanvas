@@ -1,0 +1,46 @@
+\hypertarget{canvas-strokeText_8c}{}\section{src/canvas-\/stroke\+Text.c File Reference}
+\label{canvas-strokeText_8c}\index{src/canvas-\/stroke\+Text.\+c@{src/canvas-\/stroke\+Text.\+c}}
+{\ttfamily \#include \char`\"{}include-\/core.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}include-\/openvg.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}include-\/freetype.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}canvas-\/begin\+Path.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}canvas-\/paint.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}canvas-\/stroke\+Style.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}canvas-\/font.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}font-\/util.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}canvas-\/line\+Width.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}canvas-\/set\+Line\+Dash.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}canvas-\/line\+Dash\+Offset.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}canvas-\/fill\+Text.\+h\char`\"{}}\\*
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{canvas-strokeText_8c_a13a88482f1dfc63c00ce113fce5bdeb2}{canvas\+\_\+stroke\+Text} (char $\ast$text, float x, float y)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{canvas-strokeText_8c_a13a88482f1dfc63c00ce113fce5bdeb2}{}\index{canvas-\/stroke\+Text.\+c@{canvas-\/stroke\+Text.\+c}!canvas\+\_\+stroke\+Text@{canvas\+\_\+stroke\+Text}}
+\index{canvas\+\_\+stroke\+Text@{canvas\+\_\+stroke\+Text}!canvas-\/stroke\+Text.\+c@{canvas-\/stroke\+Text.\+c}}
+\subsubsection[{canvas\+\_\+stroke\+Text(char $\ast$text, float x, float y)}]{\setlength{\rightskip}{0pt plus 5cm}void canvas\+\_\+stroke\+Text (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{text, }
+\item[{float}]{x, }
+\item[{float}]{y}
+\end{DoxyParamCaption}
+)}\label{canvas-strokeText_8c_a13a88482f1dfc63c00ce113fce5bdeb2}
+Copyright (C) 2015 N\+I\+P\+E-\/\+S\+Y\+S\+T\+E\+M\+S
+
+This program is free software\+: you can redistribute it and/or modify it under the terms of the G\+N\+U General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+U\+T A\+N\+Y W\+A\+R\+R\+A\+N\+T\+Y; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+T\+Y or F\+I\+T\+N\+E\+S\+S F\+O\+R A P\+A\+R\+T\+I\+C\+U\+L\+A\+R P\+U\+R\+P\+O\+S\+E. See the G\+N\+U General Public License for more details.
+
+You should have received a copy of the G\+N\+U General Public License along with this program. If not, see \href{http://www.gnu.org/licenses/}{\tt http\+://www.\+gnu.\+org/licenses/}. The stroke\+Text() method strokes a given text at the given (x, y) position. If the optional fourth parameter for a maximum width is provided, the text will be scaled to fit that width. max\+Width is not supported. 
+\begin{DoxyParams}{Parameters}
+{\em text} & The text to render using the current font, text\+Align, text\+Baseline, and direction values. \\
+\hline
+{\em x} & The x axis of the coordinate for the text starting point. \\
+\hline
+{\em y} & The y axis of the coordinate for the text starting point. \\
+\hline
+\end{DoxyParams}

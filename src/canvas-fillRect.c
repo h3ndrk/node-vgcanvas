@@ -19,6 +19,8 @@
 #include "include-openvg.h"
 // #include "include-freetype.h"
 
+#include "canvas-paint.h"
+#include "canvas-fillStyle.h"
 #include "canvas-beginPath.h"
 #include "canvas-fillRect.h"
 
@@ -33,7 +35,7 @@
  */
 void canvas_fillRect(VGfloat x, VGfloat y, VGfloat width, VGfloat height)
 {
-	paint_activate(fillPaint, VG_FILL_PATH);
+	paint_activate(canvas_fillStyle_get(), VG_FILL_PATH);
 
 	canvas_beginPath();
 	

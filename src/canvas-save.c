@@ -18,9 +18,15 @@
 #include "include-core.h"
 #include "include-openvg.h"
 // #include "include-freetype.h"
+
 #include "canvas-clip.h"
 #include "canvas-setLineDash.h"
 #include "canvas-globalAlpha.h"
+#include "canvas-lineWidth.h"
+#include "canvas-lineCap.h"
+#include "canvas-lineJoin.h"
+#include "canvas-miterLimit.h"
+#include "canvas-lineDashOffset.h"
 #include "canvas-save.h"
 
 static canvas_save_stack_t *canvas_save_stack_top = NULL;
@@ -62,7 +68,7 @@ void canvas_save(void)
 	}
 	else
 	{
-		canvas_save_stack_top->clip_mask = NULL;
+		canvas_save_stack_top->clip_mask = 0;
 	}
 	
 	canvas_save_stack_top->lineDash_count = canvas_setLineDash_get_count();

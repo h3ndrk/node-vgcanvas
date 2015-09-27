@@ -1,0 +1,107 @@
+\hypertarget{canvas-paint_8c}{}\section{src/canvas-\/paint.c File Reference}
+\label{canvas-paint_8c}\index{src/canvas-\/paint.\+c@{src/canvas-\/paint.\+c}}
+{\ttfamily \#include $<$V\+G/openvg.\+h$>$}\\*
+{\ttfamily \#include $<$stdio.\+h$>$}\\*
+{\ttfamily \#include $<$stdlib.\+h$>$}\\*
+{\ttfamily \#include $<$memory.\+h$>$}\\*
+{\ttfamily \#include $<$assert.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}canvas-\/paint.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}canvas-\/global\+Alpha.\+h\char`\"{}}\\*
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{canvas-paint_8c_ab592ca67fb1837cd3cf544f609b79f64}{paint\+\_\+create\+Color} (\hyperlink{structpaint__t}{paint\+\_\+t} $\ast$paint, V\+Gfloat red, V\+Gfloat green, V\+Gfloat blue, V\+Gfloat alpha)
+\item 
+void \hyperlink{canvas-paint_8c_ac1598eac12f6ba5d101b2dd09c994600}{paint\+\_\+create\+Linear\+Gradient} (\hyperlink{structpaint__t}{paint\+\_\+t} $\ast$paint, V\+Gfloat x1, V\+Gfloat y1, V\+Gfloat x2, V\+Gfloat y2)
+\item 
+void \hyperlink{canvas-paint_8c_a79de025c3c5f989806af6ce599084d54}{paint\+\_\+create\+Radial\+Gradient} (\hyperlink{structpaint__t}{paint\+\_\+t} $\ast$paint, V\+Gfloat cx, V\+Gfloat cy, V\+Gfloat r, V\+Gfloat fx, V\+Gfloat fy)
+\item 
+void \hyperlink{canvas-paint_8c_a430811e2f660a0783c6bf5eff8534b52}{paint\+\_\+destroy} (\hyperlink{structpaint__t}{paint\+\_\+t} $\ast$paint)
+\item 
+void \hyperlink{canvas-paint_8c_a2b7ce5138c8bd3795c8f6a6adaeb4809}{paint\+\_\+set\+R\+G\+B\+A} (\hyperlink{structpaint__t}{paint\+\_\+t} $\ast$paint, V\+Gfloat red, V\+Gfloat green, V\+Gfloat blue, V\+Gfloat alpha)
+\item 
+void \hyperlink{canvas-paint_8c_a7b698b25e156840ec595ce6e09eba713}{paint\+\_\+add\+Color\+Stop} (\hyperlink{structpaint__t}{paint\+\_\+t} $\ast$paint, V\+Gfloat position, V\+Gfloat red, V\+Gfloat green, V\+Gfloat blue, V\+Gfloat alpha)
+\item 
+void \hyperlink{canvas-paint_8c_a1743eb90369368d6504e9a7a15a8cd93}{paint\+\_\+activate} (\hyperlink{structpaint__t}{paint\+\_\+t} $\ast$paint, V\+Gbitfield mode)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{canvas-paint_8c_a1743eb90369368d6504e9a7a15a8cd93}{}\index{canvas-\/paint.\+c@{canvas-\/paint.\+c}!paint\+\_\+activate@{paint\+\_\+activate}}
+\index{paint\+\_\+activate@{paint\+\_\+activate}!canvas-\/paint.\+c@{canvas-\/paint.\+c}}
+\subsubsection[{paint\+\_\+activate(paint\+\_\+t $\ast$paint, V\+Gbitfield mode)}]{\setlength{\rightskip}{0pt plus 5cm}void paint\+\_\+activate (
+\begin{DoxyParamCaption}
+\item[{{\bf paint\+\_\+t} $\ast$}]{paint, }
+\item[{V\+Gbitfield}]{mode}
+\end{DoxyParamCaption}
+)}\label{canvas-paint_8c_a1743eb90369368d6504e9a7a15a8cd93}
+\hypertarget{canvas-paint_8c_a7b698b25e156840ec595ce6e09eba713}{}\index{canvas-\/paint.\+c@{canvas-\/paint.\+c}!paint\+\_\+add\+Color\+Stop@{paint\+\_\+add\+Color\+Stop}}
+\index{paint\+\_\+add\+Color\+Stop@{paint\+\_\+add\+Color\+Stop}!canvas-\/paint.\+c@{canvas-\/paint.\+c}}
+\subsubsection[{paint\+\_\+add\+Color\+Stop(paint\+\_\+t $\ast$paint, V\+Gfloat position, V\+Gfloat red, V\+Gfloat green, V\+Gfloat blue, V\+Gfloat alpha)}]{\setlength{\rightskip}{0pt plus 5cm}void paint\+\_\+add\+Color\+Stop (
+\begin{DoxyParamCaption}
+\item[{{\bf paint\+\_\+t} $\ast$}]{paint, }
+\item[{V\+Gfloat}]{position, }
+\item[{V\+Gfloat}]{red, }
+\item[{V\+Gfloat}]{green, }
+\item[{V\+Gfloat}]{blue, }
+\item[{V\+Gfloat}]{alpha}
+\end{DoxyParamCaption}
+)}\label{canvas-paint_8c_a7b698b25e156840ec595ce6e09eba713}
+\hypertarget{canvas-paint_8c_ab592ca67fb1837cd3cf544f609b79f64}{}\index{canvas-\/paint.\+c@{canvas-\/paint.\+c}!paint\+\_\+create\+Color@{paint\+\_\+create\+Color}}
+\index{paint\+\_\+create\+Color@{paint\+\_\+create\+Color}!canvas-\/paint.\+c@{canvas-\/paint.\+c}}
+\subsubsection[{paint\+\_\+create\+Color(paint\+\_\+t $\ast$paint, V\+Gfloat red, V\+Gfloat green, V\+Gfloat blue, V\+Gfloat alpha)}]{\setlength{\rightskip}{0pt plus 5cm}void paint\+\_\+create\+Color (
+\begin{DoxyParamCaption}
+\item[{{\bf paint\+\_\+t} $\ast$}]{paint, }
+\item[{V\+Gfloat}]{red, }
+\item[{V\+Gfloat}]{green, }
+\item[{V\+Gfloat}]{blue, }
+\item[{V\+Gfloat}]{alpha}
+\end{DoxyParamCaption}
+)}\label{canvas-paint_8c_ab592ca67fb1837cd3cf544f609b79f64}
+Copyright (C) 2015 N\+I\+P\+E-\/\+S\+Y\+S\+T\+E\+M\+S Copyright (C) 2015 Hauke Oldsen
+
+This program is free software\+: you can redistribute it and/or modify it under the terms of the G\+N\+U General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+U\+T A\+N\+Y W\+A\+R\+R\+A\+N\+T\+Y; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+T\+Y or F\+I\+T\+N\+E\+S\+S F\+O\+R A P\+A\+R\+T\+I\+C\+U\+L\+A\+R P\+U\+R\+P\+O\+S\+E. See the G\+N\+U General Public License for more details.
+
+You should have received a copy of the G\+N\+U General Public License along with this program. If not, see \href{http://www.gnu.org/licenses/}{\tt http\+://www.\+gnu.\+org/licenses/}. \hypertarget{canvas-paint_8c_ac1598eac12f6ba5d101b2dd09c994600}{}\index{canvas-\/paint.\+c@{canvas-\/paint.\+c}!paint\+\_\+create\+Linear\+Gradient@{paint\+\_\+create\+Linear\+Gradient}}
+\index{paint\+\_\+create\+Linear\+Gradient@{paint\+\_\+create\+Linear\+Gradient}!canvas-\/paint.\+c@{canvas-\/paint.\+c}}
+\subsubsection[{paint\+\_\+create\+Linear\+Gradient(paint\+\_\+t $\ast$paint, V\+Gfloat x1, V\+Gfloat y1, V\+Gfloat x2, V\+Gfloat y2)}]{\setlength{\rightskip}{0pt plus 5cm}void paint\+\_\+create\+Linear\+Gradient (
+\begin{DoxyParamCaption}
+\item[{{\bf paint\+\_\+t} $\ast$}]{paint, }
+\item[{V\+Gfloat}]{x1, }
+\item[{V\+Gfloat}]{y1, }
+\item[{V\+Gfloat}]{x2, }
+\item[{V\+Gfloat}]{y2}
+\end{DoxyParamCaption}
+)}\label{canvas-paint_8c_ac1598eac12f6ba5d101b2dd09c994600}
+\hypertarget{canvas-paint_8c_a79de025c3c5f989806af6ce599084d54}{}\index{canvas-\/paint.\+c@{canvas-\/paint.\+c}!paint\+\_\+create\+Radial\+Gradient@{paint\+\_\+create\+Radial\+Gradient}}
+\index{paint\+\_\+create\+Radial\+Gradient@{paint\+\_\+create\+Radial\+Gradient}!canvas-\/paint.\+c@{canvas-\/paint.\+c}}
+\subsubsection[{paint\+\_\+create\+Radial\+Gradient(paint\+\_\+t $\ast$paint, V\+Gfloat cx, V\+Gfloat cy, V\+Gfloat r, V\+Gfloat fx, V\+Gfloat fy)}]{\setlength{\rightskip}{0pt plus 5cm}void paint\+\_\+create\+Radial\+Gradient (
+\begin{DoxyParamCaption}
+\item[{{\bf paint\+\_\+t} $\ast$}]{paint, }
+\item[{V\+Gfloat}]{cx, }
+\item[{V\+Gfloat}]{cy, }
+\item[{V\+Gfloat}]{r, }
+\item[{V\+Gfloat}]{fx, }
+\item[{V\+Gfloat}]{fy}
+\end{DoxyParamCaption}
+)}\label{canvas-paint_8c_a79de025c3c5f989806af6ce599084d54}
+\hypertarget{canvas-paint_8c_a430811e2f660a0783c6bf5eff8534b52}{}\index{canvas-\/paint.\+c@{canvas-\/paint.\+c}!paint\+\_\+destroy@{paint\+\_\+destroy}}
+\index{paint\+\_\+destroy@{paint\+\_\+destroy}!canvas-\/paint.\+c@{canvas-\/paint.\+c}}
+\subsubsection[{paint\+\_\+destroy(paint\+\_\+t $\ast$paint)}]{\setlength{\rightskip}{0pt plus 5cm}void paint\+\_\+destroy (
+\begin{DoxyParamCaption}
+\item[{{\bf paint\+\_\+t} $\ast$}]{paint}
+\end{DoxyParamCaption}
+)}\label{canvas-paint_8c_a430811e2f660a0783c6bf5eff8534b52}
+\hypertarget{canvas-paint_8c_a2b7ce5138c8bd3795c8f6a6adaeb4809}{}\index{canvas-\/paint.\+c@{canvas-\/paint.\+c}!paint\+\_\+set\+R\+G\+B\+A@{paint\+\_\+set\+R\+G\+B\+A}}
+\index{paint\+\_\+set\+R\+G\+B\+A@{paint\+\_\+set\+R\+G\+B\+A}!canvas-\/paint.\+c@{canvas-\/paint.\+c}}
+\subsubsection[{paint\+\_\+set\+R\+G\+B\+A(paint\+\_\+t $\ast$paint, V\+Gfloat red, V\+Gfloat green, V\+Gfloat blue, V\+Gfloat alpha)}]{\setlength{\rightskip}{0pt plus 5cm}void paint\+\_\+set\+R\+G\+B\+A (
+\begin{DoxyParamCaption}
+\item[{{\bf paint\+\_\+t} $\ast$}]{paint, }
+\item[{V\+Gfloat}]{red, }
+\item[{V\+Gfloat}]{green, }
+\item[{V\+Gfloat}]{blue, }
+\item[{V\+Gfloat}]{alpha}
+\end{DoxyParamCaption}
+)}\label{canvas-paint_8c_a2b7ce5138c8bd3795c8f6a6adaeb4809}

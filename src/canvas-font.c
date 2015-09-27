@@ -17,7 +17,7 @@
 
 #include "include-core.h"
 #include "include-openvg.h"
-// #include "include-freetype.h"
+#include "include-freetype.h"
 
 #include "font-util.h"
 #include "canvas-font.h"
@@ -34,11 +34,6 @@ static float canvas_font_size = 0;
  */
 void canvas_font(char *path, VGfloat size)
 {
-	if(fonts == NULL)
-	{
-		return;
-	}
-	
 	canvas_font_index = font_util_get(path);
 	
 	if(canvas_font_index < 0)
@@ -47,6 +42,8 @@ void canvas_font(char *path, VGfloat size)
 		
 		return;
 	}
+	
+	canvas_font_size = size;
 }
 
 /**

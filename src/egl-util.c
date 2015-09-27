@@ -15,13 +15,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <assert.h>
-#include <EGL/egl.h>
-#include <GLES/gl.h>
-#include <bcm_host.h>
+#include "include-core.h"
+#include "include-openvg.h"
+// #include "include-freetype.h"
 
 #include "egl-util.h"
 

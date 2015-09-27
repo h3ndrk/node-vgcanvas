@@ -146,7 +146,7 @@ static void convert_contour(const FT_Vector *points, const char *tags, short poi
 	segments[segments_count++] = VG_CLOSE_PATH;
 }
 
-static void convert_outline(const FT_Vector *points, const char *tags, const short *contours, short contours_count, short points_count)
+void convert_outline(const FT_Vector *points, const char *tags, const short *contours, short contours_count, short points_count)
 {
 	segments_count = 0;
 	coords_count = 0;
@@ -184,7 +184,7 @@ int font_util_get(char *path)
 	return -1;
 }
 
-static FT_Face font_util_get_face(int fonts_index, char character)
+FT_Face font_util_get_face(int fonts_index, char character)
 {
 	FT_UInt glyph_index = FT_Get_Char_Index(fonts[fonts_index].face, character);
 	
@@ -318,4 +318,24 @@ void font_util_remove(char *path)
 		
 		return;
 	}
+}
+
+VGuint segments_count_get(void)
+{
+	return segments_count;
+}
+
+VGubyte *segments_get(void)
+{
+	return segments;
+}
+
+VGuint coords_count_get(void)
+{
+	return coords_count;
+}
+
+VGfloat *coords_get(void)
+{
+	return coords;
 }

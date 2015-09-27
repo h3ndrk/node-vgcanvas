@@ -21,6 +21,7 @@
 
 #include "canvas-beginPath.h"
 #include "canvas-paint.h"
+#include "canvas-fillStyle.h"
 #include "canvas-font.h"
 #include "font-util.h"
 #include "canvas-fillText.h"
@@ -47,13 +48,13 @@ void canvas_fillText(char *text, float x, float y)
 		return;
 	}
 	
-	paint_activate(fillPaint, VG_FILL_PATH);
+	paint_activate(canvas_fillStyle_get(), VG_FILL_PATH);
 	
 	for(text_index = 0; text_index < strlen(text); text_index++)
 	{
-		face = font_get_face(fonts_index, text[text_index]);
+		face = font_util_get_face(fonts_index, text[text_index]);
 		
-		printf("'%c': %f %f\n", text[text_index], ((float)(face->glyph->metrics.vertAdvance) / 64), ((float)(face->glyph->metrics.horiAdvance) / 64));
+		printf("fill: '%c': %f %f\n", text[text_index], ((float)(face->glyph->metrics.vertAdvance) / 64), ((float)(face->glyph->metrics.horiAdvance) / 64));
 		
 		if(face->glyph->outline.n_contours != 0)
 		{
@@ -61,7 +62,7 @@ void canvas_fillText(char *text, float x, float y)
 			
 			convert_outline(face->glyph->outline.points, face->glyph->outline.tags, face->glyph->outline.contours, face->glyph->outline.n_contours, face->glyph->outline.n_points);
 			
-			vgAppendPathData(canvas_beginPath_get(), segments_count, segments, coords);
+			vgAppendPathData(canvas_beginPath_get(), segments_count_get(), segments_get(), coords_get());
 			
 			vgTranslate(offset_x, 0);
 			vgTranslate(x, y);

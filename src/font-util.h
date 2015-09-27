@@ -18,10 +18,22 @@
 #ifndef __FONT_UTIL_H__
 #define __FONT_UTIL_H__
 
+typedef struct
+{
+	char *path;
+	FT_Face face;
+} font_t;
+
+void convert_outline(const FT_Vector *points, const char *tags, const short *contours, short contours_count, short points_count);
 int font_util_get(char *path);
+FT_Face font_util_get_face(int fonts_index, char character);
 void font_util_init(void);
 void font_util_cleanup(void);
 void font_util_new(char *path);
 void font_util_remove(char *path);
+VGuint segments_count_get(void);
+VGubyte *segments_get(void);
+VGuint coords_count_get(void);
+VGfloat *coords_get(void);
 
 #endif /* __FONT_UTIL_H__ */

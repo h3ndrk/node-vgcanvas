@@ -18,6 +18,6 @@
 #ifndef __CANVAS_STROKETEXT_H__
 #define __CANVAS_STROKETEXT_H__
 
-void canvas_fillText(char *text, float x, float y);
+void canvas_strokeText(char *text, float x, float y);
 
 #endif /* __CANVAS_STROKETEXT_H__ */

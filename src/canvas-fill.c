@@ -20,6 +20,8 @@
 // #include "include-freetype.h"
 
 #include "canvas-beginPath.h"
+#include "canvas-paint.h"
+#include "canvas-fillStyle.h"
 #include "canvas-fill.h"
 
 /**
@@ -28,7 +30,7 @@
  */
 void canvas_fill(void)
 {
-	paint_activate(fillPaint, VG_FILL_PATH);
+	paint_activate(canvas_fillStyle_get(), VG_FILL_PATH);
 	
 	vgDrawPath(canvas_beginPath_get(), VG_FILL_PATH);
 }

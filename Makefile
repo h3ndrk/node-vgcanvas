@@ -63,6 +63,7 @@ SRC += canvas-restore.c
 SRC += canvas-miterLimit.c
 SRC += canvas.c
 SRC += canvas-paint.c
+SRC += canvas-font.c
 SRC += canvas-fill.c
 SRC += canvas-fillStyle.c
 SRC += canvas-fillRect.c
@@ -72,6 +73,7 @@ SRC += canvas-strokeStyle.c
 SRC += canvas-strokeRect.c
 SRC += canvas-strokeText.c
 SRC += egl-util.c
+SRC += font-util.c
 
 OBJS = $(addprefix bin/obj/, $(SRC:%.c=%.o))
 

@@ -2,6 +2,7 @@
 \label{canvas-clip_8c}\index{src/canvas-\/clip.\+c@{src/canvas-\/clip.\+c}}
 {\ttfamily \#include \char`\"{}include-\/core.\+h\char`\"{}}\\*
 {\ttfamily \#include \char`\"{}include-\/openvg.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}egl-\/util.\+h\char`\"{}}\\*
 {\ttfamily \#include \char`\"{}canvas-\/begin\+Path.\+h\char`\"{}}\\*
 {\ttfamily \#include \char`\"{}canvas-\/clip.\+h\char`\"{}}\\*
 \subsection*{Functions}
@@ -13,7 +14,7 @@ void \hyperlink{canvas-clip_8c_ade0def031a2b4c1dcb342cb19c1ed695}{canvas\+\_\+cl
 \item 
 V\+Gboolean \hyperlink{canvas-clip_8c_a39b862c177870905789aefcf1cffb4ef}{canvas\+\_\+clip\+\_\+get\+\_\+clipping} (void)
 \item 
-void \hyperlink{canvas-clip_8c_ac84b32c692c901fade9dc96c2bf0efd6}{canvas\+\_\+clip\+\_\+set\+\_\+clipping} (Vboolean clipping)
+void \hyperlink{canvas-clip_8c_a94e4d7a7f36f3a933531898b5a1779c6}{canvas\+\_\+clip\+\_\+set\+\_\+clipping} (V\+Gboolean clipping)
 \item 
 V\+G\+Mask\+Layer \hyperlink{canvas-clip_8c_ade2b0675d3365ea8b81c8b31eed3f907}{canvas\+\_\+clip\+\_\+get\+\_\+mask} (void)
 \item 
@@ -70,13 +71,13 @@ The newly created clipping mask layer. This mask must be destroyed by \hyperlink
 \item[{void}]{}
 \end{DoxyParamCaption}
 )}\label{canvas-clip_8c_a2d531b09936a3622973c6902f251a8b7}
-Initializes clip(). Disables masking by default. \hypertarget{canvas-clip_8c_ac84b32c692c901fade9dc96c2bf0efd6}{}\index{canvas-\/clip.\+c@{canvas-\/clip.\+c}!canvas\+\_\+clip\+\_\+set\+\_\+clipping@{canvas\+\_\+clip\+\_\+set\+\_\+clipping}}
+Initializes clip(). Disables masking by default. \hypertarget{canvas-clip_8c_a94e4d7a7f36f3a933531898b5a1779c6}{}\index{canvas-\/clip.\+c@{canvas-\/clip.\+c}!canvas\+\_\+clip\+\_\+set\+\_\+clipping@{canvas\+\_\+clip\+\_\+set\+\_\+clipping}}
 \index{canvas\+\_\+clip\+\_\+set\+\_\+clipping@{canvas\+\_\+clip\+\_\+set\+\_\+clipping}!canvas-\/clip.\+c@{canvas-\/clip.\+c}}
-\subsubsection[{canvas\+\_\+clip\+\_\+set\+\_\+clipping(\+Vboolean clipping)}]{\setlength{\rightskip}{0pt plus 5cm}void canvas\+\_\+clip\+\_\+set\+\_\+clipping (
+\subsubsection[{canvas\+\_\+clip\+\_\+set\+\_\+clipping(\+V\+Gboolean clipping)}]{\setlength{\rightskip}{0pt plus 5cm}void canvas\+\_\+clip\+\_\+set\+\_\+clipping (
 \begin{DoxyParamCaption}
-\item[{Vboolean}]{clipping}
+\item[{V\+Gboolean}]{clipping}
 \end{DoxyParamCaption}
-)}\label{canvas-clip_8c_ac84b32c692c901fade9dc96c2bf0efd6}
+)}\label{canvas-clip_8c_a94e4d7a7f36f3a933531898b5a1779c6}
 Sets the clipping state. 
 \begin{DoxyParams}{Parameters}
 {\em clipping} & The clipping state. \\

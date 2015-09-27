@@ -43,34 +43,35 @@
 #include "canvas-setLineDash.h"
 #include "canvas-save.h"
 #include "canvas-beginPath.h"
+#include "font-util.h"
 
 // Current fill and stroke paint
-static paint_t *fillPaint;
-static paint_t *strokePaint;
+// static paint_t *fillPaint;
+// static paint_t *strokePaint;
 
-static VGPath immediatePath = 0;
+// static VGPath immediatePath = 0;
 
-static canvas_state_t currentState;
-static canvas_state_t *stateStack = NULL;
+// static canvas_state_t currentState;
+// static canvas_state_t *stateStack = NULL;
 
-static int init = 0;
+// static int init = 0;
 
-#define SEGMENTS_COUNT_MAX 256
-#define COORDS_COUNT_MAX 1024
-#define FONT_FLOAT_FROM_26_6(x) ((VGfloat)x / 64.0f)
+// #define SEGMENTS_COUNT_MAX 256
+// #define COORDS_COUNT_MAX 1024
+// #define FONT_FLOAT_FROM_26_6(x) ((VGfloat)x / 64.0f)
 
-static FT_Library font_library = NULL;
-static font_t *fonts = NULL;
-static int fonts_amount = 0;
+// static FT_Library font_library = NULL;
+// static font_t *fonts = NULL;
+// static int fonts_amount = 0;
 
-static VGuint segments_count;
-static VGubyte segments[SEGMENTS_COUNT_MAX];
-static VGuint coords_count;
-static VGfloat coords[COORDS_COUNT_MAX];
+// static VGuint segments_count;
+// static VGubyte segments[SEGMENTS_COUNT_MAX];
+// static VGuint coords_count;
+// static VGfloat coords[COORDS_COUNT_MAX];
 
 void canvas__init(void)
 {
-	font_init();
+	font_util_init();
 	egl_init();
 	
 	printf("{ width: %i, height: %i }\n", egl_get_width(), egl_get_height());
@@ -80,84 +81,84 @@ void canvas__init(void)
 	//paint_createColor(&strokePaint, 1, 1, 1, 1);
 	
 	// reset values
-	canvas_lineWidth(1);
-	canvas_lineCap("butt");
-	canvas_lineJoin("miter");
-	canvas_globalAlpha(1);
-	canvas_lineDashOffset(0);
-	canvas_setLineDash(0, NULL);
-	currentState.clipping = VG_FALSE;
-	currentState.savedLayer = 0;
-	currentState.next = NULL;
+	// canvas_lineWidth(1);
+	// canvas_lineCap("butt");
+	// canvas_lineJoin("miter");
+	// canvas_globalAlpha(1);
+	// canvas_lineDashOffset(0);
+	// canvas_setLineDash(0, NULL);
+	// currentState.clipping = VG_FALSE;
+	// currentState.savedLayer = 0;
+	// currentState.next = NULL;
 	
 	canvas_beginPath_init();
 	
 	// immediate path for drawing rects, etc.
-	immediatePath = vgCreatePath(VG_PATH_FORMAT_STANDARD, VG_PATH_DATATYPE_F, 1.0f, 0.0f, 0, 0, VG_PATH_CAPABILITY_ALL);
+	// immediatePath = vgCreatePath(VG_PATH_FORMAT_STANDARD, VG_PATH_DATATYPE_F, 1.0f, 0.0f, 0, 0, VG_PATH_CAPABILITY_ALL);
 	
 	vgSeti(VG_SCISSORING, VG_FALSE);
 	vgSeti(VG_MASKING, VG_FALSE);
 	
-	init = 1;
+	// init = 1;
 	
 	canvas_clearRect_init();
 }
 
-static void canvas__destroyState(canvas_state_t *state)
-{
-	if(state->savedLayer)
-	{
-		vgDestroyMaskLayer(state->savedLayer);
-	}
+// static void canvas__destroyState(canvas_state_t *state)
+// {
+// 	if(state->savedLayer)
+// 	{
+// 		vgDestroyMaskLayer(state->savedLayer);
+// 	}
 	
-	if(state->dashPattern)
-	{
-		free(state->dashPattern);
-	}
+// 	if(state->dashPattern)
+// 	{
+// 		free(state->dashPattern);
+// 	}
 		
-}
+// }
 
 void canvas__cleanup(void)
 {
-	if(!init)
-	{
-		return;
-	}
+	// if(!init)
+	// {
+	// 	return;
+	// }
 	
-	canvas_state_t *current = stateStack;
-	while(current)
-	{
-		canvas_state_t *next = current->next;
-		canvas__destroyState(current);
-		free(current);
-		current = next;
-	}
-	canvas__destroyState(&currentState);
+	// canvas_state_t *current = stateStack;
+	// while(current)
+	// {
+	// 	canvas_state_t *next = current->next;
+	// 	canvas__destroyState(current);
+	// 	free(current);
+	// 	current = next;
+	// }
+	// canvas__destroyState(&currentState);
 	
 	canvas_beginPath_cleanup();
 	canvas_setLineDash_cleanup();
 	canvas_save_cleanup();
 	
-	vgDestroyPath(immediatePath);
+	// vgDestroyPath(immediatePath);
 	
 	egl_cleanup();
 	
-	font_cleanup();
+	font_util_cleanup();
 }
 
-unsigned int canvas_stackSize(void)
-{
-	unsigned int size = 0;
-	canvas_state_t *current = stateStack;
+// unsigned int canvas_stackSize(void)
+// {
+// 	unsigned int size = 0;
+// 	canvas_state_t *current = stateStack;
 	
-	while(current)
-	{
-		current = current->next;
-		size++;
-	}
+// 	while(current)
+// 	{
+// 		current = current->next;
+// 		size++;
+// 	}
 	
-	return size;
-}
+// 	return size;
+// }
 
 // void canvas_fillRect(VGfloat x, VGfloat y, VGfloat width, VGfloat height)
 // {

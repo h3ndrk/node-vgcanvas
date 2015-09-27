@@ -18,6 +18,8 @@
 #include "include-core.h"
 #include "include-openvg.h"
 // #include "include-freetype.h"
+
+#include "egl-util.h"
 #include "canvas-beginPath.h"
 #include "canvas-clip.h"
 

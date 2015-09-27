@@ -20,6 +20,8 @@
 // #include "include-freetype.h"
 
 #include "canvas-beginPath.h"
+#include "canvas-paint.h"
+#include "canvas-strokeStyle.h"
 #include "canvas-strokeRect.h"
 
 /**
@@ -33,7 +35,7 @@
  */
 void canvas_strokeRect(VGfloat x, VGfloat y, VGfloat width, VGfloat height)
 {
-	paint_activate(fillPaint, VG_STROKE_PATH);
+	paint_activate(canvas_strokeStyle_get(), VG_STROKE_PATH);
 
 	canvas_beginPath();
 	

@@ -1,0 +1,117 @@
+\hypertarget{font-util_8h}{}\section{src/font-\/util.h File Reference}
+\label{font-util_8h}\index{src/font-\/util.\+h@{src/font-\/util.\+h}}
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structfont__t}{font\+\_\+t}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{font-util_8h_a2e1f4f43990064db73c98ffb44b99201}{convert\+\_\+outline} (const F\+T\+\_\+\+Vector $\ast$points, const char $\ast$tags, const short $\ast$contours, short contours\+\_\+count, short points\+\_\+count)
+\item 
+int \hyperlink{font-util_8h_ab67157cbf375fb8580de7c957fbd3626}{font\+\_\+util\+\_\+get} (char $\ast$path)
+\item 
+F\+T\+\_\+\+Face \hyperlink{font-util_8h_a17cd259b0b9dd2e02bd08f7f3f3c5b58}{font\+\_\+util\+\_\+get\+\_\+face} (int fonts\+\_\+index, char character)
+\item 
+void \hyperlink{font-util_8h_ace26dcda0550c0649bdfd9168e963c27}{font\+\_\+util\+\_\+init} (void)
+\item 
+void \hyperlink{font-util_8h_ab1a9b6e2faff61b99fc4302f6388c352}{font\+\_\+util\+\_\+cleanup} (void)
+\item 
+void \hyperlink{font-util_8h_a8c16da6fd800e231ec79a4f3a6b8b70a}{font\+\_\+util\+\_\+new} (char $\ast$path)
+\item 
+void \hyperlink{font-util_8h_a4187fe09f2ceb1ed6ec21a877521aaf2}{font\+\_\+util\+\_\+remove} (char $\ast$path)
+\item 
+V\+Guint \hyperlink{font-util_8h_a3f7b521baa3aabbf1cfdb95366d8c6a1}{segments\+\_\+count\+\_\+get} (void)
+\item 
+V\+Gubyte $\ast$ \hyperlink{font-util_8h_a172b6b169cd4108eaa3412788db42220}{segments\+\_\+get} (void)
+\item 
+V\+Guint \hyperlink{font-util_8h_a684c2dd54133ee0f96fa398f00e9dbd7}{coords\+\_\+count\+\_\+get} (void)
+\item 
+V\+Gfloat $\ast$ \hyperlink{font-util_8h_a0da680a50f460d392d95aacde6ecdbba}{coords\+\_\+get} (void)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{font-util_8h_a2e1f4f43990064db73c98ffb44b99201}{}\index{font-\/util.\+h@{font-\/util.\+h}!convert\+\_\+outline@{convert\+\_\+outline}}
+\index{convert\+\_\+outline@{convert\+\_\+outline}!font-\/util.\+h@{font-\/util.\+h}}
+\subsubsection[{convert\+\_\+outline(const F\+T\+\_\+\+Vector $\ast$points, const char $\ast$tags, const short $\ast$contours, short contours\+\_\+count, short points\+\_\+count)}]{\setlength{\rightskip}{0pt plus 5cm}void convert\+\_\+outline (
+\begin{DoxyParamCaption}
+\item[{const F\+T\+\_\+\+Vector $\ast$}]{points, }
+\item[{const char $\ast$}]{tags, }
+\item[{const short $\ast$}]{contours, }
+\item[{short}]{contours\+\_\+count, }
+\item[{short}]{points\+\_\+count}
+\end{DoxyParamCaption}
+)}\label{font-util_8h_a2e1f4f43990064db73c98ffb44b99201}
+\hypertarget{font-util_8h_a684c2dd54133ee0f96fa398f00e9dbd7}{}\index{font-\/util.\+h@{font-\/util.\+h}!coords\+\_\+count\+\_\+get@{coords\+\_\+count\+\_\+get}}
+\index{coords\+\_\+count\+\_\+get@{coords\+\_\+count\+\_\+get}!font-\/util.\+h@{font-\/util.\+h}}
+\subsubsection[{coords\+\_\+count\+\_\+get(void)}]{\setlength{\rightskip}{0pt plus 5cm}V\+Guint coords\+\_\+count\+\_\+get (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{font-util_8h_a684c2dd54133ee0f96fa398f00e9dbd7}
+\hypertarget{font-util_8h_a0da680a50f460d392d95aacde6ecdbba}{}\index{font-\/util.\+h@{font-\/util.\+h}!coords\+\_\+get@{coords\+\_\+get}}
+\index{coords\+\_\+get@{coords\+\_\+get}!font-\/util.\+h@{font-\/util.\+h}}
+\subsubsection[{coords\+\_\+get(void)}]{\setlength{\rightskip}{0pt plus 5cm}V\+Gfloat$\ast$ coords\+\_\+get (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{font-util_8h_a0da680a50f460d392d95aacde6ecdbba}
+\hypertarget{font-util_8h_ab1a9b6e2faff61b99fc4302f6388c352}{}\index{font-\/util.\+h@{font-\/util.\+h}!font\+\_\+util\+\_\+cleanup@{font\+\_\+util\+\_\+cleanup}}
+\index{font\+\_\+util\+\_\+cleanup@{font\+\_\+util\+\_\+cleanup}!font-\/util.\+h@{font-\/util.\+h}}
+\subsubsection[{font\+\_\+util\+\_\+cleanup(void)}]{\setlength{\rightskip}{0pt plus 5cm}void font\+\_\+util\+\_\+cleanup (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{font-util_8h_ab1a9b6e2faff61b99fc4302f6388c352}
+\hypertarget{font-util_8h_ab67157cbf375fb8580de7c957fbd3626}{}\index{font-\/util.\+h@{font-\/util.\+h}!font\+\_\+util\+\_\+get@{font\+\_\+util\+\_\+get}}
+\index{font\+\_\+util\+\_\+get@{font\+\_\+util\+\_\+get}!font-\/util.\+h@{font-\/util.\+h}}
+\subsubsection[{font\+\_\+util\+\_\+get(char $\ast$path)}]{\setlength{\rightskip}{0pt plus 5cm}int font\+\_\+util\+\_\+get (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{path}
+\end{DoxyParamCaption}
+)}\label{font-util_8h_ab67157cbf375fb8580de7c957fbd3626}
+\hypertarget{font-util_8h_a17cd259b0b9dd2e02bd08f7f3f3c5b58}{}\index{font-\/util.\+h@{font-\/util.\+h}!font\+\_\+util\+\_\+get\+\_\+face@{font\+\_\+util\+\_\+get\+\_\+face}}
+\index{font\+\_\+util\+\_\+get\+\_\+face@{font\+\_\+util\+\_\+get\+\_\+face}!font-\/util.\+h@{font-\/util.\+h}}
+\subsubsection[{font\+\_\+util\+\_\+get\+\_\+face(int fonts\+\_\+index, char character)}]{\setlength{\rightskip}{0pt plus 5cm}F\+T\+\_\+\+Face font\+\_\+util\+\_\+get\+\_\+face (
+\begin{DoxyParamCaption}
+\item[{int}]{fonts\+\_\+index, }
+\item[{char}]{character}
+\end{DoxyParamCaption}
+)}\label{font-util_8h_a17cd259b0b9dd2e02bd08f7f3f3c5b58}
+\hypertarget{font-util_8h_ace26dcda0550c0649bdfd9168e963c27}{}\index{font-\/util.\+h@{font-\/util.\+h}!font\+\_\+util\+\_\+init@{font\+\_\+util\+\_\+init}}
+\index{font\+\_\+util\+\_\+init@{font\+\_\+util\+\_\+init}!font-\/util.\+h@{font-\/util.\+h}}
+\subsubsection[{font\+\_\+util\+\_\+init(void)}]{\setlength{\rightskip}{0pt plus 5cm}void font\+\_\+util\+\_\+init (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{font-util_8h_ace26dcda0550c0649bdfd9168e963c27}
+\hypertarget{font-util_8h_a8c16da6fd800e231ec79a4f3a6b8b70a}{}\index{font-\/util.\+h@{font-\/util.\+h}!font\+\_\+util\+\_\+new@{font\+\_\+util\+\_\+new}}
+\index{font\+\_\+util\+\_\+new@{font\+\_\+util\+\_\+new}!font-\/util.\+h@{font-\/util.\+h}}
+\subsubsection[{font\+\_\+util\+\_\+new(char $\ast$path)}]{\setlength{\rightskip}{0pt plus 5cm}void font\+\_\+util\+\_\+new (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{path}
+\end{DoxyParamCaption}
+)}\label{font-util_8h_a8c16da6fd800e231ec79a4f3a6b8b70a}
+\hypertarget{font-util_8h_a4187fe09f2ceb1ed6ec21a877521aaf2}{}\index{font-\/util.\+h@{font-\/util.\+h}!font\+\_\+util\+\_\+remove@{font\+\_\+util\+\_\+remove}}
+\index{font\+\_\+util\+\_\+remove@{font\+\_\+util\+\_\+remove}!font-\/util.\+h@{font-\/util.\+h}}
+\subsubsection[{font\+\_\+util\+\_\+remove(char $\ast$path)}]{\setlength{\rightskip}{0pt plus 5cm}void font\+\_\+util\+\_\+remove (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{path}
+\end{DoxyParamCaption}
+)}\label{font-util_8h_a4187fe09f2ceb1ed6ec21a877521aaf2}
+\hypertarget{font-util_8h_a3f7b521baa3aabbf1cfdb95366d8c6a1}{}\index{font-\/util.\+h@{font-\/util.\+h}!segments\+\_\+count\+\_\+get@{segments\+\_\+count\+\_\+get}}
+\index{segments\+\_\+count\+\_\+get@{segments\+\_\+count\+\_\+get}!font-\/util.\+h@{font-\/util.\+h}}
+\subsubsection[{segments\+\_\+count\+\_\+get(void)}]{\setlength{\rightskip}{0pt plus 5cm}V\+Guint segments\+\_\+count\+\_\+get (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{font-util_8h_a3f7b521baa3aabbf1cfdb95366d8c6a1}
+\hypertarget{font-util_8h_a172b6b169cd4108eaa3412788db42220}{}\index{font-\/util.\+h@{font-\/util.\+h}!segments\+\_\+get@{segments\+\_\+get}}
+\index{segments\+\_\+get@{segments\+\_\+get}!font-\/util.\+h@{font-\/util.\+h}}
+\subsubsection[{segments\+\_\+get(void)}]{\setlength{\rightskip}{0pt plus 5cm}V\+Gubyte$\ast$ segments\+\_\+get (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{font-util_8h_a172b6b169cd4108eaa3412788db42220}

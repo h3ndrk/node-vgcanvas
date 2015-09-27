@@ -21,6 +21,11 @@
 #include "canvas-clip.h"
 #include "canvas-setLineDash.h"
 #include "canvas-globalAlpha.h"
+#include "canvas-lineWidth.h"
+#include "canvas-lineCap.h"
+#include "canvas-lineJoin.h"
+#include "canvas-miterLimit.h"
+#include "canvas-lineDashOffset.h"
 #include "canvas-save.h"
 #include "canvas-restore.h"
 

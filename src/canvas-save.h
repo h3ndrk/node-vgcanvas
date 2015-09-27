@@ -34,8 +34,8 @@ typedef struct canvas_save_stack_t
 	VGfloat globalAlpha;
 	
 	VGfloat lineWidth;
-	VGfloat lineCap;
-	VGfloat lineJoin;
+	char *lineCap;
+	char *lineJoin;
 	VGfloat miterLimit;
 	
 	// TODO: shadowOffsetX missing
@@ -59,6 +59,6 @@ void canvas_save(void);
 void canvas_save_cleanup_state(canvas_save_stack_t *state);
 void canvas_save_cleanup(void);
 canvas_save_stack_t *canvas_save_get(void);
-void canvas_clip_set(canvas_save_stack_t *mask);
+void canvas_save_set(canvas_save_stack_t *mask);
 
 #endif /* __CANVAS_SAVE_H__ */

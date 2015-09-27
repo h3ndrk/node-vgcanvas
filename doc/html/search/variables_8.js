@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['paint',['paint',['../structcolor__t.html#a17ecc773b13841683517fa109dd87984',1,'color_t']]],
-  ['path',['path',['../structfont__t.html#aa3c5e0635a023f249f7f46200e1a4267',1,'font_t']]]
+  ['savedlayer',['savedLayer',['../structcanvas__state__t.html#a46394e3d2c0bfac283b820478a8e54e6',1,'canvas_state_t']]],
+  ['strokepaint',['strokePaint',['../structcanvas__state__t.html#a0c8736008fd042235f9347563ff7b998',1,'canvas_state_t']]]
 ];

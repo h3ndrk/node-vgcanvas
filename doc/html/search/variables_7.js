@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['next',['next',['../structcanvas__save__stack__t.html#a214b86daeaa6f4461d169921a9c0298d',1,'canvas_save_stack_t::next()'],['../structcanvas__state__t.html#affd976ea64b3c8ac9ee660b20e8be5a9',1,'canvas_state_t::next()']]]
+  ['paint',['paint',['../structpaint__t.html#a4e1356c7f535abd01d52e5f0a080a2fd',1,'paint_t']]],
+  ['painttype',['paintType',['../structpaint__t.html#a1847b9704a2a157bd821f0c81a58a39d',1,'paint_t']]],
+  ['path',['path',['../structfont__t.html#a5e3dd9dc422392492027e5c3e598898a',1,'font_t']]]
 ];

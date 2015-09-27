@@ -11,9 +11,9 @@
 \item 
 \hyperlink{canvas_8h_a565fe2807948893e6f97695409abd0b0}{canvas\+\_\+line\+\_\+join\+\_\+t} \hyperlink{structcanvas__state__t_adf0f976e5ae4b1b864216b96e9b4aafd}{line\+Join}
 \item 
-\hyperlink{structcolor__t}{color\+\_\+t} \hyperlink{structcanvas__state__t_a11e41bb683196e0f3fe94b3ec03eb84e}{fill\+Color}
+\hyperlink{structpaint__t}{paint\+\_\+t} $\ast$ \hyperlink{structcanvas__state__t_a137050e1598f0c76a76e1ce42a09f0c3}{fill\+Paint}
 \item 
-\hyperlink{structcolor__t}{color\+\_\+t} \hyperlink{structcanvas__state__t_af12f76ebfaaba2fd2aca008b5771a7a8}{stroke\+Color}
+\hyperlink{structpaint__t}{paint\+\_\+t} $\ast$ \hyperlink{structcanvas__state__t_a0c8736008fd042235f9347563ff7b998}{stroke\+Paint}
 \item 
 V\+Gfloat \hyperlink{structcanvas__state__t_a95d523b1df5a121a83039f320d456328}{global\+Alpha}
 \item 
@@ -46,9 +46,9 @@ struct \hyperlink{structcanvas__state__t}{canvas\+\_\+state\+\_\+t} $\ast$ \hype
 \hypertarget{structcanvas__state__t_a853b1185b6a5f5066aab0442cebfad4d}{}\index{canvas\+\_\+state\+\_\+t@{canvas\+\_\+state\+\_\+t}!dash\+Pattern@{dash\+Pattern}}
 \index{dash\+Pattern@{dash\+Pattern}!canvas\+\_\+state\+\_\+t@{canvas\+\_\+state\+\_\+t}}
 \subsubsection[{dash\+Pattern}]{\setlength{\rightskip}{0pt plus 5cm}V\+Gfloat$\ast$ canvas\+\_\+state\+\_\+t\+::dash\+Pattern}\label{structcanvas__state__t_a853b1185b6a5f5066aab0442cebfad4d}
-\hypertarget{structcanvas__state__t_a11e41bb683196e0f3fe94b3ec03eb84e}{}\index{canvas\+\_\+state\+\_\+t@{canvas\+\_\+state\+\_\+t}!fill\+Color@{fill\+Color}}
-\index{fill\+Color@{fill\+Color}!canvas\+\_\+state\+\_\+t@{canvas\+\_\+state\+\_\+t}}
-\subsubsection[{fill\+Color}]{\setlength{\rightskip}{0pt plus 5cm}{\bf color\+\_\+t} canvas\+\_\+state\+\_\+t\+::fill\+Color}\label{structcanvas__state__t_a11e41bb683196e0f3fe94b3ec03eb84e}
+\hypertarget{structcanvas__state__t_a137050e1598f0c76a76e1ce42a09f0c3}{}\index{canvas\+\_\+state\+\_\+t@{canvas\+\_\+state\+\_\+t}!fill\+Paint@{fill\+Paint}}
+\index{fill\+Paint@{fill\+Paint}!canvas\+\_\+state\+\_\+t@{canvas\+\_\+state\+\_\+t}}
+\subsubsection[{fill\+Paint}]{\setlength{\rightskip}{0pt plus 5cm}{\bf paint\+\_\+t}$\ast$ canvas\+\_\+state\+\_\+t\+::fill\+Paint}\label{structcanvas__state__t_a137050e1598f0c76a76e1ce42a09f0c3}
 \hypertarget{structcanvas__state__t_a95d523b1df5a121a83039f320d456328}{}\index{canvas\+\_\+state\+\_\+t@{canvas\+\_\+state\+\_\+t}!global\+Alpha@{global\+Alpha}}
 \index{global\+Alpha@{global\+Alpha}!canvas\+\_\+state\+\_\+t@{canvas\+\_\+state\+\_\+t}}
 \subsubsection[{global\+Alpha}]{\setlength{\rightskip}{0pt plus 5cm}V\+Gfloat canvas\+\_\+state\+\_\+t\+::global\+Alpha}\label{structcanvas__state__t_a95d523b1df5a121a83039f320d456328}
@@ -67,9 +67,9 @@ struct \hyperlink{structcanvas__state__t}{canvas\+\_\+state\+\_\+t} $\ast$ \hype
 \hypertarget{structcanvas__state__t_a46394e3d2c0bfac283b820478a8e54e6}{}\index{canvas\+\_\+state\+\_\+t@{canvas\+\_\+state\+\_\+t}!saved\+Layer@{saved\+Layer}}
 \index{saved\+Layer@{saved\+Layer}!canvas\+\_\+state\+\_\+t@{canvas\+\_\+state\+\_\+t}}
 \subsubsection[{saved\+Layer}]{\setlength{\rightskip}{0pt plus 5cm}V\+G\+Mask\+Layer canvas\+\_\+state\+\_\+t\+::saved\+Layer}\label{structcanvas__state__t_a46394e3d2c0bfac283b820478a8e54e6}
-\hypertarget{structcanvas__state__t_af12f76ebfaaba2fd2aca008b5771a7a8}{}\index{canvas\+\_\+state\+\_\+t@{canvas\+\_\+state\+\_\+t}!stroke\+Color@{stroke\+Color}}
-\index{stroke\+Color@{stroke\+Color}!canvas\+\_\+state\+\_\+t@{canvas\+\_\+state\+\_\+t}}
-\subsubsection[{stroke\+Color}]{\setlength{\rightskip}{0pt plus 5cm}{\bf color\+\_\+t} canvas\+\_\+state\+\_\+t\+::stroke\+Color}\label{structcanvas__state__t_af12f76ebfaaba2fd2aca008b5771a7a8}
+\hypertarget{structcanvas__state__t_a0c8736008fd042235f9347563ff7b998}{}\index{canvas\+\_\+state\+\_\+t@{canvas\+\_\+state\+\_\+t}!stroke\+Paint@{stroke\+Paint}}
+\index{stroke\+Paint@{stroke\+Paint}!canvas\+\_\+state\+\_\+t@{canvas\+\_\+state\+\_\+t}}
+\subsubsection[{stroke\+Paint}]{\setlength{\rightskip}{0pt plus 5cm}{\bf paint\+\_\+t}$\ast$ canvas\+\_\+state\+\_\+t\+::stroke\+Paint}\label{structcanvas__state__t_a0c8736008fd042235f9347563ff7b998}
 
 
 The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}

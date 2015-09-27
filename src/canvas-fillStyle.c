@@ -19,6 +19,7 @@
 #include "include-openvg.h"
 // #include "include-freetype.h"
 
+#include "canvas-paint.h"
 #include "canvas-fillStyle.h"
 
 static paint_t *canvas_fillStyle_paint = NULL;

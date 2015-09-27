@@ -96,15 +96,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;VG/openvg.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="color_8h_source.html">color.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="canvas-paint_8h_source.html">canvas-paint.h</a>&quot;</code><br />
 </div>
 <p><a href="canvas_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Data Structures</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcanvas__state__t.html">canvas_state_t</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structfont__t.html">font_t</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
@@ -137,30 +135,14 @@ Functions</h2></td></tr>
 <tr class="separator:a73f7ee53af695ef904c3033f8f7601af"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad643f83db27f2150aa3915b6e6d00afb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canvas_8h.html#ad643f83db27f2150aa3915b6e6d00afb">canvas_fillRect</a> (VGfloat x, VGfloat y, VGfloat width, VGfloat height)</td></tr>
 <tr class="separator:ad643f83db27f2150aa3915b6e6d00afb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a829bb44fbc54c0ab04d9a306f95f1578"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canvas_8h.html#a829bb44fbc54c0ab04d9a306f95f1578">canvas_fillStyle_color</a> (VGfloat red, VGfloat green, VGfloat blue, VGfloat alpha)</td></tr>
-<tr class="separator:a829bb44fbc54c0ab04d9a306f95f1578"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac24699a333c4d5c50b774c720140afa8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canvas_8h.html#ac24699a333c4d5c50b774c720140afa8">canvas_fillStyle</a> (<a class="el" href="structpaint__t.html">paint_t</a> *paint)</td></tr>
+<tr class="separator:ac24699a333c4d5c50b774c720140afa8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a75cdd36359ab8d1fa8ffed8ece5cd9bb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canvas_8h.html#a75cdd36359ab8d1fa8ffed8ece5cd9bb">canvas_strokeRect</a> (VGfloat x, VGfloat y, VGfloat width, VGfloat height)</td></tr>
 <tr class="separator:a75cdd36359ab8d1fa8ffed8ece5cd9bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3849524cf904f77ae7930bea5965884d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canvas_8h.html#a3849524cf904f77ae7930bea5965884d">canvas_strokeStyle_color</a> (VGfloat red, VGfloat green, VGfloat blue, VGfloat alpha)</td></tr>
-<tr class="separator:a3849524cf904f77ae7930bea5965884d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aabcf1f6f0091035561c94edc09039459"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canvas_8h.html#aabcf1f6f0091035561c94edc09039459">canvas_setLineDash</a> (VGint count, const VGfloat *data)</td></tr>
-<tr class="separator:aabcf1f6f0091035561c94edc09039459"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae50eacfa82cdf55290a72533aec448d6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canvas_8h.html#ae50eacfa82cdf55290a72533aec448d6">canvas_beginPath</a> (void)</td></tr>
-<tr class="separator:ae50eacfa82cdf55290a72533aec448d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7432c31791dd305a82a7f48f41b83e85"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canvas_8h.html#a7432c31791dd305a82a7f48f41b83e85">canvas_moveTo</a> (VGfloat x, VGfloat y)</td></tr>
-<tr class="separator:a7432c31791dd305a82a7f48f41b83e85"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa6a01d301b158fcbef3a55276fb7f913"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canvas_8h.html#aa6a01d301b158fcbef3a55276fb7f913">canvas_lineTo</a> (VGfloat x, VGfloat y)</td></tr>
-<tr class="separator:aa6a01d301b158fcbef3a55276fb7f913"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1df6a511ce3c960ef0cd53dcbd856080"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canvas_8h.html#a1df6a511ce3c960ef0cd53dcbd856080">canvas_quadraticCurveTo</a> (VGfloat cpx, VGfloat cpy, VGfloat x, VGfloat y)</td></tr>
-<tr class="separator:a1df6a511ce3c960ef0cd53dcbd856080"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7b3b15dddf44c5b41b3538646e834064"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canvas_8h.html#a7b3b15dddf44c5b41b3538646e834064">canvas_bezierCurveTo</a> (VGfloat cp1x, VGfloat cp1y, VGfloat cp2x, VGfloat cp2y, VGfloat x, VGfloat y)</td></tr>
-<tr class="separator:a7b3b15dddf44c5b41b3538646e834064"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad669bb8bfd22b8cbece647fcfd50d311"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canvas_8h.html#ad669bb8bfd22b8cbece647fcfd50d311">canvas_strokeStyle</a> (<a class="el" href="structpaint__t.html">paint_t</a> *paint)</td></tr>
+<tr class="separator:ad669bb8bfd22b8cbece647fcfd50d311"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac60ce504adbe3e8bfbd672a06195607d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canvas_8h.html#ac60ce504adbe3e8bfbd672a06195607d">canvas_arc</a> (VGfloat x, VGfloat y, VGfloat radius, VGfloat start_angle, VGfloat end_angle, VGboolean anticlockwise)</td></tr>
 <tr class="separator:ac60ce504adbe3e8bfbd672a06195607d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a71f54620490bd9b84d777cae2050141d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canvas_8h.html#a71f54620490bd9b84d777cae2050141d">canvas_rect</a> (VGfloat x, VGfloat y, VGfloat width, VGfloat height)</td></tr>
-<tr class="separator:a71f54620490bd9b84d777cae2050141d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a81315a8d6727ba368238372b796fd987"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canvas_8h.html#a81315a8d6727ba368238372b796fd987">canvas_closePath</a> (void)</td></tr>
-<tr class="separator:a81315a8d6727ba368238372b796fd987"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ade0def031a2b4c1dcb342cb19c1ed695"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canvas_8h.html#ade0def031a2b4c1dcb342cb19c1ed695">canvas_clip</a> (void)</td></tr>
 <tr class="separator:ade0def031a2b4c1dcb342cb19c1ed695"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae82cc37b7b2b1c9148a08032a0c7cc40"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="canvas_8h.html#ae82cc37b7b2b1c9148a08032a0c7cc40">canvas_save</a> (void)</td></tr>
@@ -279,6 +261,10 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Copyright (C) 2015 NIPE-SYSTEMS</p>
+<p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p>
+<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License along with this program. If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>. </p>
 
 </div>
 </div>
@@ -340,87 +326,6 @@ Variables</h2></td></tr>
     <tr><td class="paramname">start_angle</td><td>The angle at which the arc starts, measured clockwise from the positive x axis and expressed in radians. </td></tr>
     <tr><td class="paramname">end_angle</td><td>The angle at which the arc ends, measured clockwise from the positive x axis and expressed in radians. </td></tr>
     <tr><td class="paramname">anticlockwise</td><td>A Boolean which, if true, causes the arc to be drawn counter-clockwise between the two angles. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a class="anchor" id="ae50eacfa82cdf55290a72533aec448d6"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void canvas_beginPath </td>
-          <td>(</td>
-          <td class="paramtype">void&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>The beginPath() method starts a new path by emptying the list of sub-paths. Call this method when you want to create a new path. </p>
-
-</div>
-</div>
-<a class="anchor" id="a7b3b15dddf44c5b41b3538646e834064"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void canvas_bezierCurveTo </td>
-          <td>(</td>
-          <td class="paramtype">VGfloat&#160;</td>
-          <td class="paramname"><em>cp1x</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">VGfloat&#160;</td>
-          <td class="paramname"><em>cp1y</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">VGfloat&#160;</td>
-          <td class="paramname"><em>cp2x</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">VGfloat&#160;</td>
-          <td class="paramname"><em>cp2y</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">VGfloat&#160;</td>
-          <td class="paramname"><em>x</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">VGfloat&#160;</td>
-          <td class="paramname"><em>y</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Copyright (C) 2015 NIPE-SYSTEMS</p>
-<p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p>
-<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</p>
-<p>You should have received a copy of the GNU General Public License along with this program. If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>. The bezierCurveTo() method of the Canvas 2D API adds a cubic Bézier curve to the path. It requires three points. The first two points are control points and the third one is the end point. The starting point is the last point in the current path, which can be changed using moveTo() before creating the Bézier curve. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">cp1x</td><td>The x axis of the coordinate for the first control point. </td></tr>
-    <tr><td class="paramname">cp1y</td><td>The y axis of the coordinate for the first control point. </td></tr>
-    <tr><td class="paramname">cp2x</td><td>The x axis of the coordinate for the second control point. </td></tr>
-    <tr><td class="paramname">cp2y</td><td>The y axis of the coordinate for the second control point. </td></tr>
-    <tr><td class="paramname">x</td><td>The x axis of the coordinate for the end point. </td></tr>
-    <tr><td class="paramname">y</td><td>The y axis of the coordinate for the end point. </td></tr>
   </table>
   </dd>
 </dl>
@@ -491,26 +396,6 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a81315a8d6727ba368238372b796fd987"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void canvas_closePath </td>
-          <td>(</td>
-          <td class="paramtype">void&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Copyright (C) 2015 NIPE-SYSTEMS</p>
-<p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p>
-<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</p>
-<p>You should have received a copy of the GNU General Public License along with this program. If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>. The closePath() method causes the point of the pen to move back to the start of the current sub-path. It tries to add a straight line (but does not actually draw it) from the current point to the start. If the shape has already been closed or has only one point, this function does nothing. </p>
-
-</div>
-</div>
 <a class="anchor" id="a73f1c2a2b8663e01dbb1472c9172bf46"></a>
 <div class="memitem">
 <div class="memproto">
@@ -524,6 +409,10 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Copyright (C) 2015 NIPE-SYSTEMS</p>
+<p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p>
+<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License along with this program. If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>. The fill() method fills the current or given path with the current fill style using the non-zero or even-odd winding rule. </p>
 
 </div>
 </div>
@@ -562,44 +451,40 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Copyright (C) 2015 NIPE-SYSTEMS</p>
+<p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p>
+<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License along with this program. If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>. The fillRect() method draws a filled rectangle at (x, y) position whose size is determined by width and height and whose style is determined by the fillStyle attribute. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>The x axis of the coordinate for the rectangle starting point. </td></tr>
+    <tr><td class="paramname">y</td><td>The y axis of the coordinate for the rectangle starting point. </td></tr>
+    <tr><td class="paramname">width</td><td>The rectangle's width. </td></tr>
+    <tr><td class="paramname">height</td><td>The rectangle's height. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
-<a class="anchor" id="a829bb44fbc54c0ab04d9a306f95f1578"></a>
+<a class="anchor" id="ac24699a333c4d5c50b774c720140afa8"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void canvas_fillStyle_color </td>
+          <td class="memname">void canvas_fillStyle </td>
           <td>(</td>
-          <td class="paramtype">VGfloat&#160;</td>
-          <td class="paramname"><em>red</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype"><a class="el" href="structpaint__t.html">paint_t</a> *&#160;</td>
+          <td class="paramname"><em>paint</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">VGfloat&#160;</td>
-          <td class="paramname"><em>green</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">VGfloat&#160;</td>
-          <td class="paramname"><em>blue</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">VGfloat&#160;</td>
-          <td class="paramname"><em>alpha</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>The fillStyle property specifies the color or style to use inside shapes. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">paint</td><td>The fill style paint. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -616,178 +501,6 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aa6a01d301b158fcbef3a55276fb7f913"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void canvas_lineTo </td>
-          <td>(</td>
-          <td class="paramtype">VGfloat&#160;</td>
-          <td class="paramname"><em>x</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">VGfloat&#160;</td>
-          <td class="paramname"><em>y</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Copyright (C) 2015 NIPE-SYSTEMS</p>
-<p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p>
-<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</p>
-<p>You should have received a copy of the GNU General Public License along with this program. If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>. The lineTo() method connects the last point in the sub-path to the x, y coordinates with a straight line (but does not actually draw it). </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">x</td><td>The x axis of the coordinate for the end of the line. </td></tr>
-    <tr><td class="paramname">y</td><td>The y axis of the coordinate for the end of the line. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a class="anchor" id="a7432c31791dd305a82a7f48f41b83e85"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void canvas_moveTo </td>
-          <td>(</td>
-          <td class="paramtype">VGfloat&#160;</td>
-          <td class="paramname"><em>x</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">VGfloat&#160;</td>
-          <td class="paramname"><em>y</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Copyright (C) 2015 NIPE-SYSTEMS</p>
-<p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p>
-<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</p>
-<p>You should have received a copy of the GNU General Public License along with this program. If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>. The moveTo() method moves the starting point of a new sub-path to the (x, y) coordinates. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">x</td><td>The x axis of the point. </td></tr>
-    <tr><td class="paramname">y</td><td>The y axis of the point. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a class="anchor" id="a1df6a511ce3c960ef0cd53dcbd856080"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void canvas_quadraticCurveTo </td>
-          <td>(</td>
-          <td class="paramtype">VGfloat&#160;</td>
-          <td class="paramname"><em>cpx</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">VGfloat&#160;</td>
-          <td class="paramname"><em>cpy</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">VGfloat&#160;</td>
-          <td class="paramname"><em>x</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">VGfloat&#160;</td>
-          <td class="paramname"><em>y</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Copyright (C) 2015 NIPE-SYSTEMS</p>
-<p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p>
-<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</p>
-<p>You should have received a copy of the GNU General Public License along with this program. If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>. The quadraticCurveTo() method adds a quadratic Bézier curve to the path. It requires two points. The first point is a control point and the second one is the end point. The starting point is the last point in the current path, which can be changed using moveTo() before creating the quadratic Bézier curve. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">cpx</td><td>The x axis of the coordinate for the control point. </td></tr>
-    <tr><td class="paramname">cpy</td><td>The y axis of the coordinate for the control point. </td></tr>
-    <tr><td class="paramname">x</td><td>The x axis of the coordinate for the end point. </td></tr>
-    <tr><td class="paramname">y</td><td>The y axis of the coordinate for the end point. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a class="anchor" id="a71f54620490bd9b84d777cae2050141d"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void canvas_rect </td>
-          <td>(</td>
-          <td class="paramtype">VGfloat&#160;</td>
-          <td class="paramname"><em>x</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">VGfloat&#160;</td>
-          <td class="paramname"><em>y</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">VGfloat&#160;</td>
-          <td class="paramname"><em>width</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">VGfloat&#160;</td>
-          <td class="paramname"><em>height</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Copyright (C) 2015 NIPE-SYSTEMS</p>
-<p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p>
-<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</p>
-<p>You should have received a copy of the GNU General Public License along with this program. If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>. The rect() method creates a path for a rectangle at position (x, y) with a size that is determined by width and height. Those four points are connected by straight lines and the sub-path is marked as closed, so that you can fill or stroke this rectangle. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">x</td><td>The x axis of the coordinate for the rectangle starting point. </td></tr>
-    <tr><td class="paramname">y</td><td>The y axis of the coordinate for the rectangle starting point. </td></tr>
-    <tr><td class="paramname">width</td><td>The rectangle's width. </td></tr>
-    <tr><td class="paramname">height</td><td>The rectangle's height. </td></tr>
-  </table>
-  </dd>
-</dl>
 
 </div>
 </div>
@@ -916,32 +629,6 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="aabcf1f6f0091035561c94edc09039459"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void canvas_setLineDash </td>
-          <td>(</td>
-          <td class="paramtype">VGint&#160;</td>
-          <td class="paramname"><em>count</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const VGfloat *&#160;</td>
-          <td class="paramname"><em>data</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="a2c5346df933951fda1e8404eb817c907"></a>
 <div class="memitem">
 <div class="memproto">
@@ -955,6 +642,10 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Copyright (C) 2015 NIPE-SYSTEMS</p>
+<p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p>
+<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License along with this program. If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>. The stroke() method fills the current or given path with the current stroke style using the non-zero or even-odd winding rule. </p>
 
 </div>
 </div>
@@ -993,44 +684,40 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Copyright (C) 2015 NIPE-SYSTEMS</p>
+<p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p>
+<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License along with this program. If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>. The strokeRect() method paints a rectangle which has a starting point at (x, y) and has a w width and an h height onto the canvas, using the current stroke style. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>The x axis of the coordinate for the rectangle starting point. </td></tr>
+    <tr><td class="paramname">y</td><td>The y axis of the coordinate for the rectangle starting point. </td></tr>
+    <tr><td class="paramname">width</td><td>The rectangle's width. </td></tr>
+    <tr><td class="paramname">height</td><td>The rectangle's height. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
-<a class="anchor" id="a3849524cf904f77ae7930bea5965884d"></a>
+<a class="anchor" id="ad669bb8bfd22b8cbece647fcfd50d311"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void canvas_strokeStyle_color </td>
+          <td class="memname">void canvas_strokeStyle </td>
           <td>(</td>
-          <td class="paramtype">VGfloat&#160;</td>
-          <td class="paramname"><em>red</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype"><a class="el" href="structpaint__t.html">paint_t</a> *&#160;</td>
+          <td class="paramname"><em>paint</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">VGfloat&#160;</td>
-          <td class="paramname"><em>green</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">VGfloat&#160;</td>
-          <td class="paramname"><em>blue</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">VGfloat&#160;</td>
-          <td class="paramname"><em>alpha</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>The strokeStyle property specifies the color or style to use inside shapes. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">paint</td><td>The stroke style paint. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -1130,7 +817,7 @@ Variables</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Sep 26 2015 16:15:20 for node-vgcanvas by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 27 2015 10:17:24 for node-vgcanvas by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.10
 </small></address>

@@ -57,12 +57,6 @@ typedef struct canvas_state_t
 	struct canvas_state_t *next;
 } canvas_state_t;
 
-typedef struct
-{
-	char *path;
-	FT_Face face;
-} font_t;
-
 extern VGPath currentPath;
 
 void canvas__init(void);

@@ -15,12 +15,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <stdio.h>
-#include <math.h>
-
-#include "ft2build.h"
-#include FT_FREETYPE_H
-#include FT_OUTLINE_H
+#include "include-core.h"
+#include "include-openvg.h"
+#include "include-freetype.h"
 
 #include "egl-util.h"
 #include "canvas.h"
@@ -34,6 +31,11 @@
 #include "canvas-moveTo.h"
 #include "canvas-closePath.h"
 #include "canvas-lineTo.h"
+#include "canvas-setLineDash.h"
+#include "canvas-font.h"
+#include "canvas-fillText.h"
+#include "canvas-strokeText.h"
+#include "font-util.h"
 
 int main(void)
 {
@@ -41,7 +43,7 @@ int main(void)
 	
 	canvas__init();
 	
-	font_new("./font.ttf");
+	font_util_new("./font.ttf");
 	
 	canvas_clearRect(0, 0, egl_get_width(), egl_get_height());
 	canvas_lineWidth(2);
@@ -101,9 +103,11 @@ int main(void)
 	canvas_lineTo(egl_get_width(), 800);
 	canvas_stroke();
 	
-	canvas_fillStyle(&gradient);
-	canvas_render_text_fill("./font.ttf", "Test", 100, 800, 100);
-	
+	canvas_strokeStyle(&paint);
+	canvas_fillStyle(&paint);
+	canvas_font("./font.ttf", 100);
+	canvas_fillText("Test", 100, 800);
+	canvas_strokeText("Test", 400, 800);
 	
 	// canvas_beginPath();
 	// vgTranslate(100, 100);
@@ -115,7 +119,6 @@ int main(void)
 	// canvas_fill();
 	// vgTranslate(-150, -100);
 	
-	
 	canvas_fillRect(60, 100, 10, 64);
 	
 	egl_swap_buffers();
@@ -125,6 +128,8 @@ int main(void)
 	
 	paint_destroy(&paint);
 	paint_destroy(&gradient);
+	paint_destroy(&textGradient);
+	paint_destroy(&radial);
 	canvas__cleanup();
 	
 	return 0;

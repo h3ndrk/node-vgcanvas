@@ -19,6 +19,7 @@
 #include "include-openvg.h"
 // #include "include-freetype.h"
 
+#include "canvas-paint.h"
 #include "canvas-strokeStyle.h"
 
 static paint_t *canvas_strokeStyle_paint = NULL;

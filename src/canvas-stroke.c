@@ -20,6 +20,8 @@
 // #include "include-freetype.h"
 
 #include "canvas-beginPath.h"
+#include "canvas-paint.h"
+#include "canvas-strokeStyle.h"
 #include "canvas-stroke.h"
 
 /**
@@ -28,7 +30,7 @@
  */
 void canvas_stroke(void)
 {
-	paint_activate(strokePaint, VG_STROKE_PATH);
+	paint_activate(canvas_strokeStyle_get(), VG_STROKE_PATH);
 	
 	vgDrawPath(canvas_beginPath_get(), VG_STROKE_PATH);
 }

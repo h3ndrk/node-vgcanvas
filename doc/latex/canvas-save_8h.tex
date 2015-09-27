@@ -21,7 +21,7 @@ void \hyperlink{canvas-save_8h_a2e0a1c92b277e1ba569f0c1a6d2eb093}{canvas\+\_\+sa
 \item 
 \hyperlink{structcanvas__save__stack__t}{canvas\+\_\+save\+\_\+stack\+\_\+t} $\ast$ \hyperlink{canvas-save_8h_af7ed9425b815c74e76980a76480f31c4}{canvas\+\_\+save\+\_\+get} (void)
 \item 
-void \hyperlink{canvas-save_8h_aa4d2313aaea02c86e42f86ec5975fbe2}{canvas\+\_\+clip\+\_\+set} (\hyperlink{structcanvas__save__stack__t}{canvas\+\_\+save\+\_\+stack\+\_\+t} $\ast$mask)
+void \hyperlink{canvas-save_8h_a80c6b83cd52721033525e153cde878e7}{canvas\+\_\+save\+\_\+set} (\hyperlink{structcanvas__save__stack__t}{canvas\+\_\+save\+\_\+stack\+\_\+t} $\ast$mask)
 \end{DoxyCompactItemize}
 
 
@@ -38,18 +38,6 @@ This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+
 You should have received a copy of the G\+N\+U General Public License along with this program. If not, see \href{http://www.gnu.org/licenses/}{\tt http\+://www.\+gnu.\+org/licenses/}. 
 
 \subsection{Function Documentation}
-\hypertarget{canvas-save_8h_aa4d2313aaea02c86e42f86ec5975fbe2}{}\index{canvas-\/save.\+h@{canvas-\/save.\+h}!canvas\+\_\+clip\+\_\+set@{canvas\+\_\+clip\+\_\+set}}
-\index{canvas\+\_\+clip\+\_\+set@{canvas\+\_\+clip\+\_\+set}!canvas-\/save.\+h@{canvas-\/save.\+h}}
-\subsubsection[{canvas\+\_\+clip\+\_\+set(canvas\+\_\+save\+\_\+stack\+\_\+t $\ast$mask)}]{\setlength{\rightskip}{0pt plus 5cm}void canvas\+\_\+clip\+\_\+set (
-\begin{DoxyParamCaption}
-\item[{{\bf canvas\+\_\+save\+\_\+stack\+\_\+t} $\ast$}]{stack}
-\end{DoxyParamCaption}
-)}\label{canvas-save_8h_aa4d2313aaea02c86e42f86ec5975fbe2}
-Sets the stack. 
-\begin{DoxyParams}{Parameters}
-{\em stack} & The stack. \\
-\hline
-\end{DoxyParams}
 \hypertarget{canvas-save_8h_ae82cc37b7b2b1c9148a08032a0c7cc40}{}\index{canvas-\/save.\+h@{canvas-\/save.\+h}!canvas\+\_\+save@{canvas\+\_\+save}}
 \index{canvas\+\_\+save@{canvas\+\_\+save}!canvas-\/save.\+h@{canvas-\/save.\+h}}
 \subsubsection[{canvas\+\_\+save(void)}]{\setlength{\rightskip}{0pt plus 5cm}void canvas\+\_\+save (
@@ -86,3 +74,15 @@ Cleans up specific stack states. Destroys the given state of the stack.
 Returns the stack. \begin{DoxyReturn}{Returns}
 The stack. 
 \end{DoxyReturn}
+\hypertarget{canvas-save_8h_a80c6b83cd52721033525e153cde878e7}{}\index{canvas-\/save.\+h@{canvas-\/save.\+h}!canvas\+\_\+save\+\_\+set@{canvas\+\_\+save\+\_\+set}}
+\index{canvas\+\_\+save\+\_\+set@{canvas\+\_\+save\+\_\+set}!canvas-\/save.\+h@{canvas-\/save.\+h}}
+\subsubsection[{canvas\+\_\+save\+\_\+set(canvas\+\_\+save\+\_\+stack\+\_\+t $\ast$mask)}]{\setlength{\rightskip}{0pt plus 5cm}void canvas\+\_\+save\+\_\+set (
+\begin{DoxyParamCaption}
+\item[{{\bf canvas\+\_\+save\+\_\+stack\+\_\+t} $\ast$}]{stack}
+\end{DoxyParamCaption}
+)}\label{canvas-save_8h_a80c6b83cd52721033525e153cde878e7}
+Sets the stack. 
+\begin{DoxyParams}{Parameters}
+{\em stack} & The stack. \\
+\hline
+\end{DoxyParams}

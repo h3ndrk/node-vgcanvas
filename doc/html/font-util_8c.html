@@ -95,6 +95,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="textblock"><code>#include &quot;<a class="el" href="include-core_8h_source.html">include-core.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="include-openvg_8h_source.html">include-openvg.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="include-freetype_8h_source.html">include-freetype.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="font-util_8h_source.html">font-util.h</a>&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
@@ -107,18 +108,28 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ae3bb49cd03b02cac95a2748cfd50c8f6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="font-util_8c.html#ae3bb49cd03b02cac95a2748cfd50c8f6">canvas_render_text_fill</a> (char *path, char *text, float x, float y, unsigned int size)</td></tr>
-<tr class="separator:ae3bb49cd03b02cac95a2748cfd50c8f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0beaa53ffa53d09c2ae9b6848dd24cc7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="font-util_8c.html#a0beaa53ffa53d09c2ae9b6848dd24cc7">canvas_render_text_stroke</a> (char *path, char *text, float x, float y, unsigned int size)</td></tr>
-<tr class="separator:a0beaa53ffa53d09c2ae9b6848dd24cc7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a669b357bedc37be27d7549bd3b8b36f8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="font-util_8c.html#a669b357bedc37be27d7549bd3b8b36f8">font_init</a> (void)</td></tr>
-<tr class="separator:a669b357bedc37be27d7549bd3b8b36f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a10be0bd82203d8a8b471752915ac73d7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="font-util_8c.html#a10be0bd82203d8a8b471752915ac73d7">font_cleanup</a> (void)</td></tr>
-<tr class="separator:a10be0bd82203d8a8b471752915ac73d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8860cee077ba27edc442a3fdf9440bdc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="font-util_8c.html#a8860cee077ba27edc442a3fdf9440bdc">font_new</a> (char *path)</td></tr>
-<tr class="separator:a8860cee077ba27edc442a3fdf9440bdc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7f5555363a802647a1a2cfdd67891922"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="font-util_8c.html#a7f5555363a802647a1a2cfdd67891922">font_remove</a> (char *path)</td></tr>
-<tr class="separator:a7f5555363a802647a1a2cfdd67891922"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e1f4f43990064db73c98ffb44b99201"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="font-util_8c.html#a2e1f4f43990064db73c98ffb44b99201">convert_outline</a> (const FT_Vector *points, const char *tags, const short *contours, short contours_count, short points_count)</td></tr>
+<tr class="separator:a2e1f4f43990064db73c98ffb44b99201"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab67157cbf375fb8580de7c957fbd3626"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="font-util_8c.html#ab67157cbf375fb8580de7c957fbd3626">font_util_get</a> (char *path)</td></tr>
+<tr class="separator:ab67157cbf375fb8580de7c957fbd3626"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17cd259b0b9dd2e02bd08f7f3f3c5b58"><td class="memItemLeft" align="right" valign="top">FT_Face&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="font-util_8c.html#a17cd259b0b9dd2e02bd08f7f3f3c5b58">font_util_get_face</a> (int fonts_index, char character)</td></tr>
+<tr class="separator:a17cd259b0b9dd2e02bd08f7f3f3c5b58"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace26dcda0550c0649bdfd9168e963c27"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="font-util_8c.html#ace26dcda0550c0649bdfd9168e963c27">font_util_init</a> (void)</td></tr>
+<tr class="separator:ace26dcda0550c0649bdfd9168e963c27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1a9b6e2faff61b99fc4302f6388c352"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="font-util_8c.html#ab1a9b6e2faff61b99fc4302f6388c352">font_util_cleanup</a> (void)</td></tr>
+<tr class="separator:ab1a9b6e2faff61b99fc4302f6388c352"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c16da6fd800e231ec79a4f3a6b8b70a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="font-util_8c.html#a8c16da6fd800e231ec79a4f3a6b8b70a">font_util_new</a> (char *path)</td></tr>
+<tr class="separator:a8c16da6fd800e231ec79a4f3a6b8b70a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4187fe09f2ceb1ed6ec21a877521aaf2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="font-util_8c.html#a4187fe09f2ceb1ed6ec21a877521aaf2">font_util_remove</a> (char *path)</td></tr>
+<tr class="separator:a4187fe09f2ceb1ed6ec21a877521aaf2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f7b521baa3aabbf1cfdb95366d8c6a1"><td class="memItemLeft" align="right" valign="top">VGuint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="font-util_8c.html#a3f7b521baa3aabbf1cfdb95366d8c6a1">segments_count_get</a> (void)</td></tr>
+<tr class="separator:a3f7b521baa3aabbf1cfdb95366d8c6a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a172b6b169cd4108eaa3412788db42220"><td class="memItemLeft" align="right" valign="top">VGubyte *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="font-util_8c.html#a172b6b169cd4108eaa3412788db42220">segments_get</a> (void)</td></tr>
+<tr class="separator:a172b6b169cd4108eaa3412788db42220"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a684c2dd54133ee0f96fa398f00e9dbd7"><td class="memItemLeft" align="right" valign="top">VGuint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="font-util_8c.html#a684c2dd54133ee0f96fa398f00e9dbd7">coords_count_get</a> (void)</td></tr>
+<tr class="separator:a684c2dd54133ee0f96fa398f00e9dbd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0da680a50f460d392d95aacde6ecdbba"><td class="memItemLeft" align="right" valign="top">VGfloat *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="font-util_8c.html#a0da680a50f460d392d95aacde6ecdbba">coords_get</a> (void)</td></tr>
+<tr class="separator:a0da680a50f460d392d95aacde6ecdbba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a class="anchor" id="a3328f7792ae2c0722a0ad16bce879029"></a>
@@ -166,39 +177,39 @@ Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a class="anchor" id="ae3bb49cd03b02cac95a2748cfd50c8f6"></a>
+<a class="anchor" id="a2e1f4f43990064db73c98ffb44b99201"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void canvas_render_text_fill </td>
+          <td class="memname">void convert_outline </td>
           <td>(</td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>path</em>, </td>
+          <td class="paramtype">const FT_Vector *&#160;</td>
+          <td class="paramname"><em>points</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>text</em>, </td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>tags</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>x</em>, </td>
+          <td class="paramtype">const short *&#160;</td>
+          <td class="paramname"><em>contours</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>y</em>, </td>
+          <td class="paramtype">short&#160;</td>
+          <td class="paramname"><em>contours_count</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned int&#160;</td>
-          <td class="paramname"><em>size</em>&#160;</td>
+          <td class="paramtype">short&#160;</td>
+          <td class="paramname"><em>points_count</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -210,39 +221,85 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a0beaa53ffa53d09c2ae9b6848dd24cc7"></a>
+<a class="anchor" id="a684c2dd54133ee0f96fa398f00e9dbd7"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void canvas_render_text_stroke </td>
+          <td class="memname">VGuint coords_count_get </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a0da680a50f460d392d95aacde6ecdbba"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VGfloat* coords_get </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ab1a9b6e2faff61b99fc4302f6388c352"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void font_util_cleanup </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ab67157cbf375fb8580de7c957fbd3626"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int font_util_get </td>
           <td>(</td>
           <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>path</em>, </td>
+          <td class="paramname"><em>path</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a17cd259b0b9dd2e02bd08f7f3f3c5b58"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">FT_Face font_util_get_face </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>fonts_index</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>text</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>x</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>y</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">unsigned int&#160;</td>
-          <td class="paramname"><em>size</em>&#160;</td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>character</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -254,12 +311,12 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a10be0bd82203d8a8b471752915ac73d7"></a>
+<a class="anchor" id="ace26dcda0550c0649bdfd9168e963c27"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void font_cleanup </td>
+          <td class="memname">void font_util_init </td>
           <td>(</td>
           <td class="paramtype">void&#160;</td>
           <td class="paramname"></td><td>)</td>
@@ -270,12 +327,44 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a669b357bedc37be27d7549bd3b8b36f8"></a>
+<a class="anchor" id="a8c16da6fd800e231ec79a4f3a6b8b70a"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void font_init </td>
+          <td class="memname">void font_util_new </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>path</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a4187fe09f2ceb1ed6ec21a877521aaf2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void font_util_remove </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>path</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a3f7b521baa3aabbf1cfdb95366d8c6a1"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VGuint segments_count_get </td>
           <td>(</td>
           <td class="paramtype">void&#160;</td>
           <td class="paramname"></td><td>)</td>
@@ -286,31 +375,15 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a8860cee077ba27edc442a3fdf9440bdc"></a>
+<a class="anchor" id="a172b6b169cd4108eaa3412788db42220"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void font_new </td>
+          <td class="memname">VGubyte* segments_get </td>
           <td>(</td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>path</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a7f5555363a802647a1a2cfdd67891922"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void font_remove </td>
-          <td>(</td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>path</em></td><td>)</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -321,7 +394,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Sep 26 2015 16:15:21 for node-vgcanvas by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 27 2015 10:17:24 for node-vgcanvas by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.10
 </small></address>

@@ -1,0 +1,54 @@
+\hypertarget{canvas-font_8c}{}\section{src/canvas-\/font.c File Reference}
+\label{canvas-font_8c}\index{src/canvas-\/font.\+c@{src/canvas-\/font.\+c}}
+{\ttfamily \#include \char`\"{}include-\/core.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}include-\/openvg.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}include-\/freetype.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}font-\/util.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}canvas-\/font.\+h\char`\"{}}\\*
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{canvas-font_8c_ab6757907ce66133ef459eaf98d8d372b}{canvas\+\_\+font} (char $\ast$path, V\+Gfloat size)
+\item 
+int \hyperlink{canvas-font_8c_a5bc1febd844b66e157c6c35d4f2ac7d1}{canvas\+\_\+font\+\_\+get\+\_\+index} (void)
+\item 
+float \hyperlink{canvas-font_8c_a4c43b0f98c5439d79a3c1ac960b8f591}{canvas\+\_\+font\+\_\+get\+\_\+size} (void)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{canvas-font_8c_ab6757907ce66133ef459eaf98d8d372b}{}\index{canvas-\/font.\+c@{canvas-\/font.\+c}!canvas\+\_\+font@{canvas\+\_\+font}}
+\index{canvas\+\_\+font@{canvas\+\_\+font}!canvas-\/font.\+c@{canvas-\/font.\+c}}
+\subsubsection[{canvas\+\_\+font(char $\ast$path, V\+Gfloat size)}]{\setlength{\rightskip}{0pt plus 5cm}void canvas\+\_\+font (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{path, }
+\item[{V\+Gfloat}]{size}
+\end{DoxyParamCaption}
+)}\label{canvas-font_8c_ab6757907ce66133ef459eaf98d8d372b}
+The font property specifies the current text style being used when drawing text. This string uses the same syntax as the C\+S\+S font specifier. The default font is undefined. 
+\begin{DoxyParams}{Parameters}
+{\em path} & The font path. \\
+\hline
+{\em size} & The font size in space units. \\
+\hline
+\end{DoxyParams}
+\hypertarget{canvas-font_8c_a5bc1febd844b66e157c6c35d4f2ac7d1}{}\index{canvas-\/font.\+c@{canvas-\/font.\+c}!canvas\+\_\+font\+\_\+get\+\_\+index@{canvas\+\_\+font\+\_\+get\+\_\+index}}
+\index{canvas\+\_\+font\+\_\+get\+\_\+index@{canvas\+\_\+font\+\_\+get\+\_\+index}!canvas-\/font.\+c@{canvas-\/font.\+c}}
+\subsubsection[{canvas\+\_\+font\+\_\+get\+\_\+index(void)}]{\setlength{\rightskip}{0pt plus 5cm}int canvas\+\_\+font\+\_\+get\+\_\+index (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{canvas-font_8c_a5bc1febd844b66e157c6c35d4f2ac7d1}
+Returns the font index. \begin{DoxyReturn}{Returns}
+The font index. 
+\end{DoxyReturn}
+\hypertarget{canvas-font_8c_a4c43b0f98c5439d79a3c1ac960b8f591}{}\index{canvas-\/font.\+c@{canvas-\/font.\+c}!canvas\+\_\+font\+\_\+get\+\_\+size@{canvas\+\_\+font\+\_\+get\+\_\+size}}
+\index{canvas\+\_\+font\+\_\+get\+\_\+size@{canvas\+\_\+font\+\_\+get\+\_\+size}!canvas-\/font.\+c@{canvas-\/font.\+c}}
+\subsubsection[{canvas\+\_\+font\+\_\+get\+\_\+size(void)}]{\setlength{\rightskip}{0pt plus 5cm}float canvas\+\_\+font\+\_\+get\+\_\+size (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{canvas-font_8c_a4c43b0f98c5439d79a3c1ac960b8f591}
+Returns the font size. \begin{DoxyReturn}{Returns}
+The font size. 
+\end{DoxyReturn}

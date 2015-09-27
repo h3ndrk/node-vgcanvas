@@ -1,13 +1,11 @@
 \hypertarget{canvas_8h}{}\section{src/canvas.h File Reference}
 \label{canvas_8h}\index{src/canvas.\+h@{src/canvas.\+h}}
 {\ttfamily \#include $<$V\+G/openvg.\+h$>$}\\*
-{\ttfamily \#include \char`\"{}color.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}canvas-\/paint.\+h\char`\"{}}\\*
 \subsection*{Data Structures}
 \begin{DoxyCompactItemize}
 \item 
 struct \hyperlink{structcanvas__state__t}{canvas\+\_\+state\+\_\+t}
-\item 
-struct \hyperlink{structfont__t}{font\+\_\+t}
 \end{DoxyCompactItemize}
 \subsection*{Typedefs}
 \begin{DoxyCompactItemize}
@@ -40,29 +38,13 @@ void \hyperlink{canvas_8h_a73f7ee53af695ef904c3033f8f7601af}{canvas\+\_\+clear\+
 \item 
 void \hyperlink{canvas_8h_ad643f83db27f2150aa3915b6e6d00afb}{canvas\+\_\+fill\+Rect} (V\+Gfloat x, V\+Gfloat y, V\+Gfloat width, V\+Gfloat height)
 \item 
-void \hyperlink{canvas_8h_a829bb44fbc54c0ab04d9a306f95f1578}{canvas\+\_\+fill\+Style\+\_\+color} (V\+Gfloat red, V\+Gfloat green, V\+Gfloat blue, V\+Gfloat alpha)
+void \hyperlink{canvas_8h_ac24699a333c4d5c50b774c720140afa8}{canvas\+\_\+fill\+Style} (\hyperlink{structpaint__t}{paint\+\_\+t} $\ast$paint)
 \item 
 void \hyperlink{canvas_8h_a75cdd36359ab8d1fa8ffed8ece5cd9bb}{canvas\+\_\+stroke\+Rect} (V\+Gfloat x, V\+Gfloat y, V\+Gfloat width, V\+Gfloat height)
 \item 
-void \hyperlink{canvas_8h_a3849524cf904f77ae7930bea5965884d}{canvas\+\_\+stroke\+Style\+\_\+color} (V\+Gfloat red, V\+Gfloat green, V\+Gfloat blue, V\+Gfloat alpha)
-\item 
-void \hyperlink{canvas_8h_aabcf1f6f0091035561c94edc09039459}{canvas\+\_\+set\+Line\+Dash} (V\+Gint count, const V\+Gfloat $\ast$data)
-\item 
-void \hyperlink{canvas_8h_ae50eacfa82cdf55290a72533aec448d6}{canvas\+\_\+begin\+Path} (void)
-\item 
-void \hyperlink{canvas_8h_a7432c31791dd305a82a7f48f41b83e85}{canvas\+\_\+move\+To} (V\+Gfloat x, V\+Gfloat y)
-\item 
-void \hyperlink{canvas_8h_aa6a01d301b158fcbef3a55276fb7f913}{canvas\+\_\+line\+To} (V\+Gfloat x, V\+Gfloat y)
-\item 
-void \hyperlink{canvas_8h_a1df6a511ce3c960ef0cd53dcbd856080}{canvas\+\_\+quadratic\+Curve\+To} (V\+Gfloat cpx, V\+Gfloat cpy, V\+Gfloat x, V\+Gfloat y)
-\item 
-void \hyperlink{canvas_8h_a7b3b15dddf44c5b41b3538646e834064}{canvas\+\_\+bezier\+Curve\+To} (V\+Gfloat cp1x, V\+Gfloat cp1y, V\+Gfloat cp2x, V\+Gfloat cp2y, V\+Gfloat x, V\+Gfloat y)
+void \hyperlink{canvas_8h_ad669bb8bfd22b8cbece647fcfd50d311}{canvas\+\_\+stroke\+Style} (\hyperlink{structpaint__t}{paint\+\_\+t} $\ast$paint)
 \item 
 void \hyperlink{canvas_8h_ac60ce504adbe3e8bfbd672a06195607d}{canvas\+\_\+arc} (V\+Gfloat x, V\+Gfloat y, V\+Gfloat radius, V\+Gfloat start\+\_\+angle, V\+Gfloat end\+\_\+angle, V\+Gboolean anticlockwise)
-\item 
-void \hyperlink{canvas_8h_a71f54620490bd9b84d777cae2050141d}{canvas\+\_\+rect} (V\+Gfloat x, V\+Gfloat y, V\+Gfloat width, V\+Gfloat height)
-\item 
-void \hyperlink{canvas_8h_a81315a8d6727ba368238372b796fd987}{canvas\+\_\+close\+Path} (void)
 \item 
 void \hyperlink{canvas_8h_ade0def031a2b4c1dcb342cb19c1ed695}{canvas\+\_\+clip} (void)
 \item 
@@ -153,7 +135,13 @@ You should have received a copy of the G\+N\+U General Public License along with
 \item[{void}]{}
 \end{DoxyParamCaption}
 )}\label{canvas_8h_acb1a6f1da30f2570e87e97a4752d074f}
-\hypertarget{canvas_8h_ac60ce504adbe3e8bfbd672a06195607d}{}\index{canvas.\+h@{canvas.\+h}!canvas\+\_\+arc@{canvas\+\_\+arc}}
+Copyright (C) 2015 N\+I\+P\+E-\/\+S\+Y\+S\+T\+E\+M\+S
+
+This program is free software\+: you can redistribute it and/or modify it under the terms of the G\+N\+U General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+U\+T A\+N\+Y W\+A\+R\+R\+A\+N\+T\+Y; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+T\+Y or F\+I\+T\+N\+E\+S\+S F\+O\+R A P\+A\+R\+T\+I\+C\+U\+L\+A\+R P\+U\+R\+P\+O\+S\+E. See the G\+N\+U General Public License for more details.
+
+You should have received a copy of the G\+N\+U General Public License along with this program. If not, see \href{http://www.gnu.org/licenses/}{\tt http\+://www.\+gnu.\+org/licenses/}. \hypertarget{canvas_8h_ac60ce504adbe3e8bfbd672a06195607d}{}\index{canvas.\+h@{canvas.\+h}!canvas\+\_\+arc@{canvas\+\_\+arc}}
 \index{canvas\+\_\+arc@{canvas\+\_\+arc}!canvas.\+h@{canvas.\+h}}
 \subsubsection[{canvas\+\_\+arc(\+V\+Gfloat x, V\+Gfloat y, V\+Gfloat radius, V\+Gfloat start\+\_\+angle, V\+Gfloat end\+\_\+angle, V\+Gboolean anticlockwise)}]{\setlength{\rightskip}{0pt plus 5cm}void canvas\+\_\+arc (
 \begin{DoxyParamCaption}
@@ -186,46 +174,6 @@ You should have received a copy of the G\+N\+U General Public License along with
 {\em anticlockwise} & A Boolean which, if true, causes the arc to be drawn counter-\/clockwise between the two angles. \\
 \hline
 \end{DoxyParams}
-\hypertarget{canvas_8h_ae50eacfa82cdf55290a72533aec448d6}{}\index{canvas.\+h@{canvas.\+h}!canvas\+\_\+begin\+Path@{canvas\+\_\+begin\+Path}}
-\index{canvas\+\_\+begin\+Path@{canvas\+\_\+begin\+Path}!canvas.\+h@{canvas.\+h}}
-\subsubsection[{canvas\+\_\+begin\+Path(void)}]{\setlength{\rightskip}{0pt plus 5cm}void canvas\+\_\+begin\+Path (
-\begin{DoxyParamCaption}
-\item[{void}]{}
-\end{DoxyParamCaption}
-)}\label{canvas_8h_ae50eacfa82cdf55290a72533aec448d6}
-The begin\+Path() method starts a new path by emptying the list of sub-\/paths. Call this method when you want to create a new path. \hypertarget{canvas_8h_a7b3b15dddf44c5b41b3538646e834064}{}\index{canvas.\+h@{canvas.\+h}!canvas\+\_\+bezier\+Curve\+To@{canvas\+\_\+bezier\+Curve\+To}}
-\index{canvas\+\_\+bezier\+Curve\+To@{canvas\+\_\+bezier\+Curve\+To}!canvas.\+h@{canvas.\+h}}
-\subsubsection[{canvas\+\_\+bezier\+Curve\+To(\+V\+Gfloat cp1x, V\+Gfloat cp1y, V\+Gfloat cp2x, V\+Gfloat cp2y, V\+Gfloat x, V\+Gfloat y)}]{\setlength{\rightskip}{0pt plus 5cm}void canvas\+\_\+bezier\+Curve\+To (
-\begin{DoxyParamCaption}
-\item[{V\+Gfloat}]{cp1x, }
-\item[{V\+Gfloat}]{cp1y, }
-\item[{V\+Gfloat}]{cp2x, }
-\item[{V\+Gfloat}]{cp2y, }
-\item[{V\+Gfloat}]{x, }
-\item[{V\+Gfloat}]{y}
-\end{DoxyParamCaption}
-)}\label{canvas_8h_a7b3b15dddf44c5b41b3538646e834064}
-Copyright (C) 2015 N\+I\+P\+E-\/\+S\+Y\+S\+T\+E\+M\+S
-
-This program is free software\+: you can redistribute it and/or modify it under the terms of the G\+N\+U General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+U\+T A\+N\+Y W\+A\+R\+R\+A\+N\+T\+Y; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+T\+Y or F\+I\+T\+N\+E\+S\+S F\+O\+R A P\+A\+R\+T\+I\+C\+U\+L\+A\+R P\+U\+R\+P\+O\+S\+E. See the G\+N\+U General Public License for more details.
-
-You should have received a copy of the G\+N\+U General Public License along with this program. If not, see \href{http://www.gnu.org/licenses/}{\tt http\+://www.\+gnu.\+org/licenses/}. The bezier\+Curve\+To() method of the Canvas 2\+D A\+P\+I adds a cubic Bézier curve to the path. It requires three points. The first two points are control points and the third one is the end point. The starting point is the last point in the current path, which can be changed using move\+To() before creating the Bézier curve. 
-\begin{DoxyParams}{Parameters}
-{\em cp1x} & The x axis of the coordinate for the first control point. \\
-\hline
-{\em cp1y} & The y axis of the coordinate for the first control point. \\
-\hline
-{\em cp2x} & The x axis of the coordinate for the second control point. \\
-\hline
-{\em cp2y} & The y axis of the coordinate for the second control point. \\
-\hline
-{\em x} & The x axis of the coordinate for the end point. \\
-\hline
-{\em y} & The y axis of the coordinate for the end point. \\
-\hline
-\end{DoxyParams}
 \hypertarget{canvas_8h_a73f7ee53af695ef904c3033f8f7601af}{}\index{canvas.\+h@{canvas.\+h}!canvas\+\_\+clear\+Rect@{canvas\+\_\+clear\+Rect}}
 \index{canvas\+\_\+clear\+Rect@{canvas\+\_\+clear\+Rect}!canvas.\+h@{canvas.\+h}}
 \subsubsection[{canvas\+\_\+clear\+Rect(\+V\+Gfloat x, V\+Gfloat y, V\+Gfloat width, V\+Gfloat height)}]{\setlength{\rightskip}{0pt plus 5cm}void canvas\+\_\+clear\+Rect (
@@ -254,27 +202,20 @@ The method sets all pixels in the rectangle defined by starting point (x, y) and
 \item[{void}]{}
 \end{DoxyParamCaption}
 )}\label{canvas_8h_ade0def031a2b4c1dcb342cb19c1ed695}
-The close\+Path() method causes the point of the pen to move back to the start of the current sub-\/path. It tries to add a straight line (but does not actually draw it) from the current point to the start. If the shape has already been closed or has only one point, this function does nothing. \hypertarget{canvas_8h_a81315a8d6727ba368238372b796fd987}{}\index{canvas.\+h@{canvas.\+h}!canvas\+\_\+close\+Path@{canvas\+\_\+close\+Path}}
-\index{canvas\+\_\+close\+Path@{canvas\+\_\+close\+Path}!canvas.\+h@{canvas.\+h}}
-\subsubsection[{canvas\+\_\+close\+Path(void)}]{\setlength{\rightskip}{0pt plus 5cm}void canvas\+\_\+close\+Path (
-\begin{DoxyParamCaption}
-\item[{void}]{}
-\end{DoxyParamCaption}
-)}\label{canvas_8h_a81315a8d6727ba368238372b796fd987}
-Copyright (C) 2015 N\+I\+P\+E-\/\+S\+Y\+S\+T\+E\+M\+S
-
-This program is free software\+: you can redistribute it and/or modify it under the terms of the G\+N\+U General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+U\+T A\+N\+Y W\+A\+R\+R\+A\+N\+T\+Y; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+T\+Y or F\+I\+T\+N\+E\+S\+S F\+O\+R A P\+A\+R\+T\+I\+C\+U\+L\+A\+R P\+U\+R\+P\+O\+S\+E. See the G\+N\+U General Public License for more details.
-
-You should have received a copy of the G\+N\+U General Public License along with this program. If not, see \href{http://www.gnu.org/licenses/}{\tt http\+://www.\+gnu.\+org/licenses/}. The close\+Path() method causes the point of the pen to move back to the start of the current sub-\/path. It tries to add a straight line (but does not actually draw it) from the current point to the start. If the shape has already been closed or has only one point, this function does nothing. \hypertarget{canvas_8h_a73f1c2a2b8663e01dbb1472c9172bf46}{}\index{canvas.\+h@{canvas.\+h}!canvas\+\_\+fill@{canvas\+\_\+fill}}
+The close\+Path() method causes the point of the pen to move back to the start of the current sub-\/path. It tries to add a straight line (but does not actually draw it) from the current point to the start. If the shape has already been closed or has only one point, this function does nothing. \hypertarget{canvas_8h_a73f1c2a2b8663e01dbb1472c9172bf46}{}\index{canvas.\+h@{canvas.\+h}!canvas\+\_\+fill@{canvas\+\_\+fill}}
 \index{canvas\+\_\+fill@{canvas\+\_\+fill}!canvas.\+h@{canvas.\+h}}
 \subsubsection[{canvas\+\_\+fill(void)}]{\setlength{\rightskip}{0pt plus 5cm}void canvas\+\_\+fill (
 \begin{DoxyParamCaption}
 \item[{void}]{}
 \end{DoxyParamCaption}
 )}\label{canvas_8h_a73f1c2a2b8663e01dbb1472c9172bf46}
-\hypertarget{canvas_8h_ad643f83db27f2150aa3915b6e6d00afb}{}\index{canvas.\+h@{canvas.\+h}!canvas\+\_\+fill\+Rect@{canvas\+\_\+fill\+Rect}}
+Copyright (C) 2015 N\+I\+P\+E-\/\+S\+Y\+S\+T\+E\+M\+S
+
+This program is free software\+: you can redistribute it and/or modify it under the terms of the G\+N\+U General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+U\+T A\+N\+Y W\+A\+R\+R\+A\+N\+T\+Y; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+T\+Y or F\+I\+T\+N\+E\+S\+S F\+O\+R A P\+A\+R\+T\+I\+C\+U\+L\+A\+R P\+U\+R\+P\+O\+S\+E. See the G\+N\+U General Public License for more details.
+
+You should have received a copy of the G\+N\+U General Public License along with this program. If not, see \href{http://www.gnu.org/licenses/}{\tt http\+://www.\+gnu.\+org/licenses/}. The fill() method fills the current or given path with the current fill style using the non-\/zero or even-\/odd winding rule. \hypertarget{canvas_8h_ad643f83db27f2150aa3915b6e6d00afb}{}\index{canvas.\+h@{canvas.\+h}!canvas\+\_\+fill\+Rect@{canvas\+\_\+fill\+Rect}}
 \index{canvas\+\_\+fill\+Rect@{canvas\+\_\+fill\+Rect}!canvas.\+h@{canvas.\+h}}
 \subsubsection[{canvas\+\_\+fill\+Rect(\+V\+Gfloat x, V\+Gfloat y, V\+Gfloat width, V\+Gfloat height)}]{\setlength{\rightskip}{0pt plus 5cm}void canvas\+\_\+fill\+Rect (
 \begin{DoxyParamCaption}
@@ -284,109 +225,13 @@ You should have received a copy of the G\+N\+U General Public License along with
 \item[{V\+Gfloat}]{height}
 \end{DoxyParamCaption}
 )}\label{canvas_8h_ad643f83db27f2150aa3915b6e6d00afb}
-\hypertarget{canvas_8h_a829bb44fbc54c0ab04d9a306f95f1578}{}\index{canvas.\+h@{canvas.\+h}!canvas\+\_\+fill\+Style\+\_\+color@{canvas\+\_\+fill\+Style\+\_\+color}}
-\index{canvas\+\_\+fill\+Style\+\_\+color@{canvas\+\_\+fill\+Style\+\_\+color}!canvas.\+h@{canvas.\+h}}
-\subsubsection[{canvas\+\_\+fill\+Style\+\_\+color(\+V\+Gfloat red, V\+Gfloat green, V\+Gfloat blue, V\+Gfloat alpha)}]{\setlength{\rightskip}{0pt plus 5cm}void canvas\+\_\+fill\+Style\+\_\+color (
-\begin{DoxyParamCaption}
-\item[{V\+Gfloat}]{red, }
-\item[{V\+Gfloat}]{green, }
-\item[{V\+Gfloat}]{blue, }
-\item[{V\+Gfloat}]{alpha}
-\end{DoxyParamCaption}
-)}\label{canvas_8h_a829bb44fbc54c0ab04d9a306f95f1578}
-\hypertarget{canvas_8h_a4ea0a1f591da41fc08834db947ca6b97}{}\index{canvas.\+h@{canvas.\+h}!canvas\+\_\+get\+State@{canvas\+\_\+get\+State}}
-\index{canvas\+\_\+get\+State@{canvas\+\_\+get\+State}!canvas.\+h@{canvas.\+h}}
-\subsubsection[{canvas\+\_\+get\+State(void)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf canvas\+\_\+state\+\_\+t}$\ast$ canvas\+\_\+get\+State (
-\begin{DoxyParamCaption}
-\item[{void}]{}
-\end{DoxyParamCaption}
-)}\label{canvas_8h_a4ea0a1f591da41fc08834db947ca6b97}
-\hypertarget{canvas_8h_aa6a01d301b158fcbef3a55276fb7f913}{}\index{canvas.\+h@{canvas.\+h}!canvas\+\_\+line\+To@{canvas\+\_\+line\+To}}
-\index{canvas\+\_\+line\+To@{canvas\+\_\+line\+To}!canvas.\+h@{canvas.\+h}}
-\subsubsection[{canvas\+\_\+line\+To(\+V\+Gfloat x, V\+Gfloat y)}]{\setlength{\rightskip}{0pt plus 5cm}void canvas\+\_\+line\+To (
-\begin{DoxyParamCaption}
-\item[{V\+Gfloat}]{x, }
-\item[{V\+Gfloat}]{y}
-\end{DoxyParamCaption}
-)}\label{canvas_8h_aa6a01d301b158fcbef3a55276fb7f913}
 Copyright (C) 2015 N\+I\+P\+E-\/\+S\+Y\+S\+T\+E\+M\+S
 
 This program is free software\+: you can redistribute it and/or modify it under the terms of the G\+N\+U General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
 This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+U\+T A\+N\+Y W\+A\+R\+R\+A\+N\+T\+Y; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+T\+Y or F\+I\+T\+N\+E\+S\+S F\+O\+R A P\+A\+R\+T\+I\+C\+U\+L\+A\+R P\+U\+R\+P\+O\+S\+E. See the G\+N\+U General Public License for more details.
 
-You should have received a copy of the G\+N\+U General Public License along with this program. If not, see \href{http://www.gnu.org/licenses/}{\tt http\+://www.\+gnu.\+org/licenses/}. The line\+To() method connects the last point in the sub-\/path to the x, y coordinates with a straight line (but does not actually draw it). 
-\begin{DoxyParams}{Parameters}
-{\em x} & The x axis of the coordinate for the end of the line. \\
-\hline
-{\em y} & The y axis of the coordinate for the end of the line. \\
-\hline
-\end{DoxyParams}
-\hypertarget{canvas_8h_a7432c31791dd305a82a7f48f41b83e85}{}\index{canvas.\+h@{canvas.\+h}!canvas\+\_\+move\+To@{canvas\+\_\+move\+To}}
-\index{canvas\+\_\+move\+To@{canvas\+\_\+move\+To}!canvas.\+h@{canvas.\+h}}
-\subsubsection[{canvas\+\_\+move\+To(\+V\+Gfloat x, V\+Gfloat y)}]{\setlength{\rightskip}{0pt plus 5cm}void canvas\+\_\+move\+To (
-\begin{DoxyParamCaption}
-\item[{V\+Gfloat}]{x, }
-\item[{V\+Gfloat}]{y}
-\end{DoxyParamCaption}
-)}\label{canvas_8h_a7432c31791dd305a82a7f48f41b83e85}
-Copyright (C) 2015 N\+I\+P\+E-\/\+S\+Y\+S\+T\+E\+M\+S
-
-This program is free software\+: you can redistribute it and/or modify it under the terms of the G\+N\+U General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+U\+T A\+N\+Y W\+A\+R\+R\+A\+N\+T\+Y; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+T\+Y or F\+I\+T\+N\+E\+S\+S F\+O\+R A P\+A\+R\+T\+I\+C\+U\+L\+A\+R P\+U\+R\+P\+O\+S\+E. See the G\+N\+U General Public License for more details.
-
-You should have received a copy of the G\+N\+U General Public License along with this program. If not, see \href{http://www.gnu.org/licenses/}{\tt http\+://www.\+gnu.\+org/licenses/}. The move\+To() method moves the starting point of a new sub-\/path to the (x, y) coordinates. 
-\begin{DoxyParams}{Parameters}
-{\em x} & The x axis of the point. \\
-\hline
-{\em y} & The y axis of the point. \\
-\hline
-\end{DoxyParams}
-\hypertarget{canvas_8h_a1df6a511ce3c960ef0cd53dcbd856080}{}\index{canvas.\+h@{canvas.\+h}!canvas\+\_\+quadratic\+Curve\+To@{canvas\+\_\+quadratic\+Curve\+To}}
-\index{canvas\+\_\+quadratic\+Curve\+To@{canvas\+\_\+quadratic\+Curve\+To}!canvas.\+h@{canvas.\+h}}
-\subsubsection[{canvas\+\_\+quadratic\+Curve\+To(\+V\+Gfloat cpx, V\+Gfloat cpy, V\+Gfloat x, V\+Gfloat y)}]{\setlength{\rightskip}{0pt plus 5cm}void canvas\+\_\+quadratic\+Curve\+To (
-\begin{DoxyParamCaption}
-\item[{V\+Gfloat}]{cpx, }
-\item[{V\+Gfloat}]{cpy, }
-\item[{V\+Gfloat}]{x, }
-\item[{V\+Gfloat}]{y}
-\end{DoxyParamCaption}
-)}\label{canvas_8h_a1df6a511ce3c960ef0cd53dcbd856080}
-Copyright (C) 2015 N\+I\+P\+E-\/\+S\+Y\+S\+T\+E\+M\+S
-
-This program is free software\+: you can redistribute it and/or modify it under the terms of the G\+N\+U General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+U\+T A\+N\+Y W\+A\+R\+R\+A\+N\+T\+Y; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+T\+Y or F\+I\+T\+N\+E\+S\+S F\+O\+R A P\+A\+R\+T\+I\+C\+U\+L\+A\+R P\+U\+R\+P\+O\+S\+E. See the G\+N\+U General Public License for more details.
-
-You should have received a copy of the G\+N\+U General Public License along with this program. If not, see \href{http://www.gnu.org/licenses/}{\tt http\+://www.\+gnu.\+org/licenses/}. The quadratic\+Curve\+To() method adds a quadratic Bézier curve to the path. It requires two points. The first point is a control point and the second one is the end point. The starting point is the last point in the current path, which can be changed using move\+To() before creating the quadratic Bézier curve. 
-\begin{DoxyParams}{Parameters}
-{\em cpx} & The x axis of the coordinate for the control point. \\
-\hline
-{\em cpy} & The y axis of the coordinate for the control point. \\
-\hline
-{\em x} & The x axis of the coordinate for the end point. \\
-\hline
-{\em y} & The y axis of the coordinate for the end point. \\
-\hline
-\end{DoxyParams}
-\hypertarget{canvas_8h_a71f54620490bd9b84d777cae2050141d}{}\index{canvas.\+h@{canvas.\+h}!canvas\+\_\+rect@{canvas\+\_\+rect}}
-\index{canvas\+\_\+rect@{canvas\+\_\+rect}!canvas.\+h@{canvas.\+h}}
-\subsubsection[{canvas\+\_\+rect(\+V\+Gfloat x, V\+Gfloat y, V\+Gfloat width, V\+Gfloat height)}]{\setlength{\rightskip}{0pt plus 5cm}void canvas\+\_\+rect (
-\begin{DoxyParamCaption}
-\item[{V\+Gfloat}]{x, }
-\item[{V\+Gfloat}]{y, }
-\item[{V\+Gfloat}]{width, }
-\item[{V\+Gfloat}]{height}
-\end{DoxyParamCaption}
-)}\label{canvas_8h_a71f54620490bd9b84d777cae2050141d}
-Copyright (C) 2015 N\+I\+P\+E-\/\+S\+Y\+S\+T\+E\+M\+S
-
-This program is free software\+: you can redistribute it and/or modify it under the terms of the G\+N\+U General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+U\+T A\+N\+Y W\+A\+R\+R\+A\+N\+T\+Y; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+T\+Y or F\+I\+T\+N\+E\+S\+S F\+O\+R A P\+A\+R\+T\+I\+C\+U\+L\+A\+R P\+U\+R\+P\+O\+S\+E. See the G\+N\+U General Public License for more details.
-
-You should have received a copy of the G\+N\+U General Public License along with this program. If not, see \href{http://www.gnu.org/licenses/}{\tt http\+://www.\+gnu.\+org/licenses/}. The rect() method creates a path for a rectangle at position (x, y) with a size that is determined by width and height. Those four points are connected by straight lines and the sub-\/path is marked as closed, so that you can fill or stroke this rectangle. 
+You should have received a copy of the G\+N\+U General Public License along with this program. If not, see \href{http://www.gnu.org/licenses/}{\tt http\+://www.\+gnu.\+org/licenses/}. The fill\+Rect() method draws a filled rectangle at (x, y) position whose size is determined by width and height and whose style is determined by the fill\+Style attribute. 
 \begin{DoxyParams}{Parameters}
 {\em x} & The x axis of the coordinate for the rectangle starting point. \\
 \hline
@@ -397,6 +242,25 @@ You should have received a copy of the G\+N\+U General Public License along with
 {\em height} & The rectangle\textquotesingle{}s height. \\
 \hline
 \end{DoxyParams}
+\hypertarget{canvas_8h_ac24699a333c4d5c50b774c720140afa8}{}\index{canvas.\+h@{canvas.\+h}!canvas\+\_\+fill\+Style@{canvas\+\_\+fill\+Style}}
+\index{canvas\+\_\+fill\+Style@{canvas\+\_\+fill\+Style}!canvas.\+h@{canvas.\+h}}
+\subsubsection[{canvas\+\_\+fill\+Style(paint\+\_\+t $\ast$paint)}]{\setlength{\rightskip}{0pt plus 5cm}void canvas\+\_\+fill\+Style (
+\begin{DoxyParamCaption}
+\item[{{\bf paint\+\_\+t} $\ast$}]{paint}
+\end{DoxyParamCaption}
+)}\label{canvas_8h_ac24699a333c4d5c50b774c720140afa8}
+The fill\+Style property specifies the color or style to use inside shapes. 
+\begin{DoxyParams}{Parameters}
+{\em paint} & The fill style paint. \\
+\hline
+\end{DoxyParams}
+\hypertarget{canvas_8h_a4ea0a1f591da41fc08834db947ca6b97}{}\index{canvas.\+h@{canvas.\+h}!canvas\+\_\+get\+State@{canvas\+\_\+get\+State}}
+\index{canvas\+\_\+get\+State@{canvas\+\_\+get\+State}!canvas.\+h@{canvas.\+h}}
+\subsubsection[{canvas\+\_\+get\+State(void)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf canvas\+\_\+state\+\_\+t}$\ast$ canvas\+\_\+get\+State (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{canvas_8h_a4ea0a1f591da41fc08834db947ca6b97}
 \hypertarget{canvas_8h_ae3bb49cd03b02cac95a2748cfd50c8f6}{}\index{canvas.\+h@{canvas.\+h}!canvas\+\_\+render\+\_\+text\+\_\+fill@{canvas\+\_\+render\+\_\+text\+\_\+fill}}
 \index{canvas\+\_\+render\+\_\+text\+\_\+fill@{canvas\+\_\+render\+\_\+text\+\_\+fill}!canvas.\+h@{canvas.\+h}}
 \subsubsection[{canvas\+\_\+render\+\_\+text\+\_\+fill(char $\ast$path, char $\ast$text, float x, float y, unsigned int size)}]{\setlength{\rightskip}{0pt plus 5cm}void canvas\+\_\+render\+\_\+text\+\_\+fill (
@@ -439,22 +303,20 @@ You should have received a copy of the G\+N\+U General Public License along with
 \item[{void}]{}
 \end{DoxyParamCaption}
 )}\label{canvas_8h_ae82cc37b7b2b1c9148a08032a0c7cc40}
-The save() method saves the entire state of the canvas by pushing the current state onto a stack. \hypertarget{canvas_8h_aabcf1f6f0091035561c94edc09039459}{}\index{canvas.\+h@{canvas.\+h}!canvas\+\_\+set\+Line\+Dash@{canvas\+\_\+set\+Line\+Dash}}
-\index{canvas\+\_\+set\+Line\+Dash@{canvas\+\_\+set\+Line\+Dash}!canvas.\+h@{canvas.\+h}}
-\subsubsection[{canvas\+\_\+set\+Line\+Dash(\+V\+Gint count, const V\+Gfloat $\ast$data)}]{\setlength{\rightskip}{0pt plus 5cm}void canvas\+\_\+set\+Line\+Dash (
-\begin{DoxyParamCaption}
-\item[{V\+Gint}]{count, }
-\item[{const V\+Gfloat $\ast$}]{data}
-\end{DoxyParamCaption}
-)}\label{canvas_8h_aabcf1f6f0091035561c94edc09039459}
-\hypertarget{canvas_8h_a2c5346df933951fda1e8404eb817c907}{}\index{canvas.\+h@{canvas.\+h}!canvas\+\_\+stroke@{canvas\+\_\+stroke}}
+The save() method saves the entire state of the canvas by pushing the current state onto a stack. \hypertarget{canvas_8h_a2c5346df933951fda1e8404eb817c907}{}\index{canvas.\+h@{canvas.\+h}!canvas\+\_\+stroke@{canvas\+\_\+stroke}}
 \index{canvas\+\_\+stroke@{canvas\+\_\+stroke}!canvas.\+h@{canvas.\+h}}
 \subsubsection[{canvas\+\_\+stroke(void)}]{\setlength{\rightskip}{0pt plus 5cm}void canvas\+\_\+stroke (
 \begin{DoxyParamCaption}
 \item[{void}]{}
 \end{DoxyParamCaption}
 )}\label{canvas_8h_a2c5346df933951fda1e8404eb817c907}
-\hypertarget{canvas_8h_a75cdd36359ab8d1fa8ffed8ece5cd9bb}{}\index{canvas.\+h@{canvas.\+h}!canvas\+\_\+stroke\+Rect@{canvas\+\_\+stroke\+Rect}}
+Copyright (C) 2015 N\+I\+P\+E-\/\+S\+Y\+S\+T\+E\+M\+S
+
+This program is free software\+: you can redistribute it and/or modify it under the terms of the G\+N\+U General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+U\+T A\+N\+Y W\+A\+R\+R\+A\+N\+T\+Y; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+T\+Y or F\+I\+T\+N\+E\+S\+S F\+O\+R A P\+A\+R\+T\+I\+C\+U\+L\+A\+R P\+U\+R\+P\+O\+S\+E. See the G\+N\+U General Public License for more details.
+
+You should have received a copy of the G\+N\+U General Public License along with this program. If not, see \href{http://www.gnu.org/licenses/}{\tt http\+://www.\+gnu.\+org/licenses/}. The stroke() method fills the current or given path with the current stroke style using the non-\/zero or even-\/odd winding rule. \hypertarget{canvas_8h_a75cdd36359ab8d1fa8ffed8ece5cd9bb}{}\index{canvas.\+h@{canvas.\+h}!canvas\+\_\+stroke\+Rect@{canvas\+\_\+stroke\+Rect}}
 \index{canvas\+\_\+stroke\+Rect@{canvas\+\_\+stroke\+Rect}!canvas.\+h@{canvas.\+h}}
 \subsubsection[{canvas\+\_\+stroke\+Rect(\+V\+Gfloat x, V\+Gfloat y, V\+Gfloat width, V\+Gfloat height)}]{\setlength{\rightskip}{0pt plus 5cm}void canvas\+\_\+stroke\+Rect (
 \begin{DoxyParamCaption}
@@ -464,16 +326,35 @@ The save() method saves the entire state of the canvas by pushing the current st
 \item[{V\+Gfloat}]{height}
 \end{DoxyParamCaption}
 )}\label{canvas_8h_a75cdd36359ab8d1fa8ffed8ece5cd9bb}
-\hypertarget{canvas_8h_a3849524cf904f77ae7930bea5965884d}{}\index{canvas.\+h@{canvas.\+h}!canvas\+\_\+stroke\+Style\+\_\+color@{canvas\+\_\+stroke\+Style\+\_\+color}}
-\index{canvas\+\_\+stroke\+Style\+\_\+color@{canvas\+\_\+stroke\+Style\+\_\+color}!canvas.\+h@{canvas.\+h}}
-\subsubsection[{canvas\+\_\+stroke\+Style\+\_\+color(\+V\+Gfloat red, V\+Gfloat green, V\+Gfloat blue, V\+Gfloat alpha)}]{\setlength{\rightskip}{0pt plus 5cm}void canvas\+\_\+stroke\+Style\+\_\+color (
+Copyright (C) 2015 N\+I\+P\+E-\/\+S\+Y\+S\+T\+E\+M\+S
+
+This program is free software\+: you can redistribute it and/or modify it under the terms of the G\+N\+U General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+U\+T A\+N\+Y W\+A\+R\+R\+A\+N\+T\+Y; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+T\+Y or F\+I\+T\+N\+E\+S\+S F\+O\+R A P\+A\+R\+T\+I\+C\+U\+L\+A\+R P\+U\+R\+P\+O\+S\+E. See the G\+N\+U General Public License for more details.
+
+You should have received a copy of the G\+N\+U General Public License along with this program. If not, see \href{http://www.gnu.org/licenses/}{\tt http\+://www.\+gnu.\+org/licenses/}. The stroke\+Rect() method paints a rectangle which has a starting point at (x, y) and has a w width and an h height onto the canvas, using the current stroke style. 
+\begin{DoxyParams}{Parameters}
+{\em x} & The x axis of the coordinate for the rectangle starting point. \\
+\hline
+{\em y} & The y axis of the coordinate for the rectangle starting point. \\
+\hline
+{\em width} & The rectangle\textquotesingle{}s width. \\
+\hline
+{\em height} & The rectangle\textquotesingle{}s height. \\
+\hline
+\end{DoxyParams}
+\hypertarget{canvas_8h_ad669bb8bfd22b8cbece647fcfd50d311}{}\index{canvas.\+h@{canvas.\+h}!canvas\+\_\+stroke\+Style@{canvas\+\_\+stroke\+Style}}
+\index{canvas\+\_\+stroke\+Style@{canvas\+\_\+stroke\+Style}!canvas.\+h@{canvas.\+h}}
+\subsubsection[{canvas\+\_\+stroke\+Style(paint\+\_\+t $\ast$paint)}]{\setlength{\rightskip}{0pt plus 5cm}void canvas\+\_\+stroke\+Style (
 \begin{DoxyParamCaption}
-\item[{V\+Gfloat}]{red, }
-\item[{V\+Gfloat}]{green, }
-\item[{V\+Gfloat}]{blue, }
-\item[{V\+Gfloat}]{alpha}
+\item[{{\bf paint\+\_\+t} $\ast$}]{paint}
 \end{DoxyParamCaption}
-)}\label{canvas_8h_a3849524cf904f77ae7930bea5965884d}
+)}\label{canvas_8h_ad669bb8bfd22b8cbece647fcfd50d311}
+The stroke\+Style property specifies the color or style to use inside shapes. 
+\begin{DoxyParams}{Parameters}
+{\em paint} & The stroke style paint. \\
+\hline
+\end{DoxyParams}
 \hypertarget{canvas_8h_af5f88188bfa0277b1ab07e00659f089c}{}\index{canvas.\+h@{canvas.\+h}!canvas\+\_\+text@{canvas\+\_\+text}}
 \index{canvas\+\_\+text@{canvas\+\_\+text}!canvas.\+h@{canvas.\+h}}
 \subsubsection[{canvas\+\_\+text(char ch)}]{\setlength{\rightskip}{0pt plus 5cm}void canvas\+\_\+text (
