@@ -9,9 +9,9 @@ Canvas 2D Method | C implementation | C++ wrapper implementation | Node.JS imple
 `VGContext.canvas` |   |   |   
 `VGContext.currentTransform` |   |   |   
 `VGContext.direction` |   |   |   
-`VGContext.fillStyle` | API unfinished |   |   
+`VGContext.fillStyle` | implemented |   |   
 `VGContext.filter` |   |   |   
-`VGContext.font` | API unfinished |   |   
+`VGContext.font` | implemented |   |   
 `VGContext.globalAlpha` | implemented |   |   
 `VGContext.globalCompositeOperation` |   |   |   
 `VGContext.imageSmoothingEnabled` |   |   |   
@@ -24,7 +24,7 @@ Canvas 2D Method | C implementation | C++ wrapper implementation | Node.JS imple
 `VGContext.shadowColor` |   |   |   
 `VGContext.shadowOffsetX` |   |   |   
 `VGContext.shadowOffsetY` |   |   |   
-`VGContext.strokeStyle` | API unfinished |   |   
+`VGContext.strokeStyle` | implemented |   |   
 `VGContext.textAlign` |   |   |   
 `VGContext.textBaseline` |   |   |   
 `VGContext.textBaseline` |   |   |   
