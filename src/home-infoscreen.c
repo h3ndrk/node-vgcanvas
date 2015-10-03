@@ -20,26 +20,37 @@
 #include "include-freetype.h"
 
 #include "egl-util.h"
-#include "canvas.h"
-#include "canvas-fillStyle.h"
-#include "canvas-strokeStyle.h"
-#include "canvas-paint.h"
-#include "canvas-clearRect.h"
-#include "canvas-lineWidth.h"
-#include "canvas-lineCap.h"
-#include "canvas-lineJoin.h"
-#include "canvas-globalAlpha.h"
-#include "canvas-beginPath.h"
-#include "canvas-moveTo.h"
-#include "canvas-closePath.h"
-#include "canvas-lineTo.h"
-#include "canvas-setLineDash.h"
-#include "canvas-font.h"
-#include "canvas-fillText.h"
-#include "canvas-strokeText.h"
-#include "canvas-lineDashOffset.h"
-#include "canvas-rect.h"
 #include "font-util.h"
+#include "canvas-beginPath.h"
+#include "canvas-bezierCurveTo.h"
+#include "canvas-clearRect.h"
+#include "canvas-globalAlpha.h"
+#include "canvas-lineCap.h"
+#include "canvas-lineDashOffset.h"
+#include "canvas-lineJoin.h"
+#include "canvas-lineTo.h"
+#include "canvas-lineWidth.h"
+#include "canvas-moveTo.h"
+#include "canvas-quadraticCurveTo.h"
+#include "canvas-arc.h"
+#include "canvas-rect.h"
+#include "canvas-setLineDash.h"
+#include "canvas-closePath.h"
+#include "canvas-clip.h"
+#include "canvas-paint.h"
+#include "canvas-save.h"
+#include "canvas-restore.h"
+#include "canvas-miterLimit.h"
+#include "canvas.h"
+#include "canvas-font.h"
+#include "canvas-fill.h"
+#include "canvas-fillStyle.h"
+#include "canvas-fillRect.h"
+#include "canvas-fillText.h"
+#include "canvas-stroke.h"
+#include "canvas-strokeStyle.h"
+#include "canvas-strokeRect.h"
+#include "canvas-strokeText.h"
 
 int main(void)
 {
@@ -54,8 +65,6 @@ int main(void)
 	
 	paint_t paint;
 	paint_createColor(&paint, 1, 0, 0, 1);
-	
-	printf("%p\n", &paint);
 	
 	paint_t gradient;
 	paint_createLinearGradient(&gradient, 100, 0, 500, 0);

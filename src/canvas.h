@@ -18,71 +18,61 @@
 #ifndef __CANVAS_H__
 #define __CANVAS_H__
 
-#include <VG/openvg.h>
-#include "canvas-paint.h"
+// #include <VG/openvg.h>
+// #include "canvas-paint.h"
 
-typedef enum
-{
-	CANVAS_LINE_CAP_BUTT = VG_CAP_BUTT,
-	CANVAS_LINE_CAP_ROUND = VG_CAP_ROUND,
-	CANVAS_LINE_CAP_SQUARE = VG_CAP_SQUARE
-} canvas_line_cap_t;
 
-typedef enum
-{
-	CANVAS_LINE_JOIN_MITER = VG_JOIN_MITER,
-	CANVAS_LINE_JOIN_ROUND = VG_JOIN_ROUND,
-	CANVAS_LINE_JOIN_BEVEL = VG_JOIN_BEVEL
-} canvas_line_join_t;
 
-typedef struct canvas_state_t
-{
-	canvas_line_cap_t lineCap;
-	canvas_line_join_t lineJoin;
-	
-	paint_t *fillPaint;
-	paint_t *strokePaint;
-	
-	VGfloat globalAlpha;
-	VGfloat lineWidth;
-	
-	VGint dashCount;
-	VGfloat *dashPattern;
-	VGfloat dashOffset;
-	
-	VGboolean clipping;
-	VGMaskLayer savedLayer;
-	
-	// The state which will be restored next
-	struct canvas_state_t *next;
-} canvas_state_t;
 
-extern VGPath currentPath;
+
+// typedef struct canvas_state_t
+// {
+// 	canvas_line_cap_t lineCap;
+// 	canvas_line_join_t lineJoin;
+	
+// 	paint_t *fillPaint;
+// 	paint_t *strokePaint;
+	
+// 	VGfloat globalAlpha;
+// 	VGfloat lineWidth;
+	
+// 	VGint dashCount;
+// 	VGfloat *dashPattern;
+// 	VGfloat dashOffset;
+	
+// 	VGboolean clipping;
+// 	VGMaskLayer savedLayer;
+	
+// 	// The state which will be restored next
+// 	struct canvas_state_t *next;
+// } canvas_state_t;
+
+// extern VGPath currentPath;
 
 void canvas__init(void);
 void canvas__cleanup(void);
 
-canvas_state_t* canvas_getState(void);
+// canvas_state_t* canvas_getState(void);
 
-void canvas_clearRect(VGfloat x, VGfloat y, VGfloat width, VGfloat height);
-void canvas_fillRect(VGfloat x, VGfloat y, VGfloat width, VGfloat height);
-void canvas_fillStyle(paint_t *paint);
-void canvas_strokeRect(VGfloat x, VGfloat y, VGfloat width, VGfloat height);
-void canvas_strokeStyle(paint_t *paint);
+// void canvas_clearRect(VGfloat x, VGfloat y, VGfloat width, VGfloat height);
+// void canvas_fillRect(VGfloat x, VGfloat y, VGfloat width, VGfloat height);
+// void canvas_fillStyle(paint_t *paint);
+// void canvas_strokeRect(VGfloat x, VGfloat y, VGfloat width, VGfloat height);
+// void canvas_strokeStyle(paint_t *paint);
 
-void canvas_arc(VGfloat x, VGfloat y, VGfloat radius, VGfloat start_angle, VGfloat end_angle, VGboolean anticlockwise);
-void canvas_clip(void);
-void canvas_save(void);
-void canvas_restore(void);
-void canvas_stroke(void);
-void canvas_fill(void);
-void canvas_text(char ch);
+// void canvas_arc(VGfloat x, VGfloat y, VGfloat radius, VGfloat start_angle, VGfloat end_angle, VGboolean anticlockwise);
+// void canvas_clip(void);
+// void canvas_save(void);
+// void canvas_restore(void);
+// void canvas_stroke(void);
+// void canvas_fill(void);
+// void canvas_text(char ch);
 
-void canvas_render_text_fill(char *path, char *text, float x, float y, unsigned int size);
-void canvas_render_text_stroke(char *path, char *text, float x, float y, unsigned int size);
-void font_init(void);
-void font_cleanup(void);
-void font_new(char *path);
-void font_remove(char *path);
+// void canvas_render_text_fill(char *path, char *text, float x, float y, unsigned int size);
+// void canvas_render_text_stroke(char *path, char *text, float x, float y, unsigned int size);
+// void font_init(void);
+// void font_cleanup(void);
+// void font_new(char *path);
+// void font_remove(char *path);
 
 #endif /* __CANVAS_H__ */

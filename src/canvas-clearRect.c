@@ -29,6 +29,8 @@ void canvas_clearRect_init(void)
 	vgSetfv(VG_CLEAR_COLOR, 4, clear_color);
 
 	vgSeti(VG_SCISSORING, VG_FALSE);
+	
+	canvas_clearRect(0, 0, egl_get_width(), egl_get_height());
 }
 
 /**

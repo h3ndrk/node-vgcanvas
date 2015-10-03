@@ -207,6 +207,10 @@ FT_Face font_util_get_face(int fonts_index, char character)
 
 void font_util_init(void)
 {
+	FT_Int major = 0;
+	FT_Int minor = 0;
+	FT_Int patch = 0;
+	
 	if(FT_Init_FreeType(&font_library))
 	{
 		printf("Failed to initialize freetype2. Fonts can't be used.\n");
@@ -214,7 +218,9 @@ void font_util_init(void)
 		return;
 	}
 	
-	printf("Freetype2 initialized.\n");
+	FT_Library_Version(font_library, &major, &minor, &patch);
+	
+	printf("Freetype %i.%i.%i initialized.\n", major, minor, patch);
 }
 
 void font_util_cleanup(void)

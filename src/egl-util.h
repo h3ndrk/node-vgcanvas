@@ -25,9 +25,9 @@ void egl_init(void);
 void egl_cleanup(void);
 EGLint egl_error(void);
 void egl_swap_buffers(void);
-EGLDisplay egl_get_display(void);
-EGLSurface egl_get_display(void);
-EGLContext egl_get_display(void);
+// EGLDisplay egl_get_display(void);
+// EGLSurface egl_get_display(void);
+// EGLContext egl_get_display(void);
 uint32_t egl_get_width(void);
 uint32_t egl_get_height(void);
 

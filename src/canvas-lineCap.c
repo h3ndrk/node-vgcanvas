@@ -18,6 +18,7 @@
 #include "include-core.h"
 #include "include-openvg.h"
 // #include "include-freetype.h"
+
 #include "canvas-lineCap.h"
 
 static VGCapStyle canvas_lineCap_value = VG_CAP_BUTT;

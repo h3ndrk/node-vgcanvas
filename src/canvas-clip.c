@@ -30,6 +30,7 @@ static VGboolean canvas_clip_clipping = VG_FALSE;
  */
 void canvas_clip_init(void)
 {
+	vgSeti(VG_SCISSORING, VG_FALSE);
 	vgSeti(VG_MASKING, VG_FALSE);
 }
 

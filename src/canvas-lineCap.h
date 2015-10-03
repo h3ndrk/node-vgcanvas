@@ -18,6 +18,13 @@
 #ifndef __CANVAS_LINECAP_H__
 #define __CANVAS_LINECAP_H__
 
+typedef enum
+{
+	CANVAS_LINE_CAP_BUTT = VG_CAP_BUTT,
+	CANVAS_LINE_CAP_ROUND = VG_CAP_ROUND,
+	CANVAS_LINE_CAP_SQUARE = VG_CAP_SQUARE
+} canvas_line_cap_t;
+
 void canvas_lineCap(char *line_cap);
 char *canvas_lineCap_get(void);
 
