@@ -9,66 +9,66 @@ Canvas 2D Method | C implementation | C++ wrapper implementation | Node.JS imple
 `VGContext.canvas` |   |   |   
 `VGContext.currentTransform` |   |   |   
 `VGContext.direction` |   |   |   
-`VGContext.fillStyle` | implemented |   |   
+`VGContext.fillStyle` | implemented | implemented | implemented
 `VGContext.filter` |   |   |   
 `VGContext.font` | implemented |   |   
-`VGContext.globalAlpha` | implemented |   |   
+`VGContext.globalAlpha` | implemented |  implemented | implemented
 `VGContext.globalCompositeOperation` |   |   |   
 `VGContext.imageSmoothingEnabled` |   |   |   
-`VGContext.lineCap` | implemented |   |   
-`VGContext.lineDashOffset` | implemented |   |   
-`VGContext.lineJoin` | implemented |   |   
-`VGContext.lineWidth` | implemented |   |   
+`VGContext.lineCap` | implemented | implemented | implemented
+`VGContext.lineDashOffset` | implemented | implemented | implemented
+`VGContext.lineJoin` | implemented | implemented | implemented
+`VGContext.lineWidth` | implemented | implemented | implemented
 `VGContext.miterLimit` | implemented |   |   
 `VGContext.shadowBlur` |   |   |   
 `VGContext.shadowColor` |   |   |   
 `VGContext.shadowOffsetX` |   |   |   
 `VGContext.shadowOffsetY` |   |   |   
-`VGContext.strokeStyle` | implemented |   |   
+`VGContext.strokeStyle` | implemented | implemented | implemented
 `VGContext.textAlign` |   |   |   
 `VGContext.textBaseline` |   |   |   
 `VGContext.textBaseline` |   |   |   
 `VGContext.addHitRegion()` |   |   |   
-`VGContext.arc()` | implemented |   |   
+`VGContext.arc()` | implemented | implemented | implemented
 `VGContext.arcTo()` |   |   |   
 `VGContext.asyncDrawXULElement()` |   |   |   
-`VGContext.beginPath()` | implemented |   |   
-`VGContext.bezierCurveTo()` | implemented |   |   
+`VGContext.beginPath()` | implemented | implemented | implemented
+`VGContext.bezierCurveTo()` | implemented | implemented | implemented
 `VGContext.clearHitRegion()` |   |   |   
-`VGContext.clearRect()` | implemented |   |   
-`VGContext.clip()` | implemented |   |   
-`VGContext.closePath()` | implemented |   |   
+`VGContext.clearRect()` | implemented | implemented | implemented
+`VGContext.clip()` | implemented | implemented | implemented
+`VGContext.closePath()` | implemented | implemented | implemented
 `VGContext.createImageData()` |   |   |   
-`VGContext.createLinearGradient()` |   |   |   
+`VGContext.createLinearGradient()` | implemented | implemented | implemented
 `VGContext.createPattern()` |   |   |   
-`VGContext.createRadialGradient()` |   |   |   
+`VGContext.createRadialGradient()` | implemented | implemented | implemented
 `VGContext.drawFocusIfNeeded()` |   |   |   
 `VGContext.drawImage()` |   |   |   
 `VGContext.drawWindow()` |   |   |   
 `VGContext.ellipse()` |   |   |   
-`VGContext.fill()` | implemented |   |   
-`VGContext.fillRect()` | implemented |   |   
+`VGContext.fill()` | implemented | implemented | implemented
+`VGContext.fillRect()` | implemented | implemented | implemented
 `VGContext.fillText()` | implemented |   |   
 `VGContext.getImageData()` |   |   |   
-`VGContext.getLineDash()` | API unfinished |   |   
+`VGContext.getLineDash()` | implemented | implemented | implemented
 `VGContext.isPointInPath()` |   |   |   
 `VGContext.isPointInStroke()` |   |   |   
-`VGContext.lineTo()` | implemented |   |   
+`VGContext.lineTo()` | implemented | implemented | implemented
 `VGContext.measureText()` |   |   |   
-`VGContext.moveTo()` | implemented |   |   
+`VGContext.moveTo()` | implemented | implemented | implemented
 `VGContext.putImageData()` |   |   |   
-`VGContext.quadraticCurveTo()` | implemented |   |   
-`VGContext.rect()` | implemented |   |   
+`VGContext.quadraticCurveTo()` | implemented | implemented | implemented
+`VGContext.rect()` | implemented | implemented | implemented
 `VGContext.removeHitRegion()` |   |   |   
 `VGContext.resetTransform()` |   |   |   
-`VGContext.restore()` | partly implemented |   |   
+`VGContext.restore()` | partly implemented | implemented | implemented
 `VGContext.rotate()` |   |   |   
-`VGContext.save()` | partly implemented |   |   
+`VGContext.save()` | partly implemented | implemented | implemented
 `VGContext.scrollPathIntoView()` |   |   |   
-`VGContext.setLineDash()` | implemented |   |   
+`VGContext.setLineDash()` | implemented | implemented | implemented
 `VGContext.setTransform()` |   |   |   
-`VGContext.stroke()` | implemented |   |   
-`VGContext.strokeRect()` | implemented |   |   
+`VGContext.stroke()` | implemented | implemented | implemented
+`VGContext.strokeRect()` | implemented | implemented | implemented
 `VGContext.strokeText()` | implemented |   |   
 `VGContext.transform()` |   |   |   
 `VGContext.translate()` |   |   |   

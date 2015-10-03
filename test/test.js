@@ -21,8 +21,21 @@ setInterval(function() {
 
 	ctx.clearRect(0, 0, ctx.getScreenWidth(), ctx.getScreenHeight());
 
+	ctx.strokeStyle = 'green';
 	ctx.fillStyle = 'red';
+	ctx.lineCap = 'round';
+	ctx.setLineDash([10, 20]);
+	ctx.lineWidth = 5;
+	
 	ctx.fillRect(100, 100, 100, 100);
+	
+	ctx.beginPath();
+	ctx.moveTo(100, 250);
+	ctx.lineTo(200, 300);
+	ctx.lineTo(250, 250);
+	ctx.closePath();
+	ctx.fill();
+	ctx.stroke();
 	
 	//ctx.save();
 	ctx.fillStyle = gradient;
