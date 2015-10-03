@@ -19,9 +19,9 @@
 #include "include-openvg.h"
 // #include "include-freetype.h"
 
+#include "egl-util.h"
 #include "canvas-beginPath.h"
 #include "canvas-rect.h"
-#include "coordinate-util.h"
 
 /**
  * The rect() method creates a path for a rectangle at position (x, y) with a

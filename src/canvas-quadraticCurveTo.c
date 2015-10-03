@@ -19,9 +19,9 @@
 #include "include-openvg.h"
 // #include "include-freetype.h"
 
+#include "egl-util.h"
 #include "canvas-beginPath.h"
 #include "canvas-quadraticCurveTo.h"
-#include "coordinate-util.h"
 
 /**
  * The quadraticCurveTo() method adds a quadratic Bézier curve to the path. It

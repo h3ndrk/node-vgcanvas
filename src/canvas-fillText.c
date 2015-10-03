@@ -19,13 +19,13 @@
 #include "include-openvg.h"
 #include "include-freetype.h"
 
+#include "egl-util.h"
 #include "canvas-beginPath.h"
 #include "canvas-paint.h"
 #include "canvas-fillStyle.h"
 #include "canvas-font.h"
 #include "font-util.h"
 #include "canvas-fillText.h"
-#include "coordinate-util.h"
 
 /**
  * The fillText() method fills a given text at the given (x, y) position. If the

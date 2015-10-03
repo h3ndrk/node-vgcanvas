@@ -21,7 +21,6 @@
 
 #include "egl-util.h"
 #include "canvas-clearRect.h"
-#include "coordinate-util.h"
 
 /**
  * Initializes clearRect(). Sets the clear color and disables scissoring.

@@ -19,11 +19,11 @@
 #include "include-openvg.h"
 // #include "include-freetype.h"
 
+#include "egl-util.h"
 #include "canvas-paint.h"
 #include "canvas-fillStyle.h"
 #include "canvas-beginPath.h"
 #include "canvas-fillRect.h"
-#include "coordinate-util.h"
 
 /**
  * The fillRect() method draws a filled rectangle at (x, y) position whose size

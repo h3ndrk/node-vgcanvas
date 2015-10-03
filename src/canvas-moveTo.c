@@ -19,9 +19,9 @@
 #include "include-openvg.h"
 // #include "include-freetype.h"
 
+#include "egl-util.h"
 #include "canvas-beginPath.h"
 #include "canvas-moveTo.h"
-#include "coordinate-util.h"
 
 /**
  * The moveTo() method moves the starting point of a new sub-path to the (x, y)

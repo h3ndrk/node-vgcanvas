@@ -19,9 +19,9 @@
 #include "include-openvg.h"
 // #include "include-freetype.h"
 
+#include "egl-util.h"
 #include "canvas-beginPath.h"
 #include "canvas-lineTo.h"
-#include "coordinate-util.h"
 
 /**
  * The lineTo() method connects the last point in the sub-path to the x, y

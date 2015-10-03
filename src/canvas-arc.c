@@ -19,9 +19,9 @@
 #include "include-openvg.h"
 // #include "include-freetype.h"
 
+#include "egl-util.h"
 #include "canvas-beginPath.h"
 #include "canvas-arc.h"
-#include "coordinate-util.h"
 
 /**
  * The arc() method adds an arc to the path which is centered at (x, y) position

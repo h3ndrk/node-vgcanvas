@@ -19,11 +19,11 @@
 #include "include-openvg.h"
 // #include "include-freetype.h"
 
+#include "egl-util.h"
 #include "canvas-beginPath.h"
 #include "canvas-paint.h"
 #include "canvas-strokeStyle.h"
 #include "canvas-strokeRect.h"
-#include "coordinate-util.h"
 
 /**
  * The strokeRect() method paints a rectangle which has a starting point at (x,

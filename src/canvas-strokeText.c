@@ -19,6 +19,7 @@
 #include "include-openvg.h"
 #include "include-freetype.h"
 
+#include "egl-util.h"
 #include "log-util.h"
 #include "canvas-beginPath.h"
 #include "canvas-paint.h"
@@ -29,7 +30,6 @@
 #include "canvas-setLineDash.h"
 #include "canvas-lineDashOffset.h"
 #include "canvas-fillText.h"
-#include "coordinate-util.h"
 
 /**
  * The strokeText() method strokes a given text at the given (x, y) position. If
