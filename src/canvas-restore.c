@@ -18,6 +18,8 @@
 #include "include-core.h"
 #include "include-openvg.h"
 // #include "include-freetype.h"
+
+#include "log-util.h"
 #include "canvas-clip.h"
 #include "canvas-setLineDash.h"
 #include "canvas-globalAlpha.h"
@@ -46,7 +48,7 @@ void canvas_restore(void)
 	
 	if(state_top == NULL)
 	{
-		printf("Failed to restore top state of stack. No states in stack.\n");
+		eprintf("Failed to restore top state of stack. No states in stack.\n");
 		
 		return;
 	}

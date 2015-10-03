@@ -54,7 +54,7 @@ void canvas_fillText(char *text, float x, float y)
 	{
 		face = font_util_get_face(fonts_index, text[text_index]);
 		
-		printf("fill: '%c': %f %f\n", text[text_index], ((float)(face->glyph->metrics.vertAdvance) / 64), ((float)(face->glyph->metrics.horiAdvance) / 64));
+		// printf("fill: '%c': %f %f\n", text[text_index], ((float)(face->glyph->metrics.vertAdvance) / 64), ((float)(face->glyph->metrics.horiAdvance) / 64));
 		
 		if(face->glyph->outline.n_contours != 0)
 		{

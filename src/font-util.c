@@ -19,6 +19,7 @@
 #include "include-openvg.h"
 #include "include-freetype.h"
 
+#include "log-util.h"
 #include "font-util.h"
 
 #define SEGMENTS_COUNT_MAX 256
@@ -190,14 +191,14 @@ FT_Face font_util_get_face(int fonts_index, char character)
 	
 	if(glyph_index == 0)
 	{
-		printf("Failed get character index: Unknown character code.\n");
+		eprintf("Failed get character index: Unknown character code.\n");
 		
 		return NULL;
 	}
 	
 	if(FT_Load_Glyph(fonts[fonts_index].face, glyph_index, FT_LOAD_NO_BITMAP | FT_LOAD_NO_HINTING | FT_LOAD_IGNORE_TRANSFORM))
 	{
-		printf("Failed load glyph.\n");
+		eprintf("Failed load glyph.\n");
 		
 		return NULL;
 	}
@@ -213,7 +214,7 @@ void font_util_init(void)
 	
 	if(FT_Init_FreeType(&font_library))
 	{
-		printf("Failed to initialize freetype2. Fonts can't be used.\n");
+		eprintf("Failed to initialize freetype2. Fonts can't be used.\n");
 		
 		return;
 	}
@@ -248,7 +249,7 @@ void font_util_new(char *path)
 	
 	if(fonts == NULL)
 	{
-		printf("Failed to grow font list.\n");
+		eprintf("Failed to grow font list.\n");
 		
 		return;
 	}
@@ -258,14 +259,14 @@ void font_util_new(char *path)
 	error = FT_New_Face(font_library, path, 0, &(fonts[fonts_amount - 1].face));
 	if(error == FT_Err_Unknown_File_Format)
 	{
-		printf("Failed to load font face: Unknown file format: %s\n", path);
+		eprintf("Failed to load font face: Unknown file format: %s\n", path);
 		font_util_remove(path);
 		
 		return;
 	}
 	else if(error)
 	{
-		printf("Failed to load font face: %s (0x%x)\n", path, error);
+		eprintf("Failed to load font face: %s (0x%x)\n", path, error);
 		font_util_remove(path);
 		
 		return;
@@ -273,7 +274,7 @@ void font_util_new(char *path)
 	
 	if(FT_Set_Char_Size(fonts[fonts_amount - 1].face, 0, 64 * 64, 96, 96))
 	{
-		printf("Failed to set font size: %s\n", path);
+		eprintf("Failed to set font size: %s\n", path);
 		font_util_remove(path);
 		
 		return;
@@ -296,7 +297,7 @@ void font_util_remove(char *path)
 	
 	if(fonts_index < 0)
 	{
-		printf("Failed to find font face: %s\n", path);
+		eprintf("Failed to find font face: %s\n", path);
 		
 		return;
 	}
@@ -320,7 +321,7 @@ void font_util_remove(char *path)
 	fonts = realloc(fonts, fonts_amount * sizeof(font_t));
 	if(fonts == NULL)
 	{
-		printf("Failed to shrink font list.\n");
+		eprintf("Failed to shrink font list.\n");
 		
 		return;
 	}

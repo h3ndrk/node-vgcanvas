@@ -18,6 +18,7 @@
 #include "include-core.h"
 #include "include-openvg.h"
 // #include "include-freetype.h"
+
 #include "canvas-beginPath.h"
 
 static VGPath canvas_beginPath_immediate_path = 0;

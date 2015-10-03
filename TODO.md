@@ -19,7 +19,7 @@
 - [ ] https://developer.mozilla.org/en-US/docs/Web/API/Path2D/Path2D
 - [x] Remove "`src/color.*`"
 - [ ] Adjust coordinates
-- [ ] `eprintf` for errors
+- [x] `eprintf` for errors
 - [ ] coordinates for closePath?
 - [ ] replace all `void`-return-types with `int`-return-types
 - [ ] eventually handle V8 Fatal Errors http://izs.me/v8-docs/classv8_1_1V8.html#ab386f81a6d58dcf481d00446e8d15c9e

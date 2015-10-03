@@ -19,6 +19,7 @@
 #include "include-openvg.h"
 // #include "include-freetype.h"
 
+#include "log-util.h"
 #include "canvas-clip.h"
 #include "canvas-setLineDash.h"
 #include "canvas-globalAlpha.h"
@@ -48,7 +49,7 @@ void canvas_save(void)
 	
 	if(state == NULL)
 	{
-		printf("Failed to add stack element.\n");
+		eprintf("Failed to add stack element.\n");
 		
 		return;
 	}
@@ -83,7 +84,7 @@ void canvas_save(void)
 		
 		if(canvas_save_stack_top->lineDash_data == NULL)
 		{
-			printf("Failed to add stack element: Copying lineDash data failed.\n");
+			eprintf("Failed to add stack element: Copying lineDash data failed.\n");
 			
 			canvas_save_stack_top->lineDash_count = 0;
 		}
@@ -104,7 +105,7 @@ void canvas_save(void)
 		
 		if(canvas_save_stack_top->fillStyle_data == NULL)
 		{
-			printf("Failed to add stack element: Failed to save fillStyle.\n");
+			eprintf("Failed to add stack element: Failed to save fillStyle.\n");
 			
 			canvas_save_stack_top->fillStyle_count = 0;
 		}
@@ -128,7 +129,7 @@ void canvas_save(void)
 		
 		if(canvas_save_stack_top->strokeStyle_data == NULL)
 		{
-			printf("Failed to add stack element: Failed to save strokeStyle.\n");
+			eprintf("Failed to add stack element: Failed to save strokeStyle.\n");
 			
 			canvas_save_stack_top->strokeStyle_count = 0;
 		}

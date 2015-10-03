@@ -18,6 +18,7 @@
 #include "include-core.h"
 #include "include-openvg.h"
 // #include "include-freetype.h"
+
 #include "canvas-lineJoin.h"
 
 static VGJoinStyle canvas_lineJoin_value = VG_JOIN_MITER;

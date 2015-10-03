@@ -23,6 +23,7 @@ CFLAGS += -I /opt/vc/include/interface/vcos/pthreads
 CFLAGS += -I /usr/include/freetype2
 # CFLAGS += -I./etc
 CFLAGS += -fgnu89-inline # fix for vcos compiler warnings
+CFLAGS += -DLOG_LEVEL=DEBUG
 
 LIBS += -lm
 LIBS += -L /opt/vc/lib
