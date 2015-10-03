@@ -44,9 +44,9 @@ void canvas__init(void)
 	
 	paint_t *fill = malloc(sizeof(paint_t));
 	paint_t *stroke = malloc(sizeof(paint_t));
-	paint_createColor(fill, 1, 1, 1, 1);
+	paint_createColor(fill, 0, 0, 0, 1);
 	canvas_fillStyle(fill);
-	paint_createColor(stroke, 1, 1, 1, 1);
+	paint_createColor(stroke, 0, 0, 0, 1);
 	canvas_strokeStyle(stroke);
 	
 	// initialize immediate path, clipping mask and clearing rectangle
