@@ -18,7 +18,7 @@
 #ifndef __CANVAS_LINECAP_H__
 #define __CANVAS_LINECAP_H__
 
-typedef enum
+typedef enum canvas_line_cap_t
 {
 	CANVAS_LINE_CAP_BUTT = VG_CAP_BUTT,
 	CANVAS_LINE_CAP_ROUND = VG_CAP_ROUND,

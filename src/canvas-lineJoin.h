@@ -18,7 +18,7 @@
 #ifndef __CANVAS_LINEJOIN_H__
 #define __CANVAS_LINEJOIN_H__
 
-typedef enum
+typedef enum canvas_line_join_t
 {
 	CANVAS_LINE_JOIN_MITER = VG_JOIN_MITER,
 	CANVAS_LINE_JOIN_ROUND = VG_JOIN_ROUND,

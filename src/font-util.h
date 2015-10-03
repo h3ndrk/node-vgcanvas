@@ -18,7 +18,7 @@
 #ifndef __FONT_UTIL_H__
 #define __FONT_UTIL_H__
 
-typedef struct
+typedef struct font_t
 {
 	char *path;
 	FT_Face face;

@@ -23,7 +23,7 @@
 - [ ] coordinates for closePath?
 - [ ] replace all `void`-return-types with `int`-return-types
 - [ ] eventually handle V8 Fatal Errors http://izs.me/v8-docs/classv8_1_1V8.html#ab386f81a6d58dcf481d00446e8d15c9e
-- [ ] remove anonymous structs
+- [x] remove anonymous structs
 - [ ] `miterLimit`: what values does effect what? OpenVG documentation does not inform well about that topic.
 - [x] set standard values at initialization
 - [ ] create font if it is firstly used

@@ -20,14 +20,14 @@
 
 #include <VG/openvg.h>
 
-typedef enum
+typedef enum paint_type_t
 {
 	PAINT_TYPE_COLOR = VG_PAINT_TYPE_COLOR,
 	PAINT_TYPE_LINEAR_GRADIENT = VG_PAINT_TYPE_LINEAR_GRADIENT,
 	PAINT_TYPE_RADIAL_GRADIENT = VG_PAINT_TYPE_RADIAL_GRADIENT
 } paint_type_t;
 
-typedef struct
+typedef struct paint_t
 {
 	paint_type_t paintType;
 	VGPaint paint;
