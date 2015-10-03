@@ -29,6 +29,7 @@
 #include "canvas-setLineDash.h"
 #include "canvas-lineDashOffset.h"
 #include "canvas-fillText.h"
+#include "coordinate-util.h"
 
 /**
  * The strokeText() method strokes a given text at the given (x, y) position. If
@@ -95,13 +96,13 @@ void canvas_strokeText(char *text, float x, float y)
 			vgAppendPathData(canvas_beginPath_get(), segments_count_get(), segments_get(), coords_get());
 			
 			vgTranslate(offset_x, 0);
-			vgTranslate(x, y);
+			vgTranslate(x, egl_get_height() - y);
 			vgScale((VGfloat)size / 64, (VGfloat)size / 64);
 			
 			vgDrawPath(canvas_beginPath_get(), VG_STROKE_PATH);
 			
 			vgScale((VGfloat)64 / size, (VGfloat)64 / size);
-			vgTranslate(-x, -y);
+			vgTranslate(-x, -(egl_get_height() - y));
 			vgTranslate(-offset_x, 0);
 			
 			canvas_lineDashOffset(lineDashOffset);

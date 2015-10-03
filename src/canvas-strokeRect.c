@@ -23,6 +23,7 @@
 #include "canvas-paint.h"
 #include "canvas-strokeStyle.h"
 #include "canvas-strokeRect.h"
+#include "coordinate-util.h"
 
 /**
  * The strokeRect() method paints a rectangle which has a starting point at (x,
@@ -39,7 +40,7 @@ void canvas_strokeRect(VGfloat x, VGfloat y, VGfloat width, VGfloat height)
 
 	canvas_beginPath();
 	
-	vguRect(canvas_beginPath_get(), x, y, width, height);
+	vguRect(canvas_beginPath_get(), x, egl_get_height() - y - height, width, height);
 	
 	vgDrawPath(canvas_beginPath_get(), VG_STROKE_PATH);
 }

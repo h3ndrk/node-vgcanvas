@@ -18,7 +18,7 @@
 - [ ] "`openSubPath`" in "`src/canvas.c`"
 - [ ] https://developer.mozilla.org/en-US/docs/Web/API/Path2D/Path2D
 - [x] Remove "`src/color.*`"
-- [ ] Adjust coordinates
+- [x] Adjust coordinates
 - [x] `eprintf` for errors
 - [ ] coordinates for closePath?
 - [ ] replace all `void`-return-types with `int`-return-types

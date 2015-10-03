@@ -21,6 +21,7 @@
 
 #include "canvas-beginPath.h"
 #include "canvas-arc.h"
+#include "coordinate-util.h"
 
 /**
  * The arc() method adds an arc to the path which is centered at (x, y) position
@@ -56,5 +57,5 @@ void canvas_arc(VGfloat x, VGfloat y, VGfloat radius, VGfloat start_angle, VGflo
 		angle_extent = 0 - (end_angle - start_angle);
 	}
 	
-	vguArc(canvas_beginPath_get(), x, y, radius * 2, radius * 2, start_angle, angle_extent, VGU_ARC_OPEN);
+	vguArc(canvas_beginPath_get(), x, egl_get_height() - y, radius * 2, radius * 2, start_angle, angle_extent, VGU_ARC_OPEN);
 }

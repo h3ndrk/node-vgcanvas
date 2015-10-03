@@ -21,6 +21,7 @@
 
 #include "egl-util.h"
 #include "canvas-clearRect.h"
+#include "coordinate-util.h"
 
 /**
  * Initializes clearRect(). Sets the clear color and disables scissoring.
@@ -46,5 +47,5 @@ void canvas_clearRect_init(void)
  */
 void canvas_clearRect(VGfloat x, VGfloat y, VGfloat width, VGfloat height)
 {
-	vgClear(x, y, width, height);
+	vgClear(x, egl_get_height() - y - height, width, height);
 }

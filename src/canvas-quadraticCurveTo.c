@@ -21,6 +21,7 @@
 
 #include "canvas-beginPath.h"
 #include "canvas-quadraticCurveTo.h"
+#include "coordinate-util.h"
 
 /**
  * The quadraticCurveTo() method adds a quadratic Bézier curve to the path. It
@@ -39,9 +40,9 @@ void canvas_quadraticCurveTo(VGfloat cpx, VGfloat cpy, VGfloat x, VGfloat y)
 	VGfloat data[4];
 	
 	data[0] = cpx;
-	data[1] = cpy;
+	data[1] = egl_get_height() - cpy;
 	data[2] = x;
-	data[3] = y;
+	data[3] = egl_get_height() - y;
 	
 	vgAppendPathData(canvas_beginPath_get(), 1, segment, (const void *)data);
 }

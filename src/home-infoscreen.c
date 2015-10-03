@@ -58,7 +58,7 @@ int main(void)
 	
 	canvas__init();
 	
-	font_util_new("./font.ttf");
+	// font_util_new("./font.ttf");
 	
 	canvas_clearRect(0, 0, egl_get_width(), egl_get_height());
 	canvas_lineWidth(2);
@@ -66,16 +66,19 @@ int main(void)
 	paint_t paint;
 	paint_createColor(&paint, 1, 0, 0, 1);
 	
-	paint_t gradient;
-	paint_createLinearGradient(&gradient, 100, 0, 500, 0);
-	paint_addColorStop(&gradient, 0, 0, 1, 0, 1);
-	paint_addColorStop(&gradient, 0.25f, 0, 0, 0, 0);
-	paint_addColorStop(&gradient, 0.5f, 0, 0, 1, 1);
-	paint_addColorStop(&gradient, 0.75f, 0, 0, 0, 0);
-	paint_addColorStop(&gradient, 1, 1, 0, 0, 1);
+	canvas_fillStyle(&paint);
+	canvas_fillRect(100, 100, 100, 100);
 	
-	canvas_fillStyle(&gradient);
-	canvas_fillRect(0, 0, egl_get_width(), egl_get_height());
+	// paint_t gradient;
+	// paint_createLinearGradient(&gradient, 100, 0, 500, 0);
+	// paint_addColorStop(&gradient, 0, 0, 1, 0, 1);
+	// paint_addColorStop(&gradient, 0.25f, 0, 0, 0, 0);
+	// paint_addColorStop(&gradient, 0.5f, 0, 0, 1, 1);
+	// paint_addColorStop(&gradient, 0.75f, 0, 0, 0, 0);
+	// paint_addColorStop(&gradient, 1, 1, 0, 0, 1);
+	
+	// canvas_fillStyle(&gradient);
+	// canvas_fillRect(0, 0, egl_get_width(), egl_get_height());
 	
 	// paint_t radial;
 	// paint_createRadialGradient(&radial, 200, 200, 100, 200, 200);
@@ -90,8 +93,8 @@ int main(void)
 	// canvas_fillStyle(&paint);
 	// canvas_fillRect(0, 100, 100, 100);
 	
-	canvas_fillStyle(&paint);
-	canvas_strokeStyle(&paint);
+	// canvas_fillStyle(&paint);
+	// canvas_strokeStyle(&paint);
 	// canvas_strokeRect(0, 250, 100, 100);
 	
 	// canvas_beginPath();
@@ -114,17 +117,17 @@ int main(void)
 	// canvas_fillStyle(&radial);
 	// canvas_fillRect(100, 100, 200, 200);
 	
-	canvas_fillRect(100, 800, 400, 3);
+	// canvas_fillRect(100, 800, 400, 3);
 	
-	canvas_save();
+	// canvas_save();
 	
-	canvas_fillStyle(&gradient);
+	// canvas_fillStyle(&gradient);
 	
-	canvas_fillRect(100, 825, 400, 3);
+	// canvas_fillRect(100, 825, 400, 3);
 	
-	canvas_restore();
+	// canvas_restore();
 	
-	canvas_fillRect(100, 850, 400, 3);
+	// canvas_fillRect(100, 850, 400, 3);
 	
 	// canvas_strokeStyle(&paint);
 	// canvas_fillStyle(&paint);
@@ -150,7 +153,7 @@ int main(void)
 	fgets(s, 2, stdin);
 	
 	paint_destroy(&paint);
-	paint_destroy(&gradient);
+	// paint_destroy(&gradient);
 	// paint_destroy(&textGradient);
 	// paint_destroy(&radial);
 	canvas__cleanup();

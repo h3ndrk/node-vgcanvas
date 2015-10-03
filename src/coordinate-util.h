@@ -1,6 +1,6 @@
 /**
  * Copyright (C) 2015 NIPE-SYSTEMS
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -15,30 +15,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "include-core.h"
-#include "include-openvg.h"
-// #include "include-freetype.h"
+#ifndef __COORDINATE_UTIL_H__
+#define __COORDINATE_UTIL_H__
 
-#include "canvas-beginPath.h"
-#include "canvas-moveTo.h"
-#include "coordinate-util.h"
+#define coordinate_util_y(y) (egl_get_height() - y)
 
-/**
- * The moveTo() method moves the starting point of a new sub-path to the (x, y)
- * coordinates.
- * @param x The x axis of the point.
- * @param y The y axis of the point.
- */
-void canvas_moveTo(VGfloat x, VGfloat y)
-{
-	VGubyte segment[1] = { VG_MOVE_TO_ABS };
-	VGfloat data[2];
-	
-	data[0] = x;
-	data[1] = egl_get_height() - y;
-	
-	// currentPath_sx = x;
-	// currentPath_sy = y;
-	
-	vgAppendPathData(canvas_beginPath_get(), 1, segment, (const void *)data);
-}
+#endif /* __COORDINATE_UTIL_H__ */

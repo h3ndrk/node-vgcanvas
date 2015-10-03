@@ -21,6 +21,7 @@
 
 #include "canvas-beginPath.h"
 #include "canvas-quadraticCurveTo.h"
+#include "coordinate-util.h"
 
 /**
  * The bezierCurveTo() method of the Canvas 2D API adds a cubic Bézier curve to
@@ -41,11 +42,11 @@ void canvas_bezierCurveTo(VGfloat cp1x, VGfloat cp1y, VGfloat cp2x, VGfloat cp2y
 	VGfloat data[6];
 	
 	data[0] = cp1x;
-	data[1] = cp1y;
+	data[1] = egl_get_height() - cp1y;
 	data[2] = cp2x;
-	data[3] = cp2y;
+	data[3] = egl_get_height() - cp2y;
 	data[4] = x;
-	data[5] = y;
+	data[5] = egl_get_height() - y;
 	
 	vgAppendPathData(canvas_beginPath_get(), 1, segment, (const void *)data);
 }

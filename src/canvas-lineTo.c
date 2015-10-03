@@ -21,6 +21,7 @@
 
 #include "canvas-beginPath.h"
 #include "canvas-lineTo.h"
+#include "coordinate-util.h"
 
 /**
  * The lineTo() method connects the last point in the sub-path to the x, y
@@ -34,7 +35,7 @@ void canvas_lineTo(VGfloat x, VGfloat y)
 	VGfloat data[2];
 	
 	data[0] = x;
-	data[1] = y;
+	data[1] = egl_get_height() - y;
 	
 	vgAppendPathData(canvas_beginPath_get(), 1, segment, (const void *)data);
 }

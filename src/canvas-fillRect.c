@@ -23,6 +23,7 @@
 #include "canvas-fillStyle.h"
 #include "canvas-beginPath.h"
 #include "canvas-fillRect.h"
+#include "coordinate-util.h"
 
 /**
  * The fillRect() method draws a filled rectangle at (x, y) position whose size
@@ -39,7 +40,7 @@ void canvas_fillRect(VGfloat x, VGfloat y, VGfloat width, VGfloat height)
 
 	canvas_beginPath();
 	
-	vguRect(canvas_beginPath_get(), x, y, width, height);
+	vguRect(canvas_beginPath_get(), x, egl_get_height() - y - height, width, height);
 	
 	vgDrawPath(canvas_beginPath_get(), VG_FILL_PATH);
 }
