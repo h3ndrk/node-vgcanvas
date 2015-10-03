@@ -17,8 +17,11 @@
 
 extern "C" {
 	#include "egl-util.h"
+	#include "include-freetype.h"
 	#include "include-openvg.h"
+	#include "font-util.h"
 	#include "canvas.h"
+	#include "canvas-font.h"
 	#include "canvas-paint.h"
 	#include "canvas-fillRect.h"
 	#include "canvas-arc.h"
@@ -47,6 +50,8 @@ extern "C" {
 	#include "canvas-stroke.h"
 	#include "canvas-strokeRect.h"
 	#include "canvas-strokeStyle.h"
+	#include "canvas-strokeText.h"
+	#include "canvas-fillText.h"
 	#include "canvas-strokeText.h"
 }
 
@@ -388,6 +393,42 @@ namespace vgcanvas {
 	void GetGlobalAlpha(const Nan::FunctionCallbackInfo<Value>& args) {
 		args.GetReturnValue().Set(Nan::New(canvas_globalAlpha_get()));
 	}
+	
+	void NewFont(const Nan::FunctionCallbackInfo<Value>& args) {
+		if(args.Length() < 1 || !args[0]->IsString()) {
+			Nan::ThrowTypeError("wrong arg");
+			return;
+		}
+		
+		font_util_new(*Nan::Utf8String(args[0]));
+	}
+	
+	void SetFont(const Nan::FunctionCallbackInfo<Value>& args) {
+		if(!checkArgs(args, 1, 0) || !args[1]->IsString()) {
+			Nan::ThrowTypeError("wrong args");
+			return;
+		}
+		
+		canvas_font(*Nan::Utf8String(args[1]), args[0]->NumberValue());
+	}
+	
+	void FillText(const Nan::FunctionCallbackInfo<Value>& args) {
+		if(!checkArgs(args, 2, 1)) {
+			Nan::ThrowTypeError("wrong args");
+			return;
+		}
+		
+		canvas_fillText(*Nan::Utf8String(args[0]), args[1]->NumberValue(), args[2]->NumberValue());
+	}
+	
+	void StrokeText(const Nan::FunctionCallbackInfo<Value>& args) {
+		if(!checkArgs(args, 2, 1)) {
+			Nan::ThrowTypeError("wrong args");
+			return;
+		}
+		
+		canvas_strokeText(*Nan::Utf8String(args[0]), args[1]->NumberValue(), args[2]->NumberValue());
+	}
 
 	void ModuleInit(Local<Object> exports) {
 		exports->Set(Nan::New("init").ToLocalChecked(), Nan::New<FunctionTemplate>(Init)->GetFunction());
@@ -435,7 +476,12 @@ namespace vgcanvas {
 
 		exports->Set(Nan::New("save").ToLocalChecked(), Nan::New<FunctionTemplate>(Save)->GetFunction());
 		exports->Set(Nan::New("restore").ToLocalChecked(), Nan::New<FunctionTemplate>(Restore)->GetFunction());
-
+		
+		exports->Set(Nan::New("setFont").ToLocalChecked(), Nan::New<FunctionTemplate>(SetFont)->GetFunction());
+		exports->Set(Nan::New("loadFont").ToLocalChecked(), Nan::New<FunctionTemplate>(NewFont)->GetFunction());
+		exports->Set(Nan::New("fillText").ToLocalChecked(), Nan::New<FunctionTemplate>(FillText)->GetFunction());
+		exports->Set(Nan::New("strokeText").ToLocalChecked(), Nan::New<FunctionTemplate>(StrokeText)->GetFunction());
+		
 		Gradient::Init(exports);
 
 	}
