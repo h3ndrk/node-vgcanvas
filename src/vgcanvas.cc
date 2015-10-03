@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2015 Hauke Oldsen
  *
  * This program is free software: you can redistribute it and/or modify
@@ -18,31 +18,69 @@
 extern "C" {
 	#include "egl-util.h"
 	#include "canvas.h"
+	#include "canvas-fillRect.h"
+	#include "canvas-arc.h"
+	#include "canvas-beginPath.h"
+	#include "canvas-bezierCurveTo.h"
+	#include "canvas-clearRect.h"
+	#include "canvas-clip.h"
+	#include "canvas-closePath.h"
+	#include "canvas-fill.h"
+	#include "canvas-fillStyle.h"
+	#include "canvas-fillText.h"
+	#include "canvas-font.h"
+	#include "canvas-globalAlpha.h"
+	#include "canvas-lineCap.h"
+	#include "canvas-lineDashOffset.h"
+	#include "canvas-lineJoin.h"
+	#include "canvas-lineTo.h"
+	#include "canvas-lineWidth.h"
+	#include "canvas-miterLimit.h"
+	#include "canvas-moveTo.h"
+	#include "canvas-paint.h"
+	#include "canvas-quadraticCurveTo.h"
+	#include "canvas-rect.h"
+	#include "canvas-restore.h"
+	#include "canvas-save.h"
+	#include "canvas-setLineDash.h"
+	#include "canvas-stroke.h"
+	#include "canvas-strokeRect.h"
+	#include "canvas-strokeStyle.h"
+	#include "canvas-strokeText.h"
 }
 
 #include <nan.h>
+#include <string>
+#include <map>
+#include "gradient.h"
 
 using namespace v8;
 
-namespace infoscreen {
+namespace vgcanvas {
 
-	bool checkArgs(const Nan::FunctionCallbackInfo<Value> &args, int expect) {
+	static std::map<uint32_t, paint_t*> paintMap;
 
-		if(args.Length() < expect) {
+	bool checkArgs(const Nan::FunctionCallbackInfo<Value> &args, int number, int offset) {
+
+		if(args.Length() < number + offset) {
 			Nan::ThrowTypeError("Not enough args");
 			return false;
 		}
 
-		for(int i = 0; i < expect; i++) {
+		for(int i = offset; i < offset + number; i++) {
 			if(!args[i]->IsNumber()) {
 				Nan::ThrowTypeError("Wrong arg");
 				return false;
 			}
-			
+
 		}
 
 		return true;
 
+	}
+
+	bool checkArgs(const Nan::FunctionCallbackInfo<Value> &args, int number) {
+		return checkArgs(args, number, 0);
 	}
 
 	void Init(const Nan::FunctionCallbackInfo<Value>& args) {
@@ -78,20 +116,20 @@ namespace infoscreen {
 			return;
 		}
 
-		canvas_fillStyle_color(args[0]->NumberValue(), args[1]->NumberValue(), args[2]->NumberValue(), args[3]->NumberValue());
+		//canvas_fillStyle_color(args[0]->NumberValue(), args[1]->NumberValue(), args[2]->NumberValue(), args[3]->NumberValue());
 	}
-	
+
 	void GetFillStyle(const Nan::FunctionCallbackInfo<Value>& args) {
-		color_t color = canvas_getState()->fillColor;
-		
+		/*color_t color = canvas_getState()->fillColor;
+
 		Local<Array> array = Nan::New<Array>(4);
-		
+
 		array->Set(0, Nan::New(color.red));
 		array->Set(1, Nan::New(color.green));
 		array->Set(2, Nan::New(color.blue));
 		array->Set(3, Nan::New(color.alpha));
-		
-		args.GetReturnValue().Set(array);
+
+		args.GetReturnValue().Set(array);*/
 	}
 
 	void GetScreenWidth(const Nan::FunctionCallbackInfo<Value>& args) {
@@ -109,11 +147,9 @@ namespace infoscreen {
 
 		canvas_lineWidth(args[0]->NumberValue());
 	}
-	
+
 	void GetLineWidth(const Nan::FunctionCallbackInfo<Value>& args) {
-		canvas_state_t *state = canvas_getState();
-		
-		args.GetReturnValue().Set(Nan::New(state->lineWidth));
+		args.GetReturnValue().Set(Nan::New(canvas_lineWidth_get()));
 	}
 
 	void SetLineCap(const Nan::FunctionCallbackInfo<Value>& args) {
@@ -122,36 +158,11 @@ namespace infoscreen {
 			return;
 		}
 
-		std::string value(*Nan::Utf8String(args[0]));
-		canvas_line_cap_t type = CANVAS_LINE_CAP_BUTT;
-
-		if(value == "round") {
-			type = CANVAS_LINE_CAP_ROUND;
-		} else if(value == "butt") {
-			type = CANVAS_LINE_CAP_BUTT;
-		} else if(value == "square") {
-			type = CANVAS_LINE_CAP_SQUARE;
-		}
-
-		canvas_lineCap(type);
+		canvas_lineCap(*Nan::Utf8String(args[0]));
 	}
-	
+
 	void GetLineCap(const Nan::FunctionCallbackInfo<Value>& args) {
-		canvas_state_t *state = canvas_getState();
-		
-		switch(state->lineCap)
-		{
-			case CANVAS_LINE_CAP_ROUND:
-				args.GetReturnValue().Set(Nan::New("round").ToLocalChecked());
-				break;
-			case CANVAS_LINE_CAP_BUTT:
-				args.GetReturnValue().Set(Nan::New("butt").ToLocalChecked());
-				break;
-			case CANVAS_LINE_CAP_SQUARE:
-				args.GetReturnValue().Set(Nan::New("square").ToLocalChecked());
-				break;
-		}
-		
+		args.GetReturnValue().Set(Nan::New(canvas_lineCap_get()).ToLocalChecked());
 	}
 
 	void SetLineJoin(const Nan::FunctionCallbackInfo<Value>& args) {
@@ -160,57 +171,76 @@ namespace infoscreen {
 			return;
 		}
 
-		std::string value(*Nan::Utf8String(args[0]));
-		canvas_line_join_t type = CANVAS_LINE_JOIN_MITER;
+		canvas_lineJoin(*Nan::Utf8String(args[0]));
 
-		if(value == "miter") {
-			type = CANVAS_LINE_JOIN_MITER;
-		} else if(value == "round") {
-			type = CANVAS_LINE_JOIN_ROUND;
-		} else if(value == "bevel") {
-			type = CANVAS_LINE_JOIN_BEVEL;
-		}
-
-		canvas_lineJoin(type);
 	}
-	
+
 	void GetLineJoin(const Nan::FunctionCallbackInfo<Value>& args) {
-		canvas_state_t *state = canvas_getState();
-		
-		switch(state->lineJoin)
-		{
-			case CANVAS_LINE_JOIN_BEVEL:
-				args.GetReturnValue().Set(Nan::New("bevel").ToLocalChecked());
-				break;
-			case CANVAS_LINE_JOIN_MITER:
-				args.GetReturnValue().Set(Nan::New("miter").ToLocalChecked());
-				break;
-			case CANVAS_LINE_JOIN_ROUND:
-				args.GetReturnValue().Set(Nan::New("round").ToLocalChecked());
-				break;
-		}
-		
+		args.GetReturnValue().Set(Nan::New(canvas_lineJoin_get()).ToLocalChecked());
 	}
 
-	void SetStrokeStyle(const Nan::FunctionCallbackInfo<Value>& args) {
-		if(!checkArgs(args, 4)) {
+	void SetStyle(const Nan::FunctionCallbackInfo<Value>& args) {
+		if(args.Length() != 2 || !args[0]->IsBoolean() || !args[1]->IsObject()) {
+			Nan::ThrowTypeError("wrong arg");
 			return;
 		}
+		
+		bool stroke = Local<Boolean>::Cast(args[0])->Value();
 
-		canvas_strokeStyle_color(args[0]->NumberValue(), args[1]->NumberValue(), args[2]->NumberValue(), args[3]->NumberValue());
+		if(args[1]->IsArray()) {
+			Local<Array> ar = Local<Array>::Cast(args[1]);
+			if(ar->Length() != 4) {
+				Nan::ThrowTypeError("wrong number of elements");
+				return;
+			}
+
+			paint_t *paint = stroke ? canvas_strokeStyle_get() : canvas_fillStyle_get();
+			if(paint->paintType == PAINT_TYPE_COLOR) {
+				paint_setRGBA(paint, ar->Get(0)->NumberValue(), ar->Get(1)->NumberValue(),
+					ar->Get(2)->NumberValue(), ar->Get(3)->NumberValue());
+			} else {
+				// paint type is gradient
+				paint = new paint_t;
+				paint_createColor(paint, ar->Get(0)->NumberValue(), ar->Get(1)->NumberValue(),
+					ar->Get(2)->NumberValue(), ar->Get(3)->NumberValue());
+				
+				if(stroke) {
+					canvas_strokeStyle(paint);
+				} else {
+					canvas_fillStyle(paint);
+				}
+				
+			}
+		} else {
+			//Gradient object
+			paint_t *paint = stroke ? canvas_strokeStyle_get() : canvas_fillStyle_get();
+			if(paint->paintType == PAINT_TYPE_COLOR) {
+				paint_destroy(paint);
+				delete paint;
+			}
+
+			Gradient *gr = Gradient::Unwrap<Gradient>(Local<Object>::Cast(args[1]));
+			if(stroke) {
+				canvas_strokeStyle(gr->GetPaint());
+			} else {
+				canvas_fillStyle(gr->GetPaint());
+			}
+
+		}
+
 	}
 	
 	void GetStrokeStyle(const Nan::FunctionCallbackInfo<Value>& args) {
-		color_t color = canvas_getState()->strokeColor;
-		
+		/*color_t color = canvas_getState()->strokeColor;
+
 		Local<Array> array = Nan::New<Array>(4);
-		
+
 		array->Set(0, Nan::New(color.red));
 		array->Set(1, Nan::New(color.green));
 		array->Set(2, Nan::New(color.blue));
 		array->Set(3, Nan::New(color.alpha));
-		
-		args.GetReturnValue().Set(array);
+
+		args.GetReturnValue().Set(array);*/
 	}
 
 	void StrokeRect(const Nan::FunctionCallbackInfo<Value>& args) {
@@ -269,97 +299,95 @@ namespace infoscreen {
 
 		canvas_bezierCurveTo(args[0]->NumberValue(), args[1]->NumberValue(), args[2]->NumberValue(), args[3]->NumberValue(), args[4]->NumberValue(), args[5]->NumberValue());
 	}
-	
+
 	void Arc(const Nan::FunctionCallbackInfo<Value>& args) {
 		if(!checkArgs(args, 5)) {
 			return;
 		}
-			
+
 		bool acw = false;
 		if(args.Length() > 5 && args[5]->IsBoolean()) {
 			acw = args[5]->BooleanValue();
 		}
-			
+
 		canvas_arc(args[0]->NumberValue(), args[1]->NumberValue(), args[2]->NumberValue(), args[3]->NumberValue(), args[4]->NumberValue(), acw);
 	}
-	
+
 	void Rect(const Nan::FunctionCallbackInfo<Value>& args) {
 		if(!checkArgs(args, 4)) {
 			return;
 		}
-			
+
 		canvas_rect(args[0]->NumberValue(), args[1]->NumberValue(), args[2]->NumberValue(), args[3]->NumberValue());
 	}
-	
+
 	void SetLineDash(const Nan::FunctionCallbackInfo<Value>& args) {
 		if(args.Length() != 1 || !args[0]->IsArray()) {
 			Nan::ThrowTypeError("wrong arg");
 			return;
 		}
-		
+
 		Local<Array> ar = Local<Array>::Cast(args[0]);
-		
-		VGfloat data[ar->Length()];
-		
+
+		VGfloat *data = new VGfloat[ar->Length()];
+
 		for(uint32_t i = 0; i < ar->Length(); i++) {
 			data[i] = ar->Get(i)->NumberValue();
 		}
-		
+
 		canvas_setLineDash(ar->Length(), data);
+		delete data;
 	}
-	
+
 	void GetLineDash(const Nan::FunctionCallbackInfo<Value>& args) {
-		canvas_state_t *state = canvas_getState();
-		VGfloat *pattern = state->dashPattern;
-		VGint count = state->dashCount;
-		
+		VGfloat *pattern = canvas_setLineDash_get_data();
+		VGint count = canvas_setLineDash_get_count();
+
 		Local<Array> array = Nan::New<Array>(count);
-		
+
 		for(int i = 0; i < count; i++) {
 			array->Set(i, Nan::New(pattern[i]));
 		}
-		
+
 		args.GetReturnValue().Set(array);
 	}
-	
+
 	void SetLineDashOffset(const Nan::FunctionCallbackInfo<Value>& args) {
 		if(!checkArgs(args, 1)) {
 			return;
 		}
-		
+
 		canvas_lineDashOffset(args[0]->NumberValue());
 	}
-	
+
 	void GetLineDashOffset(const Nan::FunctionCallbackInfo<Value>& args) {
-		canvas_state_t *state = canvas_getState();
-		
-		args.GetReturnValue().Set(Nan::New(state->dashOffset));
+		args.GetReturnValue().Set(Nan::New(canvas_lineDashOffset_get()));
 	}
-	
+
 	void Clip(const Nan::FunctionCallbackInfo<Value>& args) {
 		canvas_clip();
 	}
-	
+
 	void Save(const Nan::FunctionCallbackInfo<Value>& args) {
 		canvas_save();
 	}
-	
+
 	void Restore(const Nan::FunctionCallbackInfo<Value>& args) {
 		canvas_restore();
 	}
-	
+
 	void SetGlobalAlpha(const Nan::FunctionCallbackInfo<Value>& args) {
 		if(!checkArgs(args, 1)) {
 			return;
 		}
-			
+
 		canvas_globalAlpha(args[0]->NumberValue());
 	}
-	
+
 	void GetGlobalAlpha(const Nan::FunctionCallbackInfo<Value>& args) {
-		args.GetReturnValue().Set(Nan::New(canvas_getState()->globalAlpha));
+		args.GetReturnValue().Set(Nan::New(canvas_globalAlpha_get()));
 	}
-	
+
 	void ModuleInit(Local<Object> exports) {
 		exports->Set(Nan::New("init").ToLocalChecked(), Nan::New<FunctionTemplate>(Init)->GetFunction());
 		exports->Set(Nan::New("swapBuffers").ToLocalChecked(), Nan::New<FunctionTemplate>(SwapBuffers)->GetFunction());
@@ -369,10 +397,8 @@ namespace infoscreen {
 		exports->Set(Nan::New("clearRect").ToLocalChecked(), Nan::New<FunctionTemplate>(ClearRect)->GetFunction());
 		exports->Set(Nan::New("strokeRect").ToLocalChecked(), Nan::New<FunctionTemplate>(StrokeRect)->GetFunction());
 
-		exports->Set(Nan::New("setFillStyle").ToLocalChecked(), Nan::New<FunctionTemplate>(SetFillStyle)->GetFunction());
-		exports->Set(Nan::New("setStrokeStyle").ToLocalChecked(), Nan::New<FunctionTemplate>(SetStrokeStyle)->GetFunction());
-		exports->Set(Nan::New("getFillStyle").ToLocalChecked(), Nan::New<FunctionTemplate>(GetFillStyle)->GetFunction());
-		exports->Set(Nan::New("getStrokeStyle").ToLocalChecked(), Nan::New<FunctionTemplate>(GetStrokeStyle)->GetFunction());
+		exports->Set(Nan::New("setStyle").ToLocalChecked(), Nan::New<FunctionTemplate>(SetStyle)->GetFunction());
+		exports->Set(Nan::New("getStyle").ToLocalChecked(), Nan::New<FunctionTemplate>(GetFillStyle)->GetFunction());
 
 		exports->Set(Nan::New("getScreenWidth").ToLocalChecked(), Nan::New<FunctionTemplate>(GetScreenWidth)->GetFunction());
 		exports->Set(Nan::New("getScreenHeight").ToLocalChecked(), Nan::New<FunctionTemplate>(GetScreenHeight)->GetFunction());
@@ -403,14 +429,16 @@ namespace infoscreen {
 		exports->Set(Nan::New("bezierCurveTo").ToLocalChecked(), Nan::New<FunctionTemplate>(BezierCurveTo)->GetFunction());
 		exports->Set(Nan::New("arc").ToLocalChecked(), Nan::New<FunctionTemplate>(Arc)->GetFunction());
 		exports->Set(Nan::New("rect").ToLocalChecked(), Nan::New<FunctionTemplate>(Rect)->GetFunction());
-		
+
 		exports->Set(Nan::New("clip").ToLocalChecked(), Nan::New<FunctionTemplate>(Clip)->GetFunction());
-		
+
 		exports->Set(Nan::New("save").ToLocalChecked(), Nan::New<FunctionTemplate>(Save)->GetFunction());
 		exports->Set(Nan::New("restore").ToLocalChecked(), Nan::New<FunctionTemplate>(Restore)->GetFunction());
+
+		Gradient::Init(exports);
 
 	}
 
 }
 
-NODE_MODULE(vgcanvas, infoscreen::ModuleInit)
+NODE_MODULE(vgcanvas, vgcanvas::ModuleInit)

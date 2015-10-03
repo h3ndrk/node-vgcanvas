@@ -77,8 +77,12 @@ void canvas__init(void)
 	printf("{ width: %i, height: %i }\n", egl_get_width(), egl_get_height());
 	
 	// immediate colors for fill and stroke
-	//paint_createColor(&fillPaint, 1, 1, 1, 1);
-	//paint_createColor(&strokePaint, 1, 1, 1, 1);
+	paint_t *fill = malloc(sizeof(paint_t));
+	paint_t *stroke = malloc(sizeof(paint_t));
+	paint_createColor(fill, 1, 1, 1, 1);
+	canvas_fillStyle(fill);
+	paint_createColor(stroke, 1, 1, 1, 1);
+	canvas_strokeStyle(stroke);
 	
 	// reset values
 	// canvas_lineWidth(1);

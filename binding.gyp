@@ -4,6 +4,7 @@
       "target_name": "vgcanvas",
       "sources": [
         "src/vgcanvas.cc",
+        "src/gradient.cc",
         "src/canvas-arc.c",
         "src/canvas-beginPath.c",
         "src/canvas-bezierCurveTo.c",
@@ -35,13 +36,14 @@
         "src/canvas-strokeText.c",
         "src/canvas.c",
         "src/egl-util.c",
-        "src/font-util.c",
+        "src/font-util.c"
       ],
       "include_dirs": [
         "<!(node -e \"require('nan')\")",
         "/opt/vc/include",
         "/opt/vc/include/interface/vmcs_host/linux",
-        "/opt/vc/include/interface/vcos/pthreads"
+        "/opt/vc/include/interface/vcos/pthreads",
+        "/usr/include/freetype2"
       ],
       "link_settings": {
         "libraries": [
@@ -53,7 +55,8 @@
           "-lvcos",
           "-lvchiq_arm",
           "-lpthread",
-          "-lrt"
+          "-lrt",
+          "-lfreetype"
         ],
         "library_dirs": [
           "/opt/vc/lib"

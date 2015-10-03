@@ -1,7 +1,7 @@
-/**
+/*
  * Copyright (C) 2015 NIPE-SYSTEMS
  * Copyright (C) 2015 Hauke Oldsen
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -26,7 +26,7 @@
 
 /**
  * Creates a new RGBA color paint
- * 
+ *
  * @param paint Pointer to paint struct
  * @param red Red component (0..1)
  * @param green Green component (0..1)
@@ -38,16 +38,16 @@ void paint_createColor(paint_t *paint, VGfloat red, VGfloat green, VGfloat blue,
 	paint->paintType = PAINT_TYPE_COLOR;
 	paint->count = 0;
 	paint->data = NULL;
-	
+
 	paint->paint = vgCreatePaint();
 	vgSetParameteri(paint->paint, VG_PAINT_TYPE, VG_PAINT_TYPE_COLOR);
-	
+
 	paint_setRGBA(paint, red, green, blue, alpha);
 }
 
 /**
  * Creates a new linear gradient paint
- * 
+ *
  * @param paint Pointer to paint struct
  * @param x1 The x axis of the coordinate of the start point
  * @param y1 The y axis of the coordinate of the start point
@@ -59,18 +59,18 @@ void paint_createLinearGradient(paint_t *paint, VGfloat x1, VGfloat y1, VGfloat 
 	paint->paintType = PAINT_TYPE_LINEAR_GRADIENT;
 	paint->count = 0;
 	paint->data = NULL;
-	
+
 	VGfloat params[4] = {x1, y1, x2, y2};
-	
+
 	paint->paint = vgCreatePaint();
 	vgSetParameteri(paint->paint, VG_PAINT_TYPE, VG_PAINT_TYPE_LINEAR_GRADIENT);
 	vgSetParameterfv(paint->paint, VG_PAINT_LINEAR_GRADIENT, 4, params);
-	
+
 }
 
 /**
  * Creates a new linear gradient paint
- * 
+ *
  * @param paint Pointer to paint struct
  * @param cx The x axis of the coordinate of the start circle
  * @param cy The y axis of the coordinate of the start circle
@@ -83,13 +83,13 @@ void paint_createRadialGradient(paint_t *paint, VGfloat cx, VGfloat cy, VGfloat 
 	paint->paintType = PAINT_TYPE_RADIAL_GRADIENT;
 	paint->count = 0;
 	paint->data = NULL;
-	
+
 	VGfloat params[5] = {cx, cy, fx, fy, r};
-	
+
 	paint->paint = vgCreatePaint();
 	vgSetParameteri(paint->paint, VG_PAINT_TYPE, VG_PAINT_TYPE_RADIAL_GRADIENT);
 	vgSetParameterfv(paint->paint, VG_PAINT_RADIAL_GRADIENT, 5, params);
-	
+
 }
 
 /**
@@ -104,12 +104,12 @@ void paint_destroy(paint_t *paint)
 	{
 		free(paint->data);
 	}
-	
+
 	vgDestroyPaint(paint->paint);
 }
 
 /**
- * Sets RGBA values of a color paint. 
+ * Sets RGBA values of a color paint.
  * Expects the paint type to be PAINT_TYPE_COLOR.
  *
  * @param paint Pointer to paint struct
@@ -121,7 +121,7 @@ void paint_destroy(paint_t *paint)
 void paint_setRGBA(paint_t *paint, VGfloat red, VGfloat green, VGfloat blue, VGfloat alpha)
 {
 	assert(paint->paintType == PAINT_TYPE_COLOR);
-	
+
 	paint->count = 4;
 	paint->data = realloc(paint->data, 4 * sizeof(VGfloat));
 	if(!paint->data)
@@ -129,16 +129,16 @@ void paint_setRGBA(paint_t *paint, VGfloat red, VGfloat green, VGfloat blue, VGf
 		printf("realloc failed\n");
 		exit(1);
 	}
-	
+
 	paint->data[0] = red;
 	paint->data[1] = green;
 	paint->data[2] = blue;
 	paint->data[3] = alpha;
-	
+
 }
 
 /**
- * Adds a color stop to a gradient paint. 
+ * Adds a color stop to a gradient paint.
  * Expects the paint type to be PAINT_TYPE_LINEAR_GRADIENT or PAINT_TYPE_RADIAL_GRADIENT.
  *
  * @param paint Pointer to paint struct
@@ -151,7 +151,7 @@ void paint_setRGBA(paint_t *paint, VGfloat red, VGfloat green, VGfloat blue, VGf
 void paint_addColorStop(paint_t *paint, VGfloat position, VGfloat red, VGfloat green, VGfloat blue, VGfloat alpha)
 {
 	assert(paint->paintType == PAINT_TYPE_LINEAR_GRADIENT || paint->paintType == PAINT_TYPE_RADIAL_GRADIENT);
-	
+
 	paint->count += 5;
 	paint->data = realloc(paint->data, paint->count * sizeof(VGfloat));
 	if(!paint->data)
@@ -159,19 +159,19 @@ void paint_addColorStop(paint_t *paint, VGfloat position, VGfloat red, VGfloat g
 		printf("realloc failed\n");
 		exit(1);
 	}
-	
+
 	paint->data[paint->count - 5] = position;
 	paint->data[paint->count - 4] = red;
 	paint->data[paint->count - 3] = green;
 	paint->data[paint->count - 2] = blue;
 	paint->data[paint->count - 1] = alpha;
-	
+
 }
 
 /**
- * Activates the paint. 
+ * Activates the paint.
  * Multiplies alpha values by globalAlpha and sets the paint of the specified modes.
- * 
+ *
  * @param paint Pointer to paint struct
  * @param mode bitwise OR of {VG_FILL_PATH | VG_STROKE_PATH}
  */
@@ -182,31 +182,31 @@ void paint_activate(paint_t *paint, VGbitfield mode)
 		{
 			VGfloat data[4];
 			memcpy(data, paint->data, 4 * sizeof(VGfloat));
-			
+
 			data[3] *= canvas_globalAlpha_get();
-			
+
 			vgSetParameterfv(paint->paint, VG_PAINT_COLOR, 4, data);
-		
+
 			break;
 		}
 		case PAINT_TYPE_LINEAR_GRADIENT:
 		case PAINT_TYPE_RADIAL_GRADIENT:
 		{
 			assert(paint->count % 5 == 0);
-		
+
 			VGfloat data[paint->count];
 			memcpy(data, paint->data, paint->count * sizeof(VGfloat));
-			
+
 			for(int i = 4; i < paint->count; i += 5) {
 				data[i] *= canvas_globalAlpha_get();
 			}
-			
+
 			vgSetParameterfv(paint->paint, VG_PAINT_COLOR_RAMP_STOPS, paint->count, data);
 			vgSetParameteri(paint->paint, VG_PAINT_COLOR_RAMP_SPREAD_MODE, VG_COLOR_RAMP_SPREAD_PAD);
-			vgSetParameteri(paint->paint, VG_PAINT_COLOR_RAMP_PREMULTIPLIED, VG_FALSE);
+			vgSetParameteri(paint->paint, VG_PAINT_COLOR_RAMP_PREMULTIPLIED, VG_TRUE);
 			break;
 		}
 	}
-	
+
 	vgSetPaint(paint->paint, mode);
 }
