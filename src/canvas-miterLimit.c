@@ -18,6 +18,7 @@
 #include "include-core.h"
 #include "include-openvg.h"
 // #include "include-freetype.h"
+
 #include "canvas-miterLimit.h"
 
 static VGfloat canvas_miterLimit_value = 10;

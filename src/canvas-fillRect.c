@@ -19,6 +19,7 @@
 #include "include-openvg.h"
 // #include "include-freetype.h"
 
+#include "egl-util.h"
 #include "canvas-paint.h"
 #include "canvas-fillStyle.h"
 #include "canvas-beginPath.h"
@@ -39,7 +40,7 @@ void canvas_fillRect(VGfloat x, VGfloat y, VGfloat width, VGfloat height)
 
 	canvas_beginPath();
 	
-	vguRect(canvas_beginPath_get(), x, y, width, height);
+	vguRect(canvas_beginPath_get(), x, egl_get_height() - y - height, width, height);
 	
 	vgDrawPath(canvas_beginPath_get(), VG_FILL_PATH);
 }

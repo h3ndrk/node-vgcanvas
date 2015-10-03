@@ -19,6 +19,8 @@
 #include "include-openvg.h"
 #include "include-freetype.h"
 
+#include "egl-util.h"
+#include "log-util.h"
 #include "canvas-beginPath.h"
 #include "canvas-paint.h"
 #include "canvas-strokeStyle.h"
@@ -61,7 +63,7 @@ void canvas_strokeText(char *text, float x, float y)
 	lineDashPattern2 = malloc(canvas_setLineDash_get_count() * sizeof(VGfloat));
 	if(lineDashPattern == NULL || lineDashPattern2 == NULL)
 	{
-		printf("Failed to copy dash pattern.\n");
+		eprintf("Failed to copy dash pattern.\n");
 		
 		return;
 	}
@@ -74,7 +76,7 @@ void canvas_strokeText(char *text, float x, float y)
 	{
 		face = font_util_get_face(fonts_index, text[text_index]);
 		
-		printf("stroke: '%c': %f %f\n", text[text_index], ((float)(face->glyph->metrics.vertAdvance) / 64), ((float)(face->glyph->metrics.horiAdvance) / 64));
+		// printf("stroke: '%c': %f %f\n", text[text_index], ((float)(face->glyph->metrics.vertAdvance) / 64), ((float)(face->glyph->metrics.horiAdvance) / 64));
 		
 		if(face->glyph->outline.n_contours != 0)
 		{
@@ -94,13 +96,13 @@ void canvas_strokeText(char *text, float x, float y)
 			vgAppendPathData(canvas_beginPath_get(), segments_count_get(), segments_get(), coords_get());
 			
 			vgTranslate(offset_x, 0);
-			vgTranslate(x, y);
+			vgTranslate(x, egl_get_height() - y);
 			vgScale((VGfloat)size / 64, (VGfloat)size / 64);
 			
 			vgDrawPath(canvas_beginPath_get(), VG_STROKE_PATH);
 			
 			vgScale((VGfloat)64 / size, (VGfloat)64 / size);
-			vgTranslate(-x, -y);
+			vgTranslate(-x, -(egl_get_height() - y));
 			vgTranslate(-offset_x, 0);
 			
 			canvas_lineDashOffset(lineDashOffset);

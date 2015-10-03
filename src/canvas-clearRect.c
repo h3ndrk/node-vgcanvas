@@ -18,6 +18,8 @@
 #include "include-core.h"
 #include "include-openvg.h"
 // #include "include-freetype.h"
+
+#include "egl-util.h"
 #include "canvas-clearRect.h"
 
 /**
@@ -29,6 +31,8 @@ void canvas_clearRect_init(void)
 	vgSetfv(VG_CLEAR_COLOR, 4, clear_color);
 
 	vgSeti(VG_SCISSORING, VG_FALSE);
+	
+	canvas_clearRect(0, 0, egl_get_width(), egl_get_height());
 }
 
 /**
@@ -42,5 +46,5 @@ void canvas_clearRect_init(void)
  */
 void canvas_clearRect(VGfloat x, VGfloat y, VGfloat width, VGfloat height)
 {
-	vgClear(x, y, width, height);
+	vgClear(x, egl_get_height() - y - height, width, height);
 }

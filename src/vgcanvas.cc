@@ -17,7 +17,9 @@
 
 extern "C" {
 	#include "egl-util.h"
+	#include "include-openvg.h"
 	#include "canvas.h"
+	#include "canvas-paint.h"
 	#include "canvas-fillRect.h"
 	#include "canvas-arc.h"
 	#include "canvas-beginPath.h"
@@ -37,7 +39,6 @@ extern "C" {
 	#include "canvas-lineWidth.h"
 	#include "canvas-miterLimit.h"
 	#include "canvas-moveTo.h"
-	#include "canvas-paint.h"
 	#include "canvas-quadraticCurveTo.h"
 	#include "canvas-rect.h"
 	#include "canvas-restore.h"

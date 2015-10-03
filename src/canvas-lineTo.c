@@ -18,6 +18,8 @@
 #include "include-core.h"
 #include "include-openvg.h"
 // #include "include-freetype.h"
+
+#include "egl-util.h"
 #include "canvas-beginPath.h"
 #include "canvas-lineTo.h"
 
@@ -33,7 +35,7 @@ void canvas_lineTo(VGfloat x, VGfloat y)
 	VGfloat data[2];
 	
 	data[0] = x;
-	data[1] = y;
+	data[1] = egl_get_height() - y;
 	
 	vgAppendPathData(canvas_beginPath_get(), 1, segment, (const void *)data);
 }

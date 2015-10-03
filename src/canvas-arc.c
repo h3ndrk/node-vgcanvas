@@ -18,6 +18,8 @@
 #include "include-core.h"
 #include "include-openvg.h"
 // #include "include-freetype.h"
+
+#include "egl-util.h"
 #include "canvas-beginPath.h"
 #include "canvas-arc.h"
 
@@ -39,6 +41,8 @@ void canvas_arc(VGfloat x, VGfloat y, VGfloat radius, VGfloat start_angle, VGflo
 {
 	VGfloat angle_extent = 0;
 	
+	// dprintf("arc: { x: %i, y: %i, radius: %i, start_angle: %i, end_angle: %i, anticlockwise: %s }\n", x, y, radius, start_angle, end_angle, log_util_booleanToString(anticlockwise));
+	
 	// radian to degrees
 	start_angle *= 180 / M_PI;
 	end_angle *= 180 / M_PI;
@@ -53,5 +57,5 @@ void canvas_arc(VGfloat x, VGfloat y, VGfloat radius, VGfloat start_angle, VGflo
 		angle_extent = 0 - (end_angle - start_angle);
 	}
 	
-	vguArc(canvas_beginPath_get(), x, y, radius * 2, radius * 2, start_angle, angle_extent, VGU_ARC_OPEN);
+	vguArc(canvas_beginPath_get(), x, egl_get_height() - y, radius * 2, radius * 2, start_angle, angle_extent, VGU_ARC_OPEN);
 }

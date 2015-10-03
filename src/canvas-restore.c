@@ -18,6 +18,8 @@
 #include "include-core.h"
 #include "include-openvg.h"
 // #include "include-freetype.h"
+
+#include "log-util.h"
 #include "canvas-clip.h"
 #include "canvas-setLineDash.h"
 #include "canvas-globalAlpha.h"
@@ -46,7 +48,7 @@ void canvas_restore(void)
 	
 	if(state_top == NULL)
 	{
-		printf("Failed to restore top state of stack. No states in stack.\n");
+		eprintf("Failed to restore top state of stack. No states in stack.\n");
 		
 		return;
 	}
@@ -70,7 +72,7 @@ void canvas_restore(void)
 	canvas_fillStyle(state_top->fillStyle);
 	if(state_top->fillStyle_count != 0 && state_top->fillStyle_data != NULL)
 	{
-		printf("Restoring color...\n");
+		// printf("Restoring color...\n");
 		
 		memcpy(canvas_fillStyle_get()->data, state_top->fillStyle_data, state_top->fillStyle_count * sizeof(VGfloat));
 		canvas_fillStyle_get()->count = state_top->fillStyle_count;
@@ -78,7 +80,7 @@ void canvas_restore(void)
 	canvas_strokeStyle(state_top->strokeStyle);
 	if(state_top->strokeStyle_count != 0 && state_top->strokeStyle_data != NULL)
 	{
-		printf("Restoring color...\n");
+		// printf("Restoring color...\n");
 		
 		memcpy(canvas_strokeStyle_get()->data, state_top->strokeStyle_data, state_top->strokeStyle_count * sizeof(VGfloat));
 		canvas_strokeStyle_get()->count = state_top->strokeStyle_count;

@@ -21,6 +21,7 @@
 #include <stdlib.h>
 #include <memory.h>
 #include <assert.h>
+#include "log-util.h"
 #include "canvas-paint.h"
 #include "canvas-globalAlpha.h"
 
@@ -126,7 +127,7 @@ void paint_setRGBA(paint_t *paint, VGfloat red, VGfloat green, VGfloat blue, VGf
 	paint->data = realloc(paint->data, 4 * sizeof(VGfloat));
 	if(!paint->data)
 	{
-		printf("realloc failed\n");
+		eprintf("realloc failed\n");
 		exit(1);
 	}
 
@@ -156,7 +157,7 @@ void paint_addColorStop(paint_t *paint, VGfloat position, VGfloat red, VGfloat g
 	paint->data = realloc(paint->data, paint->count * sizeof(VGfloat));
 	if(!paint->data)
 	{
-		printf("realloc failed\n");
+		eprintf("realloc failed\n");
 		exit(1);
 	}
 

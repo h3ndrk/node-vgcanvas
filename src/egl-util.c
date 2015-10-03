@@ -110,21 +110,9 @@ void egl_init(void)
 	eglSurfaceAttrib(display, surface, EGL_SWAP_BEHAVIOR, EGL_BUFFER_PRESERVED);
 	
 	vgLoadIdentity();
+	
+	printf("OpenVG %s initialized (%s %s).\n%i x %i\n", vgGetString(VG_VERSION), vgGetString(VG_VENDOR), vgGetString(VG_RENDERER), screen_width, screen_height);
 }
-
-// Code from https://github.com/ajstarks/openvg/blob/master/oglinit.c doesn't
-// seem necessary.
-// void egl_init_open_gles(void)
-// {
-// 	//DAVE - Set up screen ratio
-// 	glViewport(0, 0, (GLsizei) screen_width, (GLsizei) screen_height);
-	
-// 	glMatrixMode(GL_PROJECTION);
-// 	glLoadIdentity();
-	
-// 	float ratio = (float)screen_width / (float)screen_height;
-// 	glFrustumf(-ratio, ratio, -1.0f, 1.0f, 1.0f, 10.0f);
-// }
 
 void egl_cleanup(void)
 {
@@ -153,20 +141,20 @@ void egl_swap_buffers(void)
 	assert(EGL_FALSE != result);
 }
 
-EGLDisplay egl_get_display(void)
-{
-	return display;
-}
+// EGLDisplay egl_get_display(void)
+// {
+// 	return display;
+// }
 
-EGLSurface egl_get_surface(void)
-{
-	return surface;
-}
+// EGLSurface egl_get_surface(void)
+// {
+// 	return surface;
+// }
 
-EGLContext egl_get_context(void)
-{
-	return context;
-}
+// EGLContext egl_get_context(void)
+// {
+// 	return context;
+// }
 
 uint32_t egl_get_width(void)
 {

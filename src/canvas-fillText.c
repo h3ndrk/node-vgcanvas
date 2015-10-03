@@ -19,6 +19,7 @@
 #include "include-openvg.h"
 #include "include-freetype.h"
 
+#include "egl-util.h"
 #include "canvas-beginPath.h"
 #include "canvas-paint.h"
 #include "canvas-fillStyle.h"
@@ -54,7 +55,7 @@ void canvas_fillText(char *text, float x, float y)
 	{
 		face = font_util_get_face(fonts_index, text[text_index]);
 		
-		printf("fill: '%c': %f %f\n", text[text_index], ((float)(face->glyph->metrics.vertAdvance) / 64), ((float)(face->glyph->metrics.horiAdvance) / 64));
+		// printf("fill: '%c': %f %f\n", text[text_index], ((float)(face->glyph->metrics.vertAdvance) / 64), ((float)(face->glyph->metrics.horiAdvance) / 64));
 		
 		if(face->glyph->outline.n_contours != 0)
 		{
@@ -65,13 +66,13 @@ void canvas_fillText(char *text, float x, float y)
 			vgAppendPathData(canvas_beginPath_get(), segments_count_get(), segments_get(), coords_get());
 			
 			vgTranslate(offset_x, 0);
-			vgTranslate(x, y);
+			vgTranslate(x, egl_get_height() - y);
 			vgScale((VGfloat)size / 64, (VGfloat)size / 64);
 			
 			vgDrawPath(canvas_beginPath_get(), VG_FILL_PATH);
 			
 			vgScale((VGfloat)64 / size, (VGfloat)64 / size);
-			vgTranslate(-x, -y);
+			vgTranslate(-x, -(egl_get_height() - y));
 			vgTranslate(-offset_x, 0);
 			
 			offset_x += ((float)(face->glyph->metrics.horiAdvance) / 64) * ((float)size / 64);

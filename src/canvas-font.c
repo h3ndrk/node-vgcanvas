@@ -19,6 +19,7 @@
 #include "include-openvg.h"
 #include "include-freetype.h"
 
+#include "log-util.h"
 #include "font-util.h"
 #include "canvas-font.h"
 
@@ -38,7 +39,7 @@ void canvas_font(char *path, VGfloat size)
 	
 	if(canvas_font_index < 0)
 	{
-		printf("Failed to find font face: %s\n", path);
+		eprintf("Failed to find font face: %s\n", path);
 		
 		return;
 	}

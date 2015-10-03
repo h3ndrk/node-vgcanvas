@@ -18,6 +18,7 @@
 #include "include-core.h"
 #include "include-openvg.h"
 // #include "include-freetype.h"
+
 #include "canvas-lineWidth.h"
 
 static VGfloat canvas_lineWidth_value = 1;

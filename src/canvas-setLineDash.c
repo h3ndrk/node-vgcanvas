@@ -18,6 +18,8 @@
 #include "include-core.h"
 #include "include-openvg.h"
 // #include "include-freetype.h"
+
+#include "log-util.h"
 #include "canvas-beginPath.h"
 #include "canvas-setLineDash.h"
 
@@ -48,7 +50,7 @@ void canvas_setLineDash(VGint count, VGfloat *data)
 			{
 				canvas_setLineDash_count = 0;
 				
-				printf("Failed to save lineDash data.\n");
+				eprintf("Failed to save lineDash data.\n");
 				
 				return;
 			}
@@ -61,7 +63,7 @@ void canvas_setLineDash(VGint count, VGfloat *data)
 			{
 				canvas_setLineDash_data = canvas_setLineDash_data_backup;
 				
-				printf("Failed to save lineDash data.\n");
+				eprintf("Failed to save lineDash data.\n");
 				
 				return;
 			}

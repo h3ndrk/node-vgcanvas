@@ -18,6 +18,7 @@
 #include "include-core.h"
 #include "include-openvg.h"
 // #include "include-freetype.h"
+
 #include "canvas-lineDashOffset.h"
 
 static VGfloat canvas_lineDashOffset_value = 0;

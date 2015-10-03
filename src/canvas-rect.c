@@ -18,6 +18,8 @@
 #include "include-core.h"
 #include "include-openvg.h"
 // #include "include-freetype.h"
+
+#include "egl-util.h"
 #include "canvas-beginPath.h"
 #include "canvas-rect.h"
 
@@ -33,5 +35,5 @@
  */
 void canvas_rect(VGfloat x, VGfloat y, VGfloat width, VGfloat height)
 {
-	vguRect(canvas_beginPath_get(), x, y, width, height);
+	vguRect(canvas_beginPath_get(), x, egl_get_height() - y - height, width, height);
 }

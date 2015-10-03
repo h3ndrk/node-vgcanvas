@@ -15,10 +15,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __CANVAS_H__
-#define __CANVAS_H__
+#ifndef __LOG_UTIL_H__
+#define __LOG_UTIL_H__
 
-void canvas__init(void);
-void canvas__cleanup(void);
+#define eprintf(fmt, args...) fprintf(stderr, fmt, ##args)
 
-#endif /* __CANVAS_H__ */
+#endif /* __LOG_UTIL_H__ */
