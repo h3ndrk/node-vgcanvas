@@ -165,18 +165,18 @@ void convert_outline(const FT_Vector *points, const char *tags, const short *con
 	assert(coords_count <= COORDS_COUNT_MAX);
 }
 
-int font_util_get(char *path)
+int font_util_get(char *name)
 {
 	int i = 0;
 	
-	if(path == NULL || fonts == NULL)
+	if(name == NULL || fonts == NULL)
 	{
 		return -1;
 	}
 	
 	for(i = 0; i < fonts_amount; i++)
 	{
-		if(strcmp(fonts[i].path, path) == 0)
+		if(strcmp(fonts[i].name, name) == 0)
 		{
 			return i;
 		}
@@ -232,18 +232,18 @@ void font_util_cleanup(void)
 	{
 		while(fonts != NULL)
 		{
-			font_util_remove(fonts[0].path);
+			font_util_remove(fonts[0].name);
 		}
 	}
 	
 	FT_Done_FreeType(font_library);
 }
 
-void font_util_new(char *path)
+int font_util_new(char *path, char *name)
 {
 	FT_Error error = 0;
 	
-	printf("Adding font: %s\n", path);
+	printf("Adding font: %s, name: %s\n", path, name);
 	
 	fonts = realloc(fonts, (++fonts_amount) * sizeof(font_t));
 	
@@ -251,10 +251,11 @@ void font_util_new(char *path)
 	{
 		eprintf("Failed to grow font list.\n");
 		
-		return;
+		return -1;
 	}
 	
 	fonts[fonts_amount - 1].path = strdup(path);
+	fonts[fonts_amount - 1].name = strdup(name);
 	
 	error = FT_New_Face(font_library, path, 0, &(fonts[fonts_amount - 1].face));
 	if(error == FT_Err_Unknown_File_Format)
@@ -262,14 +263,14 @@ void font_util_new(char *path)
 		eprintf("Failed to load font face: Unknown file format: %s\n", path);
 		font_util_remove(path);
 		
-		return;
+		return -1;
 	}
 	else if(error)
 	{
 		eprintf("Failed to load font face: %s (0x%x)\n", path, error);
 		font_util_remove(path);
 		
-		return;
+		return -1;
 	}
 	
 	if(FT_Set_Char_Size(fonts[fonts_amount - 1].face, 0, 64 * 64, 96, 96))
@@ -277,11 +278,13 @@ void font_util_new(char *path)
 		eprintf("Failed to set font size: %s\n", path);
 		font_util_remove(path);
 		
-		return;
+		return -1;
 	}
+	
+	return 0;
 }
 
-void font_util_remove(char *path)
+void font_util_remove(char *name)
 {
 	int i = 0;
 	int fonts_index = 0;
@@ -291,18 +294,19 @@ void font_util_remove(char *path)
 		return;
 	}
 	
-	printf("Removing font: %s\n", path);
+	printf("Removing font: %s\n", name);
 	
-	fonts_index = font_util_get(path);
+	fonts_index = font_util_get(name);
 	
 	if(fonts_index < 0)
 	{
-		eprintf("Failed to find font face: %s\n", path);
+		eprintf("Failed to find font face: %s\n", name);
 		
 		return;
 	}
 	
 	free(fonts[fonts_index].path);
+	free(fonts[fonts_index].name);
 	FT_Done_Face(fonts[fonts_index].face);
 	
 	for(i = fonts_index; i < fonts_amount - 1; i++)

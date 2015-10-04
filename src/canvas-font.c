@@ -33,13 +33,13 @@ static float canvas_font_size = 0;
  * @param path The font path.
  * @param size The font size in space units.
  */
-void canvas_font(char *path, VGfloat size)
+void canvas_font(char *name, VGfloat size)
 {
-	canvas_font_index = font_util_get(path);
+	canvas_font_index = font_util_get(name);
 	
 	if(canvas_font_index < 0)
 	{
-		eprintf("Failed to find font face: %s\n", path);
+		eprintf("Failed to find font face: %s\n", name);
 		
 		return;
 	}

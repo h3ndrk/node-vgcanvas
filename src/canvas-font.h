@@ -18,7 +18,7 @@
 #ifndef __CANVAS_FONT_H__
 #define __CANVAS_FONT_H__
 
-void canvas_font(char *path, VGfloat size);
+void canvas_font(char *name, VGfloat size);
 int canvas_font_get_index(void);
 float canvas_font_get_size(void);
 

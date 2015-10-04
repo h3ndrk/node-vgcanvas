@@ -58,7 +58,7 @@ int main(void)
 	
 	canvas__init();
 	
- font_util_new("./font.ttf");
+	font_util_new("./font.ttf", "Font");
 	
 	canvas_clearRect(0, 0, egl_get_width(), egl_get_height());
 	canvas_lineWidth(2);
@@ -131,7 +131,7 @@ int main(void)
 	
 	// canvas_strokeStyle(&paint);
 	// canvas_fillStyle(&paint);
-	 canvas_font("./font.ttf", 100);
+	 canvas_font("Font", 100);
 	 canvas_fillText("Test", 100, 800);
 	 canvas_strokeText("Test", 400, 800);
 	
