@@ -43,9 +43,7 @@
 void canvas_strokeText(char *text, float x, float y)
 {
 	int fonts_index = canvas_font_get_index();
-	FT_Face face;
-	unsigned int text_index = 0;
-	VGfloat offset_x = 0;
+	VGFont vg_font = font_util_get_font(fonts_index);
 	VGfloat size = canvas_font_get_size();
 	int lineDashPattern_index = 0;
 	VGfloat lineDashOffset = canvas_lineDashOffset_get();
@@ -53,8 +51,10 @@ void canvas_strokeText(char *text, float x, float y)
 	VGint lineDashCount = canvas_setLineDash_get_count();
 	VGfloat *lineDashPattern = NULL;
 	VGfloat *lineDashPattern2 = NULL;
+	VGuint *text_converted = NULL;
+	unsigned int text_converted_index = 0;
 	
-	if(fonts_index < 0)
+	if(fonts_index < 0 || text == NULL)
 	{
 		return;
 	}
@@ -72,46 +72,45 @@ void canvas_strokeText(char *text, float x, float y)
 	
 	paint_activate(canvas_strokeStyle_get(), VG_STROKE_PATH);
 	
-	for(text_index = 0; text_index < strlen(text); text_index++)
+	text_converted = malloc(strlen(text) * sizeof(VGuint));
+	if(text_converted == NULL)
 	{
-		face = font_util_get_face(fonts_index, text[text_index]);
+		eprintf("Failed to convert text data to 2 byte text.\n");
 		
-		// printf("stroke: '%c': %f %f\n", text[text_index], ((float)(face->glyph->metrics.vertAdvance) / 64), ((float)(face->glyph->metrics.horiAdvance) / 64));
-		
-		if(face->glyph->outline.n_contours != 0)
-		{
-			for(lineDashPattern_index = 0; lineDashPattern_index < lineDashCount; lineDashPattern_index++)
-			{
-				lineDashPattern2[lineDashPattern_index] = lineDashPattern[lineDashPattern_index] * ((VGfloat)64 / size);
-			}
-			
-			canvas_setLineDash(lineDashCount, lineDashPattern2);
-			canvas_lineWidth(lineWidth * ((VGfloat)64 / size));
-			canvas_lineDashOffset(lineDashOffset * ((VGfloat)64 / size));
-			
-			canvas_beginPath();
-			
-			convert_outline(face->glyph->outline.points, face->glyph->outline.tags, face->glyph->outline.contours, face->glyph->outline.n_contours, face->glyph->outline.n_points);
-			
-			vgAppendPathData(canvas_beginPath_get(), segments_count_get(), segments_get(), coords_get());
-			
-			vgTranslate(offset_x, 0);
-			vgTranslate(x, egl_get_height() - y - size);
-			vgScale((VGfloat)size / 64, (VGfloat)size / 64);
-			
-			vgDrawPath(canvas_beginPath_get(), VG_STROKE_PATH);
-			
-			vgScale((VGfloat)64 / size, (VGfloat)64 / size);
-			vgTranslate(-x, -(egl_get_height() - y - size));
-			vgTranslate(-offset_x, 0);
-			
-			canvas_lineDashOffset(lineDashOffset);
-			canvas_lineWidth(lineWidth);
-			canvas_setLineDash(lineDashCount, lineDashPattern);
-			
-			offset_x += ((float)(face->glyph->metrics.horiAdvance) / 64) * ((float)size / 64);
-		}
+		return;
 	}
+	
+	for(text_converted_index = 0; text_converted_index < strlen(text); text_converted_index++)
+	{
+		text_converted[text_converted_index] = (VGuint)text[text_converted_index];
+	}
+	
+	for(lineDashPattern_index = 0; lineDashPattern_index < lineDashCount; lineDashPattern_index++)
+	{
+		lineDashPattern2[lineDashPattern_index] = lineDashPattern[lineDashPattern_index] / size;
+	}
+	
+	canvas_setLineDash(lineDashCount, lineDashPattern2);
+	canvas_lineWidth(lineWidth / size);
+	canvas_lineDashOffset(lineDashOffset / size);
+	
+	vgSeti(VG_MATRIX_MODE, VG_MATRIX_GLYPH_USER_TO_SURFACE);
+	
+	vgTranslate(x, egl_get_height() - y - size);
+	vgScale(size, size);
+	
+	vgDrawGlyphs(vg_font, strlen(text), text_converted, NULL, NULL, VG_STROKE_PATH, VG_FALSE);
+	
+	vgScale(1 / size, 1 / size);
+	vgTranslate(-x, -(egl_get_height() - y - size));
+	
+	vgSeti(VG_MATRIX_MODE, VG_MATRIX_PATH_USER_TO_SURFACE);
+	
+	canvas_lineDashOffset(lineDashOffset);
+	canvas_lineWidth(lineWidth);
+	canvas_setLineDash(lineDashCount, lineDashPattern);
+	
+	free(text_converted);
 	
 	free(lineDashPattern);
 	free(lineDashPattern2);

@@ -67,6 +67,7 @@ int main(void)
 	paint_createColor(&paint, 1, 0, 0, 1);
 	
 	canvas_fillStyle(&paint);
+	canvas_strokeStyle(&paint);
 	canvas_fillRect(100, 100, 100, 100);
 	
 	// paint_t gradient;
@@ -131,9 +132,9 @@ int main(void)
 	
 	// canvas_strokeStyle(&paint);
 	// canvas_fillStyle(&paint);
-	 canvas_font("Font", 100);
-	 canvas_fillText("Test", 100, 800);
-	 canvas_strokeText("Test", 400, 800);
+	canvas_font("Font", 100);
+	canvas_fillText("Test", 300, 100);
+	canvas_strokeText("Test", 400, 100);
 	
 	// canvas_beginPath();
 	// vgTranslate(100, 100);

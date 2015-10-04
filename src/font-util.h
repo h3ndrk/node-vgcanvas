@@ -23,11 +23,16 @@ typedef struct font_t
 	char *path;
 	char *name;
 	FT_Face face;
+	VGFont vg_font;
 } font_t;
 
-void convert_outline(const FT_Vector *points, const char *tags, const short *contours, short contours_count, short points_count);
+#define FONT_UTIL_SIZE 64 * 64 * 64
+#define FONT_UTIL_TO_FLOAT(ft_size) ((float)(ft_size) / (FONT_UTIL_SIZE))
+
+// void convert_outline(const FT_Vector *points, const char *tags, const short *contours, short contours_count, short points_count);
 int font_util_get(char *name);
 FT_Face font_util_get_face(int fonts_index, char character);
+VGFont font_util_get_font(int fonts_index);
 void font_util_init(void);
 void font_util_cleanup(void);
 int font_util_new(char *path, char *name);
