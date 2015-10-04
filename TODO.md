@@ -13,7 +13,10 @@
 - [ ] shadows
 - [ ] images
 - [x] text
-- [x] comments
+- [ ] comments
+    - [ ] `src/font-util.c`
+    - [ ] `src/log-util.h`
+    - [ ] not only the functions but also the code
 - [ ] remove Makefile, remove "`bin`" from "`.gitignore`", remove "`src/home-infoscreen.c`"
 - [ ] "`openSubPath`" in "`src/canvas.c`"
 - [ ] https://developer.mozilla.org/en-US/docs/Web/API/Path2D/Path2D
@@ -27,3 +30,11 @@
 - [ ] `miterLimit`: what values does effect what? OpenVG documentation does not inform well about that topic.
 - [x] set standard values at initialization
 - [ ] create font if it is firstly used
+- [ ] Replace `onecolor` with regular expressions and native code
+- [ ] `textBaseline`, `textAlign`
+- [ ] general error handling: worst case scenario for user input
+    - [ ] better `eprintf` and failure exit with memory safety
+    - [ ] error handling for system failures (out-of-memory-failure)
+- [ ] analyze memory leaks
+    - [ ] in the whole code generally
+    - [ ] **VRAM memory leaks** (maybe flush cache?)
