@@ -75,7 +75,8 @@ void canvas_fillText(char *text, float x, float y)
 			vgTranslate(-x, -(egl_get_height() - y - size));
 			vgTranslate(-offset_x, 0);
 			
-			offset_x += ((float)(face->glyph->metrics.horiAdvance) / 64) * ((float)size / 64);
 		}
+		
+		offset_x += ((float)(face->glyph->metrics.horiAdvance) / 64) * ((float)size / 64);
 	}
 }
