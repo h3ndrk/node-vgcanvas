@@ -55,6 +55,7 @@
 int main(void)
 {
 	char s[3];
+	unsigned int i = 0;
 	
 	canvas__init();
 	
@@ -132,9 +133,14 @@ int main(void)
 	
 	// canvas_strokeStyle(&paint);
 	// canvas_fillStyle(&paint);
-	canvas_font("Font", 100);
-	canvas_fillText("Test", 300, 100);
-	canvas_strokeText("Test", 400, 100);
+	canvas_font("Font", 7);
+	printf("Rendering...\n");
+	for(i = 0; i < 150; i++)
+	{
+		canvas_fillText("abcdefghijklmnopqrstuvwABCDEFGHIJKLMNOPQRSTUVWXYZ asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasd", i, i);
+	}
+	
+	printf("Rendering finished\n");
 	
 	// canvas_beginPath();
 	// vgTranslate(100, 100);

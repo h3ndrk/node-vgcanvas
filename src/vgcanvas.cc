@@ -395,12 +395,12 @@ namespace vgcanvas {
 	}
 	
 	void NewFont(const Nan::FunctionCallbackInfo<Value>& args) {
-		if(args.Length() < 1 || !args[0]->IsString()) {
+		if(args.Length() < 2 || !args[0]->IsString(), !args[1]->IsString()) {
 			Nan::ThrowTypeError("wrong arg");
 			return;
 		}
 		
-		font_util_new(*Nan::Utf8String(args[0]));
+		font_util_new(*Nan::Utf8String(args[0]), *Nan::Utf8String(args[1]));
 	}
 	
 	void SetFont(const Nan::FunctionCallbackInfo<Value>& args) {
