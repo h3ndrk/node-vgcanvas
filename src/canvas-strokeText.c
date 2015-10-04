@@ -53,6 +53,7 @@ void canvas_strokeText(char *text, float x, float y)
 	VGfloat *lineDashPattern2 = NULL;
 	VGuint *text_converted = NULL;
 	unsigned int text_converted_index = 0;
+	VGfloat glyph_origin[2] = { 0, 0 };
 	
 	if(fonts_index < 0 || text == NULL)
 	{
@@ -96,6 +97,8 @@ void canvas_strokeText(char *text, float x, float y)
 	
 	vgSeti(VG_MATRIX_MODE, VG_MATRIX_GLYPH_USER_TO_SURFACE);
 	
+	vgSetfv(VG_GLYPH_ORIGIN, 2, glyph_origin);
+	
 	vgTranslate(x, egl_get_height() - y - size);
 	vgScale(size, size);
 	
@@ -103,6 +106,8 @@ void canvas_strokeText(char *text, float x, float y)
 	
 	vgScale(1 / size, 1 / size);
 	vgTranslate(-x, -(egl_get_height() - y - size));
+	
+	vgSetfv(VG_GLYPH_ORIGIN, 2, glyph_origin);
 	
 	vgSeti(VG_MATRIX_MODE, VG_MATRIX_PATH_USER_TO_SURFACE);
 	
