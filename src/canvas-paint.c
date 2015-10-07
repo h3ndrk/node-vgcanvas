@@ -16,12 +16,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <VG/openvg.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <memory.h>
-#include <assert.h>
+#include "include-core.h"
+#include "include-openvg.h"
+
 #include "log-util.h"
+#include "egl-util.h"
 #include "canvas-paint.h"
 #include "canvas-globalAlpha.h"
 
@@ -61,7 +60,7 @@ void paint_createLinearGradient(paint_t *paint, VGfloat x1, VGfloat y1, VGfloat 
 	paint->count = 0;
 	paint->data = NULL;
 
-	VGfloat params[4] = {x1, y1, x2, y2};
+	VGfloat params[4] = {x1, egl_get_height() - y1, x2, egl_get_height() - y2};
 
 	paint->paint = vgCreatePaint();
 	vgSetParameteri(paint->paint, VG_PAINT_TYPE, VG_PAINT_TYPE_LINEAR_GRADIENT);
@@ -85,7 +84,7 @@ void paint_createRadialGradient(paint_t *paint, VGfloat cx, VGfloat cy, VGfloat 
 	paint->count = 0;
 	paint->data = NULL;
 
-	VGfloat params[5] = {cx, cy, fx, fy, r};
+	VGfloat params[5] = {cx, egl_get_height() - cy, fx, egl_get_height() - fy, r};
 
 	paint->paint = vgCreatePaint();
 	vgSetParameteri(paint->paint, VG_PAINT_TYPE, VG_PAINT_TYPE_RADIAL_GRADIENT);

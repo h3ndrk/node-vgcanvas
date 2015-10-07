@@ -66,6 +66,11 @@ void canvas_fillText(char *text, float x, float y)
 		text_converted[text_converted_index] = (VGuint)text[text_converted_index];
 	}
 	
+	vgSeti(VG_MATRIX_MODE, VG_MATRIX_FILL_PAINT_TO_USER);
+	
+	vgScale(1 / size, 1 / size);
+	vgTranslate(-x, -(egl_get_height() - y - size));
+	
 	vgSeti(VG_MATRIX_MODE, VG_MATRIX_GLYPH_USER_TO_SURFACE);
 	
 	vgSetfv(VG_GLYPH_ORIGIN, 2, glyph_origin);
@@ -79,6 +84,11 @@ void canvas_fillText(char *text, float x, float y)
 	vgTranslate(-x, -(egl_get_height() - y - size));
 	
 	vgSetfv(VG_GLYPH_ORIGIN, 2, glyph_origin);
+	
+	vgSeti(VG_MATRIX_MODE, VG_MATRIX_FILL_PAINT_TO_USER);
+	
+	vgTranslate(x, egl_get_height() - y - size);
+	vgScale(size, size);
 	
 	vgSeti(VG_MATRIX_MODE, VG_MATRIX_PATH_USER_TO_SURFACE);
 	
