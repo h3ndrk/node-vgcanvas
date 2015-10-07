@@ -38,5 +38,8 @@
 - [ ] analyze memory leaks
     - [ ] in the whole code generally
     - [ ] **VRAM memory leaks** (maybe flush cache?)
-- [ ] add properties (e.g. `miterLimit`, gradients, patterns) for `fillText` and `strokeText`
+- [ ] add properties for `fillText` and `strokeText`
+    - [ ] `miterLimit`
+    - [x] gradients
+    - [ ] patterns
 - [ ] add dependencies for `#include`s
