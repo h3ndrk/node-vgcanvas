@@ -18,6 +18,8 @@
 #ifndef __CANVAS_FILLTEXT_H__
 #define __CANVAS_FILLTEXT_H__
 
-void canvas_fillText(char *text, float x, float y);
+#include <VG/openvg.h>
+
+void canvas_fillText(char *text, VGfloat x, VGfloat y);
 
 #endif /* __CANVAS_FILLTEXT_H__ */

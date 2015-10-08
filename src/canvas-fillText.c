@@ -37,7 +37,7 @@
  * @param x The x axis of the coordinate for the text starting point.
  * @param y The y axis of the coordinate for the text starting point.
  */
-void canvas_fillText(char *text, float x, float y)
+void canvas_fillText(char *text, VGfloat x, VGfloat y)
 {
 	int fonts_index = canvas_font_get_index();
 	VGFont vg_font = font_util_get_font(fonts_index);

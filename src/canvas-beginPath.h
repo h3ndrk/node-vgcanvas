@@ -18,6 +18,8 @@
 #ifndef __CANVAS_BEGINPATH_H__
 #define __CANVAS_BEGINPATH_H__
 
+#include <VG/openvg.h>
+
 void canvas_beginPath_init(void);
 void canvas_beginPath_cleanup(void);
 void canvas_beginPath(void);

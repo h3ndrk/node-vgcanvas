@@ -18,6 +18,8 @@
 #ifndef __CANVAS_LINETO_H__
 #define __CANVAS_LINETO_H__
 
+#include <VG/openvg.h>
+
 void canvas_lineTo(VGfloat x, VGfloat y);
 
 #endif /* __CANVAS_LINETO_H__ */

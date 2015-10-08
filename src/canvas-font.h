@@ -18,8 +18,10 @@
 #ifndef __CANVAS_FONT_H__
 #define __CANVAS_FONT_H__
 
+#include <VG/openvg.h>
+
 void canvas_font(char *name, VGfloat size);
 int canvas_font_get_index(void);
-float canvas_font_get_size(void);
+VGfloat canvas_font_get_size(void);
 
 #endif /* __CANVAS_FONT_H__ */

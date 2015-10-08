@@ -18,6 +18,8 @@
 #ifndef __CANVAS_LINEDASHOFFSET_H__
 #define __CANVAS_LINEDASHOFFSET_H__
 
+#include <VG/openvg.h>
+
 void canvas_lineDashOffset(VGfloat line_dash_offset);
 VGfloat canvas_lineDashOffset_get(void);
 

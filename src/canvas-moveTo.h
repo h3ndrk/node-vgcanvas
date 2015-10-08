@@ -18,6 +18,8 @@
 #ifndef __CANVAS_MOVETO_H__
 #define __CANVAS_MOVETO_H__
 
+#include <VG/openvg.h>
+
 void canvas_moveTo(VGfloat x, VGfloat y);
 
 #endif /* __CANVAS_MOVETO_H__ */

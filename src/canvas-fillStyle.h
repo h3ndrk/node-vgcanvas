@@ -18,6 +18,8 @@
 #ifndef __CANVAS_FILLSTYLE_H__
 #define __CANVAS_FILLSTYLE_H__
 
+#include "canvas-paint.h"
+
 void canvas_fillStyle(paint_t *paint);
 paint_t *canvas_fillStyle_get(void);
 

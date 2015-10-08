@@ -60,7 +60,7 @@ int canvas_font_get_index(void)
  * Returns the font size.
  * @return The font size.
  */
-float canvas_font_get_size(void)
+VGfloat canvas_font_get_size(void)
 {
 	return canvas_font_size;
 }

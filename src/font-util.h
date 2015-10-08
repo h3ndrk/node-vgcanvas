@@ -18,6 +18,11 @@
 #ifndef __FONT_UTIL_H__
 #define __FONT_UTIL_H__
 
+#include <VG/openvg.h>
+#include <ft2build.h>
+#include FT_FREETYPE_H
+#include FT_STROKER_H
+
 typedef struct font_t
 {
 	char *path;
@@ -29,7 +34,6 @@ typedef struct font_t
 #define FONT_UTIL_SIZE 64 * 64 * 64
 #define FONT_UTIL_TO_FLOAT(ft_size) ((float)(ft_size) / (FONT_UTIL_SIZE))
 
-// void convert_outline(const FT_Vector *points, const char *tags, const short *contours, short contours_count, short points_count);
 int font_util_get(char *name);
 FT_Face font_util_get_face(int fonts_index, char character);
 VGFont font_util_get_font(int fonts_index);

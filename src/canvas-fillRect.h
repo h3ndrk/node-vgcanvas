@@ -18,6 +18,8 @@
 #ifndef __CANVAS_FILLRECT_H__
 #define __CANVAS_FILLRECT_H__
 
+#include <VG/openvg.h>
+
 void canvas_fillRect(VGfloat x, VGfloat y, VGfloat width, VGfloat height);
 
 #endif /* __CANVAS_FILLRECT_H__ */

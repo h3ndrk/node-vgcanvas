@@ -18,6 +18,8 @@
 #ifndef __CANVAS_CLEARRECT_H__
 #define __CANVAS_CLEARRECT_H__
 
+#include <VG/openvg.h>
+
 void canvas_clearRect_init(void);
 void canvas_clearRect(VGfloat x, VGfloat y, VGfloat width, VGfloat height);
 

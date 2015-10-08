@@ -18,6 +18,8 @@
 #ifndef __CANVAS_CLIP_H__
 #define __CANVAS_CLIP_H__
 
+#include <VG/openvg.h>
+
 void canvas_clip_init(void);
 void canvas_clip(void);
 VGboolean canvas_clip_get_clipping(void);

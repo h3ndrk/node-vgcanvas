@@ -18,6 +18,8 @@
 #ifndef __CANVAS_QUADRATICCURVETO_H__
 #define __CANVAS_QUADRATICCURVETO_H__
 
+#include <VG/openvg.h>
+
 void canvas_quadraticCurveTo(VGfloat cpx, VGfloat cpy, VGfloat x, VGfloat y);
 
 #endif /* __CANVAS_QUADRATICCURVETO_H__ */

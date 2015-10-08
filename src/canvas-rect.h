@@ -18,6 +18,8 @@
 #ifndef __CANVAS_RECT_H__
 #define __CANVAS_RECT_H__
 
+#include <VG/openvg.h>
+
 void canvas_rect(VGfloat x, VGfloat y, VGfloat width, VGfloat height);
 
 #endif /* __CANVAS_RECT_H__ */

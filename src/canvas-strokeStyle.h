@@ -18,6 +18,8 @@
 #ifndef __CANVAS_STROKESTYLE_H__
 #define __CANVAS_STROKESTYLE_H__
 
+#include "canvas-paint.h"
+
 void canvas_strokeStyle(paint_t *paint);
 paint_t *canvas_strokeStyle_get(void);
 

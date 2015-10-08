@@ -18,6 +18,8 @@
 #ifndef __CANVAS_GLOBALALPHA_H__
 #define __CANVAS_GLOBALALPHA_H__
 
+#include <VG/openvg.h>
+
 void canvas_globalAlpha(VGfloat global_alpha);
 VGfloat canvas_globalAlpha_get(void);
 

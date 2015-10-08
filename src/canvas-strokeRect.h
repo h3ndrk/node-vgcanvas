@@ -18,6 +18,8 @@
 #ifndef __CANVAS_STROKERECT_H__
 #define __CANVAS_STROKERECT_H__
 
+#include <VG/openvg.h>
+
 void canvas_strokeRect(VGfloat x, VGfloat y, VGfloat width, VGfloat height);
 
 #endif /* __CANVAS_STROKERECT_H__ */

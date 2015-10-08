@@ -18,6 +18,8 @@
 #ifndef __CANVAS_MITERLIMIT_H__
 #define __CANVAS_MITERLIMIT_H__
 
+#include <VG/openvg.h>
+
 void canvas_miterLimit(VGfloat miter_limit);
 VGfloat canvas_miterLimit_get(void);
 

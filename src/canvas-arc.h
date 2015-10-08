@@ -18,6 +18,8 @@
 #ifndef __CANVAS_ARC_H__
 #define __CANVAS_ARC_H__
 
+#include <VG/openvg.h>
+
 void canvas_arc(VGfloat x, VGfloat y, VGfloat radius, VGfloat start_angle, VGfloat end_angle, VGboolean anticlockwise);
 
 #endif /* __CANVAS_ARC_H__ */

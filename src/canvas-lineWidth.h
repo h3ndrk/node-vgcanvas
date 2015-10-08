@@ -18,6 +18,8 @@
 #ifndef __CANVAS_LINEWIDTH_H__
 #define __CANVAS_LINEWIDTH_H__
 
+#include <VG/openvg.h>
+
 void canvas_lineWidth(VGfloat line_width);
 VGfloat canvas_lineWidth_get(void);
 

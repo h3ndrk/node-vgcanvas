@@ -42,4 +42,4 @@
     - [ ] `miterLimit`
     - [x] gradients
     - [ ] patterns
-- [ ] add dependencies for `#include`s
+- [x] add dependencies for `#include`s

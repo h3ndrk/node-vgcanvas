@@ -18,6 +18,8 @@
 #ifndef __CANVAS_BEZIERCURVETO_H__
 #define __CANVAS_BEZIERCURVETO_H__
 
+#include <VG/openvg.h>
+
 void canvas_bezierCurveTo(VGfloat cp1x, VGfloat cp1y, VGfloat cp2x, VGfloat cp2y, VGfloat x, VGfloat y);
 
 #endif /* __CANVAS_BEZIERCURVETO_H__ */
