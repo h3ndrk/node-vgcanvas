@@ -1,5 +1,6 @@
 /**
  * Copyright (C) 2015 NIPE-SYSTEMS
+ * Copyright (C) 2015 Hauke Oldsen
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -65,11 +66,11 @@ int main(void)
 	canvas_lineWidth(2);
 	
 	paint_t paint;
-	paint_createColor(&paint, 1, 0, 0, 1);
+	paint_createColor(&paint, 1, 0.3, 0, 1);
 	
 	canvas_fillStyle(&paint);
 	canvas_strokeStyle(&paint);
-	canvas_fillRect(100, 100, 100, 100);
+	canvas_fillRect(100, 160, 450, 140);
 	
 	// paint_t gradient;
 	// paint_createLinearGradient(&gradient, 100, 0, 500, 0);
@@ -133,14 +134,9 @@ int main(void)
 	
 	// canvas_strokeStyle(&paint);
 	// canvas_fillStyle(&paint);
-	canvas_font("Font", 7);
-	printf("Rendering...\n");
-	for(i = 0; i < 150; i++)
-	{
-		canvas_fillText("abcdefghijklmnopqrstuvwABCDEFGHIJKLMNOPQRSTUVWXYZ asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasd", i, i);
-	}
-	
-	printf("Rendering finished\n");
+	canvas_font("Font", 200);
+	canvas_fillText("node", 620, 100);
+	canvas_fillText("vgcanvas", 100, 330);
 	
 	// canvas_beginPath();
 	// vgTranslate(100, 100);
@@ -159,7 +155,7 @@ int main(void)
 	printf("Press <Enter> to shutdown.\n");
 	fgets(s, 2, stdin);
 	
-	paint_destroy(&paint);
+	paint_cleanup(&paint);
 	// paint_destroy(&gradient);
 	// paint_destroy(&textGradient);
 	// paint_destroy(&radial);

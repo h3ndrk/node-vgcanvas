@@ -221,7 +221,7 @@ namespace vgcanvas {
 			//Gradient object
 			paint_t *paint = stroke ? canvas_strokeStyle_get() : canvas_fillStyle_get();
 			if(paint->paintType == PAINT_TYPE_COLOR) {
-				paint_destroy(paint);
+				paint_cleanup(paint);
 				delete paint;
 			}
 

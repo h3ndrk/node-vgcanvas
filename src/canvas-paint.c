@@ -35,13 +35,13 @@
  */
 void paint_createColor(paint_t *paint, VGfloat red, VGfloat green, VGfloat blue, VGfloat alpha)
 {
-	paint->paintType = PAINT_TYPE_COLOR;
+	paint->paint_type = PAINT_TYPE_COLOR;
 	paint->count = 0;
 	paint->data = NULL;
-
+	
 	paint->paint = vgCreatePaint();
 	vgSetParameteri(paint->paint, VG_PAINT_TYPE, VG_PAINT_TYPE_COLOR);
-
+	
 	paint_setRGBA(paint, red, green, blue, alpha);
 }
 
@@ -56,16 +56,21 @@ void paint_createColor(paint_t *paint, VGfloat red, VGfloat green, VGfloat blue,
  */
 void paint_createLinearGradient(paint_t *paint, VGfloat x1, VGfloat y1, VGfloat x2, VGfloat y2)
 {
-	paint->paintType = PAINT_TYPE_LINEAR_GRADIENT;
+	VGfloat data[4];
+	
+	paint->paint_type = PAINT_TYPE_LINEAR_GRADIENT;
 	paint->count = 0;
 	paint->data = NULL;
-
-	VGfloat params[4] = {x1, egl_get_height() - y1, x2, egl_get_height() - y2};
-
+	
+	data[0] = x1;
+	data[1] = egl_get_height() - y1;
+	data[2] = x2;
+	data[3] = egl_get_height() - y2;
+	
 	paint->paint = vgCreatePaint();
+	
 	vgSetParameteri(paint->paint, VG_PAINT_TYPE, VG_PAINT_TYPE_LINEAR_GRADIENT);
-	vgSetParameterfv(paint->paint, VG_PAINT_LINEAR_GRADIENT, 4, params);
-
+	vgSetParameterfv(paint->paint, VG_PAINT_LINEAR_GRADIENT, 4, data);
 }
 
 /**
@@ -80,37 +85,42 @@ void paint_createLinearGradient(paint_t *paint, VGfloat x1, VGfloat y1, VGfloat 
  */
 void paint_createRadialGradient(paint_t *paint, VGfloat cx, VGfloat cy, VGfloat r, VGfloat fx, VGfloat fy)
 {
-	paint->paintType = PAINT_TYPE_RADIAL_GRADIENT;
+	VGfloat data[5];
+	
+	paint->paint_type = PAINT_TYPE_RADIAL_GRADIENT;
 	paint->count = 0;
 	paint->data = NULL;
-
-	VGfloat params[5] = {cx, egl_get_height() - cy, fx, egl_get_height() - fy, r};
-
+	
+	data[0] = cx;
+	data[1] = egl_get_height() - cy;
+	data[2] = fx;
+	data[3] = egl_get_height() - fy;
+	data[4] = r;
+	
 	paint->paint = vgCreatePaint();
+	
 	vgSetParameteri(paint->paint, VG_PAINT_TYPE, VG_PAINT_TYPE_RADIAL_GRADIENT);
-	vgSetParameterfv(paint->paint, VG_PAINT_RADIAL_GRADIENT, 5, params);
-
+	vgSetParameterfv(paint->paint, VG_PAINT_RADIAL_GRADIENT, 5, data);
 }
 
 /**
- * Destroys a paint.
- * Deallocates memory and releases the OpenVG paint.
+ * Destroys a paint. Deallocates memory and releases the OpenVG paint.
  *
  * @param paint Pointer to paint struct
  */
-void paint_destroy(paint_t *paint)
+void paint_cleanup(paint_t *paint)
 {
 	if(paint->data)
 	{
 		free(paint->data);
 	}
-
+	
 	vgDestroyPaint(paint->paint);
 }
 
 /**
- * Sets RGBA values of a color paint.
- * Expects the paint type to be PAINT_TYPE_COLOR.
+ * Sets RGBA values of a color paint. Expects the paint type to be
+ * PAINT_TYPE_COLOR.
  *
  * @param paint Pointer to paint struct
  * @param red Red component (0..1)
@@ -120,26 +130,37 @@ void paint_destroy(paint_t *paint)
  */
 void paint_setRGBA(paint_t *paint, VGfloat red, VGfloat green, VGfloat blue, VGfloat alpha)
 {
-	assert(paint->paintType == PAINT_TYPE_COLOR);
-
-	paint->count = 4;
-	paint->data = realloc(paint->data, 4 * sizeof(VGfloat));
-	if(!paint->data)
+	VGfloat *paint_data_backup = NULL;
+	
+	if(paint->paint_type != PAINT_TYPE_COLOR)
 	{
-		eprintf("realloc failed\n");
-		exit(1);
+		eprintf("Failed to set color of paint: paint is a gradient.\n");
+		
+		return;
 	}
-
+	
+	paint->count = 4;
+	paint_data_backup = paint->data;
+	paint->data = realloc(paint->data, 4 * sizeof(VGfloat));
+	
+	if(paint->data == NULL)
+	{
+		eprintf("Failed to reallocate color data of paint.\n");
+		
+		paint->data = paint_data_backup;
+		
+		return;
+	}
+	
 	paint->data[0] = red;
 	paint->data[1] = green;
 	paint->data[2] = blue;
 	paint->data[3] = alpha;
-
 }
 
 /**
- * Adds a color stop to a gradient paint.
- * Expects the paint type to be PAINT_TYPE_LINEAR_GRADIENT or PAINT_TYPE_RADIAL_GRADIENT.
+ * Adds a color stop to a gradient paint. Expects the paint type to be
+ * PAINT_TYPE_LINEAR_GRADIENT or PAINT_TYPE_RADIAL_GRADIENT.
  *
  * @param paint Pointer to paint struct
  * @param position Position of the point (0..1)
@@ -150,63 +171,94 @@ void paint_setRGBA(paint_t *paint, VGfloat red, VGfloat green, VGfloat blue, VGf
  */
 void paint_addColorStop(paint_t *paint, VGfloat position, VGfloat red, VGfloat green, VGfloat blue, VGfloat alpha)
 {
-	assert(paint->paintType == PAINT_TYPE_LINEAR_GRADIENT || paint->paintType == PAINT_TYPE_RADIAL_GRADIENT);
-
-	paint->count += 5;
-	paint->data = realloc(paint->data, paint->count * sizeof(VGfloat));
-	if(!paint->data)
+	VGfloat *paint_data_backup = NULL;
+	
+	if(paint->paint_type != PAINT_TYPE_LINEAR_GRADIENT && paint->paint_type != PAINT_TYPE_RADIAL_GRADIENT)
 	{
-		eprintf("realloc failed\n");
-		exit(1);
+		eprintf("Failed to add stop color to paint: paint is not a gradient.\n");
+		
+		return;
 	}
-
+	
+	paint->count += 5;
+	paint_data_backup = paint->data;
+	paint->data = realloc(paint->data, paint->count * sizeof(VGfloat));
+	
+	if(paint->data == NULL)
+	{
+		eprintf("Failed to reallocate color data for gradient.\n");
+		
+		paint->data = paint_data_backup;
+		
+		return;
+	}
+	
 	paint->data[paint->count - 5] = position;
 	paint->data[paint->count - 4] = red;
 	paint->data[paint->count - 3] = green;
 	paint->data[paint->count - 2] = blue;
 	paint->data[paint->count - 1] = alpha;
-
 }
 
 /**
- * Activates the paint.
- * Multiplies alpha values by globalAlpha and sets the paint of the specified modes.
- *
+ * Activates the paint. Multiplies alpha values by globalAlpha and sets the
+ * paint of the specified modes.
+ * 
  * @param paint Pointer to paint struct
  * @param mode bitwise OR of {VG_FILL_PATH | VG_STROKE_PATH}
  */
 void paint_activate(paint_t *paint, VGbitfield mode)
 {
-	switch(paint->paintType) {
+	VGfloat data_paint[4];
+	VGfloat *data_gradient = NULL;
+	int i = 0;
+	
+	switch(paint->paint_type)
+	{
 		case PAINT_TYPE_COLOR:
 		{
-			VGfloat data[4];
-			memcpy(data, paint->data, 4 * sizeof(VGfloat));
-
-			data[3] *= canvas_globalAlpha_get();
-
-			vgSetParameterfv(paint->paint, VG_PAINT_COLOR, 4, data);
-
+			memcpy(data_paint, paint->data, 4 * sizeof(VGfloat));
+			
+			data_paint[3] *= canvas_globalAlpha_get();
+			
+			vgSetParameterfv(paint->paint, VG_PAINT_COLOR, 4, data_paint);
+			
 			break;
 		}
 		case PAINT_TYPE_LINEAR_GRADIENT:
 		case PAINT_TYPE_RADIAL_GRADIENT:
 		{
-			assert(paint->count % 5 == 0);
-
-			VGfloat data[paint->count];
-			memcpy(data, paint->data, paint->count * sizeof(VGfloat));
-
-			for(int i = 4; i < paint->count; i += 5) {
-				data[i] *= canvas_globalAlpha_get();
+			if(paint->count % 5 != 0)
+			{
+				eprintf("Failed to activate gradient paint: gradient data is misaligned.\n");
+				
+				return;
 			}
-
-			vgSetParameterfv(paint->paint, VG_PAINT_COLOR_RAMP_STOPS, paint->count, data);
+			
+			data_gradient = malloc(paint->count * sizeof(VGfloat));
+			if(data_gradient == NULL)
+			{
+				eprintf("Failed to allocate color data for gradient.\n");
+				
+				return;
+			}
+			
+			memcpy(data_gradient, paint->data, paint->count * sizeof(VGfloat));
+			
+			for(i = 4; i < paint->count; i += 5)
+			{
+				data_gradient[i] *= canvas_globalAlpha_get();
+			}
+			
+			vgSetParameterfv(paint->paint, VG_PAINT_COLOR_RAMP_STOPS, paint->count, data_gradient);
 			vgSetParameteri(paint->paint, VG_PAINT_COLOR_RAMP_SPREAD_MODE, VG_COLOR_RAMP_SPREAD_PAD);
-			vgSetParameteri(paint->paint, VG_PAINT_COLOR_RAMP_PREMULTIPLIED, VG_TRUE);
+			vgSetParameteri(paint->paint, VG_PAINT_COLOR_RAMP_PREMULTIPLIED, VG_FALSE);
+			
+			free(data_gradient);
+			
 			break;
 		}
 	}
-
+	
 	vgSetPaint(paint->paint, mode);
 }

@@ -30,7 +30,7 @@ namespace vgcanvas {
 	}
 	
 	Gradient::~Gradient() {
-		paint_destroy(&paint);
+		paint_cleanup(&paint);
 	}
 	
 	void Gradient::Init(Local<Object> exports) {

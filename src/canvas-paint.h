@@ -1,5 +1,6 @@
 /**
  * Copyright (C) 2015 NIPE-SYSTEMS
+ * Copyright (C) 2015 Hauke Oldsen
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,7 +30,7 @@ typedef enum paint_type_t
 
 typedef struct paint_t
 {
-	paint_type_t paintType;
+	paint_type_t paint_type;
 	VGPaint paint;
 	VGint count;
 	VGfloat *data;
@@ -38,7 +39,7 @@ typedef struct paint_t
 void paint_createColor(paint_t *paint, VGfloat red, VGfloat green, VGfloat blue, VGfloat alpha);
 void paint_createLinearGradient(paint_t *paint, VGfloat x1, VGfloat y1, VGfloat x2, VGfloat y2);
 void paint_createRadialGradient(paint_t *paint, VGfloat cx, VGfloat cy, VGfloat r, VGfloat fx, VGfloat fy);
-void paint_destroy(paint_t *paint);
+void paint_cleanup(paint_t *paint);
 void paint_activate(paint_t *paint, VGbitfield mode);
 void paint_setRGBA(paint_t *color, VGfloat red, VGfloat green, VGfloat blue, VGfloat alpha);
 void paint_addColorStop(paint_t *paint, VGfloat pos, VGfloat red, VGfloat green, VGfloat blue, VGfloat alpha);
