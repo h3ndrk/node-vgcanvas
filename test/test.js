@@ -1,5 +1,5 @@
 var canvas = require('../lib/canvas')
-var tests = [require('./colorPaint'), require('./alpha')];
+var tests = [require('./colorPaint'), require('./alpha'), require('./gradient')];
 require('keypress')(process.stdin);
 
 var ctx = canvas.getContext('2d');
