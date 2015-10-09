@@ -100,7 +100,7 @@ void canvas_save(void)
 	}
 	
 	canvas_save_stack_top->fillStyle = canvas_fillStyle_get();
-	if(canvas_save_stack_top->fillStyle->paintType == PAINT_TYPE_COLOR)
+	if(canvas_save_stack_top->fillStyle->paint_type == PAINT_TYPE_COLOR)
 	{
 		canvas_save_stack_top->fillStyle_data = malloc(canvas_save_stack_top->fillStyle->count * sizeof(VGfloat));
 		
@@ -124,7 +124,7 @@ void canvas_save(void)
 		canvas_save_stack_top->fillStyle_count = 0;
 	}
 	canvas_save_stack_top->strokeStyle = canvas_strokeStyle_get();
-	if(canvas_save_stack_top->strokeStyle->paintType == PAINT_TYPE_COLOR)
+	if(canvas_save_stack_top->strokeStyle->paint_type == PAINT_TYPE_COLOR)
 	{
 		canvas_save_stack_top->strokeStyle_data = malloc(canvas_save_stack_top->strokeStyle->count * sizeof(VGfloat));
 		

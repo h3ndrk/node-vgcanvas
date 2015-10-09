@@ -201,7 +201,7 @@ namespace vgcanvas {
 			}
 
 			paint_t *paint = stroke ? canvas_strokeStyle_get() : canvas_fillStyle_get();
-			if(paint->paintType == PAINT_TYPE_COLOR) {
+			if(paint->paint_type == PAINT_TYPE_COLOR) {
 				paint_setRGBA(paint, ar->Get(0)->NumberValue(), ar->Get(1)->NumberValue(),
 					ar->Get(2)->NumberValue(), ar->Get(3)->NumberValue());
 			} else {
@@ -220,7 +220,7 @@ namespace vgcanvas {
 		} else {
 			//Gradient object
 			paint_t *paint = stroke ? canvas_strokeStyle_get() : canvas_fillStyle_get();
-			if(paint->paintType == PAINT_TYPE_COLOR) {
+			if(paint->paint_type == PAINT_TYPE_COLOR) {
 				paint_cleanup(paint);
 				delete paint;
 			}
