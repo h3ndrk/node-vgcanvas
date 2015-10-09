@@ -19,8 +19,7 @@
 	},
 	"homepage": "https://github.com/NIPE-SYSTEMS/node-vgcanvas#readme",
 	"dependencies": {
-		"nan": "^2.0.9",
-		"onecolor": "^2.5.0"
+		"nan": "^2.0.9"
 	},
 	"devDependencies": {
 		"keypress": "^0.2.1"
