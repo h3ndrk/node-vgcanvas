@@ -43,3 +43,4 @@
     - [x] gradients
     - [ ] patterns
 - [x] add dependencies for `#include`s
+- [ ] error handling for `[fill|stroke]Text()` when no font has been loaded
