@@ -31,6 +31,7 @@
 #include "canvas-setLineDash.h"
 #include "canvas-lineDashOffset.h"
 #include "canvas-fillText.h"
+#include "canvas-kerning.h"
 
 /**
  * The strokeText() method strokes a given text at the given (x, y) position. If
@@ -44,7 +45,6 @@
 void canvas_strokeText(char *text, VGfloat x, VGfloat y)
 {
 	int fonts_index = canvas_font_get_index();
-	VGFont vg_font = font_util_get_font(fonts_index);
 	VGfloat size = canvas_font_get_size();
 	int lineDashPattern_index = 0;
 	VGfloat lineDashOffset = canvas_lineDashOffset_get();
@@ -52,9 +52,10 @@ void canvas_strokeText(char *text, VGfloat x, VGfloat y)
 	VGint lineDashCount = canvas_setLineDash_get_count();
 	VGfloat *lineDashPattern = NULL;
 	VGfloat *lineDashPattern2 = NULL;
-	VGuint *text_converted = NULL;
-	unsigned int text_converted_index = 0;
-	VGfloat glyph_origin[2] = { 0, 0 };
+	unsigned int text_index = 0;
+	VGfloat offset_x = 0;
+	VGfloat offset_kerning_x = 0;
+	int char_index = 0;
 	
 	if(fonts_index < 0 || text == NULL)
 	{
@@ -74,19 +75,6 @@ void canvas_strokeText(char *text, VGfloat x, VGfloat y)
 	
 	paint_activate(canvas_strokeStyle_get(), VG_STROKE_PATH);
 	
-	text_converted = malloc(strlen(text) * sizeof(VGuint));
-	if(text_converted == NULL)
-	{
-		eprintf("Failed to convert text data to 2 byte text.\n");
-		
-		return;
-	}
-	
-	for(text_converted_index = 0; text_converted_index < strlen(text); text_converted_index++)
-	{
-		text_converted[text_converted_index] = (VGuint)text[text_converted_index];
-	}
-	
 	for(lineDashPattern_index = 0; lineDashPattern_index < lineDashCount; lineDashPattern_index++)
 	{
 		lineDashPattern2[lineDashPattern_index] = lineDashPattern[lineDashPattern_index] / size;
@@ -101,19 +89,37 @@ void canvas_strokeText(char *text, VGfloat x, VGfloat y)
 	vgScale(1 / size, 1 / size);
 	vgTranslate(-x, -(egl_get_height() - y - size));
 	
-	vgSeti(VG_MATRIX_MODE, VG_MATRIX_GLYPH_USER_TO_SURFACE);
-	
-	vgSetfv(VG_GLYPH_ORIGIN, 2, glyph_origin);
+	vgSeti(VG_MATRIX_MODE, VG_MATRIX_PATH_USER_TO_SURFACE);
 	
 	vgTranslate(x, egl_get_height() - y - size);
 	vgScale(size, size);
 	
-	vgDrawGlyphs(vg_font, strlen(text), text_converted, NULL, NULL, VG_STROKE_PATH, VG_FALSE);
+	for(text_index = 0; text_index < strlen(text); text_index++)
+	{
+		char_index = font_util_get_char_index(fonts_index, text[text_index]);
+		
+		vgDrawPath(font_util_get_path(fonts_index, char_index), VG_STROKE_PATH);
+		
+		if(text_index < strlen(text) - 1)
+		{
+			// apply kerning if kerning should be used and if kerning is available
+			if(canvas_kerning_get() && font_util_get_kerning_availability(fonts_index) == VG_TRUE)
+			{
+				offset_kerning_x = font_util_get_kerning_x(fonts_index, text[text_index], text[text_index + 1]);
+				
+				offset_x += offset_kerning_x;
+				vgTranslate(offset_kerning_x, 0);
+			}
+			
+			offset_x += font_util_get_advance_x(fonts_index, char_index);
+			vgTranslate(font_util_get_advance_x(fonts_index, char_index), 0);
+		}
+	}
+	
+	vgTranslate(-offset_x, 0);
 	
 	vgScale(1 / size, 1 / size);
 	vgTranslate(-x, -(egl_get_height() - y - size));
-	
-	vgSetfv(VG_GLYPH_ORIGIN, 2, glyph_origin);
 	
 	vgSeti(VG_MATRIX_MODE, VG_MATRIX_STROKE_PAINT_TO_USER);
 	
@@ -125,8 +131,6 @@ void canvas_strokeText(char *text, VGfloat x, VGfloat y)
 	canvas_lineDashOffset(lineDashOffset);
 	canvas_lineWidth(lineWidth);
 	canvas_setLineDash(lineDashCount, lineDashPattern);
-	
-	free(text_converted);
 	
 	free(lineDashPattern);
 	free(lineDashPattern2);

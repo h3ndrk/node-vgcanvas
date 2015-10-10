@@ -36,6 +36,7 @@
 #include "canvas-clip.h"
 #include "canvas-fillStyle.h"
 #include "canvas-strokeStyle.h"
+#include "canvas-kerning.h"
 #include "font-util.h"
 
 void canvas__init(void)
@@ -63,6 +64,7 @@ void canvas__init(void)
 	canvas_lineWidth(canvas_lineWidth_get());
 	canvas_setLineDash(0, NULL);
 	canvas_miterLimit(canvas_miterLimit_get());
+	canvas_kerning(canvas_kerning_get());
 }
 
 void canvas__cleanup(void)

@@ -24,27 +24,44 @@
 #include FT_FREETYPE_H
 #include FT_STROKER_H
 
+typedef struct character_t
+{
+	char charcode;
+	VGPath path;
+	VGfloat advance_x;
+	VGfloat bearing_x;
+	VGfloat bearing_y;
+	VGfloat width;
+	VGfloat height;
+} character_t;
+
 typedef struct font_t
 {
 	char *path;
 	char *name;
 	FT_Face face;
-	VGFont vg_font;
+	character_t **characters;
+	int characters_amount;
+	VGboolean kerning_available;
 } font_t;
 
 #define FONT_UTIL_SIZE 64 * 64 * 64
 #define FONT_UTIL_TO_FLOAT(ft_size) ((float)(ft_size) / (FONT_UTIL_SIZE))
 
 int font_util_get(char *name);
-FT_Face font_util_get_face(int fonts_index, char character);
-VGFont font_util_get_font(int fonts_index);
+FT_Face font_util_get_face(unsigned int fonts_index, char character);
 void font_util_init(void);
 void font_util_cleanup(void);
 int font_util_new(char *path, char *name);
 void font_util_remove(char *name);
-VGuint segments_count_get(void);
-VGubyte *segments_get(void);
-VGuint coords_count_get(void);
-VGfloat *coords_get(void);
+int font_util_get_char_index(unsigned int fonts_index, char character);
+VGPath font_util_get_path(unsigned int fonts_index, int char_index);
+VGfloat font_util_get_width(unsigned int fonts_index, int char_index);
+VGfloat font_util_get_height(unsigned int fonts_index, int char_index);
+VGfloat font_util_get_advance_x(unsigned int fonts_index, int char_index);
+VGfloat font_util_get_bearing_x(unsigned int fonts_index, int char_index);
+VGfloat font_util_get_bearing_y(unsigned int fonts_index, int char_index);
+VGboolean font_util_get_kerning_availability(unsigned int fonts_index);
+VGfloat font_util_get_kerning_x(unsigned int fonts_index, char character, char character_next);
 
 #endif /* __FONT_UTIL_H__ */
