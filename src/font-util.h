@@ -27,6 +27,7 @@
 typedef struct character_t
 {
 	char charcode;
+	FT_UInt glyph_index;
 	VGPath path;
 	VGfloat advance_x;
 	VGfloat bearing_x;
