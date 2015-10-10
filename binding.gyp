@@ -23,6 +23,7 @@
         "src/canvas-lineJoin.c",
         "src/canvas-lineTo.c",
         "src/canvas-lineWidth.c",
+        "src/canvas-measureText.c",
         "src/canvas-miterLimit.c",
         "src/canvas-moveTo.c",
         "src/canvas-paint.c",
@@ -35,6 +36,8 @@
         "src/canvas-strokeRect.c",
         "src/canvas-strokeStyle.c",
         "src/canvas-strokeText.c",
+        "src/canvas-textAlign.c",
+        "src/canvas-textBaseline.c",
         "src/canvas.c",
         "src/egl-util.c",
         "src/font-util.c"

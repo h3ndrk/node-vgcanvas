@@ -62,6 +62,7 @@ SRC += canvas-clip.c
 SRC += canvas-kerning.c
 SRC += canvas-save.c
 SRC += canvas-restore.c
+SRC += canvas-measureText.c
 SRC += canvas-miterLimit.c
 SRC += canvas.c
 SRC += canvas-paint.c
@@ -74,6 +75,8 @@ SRC += canvas-stroke.c
 SRC += canvas-strokeStyle.c
 SRC += canvas-strokeRect.c
 SRC += canvas-strokeText.c
+SRC += canvas-textAlign.c
+SRC += canvas-textBaseline.c
 SRC += egl-util.c
 SRC += font-util.c
 
