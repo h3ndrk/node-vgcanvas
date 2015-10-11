@@ -36,6 +36,7 @@ LIBS += -lvchiq_arm
 LIBS += -lpthread
 LIBS += -lrt
 LIBS += -lfreetype
+LIBS += -lfreeimage
 # LIBS += -lbcm_host
 # LIBS += -lpthread
 # LIBS += -ljpeg
@@ -79,10 +80,12 @@ SRC += canvas-stroke.c
 SRC += canvas-strokeStyle.c
 SRC += canvas-strokeRect.c
 SRC += canvas-strokeText.c
+SRC += canvas-drawImage.c
 SRC += canvas-textAlign.c
 SRC += canvas-textBaseline.c
 SRC += egl-util.c
 SRC += font-util.c
+SRC += image-util.c
 
 OBJS = $(addprefix bin/obj/, $(SRC:%.c=%.o))
 
