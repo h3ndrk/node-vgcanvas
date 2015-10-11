@@ -52,6 +52,33 @@
 #include "canvas-strokeStyle.h"
 #include "canvas-strokeRect.h"
 #include "canvas-strokeText.h"
+#include "image-util.h"
+#include "canvas-drawImage.h"
+
+void draw_grid(void)
+{
+	paint_t paint;
+	paint_createColor(&paint, 0.7f, 0.7f, 0.7f, 1);
+	canvas_strokeStyle(&paint);
+	
+	for(int x = 0; x < egl_get_width(); x += 100)
+	{
+		canvas_beginPath();
+		canvas_moveTo(x, 0);
+		canvas_lineTo(x, egl_get_height());
+		canvas_stroke();
+	}
+	
+	for(int y = 0; y < egl_get_height(); y += 100)
+	{
+		canvas_beginPath();
+		canvas_moveTo(0, y);
+		canvas_lineTo(egl_get_width(), y);
+		canvas_stroke();
+	}
+	
+	paint_cleanup(&paint);
+}
 
 int main(void)
 {
@@ -60,9 +87,31 @@ int main(void)
 	
 	canvas__init();
 	
-	font_util_new("./font.ttf", "Font");
+	font_util_new("./font.ttf", "font");
+	image_t* image = image_load("./test.png");
 	
-	canvas_clearRect(0, 0, egl_get_width(), egl_get_height());
+	draw_grid();
+	
+	paint_t paint;
+	//paint_createLinearGradient(&paint, 0, 0, 1000, 0);
+	//paint_addColorStop(&paint, 0, 0, 1, 0, 1);
+	//paint_addColorStop(&paint, 1, 0, 0, 1, 1);
+	//paint_createColor(&paint, 1, 0, 0, 1);
+	//canvas_fillStyle(&paint);
+	//canvas_font("font", 30);
+	
+	//for(int u = 0; u < 50; u++)
+	//{
+	//	for(int i = 0; i < 50; i++) 
+	//	{
+			/*paint_t p2;
+			paint_createColor(&p2, 1, 0, 0, 1);
+			canvas_fillStyle(&p2);*/
+	//		canvas_fillRect(u * 10, i * 10, 5, 5);
+	//	}
+	//}
+	
+	/*canvas_clearRect(0, 0, egl_get_width(), egl_get_height());
 	canvas_lineWidth(2);
 	
 	paint_t paint;
@@ -70,7 +119,11 @@ int main(void)
 	
 	canvas_fillStyle(&paint);
 	canvas_strokeStyle(&paint);
-	canvas_fillRect(100, 160, 450, 140);
+	canvas_fillRect(100, 160, 450, 140);*/
+	
+	canvas_drawImage(image, 100, 100, 200, 200, 0, 0, 200, 200);
+	canvas_drawImage(image, 400, 100, 200, 200, 0, 100, 200, 200);
+	canvas_drawImage(image, 100, 500, 200, 200, 100, 0, 400, 200);
 	
 	// paint_t gradient;
 	// paint_createLinearGradient(&gradient, 100, 0, 500, 0);
@@ -134,9 +187,9 @@ int main(void)
 	
 	// canvas_strokeStyle(&paint);
 	// canvas_fillStyle(&paint);
-	canvas_font("Font", 200);
-	canvas_fillText("node", 620, 100);
-	canvas_fillText("vgcanvas", 100, 330);
+	//canvas_font("Font", 200);
+	//canvas_fillText("node", 620, 100);
+	//canvas_fillText("vgcanvas", 100, 330);
 	
 	// canvas_beginPath();
 	// vgTranslate(100, 100);
@@ -155,10 +208,11 @@ int main(void)
 	printf("Press <Enter> to shutdown.\n");
 	fgets(s, 2, stdin);
 	
-	paint_cleanup(&paint);
+	//paint_cleanup(&paint);
 	// paint_destroy(&gradient);
 	// paint_destroy(&textGradient);
 	// paint_destroy(&radial);
+	image_cleanup(image);
 	canvas__cleanup();
 	
 	return 0;
