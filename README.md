@@ -25,9 +25,8 @@ Canvas 2D Method | C implementation | C++ wrapper implementation | Node.JS imple
 `VGContext.shadowOffsetX` |   |   |   
 `VGContext.shadowOffsetY` |   |   |   
 `VGContext.strokeStyle` | implemented | implemented | implemented
-`VGContext.textAlign` |   |   |   
-`VGContext.textBaseline` |   |   |   
-`VGContext.textBaseline` |   |   |   
+`VGContext.textAlign` | implemented |   |   
+`VGContext.textBaseline` | implemented |   |   
 `VGContext.addHitRegion()` |   |   |   
 `VGContext.arc()` | implemented | implemented | implemented
 `VGContext.arcTo()` |   |   |   
