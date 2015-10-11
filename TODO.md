@@ -45,3 +45,4 @@
 - [x] add dependencies for `#include`s
 - [ ] error handling for `[fill|stroke]Text()` when no font has been loaded
 - [ ] Use new paths for `[fill|stroke]Rect()`
+- [ ] `closePath` for `strokeText()`
