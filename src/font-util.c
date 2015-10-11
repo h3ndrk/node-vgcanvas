@@ -34,11 +34,6 @@ static FT_Library font_library = NULL;
 static font_t *fonts = NULL;
 static int fonts_amount = 0;
 
-static VGuint segments_count;
-static VGubyte segments[SEGMENTS_COUNT_MAX];
-static VGuint coords_count;
-static VGfloat coords[COORDS_COUNT_MAX];
-
 int font_util_get(char *name)
 {
 	int i = 0;
@@ -59,7 +54,7 @@ int font_util_get(char *name)
 	return -1;
 }
 
-FT_Face font_util_get_face(int fonts_index, char character)
+FT_Face font_util_get_face(unsigned int fonts_index, char character)
 {
 	FT_UInt glyph_index = FT_Get_Char_Index(fonts[fonts_index].face, character);
 	
@@ -78,11 +73,6 @@ FT_Face font_util_get_face(int fonts_index, char character)
 	}
 	
 	return fonts[fonts_index].face;
-}
-
-VGFont font_util_get_font(int fonts_index)
-{
-	return fonts[fonts_index].vg_font;
 }
 
 void font_util_init(void)
@@ -194,13 +184,12 @@ static int font_util_outline_decode_cubic_to(const FT_Vector *control1, const FT
 
 int font_util_new(char *path, char *name)
 {
+	int i = 0;
 	FT_Error error = 0;
 	FT_Outline_Funcs outline_functions;
 	FT_ULong charcode;
 	FT_UInt gindex;
 	VGPath glyph_path = 0;
-	VGfloat glyph_origin[2] = { 0, 0 };
-	VGfloat glyph_escapement[2] = { 0, 0 };
 	
 	outline_functions.move_to = &font_util_outline_decode_move_to;
 	outline_functions.line_to = &font_util_outline_decode_line_to;
@@ -242,15 +231,52 @@ int font_util_new(char *path, char *name)
 	
 	if(FT_Set_Char_Size(fonts[fonts_amount - 1].face, 0, FONT_UTIL_SIZE, 96, 96))
 	{
-		eprintf("Failed to set font size: %s\n", name);
+		eprintf("Failed to set font size (char): %s\n", name);
 		font_util_remove(name);
 		
 		return -1;
 	}
 	
-	printf("Converting characters...\n");
-	fonts[fonts_amount - 1].vg_font = vgCreateFont(0);
+	printf("Counting characters...\n");
+	char_count = 0;
 	
+	charcode = FT_Get_First_Char(fonts[fonts_amount - 1].face, &gindex);
+	while(gindex != 0)
+	{
+		charcode = FT_Get_Next_Char(fonts[fonts_amount - 1].face, charcode, &gindex);
+		
+		char_count++;
+	}
+	
+	printf("%i characters\n", char_count);
+	
+	printf("Converting characters...\n");
+	fonts[fonts_amount - 1].characters = malloc(char_count * sizeof(character_t *));
+	fonts[fonts_amount - 1].characters_amount = char_count;
+	if(fonts[fonts_amount - 1].characters == NULL)
+	{
+		eprintf("Failed to allocate character array: %s\n", name);
+		font_util_remove(name);
+		
+		return -1;
+	}
+	
+	for(i = 0; i < fonts[fonts_amount - 1].characters_amount; i++)
+	{
+		fonts[fonts_amount - 1].characters[i] = malloc(sizeof(character_t));
+		if(fonts[fonts_amount - 1].characters[i] == NULL)
+		{
+			eprintf("Failed to allocate glyph: %s\n", name);
+			font_util_remove(name);
+			
+			return -1;
+		}
+	}
+	
+	fonts[fonts_amount - 1].ascender = 0;
+	fonts[fonts_amount - 1].descender = 0;
+	char_count = 0;
+	point_count = 0;
 	charcode = FT_Get_First_Char(fonts[fonts_amount - 1].face, &gindex);
 	while(gindex != 0)
 	{
@@ -275,21 +301,42 @@ int font_util_new(char *path, char *name)
 			return -1;
 		}
 		
-		glyph_escapement[0] = FONT_UTIL_TO_FLOAT(fonts[fonts_amount - 1].face->glyph->metrics.horiAdvance);
-		glyph_escapement[1] = 0; // horizontal text
+		fonts[fonts_amount - 1].characters[char_count]->charcode = charcode;
+		fonts[fonts_amount - 1].characters[char_count]->glyph_index = gindex;
+		fonts[fonts_amount - 1].characters[char_count]->path = glyph_path;
+		fonts[fonts_amount - 1].characters[char_count]->width = FONT_UTIL_TO_FLOAT(fonts[fonts_amount - 1].face->glyph->metrics.width);
+		fonts[fonts_amount - 1].characters[char_count]->height = FONT_UTIL_TO_FLOAT(fonts[fonts_amount - 1].face->glyph->metrics.height);
+		fonts[fonts_amount - 1].characters[char_count]->advance_x = FONT_UTIL_TO_FLOAT(fonts[fonts_amount - 1].face->glyph->metrics.horiAdvance);
+		fonts[fonts_amount - 1].characters[char_count]->bearing_x = FONT_UTIL_TO_FLOAT(fonts[fonts_amount - 1].face->glyph->metrics.horiBearingX);
+		fonts[fonts_amount - 1].characters[char_count]->bearing_y = FONT_UTIL_TO_FLOAT(fonts[fonts_amount - 1].face->glyph->metrics.horiBearingY);
 		
-		// printf("%4i: Storing %i segments and %i coordinates...\n", char_count, vgGetParameteri(glyph_path, VG_PATH_NUM_SEGMENTS), vgGetParameteri(glyph_path, VG_PATH_NUM_COORDS));
+		if(fonts[fonts_amount - 1].characters[char_count]->bearing_y > fonts[fonts_amount - 1].ascender)
+		{
+			fonts[fonts_amount - 1].ascender = fonts[fonts_amount - 1].characters[char_count]->bearing_y;
+		}
 		
-		vgSetGlyphToPath(fonts[fonts_amount - 1].vg_font, charcode, glyph_path, VG_FALSE, glyph_origin, glyph_escapement);
-		
-		vgDestroyPath(glyph_path);
+		if(fonts[fonts_amount - 1].characters[char_count]->height - fonts[fonts_amount - 1].characters[char_count]->bearing_y > fonts[fonts_amount - 1].descender)
+		{
+			fonts[fonts_amount - 1].descender = fonts[fonts_amount - 1].characters[char_count]->height - fonts[fonts_amount - 1].characters[char_count]->bearing_y;
+		}
 		
 		charcode = FT_Get_Next_Char(fonts[fonts_amount - 1].face, charcode, &gindex);
 		
 		char_count++;
 	}
 	
-	printf("%i characters, %lli coordinates\n", vgGetParameteri(fonts[fonts_amount - 1].vg_font, VG_FONT_NUM_GLYPHS), point_count);
+	printf("%i converted characters, %lli coordinates\n", char_count, point_count);
+	
+	if(FT_HAS_KERNING(fonts[fonts_amount - 1].face))
+	{
+		printf("Kerning for font '%s' available.\n", name);
+		
+		fonts[fonts_amount - 1].kerning_available = VG_TRUE;
+	}
+	else
+	{
+		fonts[fonts_amount - 1].kerning_available = VG_FALSE;
+	}
 	
 	return 0;
 }
@@ -318,7 +365,13 @@ void font_util_remove(char *name)
 	free(fonts[fonts_index].path);
 	free(fonts[fonts_index].name);
 	FT_Done_Face(fonts[fonts_index].face);
-	vgDestroyFont(fonts[fonts_index].vg_font);
+	
+	for(i = 0; i < fonts[fonts_index].characters_amount; i++)
+	{
+		vgDestroyPath(fonts[fonts_index].characters[i]->path);
+		free(fonts[fonts_index].characters[i]);
+	}
+	free(fonts[fonts_index].characters);
 	
 	for(i = fonts_index; i < fonts_amount - 1; i++)
 	{
@@ -342,22 +395,177 @@ void font_util_remove(char *name)
 	}
 }
 
-VGuint segments_count_get(void)
+int font_util_get_char_index(unsigned int fonts_index, char character)
 {
-	return segments_count;
+	int i = 0;
+	
+	if(fonts == NULL)
+	{
+		return -1;
+	}
+	
+	for(i = 0; i < fonts[fonts_index].characters_amount; i++)
+	{
+		if(fonts[fonts_index].characters[i]->charcode == character)
+		{
+			return i;
+		}
+	}
+	
+	eprintf("Failed to find character.\n");
+	
+	return -1;
 }
 
-VGubyte *segments_get(void)
+VGPath font_util_get_path(unsigned int fonts_index, int char_index)
 {
-	return segments;
+	if(fonts == NULL)
+	{
+		return VG_INVALID_HANDLE;
+	}
+	
+	if(char_index != -1)
+	{
+		return fonts[fonts_index].characters[char_index]->path;
+	}
+	
+	return VG_INVALID_HANDLE;
 }
 
-VGuint coords_count_get(void)
+VGfloat font_util_get_width(unsigned int fonts_index, int char_index)
 {
-	return coords_count;
+	if(fonts == NULL)
+	{
+		return 0;
+	}
+	
+	if(char_index != -1)
+	{
+		return fonts[fonts_index].characters[char_index]->width;
+	}
+	
+	return 0;
 }
 
-VGfloat *coords_get(void)
+VGfloat font_util_get_height(unsigned int fonts_index, int char_index)
 {
-	return coords;
+	if(fonts == NULL)
+	{
+		return 0;
+	}
+	
+	if(char_index != -1)
+	{
+		return fonts[fonts_index].characters[char_index]->height;
+	}
+	
+	return 0;
+}
+
+VGfloat font_util_get_advance_x(unsigned int fonts_index, int char_index)
+{
+	if(fonts == NULL)
+	{
+		return 0;
+	}
+	
+	if(char_index != -1)
+	{
+		return fonts[fonts_index].characters[char_index]->advance_x;
+	}
+	
+	return 0;
+}
+
+VGfloat font_util_get_bearing_x(unsigned int fonts_index, int char_index)
+{
+	if(fonts == NULL)
+	{
+		return 0;
+	}
+	
+	if(char_index != -1)
+	{
+		return fonts[fonts_index].characters[char_index]->bearing_x;
+	}
+	
+	return 0;
+}
+
+VGfloat font_util_get_bearing_y(unsigned int fonts_index, int char_index)
+{
+	if(fonts == NULL)
+	{
+		return 0;
+	}
+	
+	if(char_index != -1)
+	{
+		return fonts[fonts_index].characters[char_index]->bearing_y;
+	}
+	
+	return 0;
+}
+
+VGboolean font_util_get_kerning_availability(unsigned int fonts_index)
+{
+	if(fonts == NULL)
+	{
+		return VG_FALSE;
+	}
+	
+	return fonts[fonts_index].kerning_available;
+}
+
+VGfloat font_util_get_kerning_x(unsigned int fonts_index, char character, char character_next)
+{
+	int char_index = 0;
+	int char_index_next = 0;
+	FT_Vector kerning = { 0, 0 };
+	
+	if(fonts == NULL)
+	{
+		return 0;
+	}
+	
+	char_index = font_util_get_char_index(fonts_index, character);
+	char_index_next = font_util_get_char_index(fonts_index, character_next);
+	
+	if(char_index == -1)
+	{
+		eprintf("Failed to find glyph for kerning.\n");
+		
+		return 0;
+	}
+	
+	if(char_index_next == -1)
+	{
+		eprintf("Failed to find next glyph for kerning.\n");
+		
+		return 0;
+	}
+	
+	FT_Get_Kerning(fonts[fonts_index].face, fonts[fonts_index].characters[char_index]->glyph_index, fonts[fonts_index].characters[char_index_next]->glyph_index, FT_KERNING_DEFAULT, &kerning);
+	
+	return FONT_UTIL_TO_FLOAT(kerning.x);
+}
+
+VGfloat font_util_get_ascender(unsigned int fonts_index)
+{
+	if(fonts == NULL)
+	{
+		return 0;
+	}
+	
+	return fonts[fonts_index].ascender;
+}
+
+VGfloat font_util_get_descender(unsigned int fonts_index)
+{
+	if(fonts == NULL)
+	{
+		return 0;
+	}
+	
+	return fonts[fonts_index].descender;
 }
