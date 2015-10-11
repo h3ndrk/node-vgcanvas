@@ -20,34 +20,29 @@
 #include "include-openvg.h"
 // #include "include-freetype.h"
 
-#include "egl-util.h"
-#include "canvas-beginPath.h"
-#include "canvas-paint.h"
-#include "canvas-fillStyle.h"
-#include "canvas-fill.h"
-#include "canvas-shadowColor.h"
-#include "canvas-shadowBlur.h"
-#include "canvas-shadowOffsetX.h"
 #include "canvas-shadowOffsetY.h"
 
+static VGfloat canvas_shadowOffsetY_value = 0;
+
 /**
- * The fill() method fills the current or given path with the current fill style
- * using the non-zero or even-odd winding rule.
+ * The shadowOffsetY property specifies the distance that the shadow will be
+ * offset in vertical distance.
+ * @param shadow_offset_y A float specifying the distance that the shadow will
+ *                        be offset in vertical distance. The default value is
+ *                        0. (In difference to the Canvas 2D API negative values
+ *                        are allowed.)
  */
-void canvas_fill(void)
+void canvas_shadowOffsetY(VGfloat shadow_offset_y)
 {
-	if(canvas_shadowColor_get_enabled())
-	{
-		egl_blur_begin();
-		
-		paint_activate(canvas_shadowColor_get(), VG_FILL_PATH);
-		
-		vgDrawPath(canvas_beginPath_get(), VG_FILL_PATH);
-		
-		egl_blur_end(canvas_shadowBlur_get(), canvas_shadowOffsetX_get(), canvas_shadowOffsetY_get());
-	}
-	
-	paint_activate(canvas_fillStyle_get(), VG_FILL_PATH);
-	
-	vgDrawPath(canvas_beginPath_get(), VG_FILL_PATH);
+	canvas_shadowOffsetY_value = shadow_offset_y;
+}
+
+/**
+ * It returns the current value (0.0 by default).
+ * @return A number specifying the current shadow offset of the y axis in space
+ *         units.
+ */
+VGfloat canvas_shadowOffsetY_get(void)
+{
+	return canvas_shadowOffsetY_value;
 }

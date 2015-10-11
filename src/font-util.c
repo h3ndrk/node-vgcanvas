@@ -199,7 +199,7 @@ int font_util_new(char *path, char *name)
 	outline_functions.shift = 0;
 	outline_functions.delta = 0;
 	
-	printf("Adding font: %s, name: %s\n", path, name);
+	printf("Adding font: %s, name: %s ...\n", path, name);
 	
 	fonts = realloc(fonts, (++fonts_amount) * sizeof(font_t));
 	
@@ -237,7 +237,6 @@ int font_util_new(char *path, char *name)
 		return -1;
 	}
 	
-	printf("Counting characters...\n");
 	char_count = 0;
 	
 	charcode = FT_Get_First_Char(fonts[fonts_amount - 1].face, &gindex);
@@ -248,9 +247,6 @@ int font_util_new(char *path, char *name)
 		char_count++;
 	}
 	
-	printf("%i characters\n", char_count);
-	
-	printf("Converting characters...\n");
 	fonts[fonts_amount - 1].characters = malloc(char_count * sizeof(character_t *));
 	fonts[fonts_amount - 1].characters_amount = char_count;
 	if(fonts[fonts_amount - 1].characters == NULL)
@@ -325,16 +321,18 @@ int font_util_new(char *path, char *name)
 		char_count++;
 	}
 	
-	printf("%i converted characters, %lli coordinates\n", char_count, point_count);
+	printf("%i characters, %lli coordinates", char_count, point_count);
 	
 	if(FT_HAS_KERNING(fonts[fonts_amount - 1].face))
 	{
-		printf("Kerning for font '%s' available.\n", name);
+		printf(", kerning available\n");
 		
 		fonts[fonts_amount - 1].kerning_available = VG_TRUE;
 	}
 	else
 	{
+		printf("\n");
+		
 		fonts[fonts_amount - 1].kerning_available = VG_FALSE;
 	}
 	

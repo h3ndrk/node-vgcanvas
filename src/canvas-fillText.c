@@ -31,6 +31,10 @@
 #include "canvas-textAlign.h"
 #include "canvas-textBaseline.h"
 #include "canvas-kerning.h"
+#include "canvas-shadowColor.h"
+#include "canvas-shadowBlur.h"
+#include "canvas-shadowOffsetX.h"
+#include "canvas-shadowOffsetY.h"
 
 /**
  * The fillText() method fills a given text at the given (x, y) position. If the
@@ -167,6 +171,61 @@ void canvas_fillText(char *text, VGfloat x, VGfloat y)
 			break;
 		}
 	}
+	
+	if(canvas_shadowColor_get_enabled())
+	{
+		egl_blur_begin();
+		
+		paint_activate(canvas_shadowColor_get(), VG_FILL_PATH);
+		
+		vgSeti(VG_MATRIX_MODE, VG_MATRIX_FILL_PAINT_TO_USER);
+		
+		vgGetMatrix(matrix_backup_fill_paint);
+		
+		vgScale(1 / size, 1 / size);
+		vgTranslate(-x, -(egl_get_height() - y));
+		
+		vgSeti(VG_MATRIX_MODE, VG_MATRIX_PATH_USER_TO_SURFACE);
+		
+		vgGetMatrix(matrix_backup_path);
+		
+		vgTranslate(x, egl_get_height() - y);
+		vgScale(size, size);
+		
+		for(text_index = 0; text_index < strlen(text); text_index++)
+		{
+			char_index = font_util_get_char_index(fonts_index, text[text_index]);
+			
+			vgDrawPath(font_util_get_path(fonts_index, char_index), VG_FILL_PATH);
+			
+			if(text_index < strlen(text) - 1)
+			{
+				// apply kerning if kerning should be used and if kerning is available
+				if(canvas_kerning_get() && font_util_get_kerning_availability(fonts_index) == VG_TRUE)
+				{
+					offset_kerning_x = font_util_get_kerning_x(fonts_index, text[text_index], text[text_index + 1]);
+					
+					offset_x += offset_kerning_x;
+					vgTranslate(offset_kerning_x, 0);
+				}
+				
+				offset_x += font_util_get_advance_x(fonts_index, char_index);
+				vgTranslate(font_util_get_advance_x(fonts_index, char_index), 0);
+			}
+		}
+		
+		vgLoadMatrix(matrix_backup_path);
+		
+		vgSeti(VG_MATRIX_MODE, VG_MATRIX_FILL_PAINT_TO_USER);
+		
+		vgLoadMatrix(matrix_backup_fill_paint);
+		
+		vgSeti(VG_MATRIX_MODE, VG_MATRIX_PATH_USER_TO_SURFACE);
+		
+		egl_blur_end(canvas_shadowBlur_get(), canvas_shadowOffsetX_get(), canvas_shadowOffsetY_get());
+	}
+	
+	offset_x = 0;
 	
 	paint_activate(canvas_fillStyle_get(), VG_FILL_PATH);
 	
