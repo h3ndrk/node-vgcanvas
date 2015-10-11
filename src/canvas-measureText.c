@@ -27,21 +27,20 @@
 #include "canvas-fillStyle.h"
 #include "canvas-font.h"
 #include "font-util.h"
-#include "canvas-fillText.h"
+#include "canvas-measureText.h"
+#include "canvas-kerning.h"
 #include "canvas-textAlign.h"
 #include "canvas-textBaseline.h"
-#include "canvas-kerning.h"
 
 /**
- * The fillText() method fills a given text at the given (x, y) position. If the
- * optional fourth parameter for a maximum width is provided, the text will be
- * scaled to fit that width. maxWidth is not supported.
- * @param text The text to render using the current font, textAlign,
+ * The measureText() method returns an object that contains information about
+ * the measured text (such as its width for example).
+ * @param metrics The metrics structure where the measured informations are
+ *                stored.
+ * @param text The text to measure using the current font, textAlign,
  *             textBaseline, and direction values.
- * @param x The x axis of the coordinate for the text starting point.
- * @param y The y axis of the coordinate for the text starting point.
  */
-void canvas_fillText(char *text, VGfloat x, VGfloat y)
+void canvas_measureText(canvas_measure_text_metrics_t *metrics, char *text)
 {
 	int fonts_index = canvas_font_get_index();
 	VGfloat size = canvas_font_get_size();
@@ -55,8 +54,6 @@ void canvas_fillText(char *text, VGfloat x, VGfloat y)
 	VGfloat start_y_temp = 0;
 	VGfloat end_y = 0;
 	VGfloat end_y_temp = 0;
-	VGfloat matrix_backup_fill_paint[9];
-	VGfloat matrix_backup_path[9];
 	
 	if(fonts_index < 0 || text == NULL)
 	{
@@ -85,6 +82,8 @@ void canvas_fillText(char *text, VGfloat x, VGfloat y)
 			end_y = end_y_temp;
 		}
 		
+		// printf("%c %f %f\n", text[text_index], start_y * size, end_y * size);
+		
 		if(text_index < strlen(text) - 1)
 		{
 			// apply kerning if kerning should be used and if kerning is available
@@ -103,25 +102,30 @@ void canvas_fillText(char *text, VGfloat x, VGfloat y)
 		}
 	}
 	
-	// printf("{\n\ttext: \"%s\",\n\tfont_index: %i,\n\tsize: %f,\n\tstart_x: %f,\n\tend_x: %f,\n\tstart_y: %f,\n\tend_y: %f,\n\tascender: %f,\n\tdescender: %f\n}\n", text, fonts_index, size, start_x * size, end_x * size, start_y * size, end_y * size, font_util_get_ascender(fonts_index) * size, font_util_get_descender(fonts_index) * size);
+	metrics->font_size = size;
+	metrics->width = (end_x - start_x) * size;
+	metrics->height = (start_y + end_y) * size;
 	
 	switch(canvas_textAlign_get_internal())
 	{
 		case CANVAS_TEXT_ALIGN_LEFT:
 		{
-			x += -start_x * size;
+			metrics->actual_bounding_box_left = 0;
+			metrics->actual_bounding_box_right = metrics->width;
 			
 			break;
 		}
 		case CANVAS_TEXT_ALIGN_RIGHT:
 		{
-			x += -end_x * size;
+			metrics->actual_bounding_box_left = metrics->width;
+			metrics->actual_bounding_box_right = 0;
 			
 			break;
 		}
 		case CANVAS_TEXT_ALIGN_CENTER:
 		{
-			x += -((end_x - start_x) * 0.5 + start_x) * size;
+			metrics->actual_bounding_box_left = metrics->width * 0.5;
+			metrics->actual_bounding_box_right = metrics->width * 0.5;
 			
 			break;
 		}
@@ -129,88 +133,50 @@ void canvas_fillText(char *text, VGfloat x, VGfloat y)
 	
 	switch(canvas_textBaseline_get_internal())
 	{
-		case CANVAS_TEXT_BASELINE_TOP:
+		case CANVAS_TEXT_BASELINE_TOP: case CANVAS_TEXT_BASELINE_HANGING:
 		{
-			y += start_y * size;
-			
-			break;
-		}
-		case CANVAS_TEXT_BASELINE_HANGING:
-		{
-			y += font_util_get_ascender(fonts_index) * size;
+			metrics->actual_bounding_box_ascent = 0;
+			metrics->actual_bounding_box_descent = metrics->height;
 			
 			break;
 		}
 		case CANVAS_TEXT_BASELINE_MIDDLE:
 		{
-			y += (start_y + end_y) * 0.5 * size;
+			metrics->actual_bounding_box_ascent = metrics->height * 0.5;
+			metrics->actual_bounding_box_descent = metrics->height * 0.5;
 			
 			break;
 		}
-		// do nothing on alphabetic baseline
 		case CANVAS_TEXT_BASELINE_ALPHABETIC:
 		{
-		// 	y = y;
+			metrics->actual_bounding_box_ascent = start_y * size;
+			metrics->actual_bounding_box_descent = end_y * size;
 			
 			break;
 		}
 		case CANVAS_TEXT_BASELINE_IDEOGRAPHIC:
 		{
-			y += -font_util_get_descender(fonts_index) * size;
+			metrics->actual_bounding_box_ascent = metrics->height;
+			metrics->actual_bounding_box_descent = 0;
 			
 			break;
 		}
 		case CANVAS_TEXT_BASELINE_BOTTOM:
 		{
-			y += -end_y * size;
+			metrics->actual_bounding_box_ascent = start_y * size;
+			metrics->actual_bounding_box_descent = end_y * size;
 			
 			break;
 		}
 	}
 	
-	paint_activate(canvas_fillStyle_get(), VG_FILL_PATH);
-	
-	vgSeti(VG_MATRIX_MODE, VG_MATRIX_FILL_PAINT_TO_USER);
-	
-	vgGetMatrix(matrix_backup_fill_paint);
-	
-	vgScale(1 / size, 1 / size);
-	vgTranslate(-x, -(egl_get_height() - y));
-	
-	vgSeti(VG_MATRIX_MODE, VG_MATRIX_PATH_USER_TO_SURFACE);
-	
-	vgGetMatrix(matrix_backup_path);
-	
-	vgTranslate(x, egl_get_height() - y);
-	vgScale(size, size);
-	
-	for(text_index = 0; text_index < strlen(text); text_index++)
-	{
-		char_index = font_util_get_char_index(fonts_index, text[text_index]);
-		
-		vgDrawPath(font_util_get_path(fonts_index, char_index), VG_FILL_PATH);
-		
-		if(text_index < strlen(text) - 1)
-		{
-			// apply kerning if kerning should be used and if kerning is available
-			if(canvas_kerning_get() && font_util_get_kerning_availability(fonts_index) == VG_TRUE)
-			{
-				offset_kerning_x = font_util_get_kerning_x(fonts_index, text[text_index], text[text_index + 1]);
-				
-				offset_x += offset_kerning_x;
-				vgTranslate(offset_kerning_x, 0);
-			}
-			
-			offset_x += font_util_get_advance_x(fonts_index, char_index);
-			vgTranslate(font_util_get_advance_x(fonts_index, char_index), 0);
-		}
-	}
-	
-	vgLoadMatrix(matrix_backup_path);
-	
-	vgSeti(VG_MATRIX_MODE, VG_MATRIX_FILL_PAINT_TO_USER);
-	
-	vgLoadMatrix(matrix_backup_fill_paint);
-	
-	vgSeti(VG_MATRIX_MODE, VG_MATRIX_PATH_USER_TO_SURFACE);
+	metrics->em_height_ascent = font_util_get_ascender(fonts_index) * size;
+	metrics->em_height_descent = font_util_get_descender(fonts_index) * size;
+	metrics->font_bounding_box_ascent = font_util_get_ascender(fonts_index) * size;
+	metrics->font_bounding_box_descent = font_util_get_descender(fonts_index) * size;
+	metrics->hanging_baseline = font_util_get_ascender(fonts_index) * size;
+	metrics->alphabetic_baseline = 0;
+	metrics->ideographic_baseline = font_util_get_descender(fonts_index) * size;
+	metrics->rendering_offset_x = start_x * size;
+	metrics->rendering_offset_y = start_y * size;
 }

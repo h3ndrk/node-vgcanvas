@@ -53,7 +53,7 @@ Canvas 2D Method | C implementation | C++ wrapper implementation | Node.JS imple
 `VGContext.isPointInPath()` |   |   |   
 `VGContext.isPointInStroke()` |   |   |   
 `VGContext.lineTo()` | implemented | implemented | implemented
-`VGContext.measureText()` |   |   |   
+`VGContext.measureText()` | implemented |   |   
 `VGContext.moveTo()` | implemented | implemented | implemented
 `VGContext.putImageData()` |   |   |   
 `VGContext.quadraticCurveTo()` | implemented | implemented | implemented
