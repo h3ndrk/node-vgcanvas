@@ -22,7 +22,7 @@
 
 #include "canvas-textBaseline.h"
 
-static canvas_text_align_t canvas_textBaseline_value = CANVAS_TEXT_ALIGN_LEFT;
+static canvas_text_baseline_t canvas_textBaseline_value = CANVAS_TEXT_BASELINE_ALPHABETIC;
 
 /**
  * The textBaseline property specifies the current text baseline being used when
@@ -33,15 +33,15 @@ void canvas_textBaseline(char *text_baseline)
 {
 	if(!strcmp(text_baseline, "top"))
 	{
-		canvas_textBaseline_value = CANVAS_TEXT_ALIGN_TOP;
+		canvas_textBaseline_value = CANVAS_TEXT_BASELINE_TOP;
 	}
 	else if(!strcmp(text_baseline, "hanging"))
 	{
-		canvas_textBaseline_value = CANVAS_TEXT_ALIGN_HANGING;
+		canvas_textBaseline_value = CANVAS_TEXT_BASELINE_HANGING;
 	}
 	else if(!strcmp(text_baseline, "middle"))
 	{
-		canvas_textBaseline_value = CANVAS_TEXT_ALIGN_MIDDLE;
+		canvas_textBaseline_value = CANVAS_TEXT_BASELINE_MIDDLE;
 	}
 	else if(!strcmp(text_baseline, "alphabetic"))
 	{
@@ -110,4 +110,13 @@ char *canvas_textBaseline_get(void)
 	}
 	
 	return "";
+}
+
+/**
+ * It returns the current internal value (left by default).
+ * @return A string specifying the current text baseline.
+ */
+canvas_text_baseline_t canvas_textBaseline_get_internal(void)
+{
+	return canvas_textBaseline_value;
 }

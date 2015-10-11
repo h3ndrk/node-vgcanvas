@@ -44,6 +44,8 @@ typedef struct font_t
 	character_t **characters;
 	int characters_amount;
 	VGboolean kerning_available;
+	VGfloat ascender;
+	VGfloat descender;
 } font_t;
 
 #define FONT_UTIL_SIZE 64 * 64 * 64
@@ -64,5 +66,7 @@ VGfloat font_util_get_bearing_x(unsigned int fonts_index, int char_index);
 VGfloat font_util_get_bearing_y(unsigned int fonts_index, int char_index);
 VGboolean font_util_get_kerning_availability(unsigned int fonts_index);
 VGfloat font_util_get_kerning_x(unsigned int fonts_index, char character, char character_next);
+VGfloat font_util_get_ascender(unsigned int fonts_index);
+VGfloat font_util_get_descender(unsigned int fonts_index);
 
 #endif /* __FONT_UTIL_H__ */

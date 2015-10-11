@@ -190,8 +190,6 @@ int font_util_new(char *path, char *name)
 	FT_ULong charcode;
 	FT_UInt gindex;
 	VGPath glyph_path = 0;
-	// VGfloat glyph_origin[2] = { 0, 0 };
-	// VGfloat glyph_escapement[2] = { 0, 0 };
 	
 	outline_functions.move_to = &font_util_outline_decode_move_to;
 	outline_functions.line_to = &font_util_outline_decode_line_to;
@@ -233,7 +231,7 @@ int font_util_new(char *path, char *name)
 	
 	if(FT_Set_Char_Size(fonts[fonts_amount - 1].face, 0, FONT_UTIL_SIZE, 96, 96))
 	{
-		eprintf("Failed to set font size: %s\n", name);
+		eprintf("Failed to set font size (char): %s\n", name);
 		font_util_remove(name);
 		
 		return -1;
@@ -275,6 +273,8 @@ int font_util_new(char *path, char *name)
 		}
 	}
 	
+	fonts[fonts_amount - 1].ascender = 0;
+	fonts[fonts_amount - 1].descender = 0;
 	char_count = 0;
 	point_count = 0;
 	charcode = FT_Get_First_Char(fonts[fonts_amount - 1].face, &gindex);
@@ -309,6 +309,16 @@ int font_util_new(char *path, char *name)
 		fonts[fonts_amount - 1].characters[char_count]->advance_x = FONT_UTIL_TO_FLOAT(fonts[fonts_amount - 1].face->glyph->metrics.horiAdvance);
 		fonts[fonts_amount - 1].characters[char_count]->bearing_x = FONT_UTIL_TO_FLOAT(fonts[fonts_amount - 1].face->glyph->metrics.horiBearingX);
 		fonts[fonts_amount - 1].characters[char_count]->bearing_y = FONT_UTIL_TO_FLOAT(fonts[fonts_amount - 1].face->glyph->metrics.horiBearingY);
+		
+		if(fonts[fonts_amount - 1].characters[char_count]->bearing_y > fonts[fonts_amount - 1].ascender)
+		{
+			fonts[fonts_amount - 1].ascender = fonts[fonts_amount - 1].characters[char_count]->bearing_y;
+		}
+		
+		if(fonts[fonts_amount - 1].characters[char_count]->height - fonts[fonts_amount - 1].characters[char_count]->bearing_y > fonts[fonts_amount - 1].descender)
+		{
+			fonts[fonts_amount - 1].descender = fonts[fonts_amount - 1].characters[char_count]->height - fonts[fonts_amount - 1].characters[char_count]->bearing_y;
+		}
 		
 		charcode = FT_Get_Next_Char(fonts[fonts_amount - 1].face, charcode, &gindex);
 		
@@ -538,4 +548,24 @@ VGfloat font_util_get_kerning_x(unsigned int fonts_index, char character, char c
 	FT_Get_Kerning(fonts[fonts_index].face, fonts[fonts_index].characters[char_index]->glyph_index, fonts[fonts_index].characters[char_index_next]->glyph_index, FT_KERNING_DEFAULT, &kerning);
 	
 	return FONT_UTIL_TO_FLOAT(kerning.x);
+}
+
+VGfloat font_util_get_ascender(unsigned int fonts_index)
+{
+	if(fonts == NULL)
+	{
+		return 0;
+	}
+	
+	return fonts[fonts_index].ascender;
+}
+
+VGfloat font_util_get_descender(unsigned int fonts_index)
+{
+	if(fonts == NULL)
+	{
+		return 0;
+	}
+	
+	return fonts[fonts_index].descender;
 }

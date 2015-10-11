@@ -28,5 +28,6 @@ typedef enum canvas_text_align_t
 
 void canvas_textAlign(char *text_align);
 char *canvas_textAlign_get(void);
+canvas_text_align_t canvas_textAlign_get_internal(void);
 
 #endif /* __CANVAS_TEXTALIGN_H__ */

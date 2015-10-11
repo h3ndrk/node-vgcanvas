@@ -31,5 +31,6 @@ typedef enum canvas_text_baseline_t
 
 void canvas_textBaseline(char *text_baseline);
 char *canvas_textBaseline_get(void);
+canvas_text_baseline_t canvas_textBaseline_get_internal(void);
 
 #endif /* __CANVAS_TEXTBASELINE_H__ */

@@ -83,3 +83,12 @@ char *canvas_textAlign_get(void)
 	
 	return "";
 }
+
+/**
+ * It returns the current internal value (left by default).
+ * @return A string specifying the current text alignment.
+ */
+canvas_text_align_t canvas_textAlign_get_internal(void)
+{
+	return canvas_textAlign_value;
+}
