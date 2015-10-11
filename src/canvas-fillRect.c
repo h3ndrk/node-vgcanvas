@@ -25,10 +25,6 @@
 #include "canvas-fillStyle.h"
 #include "canvas-beginPath.h"
 #include "canvas-fillRect.h"
-#include "canvas-shadowColor.h"
-#include "canvas-shadowBlur.h"
-#include "canvas-shadowOffsetX.h"
-#include "canvas-shadowOffsetY.h"
 
 /**
  * The fillRect() method draws a filled rectangle at (x, y) position whose size
@@ -41,21 +37,6 @@
  */
 void canvas_fillRect(VGfloat x, VGfloat y, VGfloat width, VGfloat height)
 {
-	if(canvas_shadowColor_get_enabled())
-	{
-		egl_blur_begin();
-		
-		paint_activate(canvas_shadowColor_get(), VG_FILL_PATH);
-		
-		canvas_beginPath();
-		
-		vguRect(canvas_beginPath_get(), x, egl_get_height() - y - height, width, height);
-		
-		vgDrawPath(canvas_beginPath_get(), VG_FILL_PATH);
-		
-		egl_blur_end(canvas_shadowBlur_get(), canvas_shadowOffsetX_get(), canvas_shadowOffsetY_get());
-	}
-	
 	paint_activate(canvas_fillStyle_get(), VG_FILL_PATH);
 	
 	canvas_beginPath();

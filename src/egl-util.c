@@ -26,9 +26,6 @@ static EGLDisplay display = NULL;
 static EGLContext context = NULL;
 static EGLSurface surface = NULL;
 static EGLConfig config = NULL;
-static EGLSurface blur_surface = NULL;
-static EGLContext blur_context = NULL;
-static VGImage blur_image = 0;
 
 static uint32_t screen_width = 0;
 static uint32_t screen_height = 0;
@@ -168,71 +165,4 @@ uint32_t egl_get_width(void)
 uint32_t egl_get_height(void)
 {
 	return screen_height;
-}
-
-// void vgConvolve(VGImage dst, VGImage src,
-//  VGint kernelWidth, VGint kernelHeight,
-//  VGint shiftX, VGint shiftY,
-//  const VGshort * kernel,
-//  VGfloat scale,
-//  VGfloat bias,
-//  VGTilingMode tilingMode)
-
-// void vgGaussianBlur(VGImage dst, VGImage src,
-//  VGfloat stdDeviationX,
-//  VGfloat stdDeviationY,
-//  VGTilingMode tilingMode)
-
-// EGLSurface eglCreatePbufferFromClientBuffer(EGLDisplay dpy,
-//  EGLenum buftype,
-//  EGLClientBuffer buffer,
-//  EGLConfig config,
-//  const EGLint *attrib_list)
-
-// VG_TILE_PAD
-
-void egl_blur_begin(void)
-{
-	const EGLint attribute_list[] =
-	{
-		EGL_TEXTURE_FORMAT, EGL_TEXTURE_RGBA,
-		EGL_TEXTURE_TARGET, EGL_TEXTURE_2D,
-		EGL_MIPMAP_TEXTURE, EGL_FALSE,
-		EGL_NONE
-	};
-	
-	blur_image = vgCreateImage(VG_sARGB_8888, screen_width, screen_height, VG_IMAGE_QUALITY_BETTER);
-	
-	blur_context = eglCreateContext(display, config, context, NULL);
-	blur_surface = eglCreatePbufferFromClientBuffer(display, EGL_OPENVG_IMAGE, (EGLClientBuffer)blur_image, config, attribute_list);
-	
-	eglMakeCurrent(display, blur_surface, blur_surface, blur_context);
-}
-
-void egl_blur_end(VGfloat blur, VGfloat offset_x, VGfloat offset_y)
-{
-	VGfloat matrix_backup_image[9];
-	VGImage blur_image_destination = vgCreateImage(VG_sARGB_8888, screen_width, screen_height, VG_IMAGE_QUALITY_BETTER);
-	
-	vgGaussianBlur(blur_image_destination, blur_image, blur, blur, VG_TILE_PAD);
-	
-	eglMakeCurrent(display, surface, surface, context);
-	
-	vgSeti(VG_MATRIX_MODE, VG_MATRIX_IMAGE_USER_TO_SURFACE);
-	
-	vgGetMatrix(matrix_backup_image);
-	
-	vgTranslate(offset_x, -offset_y);
-	
-	vgDrawImage(blur_image_destination);
-	
-	vgLoadMatrix(matrix_backup_image);
-	
-	vgSeti(VG_MATRIX_MODE, VG_MATRIX_PATH_USER_TO_SURFACE);
-	
-	vgDestroyImage(blur_image);
-	vgDestroyImage(blur_image_destination);
-	
-	eglDestroySurface(display, blur_surface);
-	eglDestroyContext(display, blur_context);
 }

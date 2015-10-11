@@ -177,6 +177,8 @@ void canvas_strokeText(char *text, VGfloat x, VGfloat y)
 		}
 	}
 	
+	offset_x = 0;
+	
 	lineDashPattern = malloc(canvas_setLineDash_get_count() * sizeof(VGfloat));
 	lineDashPattern2 = malloc(canvas_setLineDash_get_count() * sizeof(VGfloat));
 	if(lineDashPattern == NULL || lineDashPattern2 == NULL)

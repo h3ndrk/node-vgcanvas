@@ -21,6 +21,7 @@
 
 #include <stdint.h>
 #include <EGL/egl.h>
+#include <VG/openvg.h>
 
 void egl_init(void);
 void egl_cleanup(void);
@@ -31,7 +32,5 @@ void egl_swap_buffers(void);
 // EGLContext egl_get_display(void);
 uint32_t egl_get_width(void);
 uint32_t egl_get_height(void);
-void egl_blur_begin(void);
-void egl_blur_end(VGfloat blur, VGfloat offset_x, VGfloat offset_y);
 
 #endif /* __GL_UTIL_H__ */

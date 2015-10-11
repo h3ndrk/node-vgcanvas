@@ -20,6 +20,7 @@
 #include "include-openvg.h"
 // #include "include-freetype.h"
 
+#include "egl-util.h"
 #include "canvas-beginPath.h"
 #include "canvas-paint.h"
 #include "canvas-strokeStyle.h"

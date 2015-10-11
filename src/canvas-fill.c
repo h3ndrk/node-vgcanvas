@@ -25,10 +25,6 @@
 #include "canvas-paint.h"
 #include "canvas-fillStyle.h"
 #include "canvas-fill.h"
-#include "canvas-shadowColor.h"
-#include "canvas-shadowBlur.h"
-#include "canvas-shadowOffsetX.h"
-#include "canvas-shadowOffsetY.h"
 
 /**
  * The fill() method fills the current or given path with the current fill style
@@ -36,17 +32,6 @@
  */
 void canvas_fill(void)
 {
-	if(canvas_shadowColor_get_enabled())
-	{
-		egl_blur_begin();
-		
-		paint_activate(canvas_shadowColor_get(), VG_FILL_PATH);
-		
-		vgDrawPath(canvas_beginPath_get(), VG_FILL_PATH);
-		
-		egl_blur_end(canvas_shadowBlur_get(), canvas_shadowOffsetX_get(), canvas_shadowOffsetY_get());
-	}
-	
 	paint_activate(canvas_fillStyle_get(), VG_FILL_PATH);
 	
 	vgDrawPath(canvas_beginPath_get(), VG_FILL_PATH);

@@ -20,10 +20,10 @@ Canvas 2D Method | C implementation | C++ wrapper implementation | Node.JS imple
 `VGContext.lineJoin` | implemented | implemented | implemented
 `VGContext.lineWidth` | implemented | implemented | implemented
 `VGContext.miterLimit` | implemented |   |   
-`VGContext.shadowBlur` | implemented |   |   
-`VGContext.shadowColor` | implemented |   |   
-`VGContext.shadowOffsetX` | implemented |   |   
-`VGContext.shadowOffsetY` | implemented |   |   
+`VGContext.shadowBlur` | *won't implement* |   |   
+`VGContext.shadowColor` | *won't implement* |   |   
+`VGContext.shadowOffsetX` | *won't implement* |   |   
+`VGContext.shadowOffsetY` | *won't implement* |   |   
 `VGContext.strokeStyle` | implemented | implemented | implemented
 `VGContext.textAlign` | implemented |   |   
 `VGContext.textBaseline` | implemented |   |   
