@@ -1,28 +1,18 @@
 # Insights
 
-* `fillText`
-    * renders nothing if no fonts are loaded (notice log output)
-    * calculates off-screen how long the text is to use `textAlign` and `textBaseline` (loop involved) (performance warning)
-    * saves the *path*-matrix and restores it at the end of drawing
-        * translates to the start position
-    * for rendering every character the *fill-paint*-matrix is saved and restored (to achieve correct gradient rendering) (performance warning)
-    * kerning involves extra matrix translations for every character rendering
+* Text Rendering
+    * without any loaded font nothing (text) will be rendered
+    * the correct rendering position is calculated via `textAlign` and `textBaseline` (loop involved)
+    * intensive matrix-saving, -restoring and -modifying (performance warning)
+        * *path*-matrix
+            * saving and restoring for every text element
+            * modifying for every character (kerning needs extra matrix modifications)
+        * *paint*-matrix (to achieve correct gradient rendering)
+            * saving and restoring for every character
+            * modifying for every character
+    * stroked text anomalies
+        * settings which are sensitive for scaling are scaled properly (includes `lineDash`-data which uses a loop: complex `lineDash`-data can result in bad performance) (performance warning)
     * see also: *Text Kerning*
-    * Conclusion:
-        * may be slow because of many matrix operations and the extra loop
-* `strokeText`
-    * renders nothing if no fonts are loaded (notice log output)
-    * calculates off-screen how long the text is to use `textAlign` and `textBaseline` (loop involved) (performance warning)
-    * stores and restores e.g. *lineDash*-data
-        * complex *lineDash*-data can result in bad performance (performance warning)
-        * if the storing fails the text rendering fails which results in no text rendering
-    * saves the *path*-matrix and restores it at the end of drawing
-        * translates to the start position
-    * for rendering every character the *fill-paint*-matrix is saved and restored (to achieve correct gradient rendering) (performance warning)
-    * kerning involves extra matrix translations for every character rendering
-    * see also: *Text Kerning*
-    * Conclusion:
-        * may be slow because of many matrix operations, the extra loop and extra loop for *lineDash*-data
 * Text Kerning
     * enabled by default
     * can be en-/disabled by `ctx.kerning = <boolean>;`
@@ -37,3 +27,11 @@
         * several sizes are computed for the character
     * the font is checked for availability for kerning support
     * fonts must not explicitly removed/clean-upped, they will automatically destroyed if the library exits
+* `textBaseline`
+    * `hanging`- and `ideographic` baselines differ from the standard *Canvas 2D API* (*Freetype* does not support these special baselines)
+        * `hanging`: the baseline sits on top of the highest character of the font
+        * `ideographic`: the baseline lays below the smallest character of the font
+
+If you have questions contact the developer: [dev.nipe.systems@gmail.com](mailto:dev.nipe.systems@gmail.com)
+
+Found a bug? https://github.com/NIPE-SYSTEMS/node-vgcanvas/issues
