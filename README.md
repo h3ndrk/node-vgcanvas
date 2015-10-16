@@ -8,9 +8,9 @@ Canvas 2D Method | C implementation | C++ wrapper implementation | Node.JS imple
 -----------------|------------------|----------------------------|-----------------------
 `VGContext.canvas` | pending | pending | pending 
 `VGContext.currentTransform` | pending | pending | pending 
-`VGContext.direction` | *won't implement* | pending | pending 
+`VGContext.direction` | *won't implement* | *won't implement* | *won't implement* 
 `VGContext.fillStyle` | **implemented** | **implemented** | **implemented**
-`VGContext.filter` | *won't implement* | pending | pending 
+`VGContext.filter` | *won't implement* | *won't implement* | *won't implement* 
 `VGContext.font` | **implemented** | pending | pending 
 `VGContext.globalAlpha` | **implemented** |  **implemented** | **implemented**
 `VGContext.globalCompositeOperation` | pending | pending | pending 
@@ -20,10 +20,10 @@ Canvas 2D Method | C implementation | C++ wrapper implementation | Node.JS imple
 `VGContext.lineJoin` | **implemented** | **implemented** | **implemented**
 `VGContext.lineWidth` | **implemented** | **implemented** | **implemented**
 `VGContext.miterLimit` | **implemented** | pending | pending 
-`VGContext.shadowBlur` | *won't implement* | pending | pending 
-`VGContext.shadowColor` | *won't implement* | pending | pending 
-`VGContext.shadowOffsetX` | *won't implement* | pending | pending 
-`VGContext.shadowOffsetY` | *won't implement* | pending | pending 
+`VGContext.shadowBlur` | *won't implement* | *won't implement* | *won't implement* 
+`VGContext.shadowColor` | *won't implement* | *won't implement* | *won't implement* 
+`VGContext.shadowOffsetX` | *won't implement* | *won't implement* | *won't implement* 
+`VGContext.shadowOffsetY` | *won't implement* | *won't implement* | *won't implement* 
 `VGContext.strokeStyle` | **implemented** | **implemented** | **implemented**
 `VGContext.textAlign` | **implemented** | pending | pending 
 `VGContext.textBaseline` | **implemented** | pending | pending 
@@ -40,9 +40,9 @@ Canvas 2D Method | C implementation | C++ wrapper implementation | Node.JS imple
 `VGContext.createLinearGradient()` | **implemented** | **implemented** | **implemented**
 `VGContext.createPattern()` | pending | pending | pending 
 `VGContext.createRadialGradient()` | **implemented** | **implemented** | **implemented**
-`VGContext.drawFocusIfNeeded()` | *won't implement* | pending | pending 
+`VGContext.drawFocusIfNeeded()` | *won't implement* | *won't implement* | *won't implement* 
 `VGContext.drawImage()` | pending | pending | pending 
-`VGContext.drawWindow()` | *won't implement* | pending | pending 
+`VGContext.drawWindow()` | *won't implement* | *won't implement* | *won't implement* 
 `VGContext.ellipse()` | pending | pending | pending 
 `VGContext.fill()` | **implemented** | **implemented** | **implemented**
 `VGContext.fillRect()` | **implemented** | **implemented** | **implemented**
