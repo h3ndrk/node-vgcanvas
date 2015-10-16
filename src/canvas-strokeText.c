@@ -201,15 +201,6 @@ void canvas_strokeText(char *text, VGfloat x, VGfloat y)
 	canvas_lineWidth(lineWidth / size);
 	canvas_lineDashOffset(lineDashOffset / size);
 	
-	vgSeti(VG_MATRIX_MODE, VG_MATRIX_STROKE_PAINT_TO_USER);
-	
-	vgGetMatrix(matrix_backup_stroke_paint);
-	
-	vgScale(1 / size, 1 / size);
-	vgTranslate(-x, -(egl_get_height() - y));
-	
-	vgSeti(VG_MATRIX_MODE, VG_MATRIX_PATH_USER_TO_SURFACE);
-	
 	vgGetMatrix(matrix_backup_path);
 	
 	vgTranslate(x, egl_get_height() - y);
@@ -219,7 +210,22 @@ void canvas_strokeText(char *text, VGfloat x, VGfloat y)
 	{
 		char_index = font_util_get_char_index(fonts_index, text[text_index]);
 		
+		vgSeti(VG_MATRIX_MODE, VG_MATRIX_STROKE_PAINT_TO_USER);
+		
+		vgGetMatrix(matrix_backup_stroke_paint);
+		
+		vgScale(1 / size, 1 / size);
+		vgTranslate(-(x + offset_x * size), -(egl_get_height() - y));
+		
+		vgSeti(VG_MATRIX_MODE, VG_MATRIX_PATH_USER_TO_SURFACE);
+		
 		vgDrawPath(font_util_get_path(fonts_index, char_index), VG_STROKE_PATH);
+		
+		vgSeti(VG_MATRIX_MODE, VG_MATRIX_STROKE_PAINT_TO_USER);
+		
+		vgLoadMatrix(matrix_backup_stroke_paint);
+		
+		vgSeti(VG_MATRIX_MODE, VG_MATRIX_PATH_USER_TO_SURFACE);
 		
 		if(text_index < strlen(text) - 1)
 		{
@@ -238,12 +244,6 @@ void canvas_strokeText(char *text, VGfloat x, VGfloat y)
 	}
 	
 	vgLoadMatrix(matrix_backup_path);
-	
-	vgSeti(VG_MATRIX_MODE, VG_MATRIX_STROKE_PAINT_TO_USER);
-	
-	vgLoadMatrix(matrix_backup_stroke_paint);
-	
-	vgSeti(VG_MATRIX_MODE, VG_MATRIX_PATH_USER_TO_SURFACE);
 	
 	canvas_lineDashOffset(lineDashOffset);
 	canvas_lineWidth(lineWidth);

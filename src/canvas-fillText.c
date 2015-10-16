@@ -103,8 +103,6 @@ void canvas_fillText(char *text, VGfloat x, VGfloat y)
 		}
 	}
 	
-	// printf("{\n\ttext: \"%s\",\n\tfont_index: %i,\n\tsize: %f,\n\tstart_x: %f,\n\tend_x: %f,\n\tstart_y: %f,\n\tend_y: %f,\n\tascender: %f,\n\tdescender: %f\n}\n", text, fonts_index, size, start_x * size, end_x * size, start_y * size, end_y * size, font_util_get_ascender(fonts_index) * size, font_util_get_descender(fonts_index) * size);
-	
 	switch(canvas_textAlign_get_internal())
 	{
 		case CANVAS_TEXT_ALIGN_LEFT:
@@ -168,18 +166,11 @@ void canvas_fillText(char *text, VGfloat x, VGfloat y)
 		}
 	}
 	
+	// printf("{\n\ttext: \"%s\",\n\tfont_index: %i,\n\tsize: %f,\n\tx: %f,\n\ty: %f,\n\tstart_x: %f,\n\tend_x: %f,\n\tstart_y: %f,\n\tend_y: %f,\n\tascender: %f,\n\tdescender: %f\n}\n", text, fonts_index, size, x, y, start_x * size, end_x * size, start_y * size, end_y * size, font_util_get_ascender(fonts_index) * size, font_util_get_descender(fonts_index) * size);
+	
 	offset_x = 0;
 	
 	paint_activate(canvas_fillStyle_get(), VG_FILL_PATH);
-	
-	vgSeti(VG_MATRIX_MODE, VG_MATRIX_FILL_PAINT_TO_USER);
-	
-	vgGetMatrix(matrix_backup_fill_paint);
-	
-	vgScale(1 / size, 1 / size);
-	vgTranslate(-x, -(egl_get_height() - y));
-	
-	vgSeti(VG_MATRIX_MODE, VG_MATRIX_PATH_USER_TO_SURFACE);
 	
 	vgGetMatrix(matrix_backup_path);
 	
@@ -190,7 +181,22 @@ void canvas_fillText(char *text, VGfloat x, VGfloat y)
 	{
 		char_index = font_util_get_char_index(fonts_index, text[text_index]);
 		
+		vgSeti(VG_MATRIX_MODE, VG_MATRIX_FILL_PAINT_TO_USER);
+		
+		vgGetMatrix(matrix_backup_fill_paint);
+		
+		vgScale(1 / size, 1 / size);
+		vgTranslate(-(x + offset_x * size), -(egl_get_height() - y));
+		
+		vgSeti(VG_MATRIX_MODE, VG_MATRIX_PATH_USER_TO_SURFACE);
+		
 		vgDrawPath(font_util_get_path(fonts_index, char_index), VG_FILL_PATH);
+		
+		vgSeti(VG_MATRIX_MODE, VG_MATRIX_FILL_PAINT_TO_USER);
+		
+		vgLoadMatrix(matrix_backup_fill_paint);
+		
+		vgSeti(VG_MATRIX_MODE, VG_MATRIX_PATH_USER_TO_SURFACE);
 		
 		if(text_index < strlen(text) - 1)
 		{
@@ -209,10 +215,4 @@ void canvas_fillText(char *text, VGfloat x, VGfloat y)
 	}
 	
 	vgLoadMatrix(matrix_backup_path);
-	
-	vgSeti(VG_MATRIX_MODE, VG_MATRIX_FILL_PAINT_TO_USER);
-	
-	vgLoadMatrix(matrix_backup_fill_paint);
-	
-	vgSeti(VG_MATRIX_MODE, VG_MATRIX_PATH_USER_TO_SURFACE);
 }

@@ -182,6 +182,19 @@ static int font_util_outline_decode_cubic_to(const FT_Vector *control1, const FT
 	return 0;
 }
 
+static void font_util_outline_decode_close_path(void *user)
+{
+	// printf("closePath()\n");
+	
+	VGubyte segment[1] = { VG_CLOSE_PATH };
+	VGfloat data[2];
+	
+	data[0] = 0;
+	data[1] = 0;
+	
+	vgAppendPathData(*(VGPath *)user, 1, segment, (const void *)data);
+}
+
 int font_util_new(char *path, char *name)
 {
 	int i = 0;
@@ -296,6 +309,8 @@ int font_util_new(char *path, char *name)
 			
 			return -1;
 		}
+		
+		font_util_outline_decode_close_path((void *)(&glyph_path));
 		
 		fonts[fonts_amount - 1].characters[char_count]->charcode = charcode;
 		fonts[fonts_amount - 1].characters[char_count]->glyph_index = gindex;
