@@ -74,7 +74,7 @@ Canvas 2D Method | C implementation | C++ wrapper implementation | Node.JS imple
 
 ## Need help?
 
-Contact the developer if you have questions: [dev.nipe.systems@gmail.com](mailto:dev.nipe.systems@gmail.com)
+Contact the developer if you have questions: [dev.nipe.systems@gmail.com](mailto:dev.nipe.systems@gmail.com), [gebatzens@archlinux.info](gebatzens@archlinux.info)
 
 ## Found a bug?
 

@@ -32,6 +32,6 @@
         * `hanging`: in the library the baseline sits on top of the highest character of the font
         * `ideographic`: in the library the baseline lays below the smallest character of the font
 
-Contact the developer if you have questions: [dev.nipe.systems@gmail.com](mailto:dev.nipe.systems@gmail.com)
+Contact the developer if you have questions: [dev.nipe.systems@gmail.com](mailto:dev.nipe.systems@gmail.com), [gebatzens@archlinux.info](gebatzens@archlinux.info)
 
 Found a bug? https://github.com/NIPE-SYSTEMS/node-vgcanvas/issues
