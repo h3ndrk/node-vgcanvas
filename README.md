@@ -27,12 +27,12 @@ Canvas 2D Method | C implementation | C++ wrapper implementation | Node.JS imple
 `VGContext.strokeStyle` | **implemented** | **implemented** | **implemented**
 `VGContext.textAlign` | **implemented** | pending | pending 
 `VGContext.textBaseline` | **implemented** | pending | pending 
-`VGContext.addHitRegion()` | pending | pending | pending 
+`VGContext.addHitRegion()` | *won't implement* | *won't implement* | *won't implement* 
 `VGContext.arc()` | **implemented** | **implemented** | **implemented**
 `VGContext.arcTo()` | pending | pending | pending 
 `VGContext.beginPath()` | **implemented** | **implemented** | **implemented**
 `VGContext.bezierCurveTo()` | **implemented** | **implemented** | **implemented**
-`VGContext.clearHitRegion()` | pending | pending | pending 
+`VGContext.clearHitRegion()` | *won't implement* | *won't implement* | *won't implement* 
 `VGContext.clearRect()` | **implemented** | **implemented** | **implemented**
 `VGContext.clip()` | **implemented** | **implemented** | **implemented**
 `VGContext.closePath()` | **implemented** | **implemented** | **implemented**
@@ -57,7 +57,7 @@ Canvas 2D Method | C implementation | C++ wrapper implementation | Node.JS imple
 `VGContext.putImageData()` | pending | pending | pending 
 `VGContext.quadraticCurveTo()` | **implemented** | **implemented** | **implemented**
 `VGContext.rect()` | **implemented** | **implemented** | **implemented**
-`VGContext.removeHitRegion()` | pending | pending | pending 
+`VGContext.removeHitRegion()` | *won't implement* | *won't implement* | *won't implement* 
 `VGContext.resetTransform()` | **implemented** | pending | pending 
 `VGContext.restore()` | **partly implemented** | **implemented** | **implemented**
 `VGContext.rotate()` | **implemented** | pending | pending 
