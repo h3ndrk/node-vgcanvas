@@ -29,9 +29,9 @@
     * fonts must not explicitly removed/clean-upped, they will automatically destroyed if the library exits
 * `textBaseline`
     * `hanging`- and `ideographic` baselines differ from the standard *Canvas 2D API* (*Freetype* does not support these special baselines)
-        * `hanging`: the baseline sits on top of the highest character of the font
-        * `ideographic`: the baseline lays below the smallest character of the font
+        * `hanging`: in the library the baseline sits on top of the highest character of the font
+        * `ideographic`: in the library the baseline lays below the smallest character of the font
 
-If you have questions contact the developer: [dev.nipe.systems@gmail.com](mailto:dev.nipe.systems@gmail.com)
+Contact the developer if you have questions: [dev.nipe.systems@gmail.com](mailto:dev.nipe.systems@gmail.com)
 
 Found a bug? https://github.com/NIPE-SYSTEMS/node-vgcanvas/issues

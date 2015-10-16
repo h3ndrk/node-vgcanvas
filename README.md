@@ -71,3 +71,17 @@ Canvas 2D Method | C implementation | C++ wrapper implementation | Node.JS imple
 `VGContext.strokeText()` | **implemented** | pending | pending 
 `VGContext.transform()` | **implemented** | pending | pending 
 `VGContext.translate()` | **implemented** | pending | pending 
+
+## Need help?
+
+Contact the developer if you have questions: [dev.nipe.systems@gmail.com](mailto:dev.nipe.systems@gmail.com)
+
+## Found a bug?
+
+Write an issue: [https://github.com/NIPE-SYSTEMS/node-vgcanvas/issues](https://github.com/NIPE-SYSTEMS/node-vgcanvas/issues)
+
+## License
+
+lastest GPL-license (see `LICENSE`-file)
+
+Copyright (C) 2015 NIPE-SYSTEMS ([http://nipe-systems.de](http://nipe-systems.de)), Hauke Oldsen ([https://gebatzens.de](https://gebatzens.de))
