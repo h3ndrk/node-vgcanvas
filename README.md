@@ -13,7 +13,7 @@ Canvas 2D Method | C implementation | C++ wrapper implementation | Node.JS imple
 `VGContext.filter` | *won't implement* | *won't implement* | *won't implement* 
 `VGContext.font` | **implemented** | pending | pending 
 `VGContext.globalAlpha` | **implemented** |  **implemented** | **implemented**
-`VGContext.globalCompositeOperation` | pending | pending | pending 
+`VGContext.globalCompositeOperation` | **implemented** | pending | pending 
 `VGContext.imageSmoothingEnabled` | pending | pending | pending 
 `VGContext.lineCap` | **implemented** | **implemented** | **implemented**
 `VGContext.lineDashOffset` | **implemented** | **implemented** | **implemented**

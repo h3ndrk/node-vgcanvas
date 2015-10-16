@@ -17,6 +17,7 @@
         "src/canvas-fillText.c",
         "src/canvas-font.c",
         "src/canvas-globalAlpha.c",
+        "src/canvas-globalCompositeOperation.c",
         "src/canvas-kerning.c",
         "src/canvas-lineCap.c",
         "src/canvas-lineDashOffset.c",

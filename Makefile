@@ -48,6 +48,7 @@ SRC += canvas-beginPath.c
 SRC += canvas-bezierCurveTo.c
 SRC += canvas-clearRect.c
 SRC += canvas-globalAlpha.c
+SRC += canvas-globalCompositeOperation.c
 SRC += canvas-lineCap.c
 SRC += canvas-lineDashOffset.c
 SRC += canvas-lineJoin.c
