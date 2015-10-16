@@ -72,6 +72,7 @@ SRC += canvas-fill.c
 SRC += canvas-fillStyle.c
 SRC += canvas-fillRect.c
 SRC += canvas-fillText.c
+SRC += canvas-resetTransform.c
 SRC += canvas-rotate.c
 SRC += canvas-scale.c
 SRC += canvas-setTransform.c

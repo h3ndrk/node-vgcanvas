@@ -6,7 +6,7 @@ Node.js wrapper for Canvas 2D API targeting the Raspberry Pi. This wrapper uses 
 
 Canvas 2D Method | C implementation | C++ wrapper implementation | Node.JS implementation
 -----------------|------------------|----------------------------|-----------------------
-`VGContext.canvas` | pending | pending | pending 
+`VGContext.canvas` | *nothing to implement* | pending | pending 
 `VGContext.currentTransform` | *won't implement* | *won't implement* | *won't implement* 
 `VGContext.direction` | *won't implement* | *won't implement* | *won't implement* 
 `VGContext.fillStyle` | **implemented** | **implemented** | **implemented**
@@ -58,12 +58,12 @@ Canvas 2D Method | C implementation | C++ wrapper implementation | Node.JS imple
 `VGContext.quadraticCurveTo()` | **implemented** | **implemented** | **implemented**
 `VGContext.rect()` | **implemented** | **implemented** | **implemented**
 `VGContext.removeHitRegion()` | pending | pending | pending 
-`VGContext.resetTransform()` | pending | pending | pending 
+`VGContext.resetTransform()` | **implemented** | pending | pending 
 `VGContext.restore()` | **partly implemented** | **implemented** | **implemented**
 `VGContext.rotate()` | **implemented** | pending | pending 
 `VGContext.save()` | **partly implemented** | **implemented** | **implemented**
 `VGContext.scale()` | **implemented** | pending | pending 
-`VGContext.scrollPathIntoView()` | pending | pending | pending 
+`VGContext.scrollPathIntoView()` | *won't implement* | *won't implement* | *won't implement* 
 `VGContext.setLineDash()` | **implemented** | **implemented** | **implemented**
 `VGContext.setTransform()` | **implemented** | pending | pending 
 `VGContext.stroke()` | **implemented** | **implemented** | **implemented**

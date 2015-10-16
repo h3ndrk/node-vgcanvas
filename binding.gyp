@@ -29,6 +29,7 @@
         "src/canvas-paint.c",
         "src/canvas-quadraticCurveTo.c",
         "src/canvas-rect.c",
+        "src/canvas-resetTransform.c",
         "src/canvas-restore.c",
         "src/canvas-rotate.c",
         "src/canvas-save.c",
