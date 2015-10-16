@@ -157,12 +157,12 @@ void egl_swap_buffers(void)
 // 	return context;
 // }
 
-uint32_t egl_get_width(void)
+int32_t egl_get_width(void)
 {
-	return screen_width;
+	return (int32_t)screen_width;
 }
 
-uint32_t egl_get_height(void)
+int32_t egl_get_height(void)
 {
-	return screen_height;
+	return (int32_t)screen_height;
 }

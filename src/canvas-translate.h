@@ -16,21 +16,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __GL_UTIL_H__
-#define __GL_UTIL_H__
+#ifndef __CANVAS_TRANSLATE_H__
+#define __CANVAS_TRANSLATE_H__
 
-#include <stdint.h>
-#include <EGL/egl.h>
 #include <VG/openvg.h>
 
-void egl_init(void);
-void egl_cleanup(void);
-EGLint egl_error(void);
-void egl_swap_buffers(void);
-// EGLDisplay egl_get_display(void);
-// EGLSurface egl_get_display(void);
-// EGLContext egl_get_display(void);
-int32_t egl_get_width(void);
-int32_t egl_get_height(void);
+void canvas_translate(VGfloat x, VGfloat y);
 
-#endif /* __GL_UTIL_H__ */
+#endif /* __CANVAS_TRANSLATE_H__ */

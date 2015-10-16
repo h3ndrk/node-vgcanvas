@@ -30,7 +30,9 @@
         "src/canvas-quadraticCurveTo.c",
         "src/canvas-rect.c",
         "src/canvas-restore.c",
+        "src/canvas-rotate.c",
         "src/canvas-save.c",
+        "src/canvas-scale.c",
         "src/canvas-setLineDash.c",
         "src/canvas-stroke.c",
         "src/canvas-strokeRect.c",
@@ -38,6 +40,7 @@
         "src/canvas-strokeText.c",
         "src/canvas-textAlign.c",
         "src/canvas-textBaseline.c",
+        "src/canvas-translate.c",
         "src/canvas.c",
         "src/egl-util.c",
         "src/font-util.c"

@@ -1,7 +1,7 @@
 /**
  * Copyright (C) 2015 NIPE-SYSTEMS
  * Copyright (C) 2015 Hauke Oldsen
- *
+ * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -16,21 +16,24 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __GL_UTIL_H__
-#define __GL_UTIL_H__
+#include "include-core.h"
+#include "include-openvg.h"
+// #include "include-freetype.h"
 
-#include <stdint.h>
-#include <EGL/egl.h>
-#include <VG/openvg.h>
+#include "egl-util.h"
+#include "canvas-rotate.h"
 
-void egl_init(void);
-void egl_cleanup(void);
-EGLint egl_error(void);
-void egl_swap_buffers(void);
-// EGLDisplay egl_get_display(void);
-// EGLSurface egl_get_display(void);
-// EGLContext egl_get_display(void);
-int32_t egl_get_width(void);
-int32_t egl_get_height(void);
-
-#endif /* __GL_UTIL_H__ */
+/**
+ * The rotate() method adds a rotation to the transformation matrix. The angle
+ * argument represents a clockwise rotation angle and is expressed in radians.
+ * @param angle The angle to rotate clockwise in radians. You can use
+ * degree * M_PI / 180 if you want to calculate from a degree value.
+ */
+void canvas_rotate(VGfloat angle)
+{
+	vgTranslate(0, egl_get_height());
+	
+	vgRotate(angle / M_PI * 180);
+	
+	vgTranslate(0, -egl_get_height());
+}
