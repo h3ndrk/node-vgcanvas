@@ -65,9 +65,9 @@ Canvas 2D Method | C implementation | C++ wrapper implementation | Node.JS imple
 `VGContext.scale()` | **implemented** | pending | pending 
 `VGContext.scrollPathIntoView()` | pending | pending | pending 
 `VGContext.setLineDash()` | **implemented** | **implemented** | **implemented**
-`VGContext.setTransform()` | pending | pending | pending 
+`VGContext.setTransform()` | **implemented** | pending | pending 
 `VGContext.stroke()` | **implemented** | **implemented** | **implemented**
 `VGContext.strokeRect()` | **implemented** | **implemented** | **implemented**
 `VGContext.strokeText()` | **implemented** | pending | pending 
-`VGContext.transform()` | pending | pending | pending 
+`VGContext.transform()` | **implemented** | pending | pending 
 `VGContext.translate()` | **implemented** | pending | pending 
