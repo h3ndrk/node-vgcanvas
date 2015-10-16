@@ -10,28 +10,28 @@
 - [x] Rename "`src/infoscreen.cc`" to "`src/vgcanvas.cc`"
 - [x] gradients
 - [ ] patterns
-- [ ] shadows
-- [ ] images
+- [x] shadows *Won't implement*
+- [x] images
 - [x] text
 - [ ] comments
     - [ ] `src/font-util.c`
     - [ ] `src/log-util.h`
     - [ ] not only the functions but also the code
 - [ ] remove Makefile, remove "`bin`" from "`.gitignore`", remove "`src/home-infoscreen.c`"
-- [ ] "`openSubPath`" in "`src/canvas.c`"
+- [x] "`openSubPath`" in "`src/canvas.c`" *Not needed*
 - [ ] https://developer.mozilla.org/en-US/docs/Web/API/Path2D/Path2D
 - [x] Remove "`src/color.*`"
 - [x] Adjust coordinates
 - [x] `eprintf` for errors
-- [ ] coordinates for closePath?
+- [x] coordinates for closePath? *No*
 - [ ] replace all `void`-return-types with `int`-return-types
 - [ ] eventually handle V8 Fatal Errors http://izs.me/v8-docs/classv8_1_1V8.html#ab386f81a6d58dcf481d00446e8d15c9e
 - [x] remove anonymous structs
 - [ ] `miterLimit`: what values does effect what? OpenVG documentation does not inform well about that topic.
 - [x] set standard values at initialization
 - [ ] create font if it is firstly used
-- [ ] Replace `onecolor` with regular expressions and native code
-- [ ] `textBaseline`, `textAlign`
+- [x] Replace `onecolor` with regular expressions and native code
+- [x] `textBaseline`, `textAlign`
 - [ ] general error handling: worst case scenario for user input
     - [ ] better `eprintf` and failure exit with memory safety
     - [ ] error handling for system failures (out-of-memory-failure)
@@ -46,3 +46,5 @@
 - [ ] error handling for `[fill|stroke]Text()` when no font has been loaded
 - [x] Use new paths for `[fill|stroke]Rect()`
 - [x] `closePath` for `strokeText()`
+- [ ] `requestAnimationFrame`
+- [ ] `imageSmoothingEnabled`
