@@ -11,7 +11,7 @@ Canvas 2D Method | C implementation | C++ wrapper implementation | Node.js imple
 `VGContext.direction` | *won't implement* | *won't implement* | *won't implement* 
 `VGContext.fillStyle` | **implemented** | **implemented** | **implemented**
 `VGContext.filter` | *won't implement* | *won't implement* | *won't implement* 
-`VGContext.font` | **implemented** | **implemented** | **implemented** 
+`VGContext.font` | **implemented** | pending | pending 
 `VGContext.globalAlpha` | **implemented** |  **implemented** | **implemented**
 `VGContext.globalCompositeOperation` | **implemented** | pending | pending 
 `VGContext.imageSmoothingEnabled` | pending | pending | pending 
@@ -41,7 +41,7 @@ Canvas 2D Method | C implementation | C++ wrapper implementation | Node.js imple
 `VGContext.createPattern()` | pending | pending | pending 
 `VGContext.createRadialGradient()` | **implemented** | **implemented** | **implemented**
 `VGContext.drawFocusIfNeeded()` | *won't implement* | *won't implement* | *won't implement* 
-`VGContext.drawImage()` | **implemented** | **implemented** | **implemented** 
+`VGContext.drawImage()` | pending | pending | pending 
 `VGContext.drawWindow()` | *won't implement* | *won't implement* | *won't implement* 
 `VGContext.ellipse()` | pending | pending | pending 
 `VGContext.fill()` | **implemented** | **implemented** | **implemented**
@@ -49,8 +49,8 @@ Canvas 2D Method | C implementation | C++ wrapper implementation | Node.js imple
 `VGContext.fillText()` | **implemented** | pending | pending 
 `VGContext.getImageData()` | pending | pending | pending 
 `VGContext.getLineDash()` | **implemented** | **implemented** | **implemented**
-`VGContext.isPointInPath()` | pending | pending | pending 
-`VGContext.isPointInStroke()` | pending | pending | pending 
+`VGContext.isPointInPath()` | *won't implement* | *won't implement* | *won't implement* 
+`VGContext.isPointInStroke()` | *won't implement* | *won't implement* | *won't implement* 
 `VGContext.lineTo()` | **implemented** | **implemented** | **implemented**
 `VGContext.measureText()` | **implemented** | pending | pending 
 `VGContext.moveTo()` | **implemented** | **implemented** | **implemented**
