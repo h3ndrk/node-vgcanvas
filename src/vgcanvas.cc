@@ -53,12 +53,14 @@ extern "C" {
 	#include "canvas-strokeText.h"
 	#include "canvas-fillText.h"
 	#include "canvas-strokeText.h"
+	#include "canvas-drawImage.h"
 }
 
 #include <nan.h>
 #include <string>
 #include <map>
 #include "gradient.h"
+#include "image.h"
 
 using namespace v8;
 
@@ -429,6 +431,21 @@ namespace vgcanvas {
 		
 		canvas_strokeText(*Nan::Utf8String(args[0]), args[1]->NumberValue(), args[2]->NumberValue());
 	}
+	
+	void DrawImage(const Nan::FunctionCallbackInfo<Value>& args) {
+		if(!args[0]->IsObject() || !checkArgs(args, 8, 1)) {
+			Nan::ThrowTypeError("wrong args");
+			return;
+		}
+		
+		Image *img = Image::Unwrap<Image>(Local<Object>::Cast(args[0]));
+		
+		if(img->GetImage()) {
+			canvas_drawImage(img->GetImage(), args[1]->NumberValue(), args[2]->NumberValue(), args[3]->NumberValue(), 
+				args[4]->NumberValue(), args[5]->NumberValue(), args[6]->NumberValue(), args[7]->NumberValue(), args[8]->NumberValue());
+		}
+		
+	}
 
 	void ModuleInit(Local<Object> exports) {
 		exports->Set(Nan::New("init").ToLocalChecked(), Nan::New<FunctionTemplate>(Init)->GetFunction());
@@ -482,7 +499,10 @@ namespace vgcanvas {
 		exports->Set(Nan::New("fillText").ToLocalChecked(), Nan::New<FunctionTemplate>(FillText)->GetFunction());
 		exports->Set(Nan::New("strokeText").ToLocalChecked(), Nan::New<FunctionTemplate>(StrokeText)->GetFunction());
 		
+		exports->Set(Nan::New("drawImage").ToLocalChecked(), Nan::New<FunctionTemplate>(DrawImage)->GetFunction());
+		
 		Gradient::Init(exports);
+		Image::Init(exports);
 
 	}
 

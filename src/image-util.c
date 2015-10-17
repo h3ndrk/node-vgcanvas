@@ -28,7 +28,7 @@ void image_cleanup(image_t *image)
   free(image);
 }
 
-image_t *image_load(char *path)
+FIBITMAP *image_load_bitmap(const char *path)
 {
   printf("Loading image %s\n", path);
   
@@ -49,14 +49,31 @@ image_t *image_load(char *path)
     bitmap = FreeImage_ConvertTo32Bits(bitmap);
     FreeImage_Unload(old);
   }
+  
+  return bitmap;
+}
 
+image_t *image_create(FIBITMAP *bitmap)
+{
   image_t *image = malloc(sizeof(image_t));
   image->width = FreeImage_GetWidth(bitmap);
   image->height = FreeImage_GetHeight(bitmap);
   image->image = vgCreateImage(VG_sARGB_8888, image->width, image->height, VG_IMAGE_QUALITY_NONANTIALIASED);
   vgImageSubData(image->image, FreeImage_GetBits(bitmap), image->width * 4, VG_sARGB_8888, 0, 0, image->width, image->height);
-  FreeImage_Unload(bitmap);
   
   return image;
   
+}
+
+void image_free_bitmap(FIBITMAP *bitmap)
+{
+  FreeImage_Unload(bitmap);
+}
+
+image_t *image_load(const char *path)
+{
+  FIBITMAP *bitmap = image_load_bitmap(path);
+  image_t *img = image_create(bitmap);
+  image_free_bitmap(bitmap);
+  return img;
 }

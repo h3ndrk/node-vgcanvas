@@ -5,12 +5,14 @@
       "sources": [
         "src/vgcanvas.cc",
         "src/gradient.cc",
+        "src/image.cc",
         "src/canvas-arc.c",
         "src/canvas-beginPath.c",
         "src/canvas-bezierCurveTo.c",
         "src/canvas-clearRect.c",
         "src/canvas-clip.c",
         "src/canvas-closePath.c",
+        "src/canvas-drawImage.c",
         "src/canvas-fill.c",
         "src/canvas-fillRect.c",
         "src/canvas-fillStyle.c",
@@ -40,7 +42,8 @@
         "src/canvas-textBaseline.c",
         "src/canvas.c",
         "src/egl-util.c",
-        "src/font-util.c"
+        "src/font-util.c",
+        "src/image-util.c"
       ],
       "include_dirs": [
         "<!(node -e \"require('nan')\")",
@@ -60,7 +63,8 @@
           "-lvchiq_arm",
           "-lpthread",
           "-lrt",
-          "-lfreetype"
+          "-lfreetype",
+          "-lfreeimage"
         ],
         "library_dirs": [
           "/opt/vc/lib"
