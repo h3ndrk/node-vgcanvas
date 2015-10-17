@@ -1,7 +1,7 @@
 /**
  * Copyright (C) 2015 NIPE-SYSTEMS
  * Copyright (C) 2015 Hauke Oldsen
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -16,23 +16,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "include-core.h"
-#include "include-openvg.h"
-// #include "include-freetype.h"
+#ifndef __CANVAS_GLOBALCOMPOSITEOPERATION_H__
+#define __CANVAS_GLOBALCOMPOSITEOPERATION_H__
 
-#include "egl-util.h"
-#include "canvas-beginPath.h"
-#include "canvas-paint.h"
-#include "canvas-strokeStyle.h"
-#include "canvas-stroke.h"
+void canvas_globalCompositeOperation(char *global_composite_operation);
+char *canvas_globalCompositeOperation_get(void);
 
-/**
- * The stroke() method fills the current or given path with the current stroke
- * style using the non-zero or even-odd winding rule.
- */
-void canvas_stroke(void)
-{
-	paint_activate(canvas_strokeStyle_get(), VG_STROKE_PATH);
-	
-	vgDrawPath(canvas_beginPath_get(), VG_STROKE_PATH);
-}
+#endif /* __CANVAS_GLOBALCOMPOSITEOPERATION_H__ */

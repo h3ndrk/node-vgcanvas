@@ -54,6 +54,16 @@ int font_util_get(char *name)
 	return -1;
 }
 
+char *font_util_get_name(unsigned int fonts_index)
+{
+	if(fonts == NULL)
+	{
+		return "";
+	}
+	
+	return fonts[fonts_index].name;
+}
+
 FT_Face font_util_get_face(unsigned int fonts_index, char character)
 {
 	FT_UInt glyph_index = FT_Get_Char_Index(fonts[fonts_index].face, character);
@@ -182,6 +192,19 @@ static int font_util_outline_decode_cubic_to(const FT_Vector *control1, const FT
 	return 0;
 }
 
+static void font_util_outline_decode_close_path(void *user)
+{
+	// printf("closePath()\n");
+	
+	VGubyte segment[1] = { VG_CLOSE_PATH };
+	VGfloat data[2];
+	
+	data[0] = 0;
+	data[1] = 0;
+	
+	vgAppendPathData(*(VGPath *)user, 1, segment, (const void *)data);
+}
+
 int font_util_new(char *path, char *name)
 {
 	int i = 0;
@@ -199,7 +222,7 @@ int font_util_new(char *path, char *name)
 	outline_functions.shift = 0;
 	outline_functions.delta = 0;
 	
-	printf("Adding font: %s, name: %s\n", path, name);
+	printf("Adding font: %s, name: %s ...\n", path, name);
 	
 	fonts = realloc(fonts, (++fonts_amount) * sizeof(font_t));
 	
@@ -237,7 +260,6 @@ int font_util_new(char *path, char *name)
 		return -1;
 	}
 	
-	printf("Counting characters...\n");
 	char_count = 0;
 	
 	charcode = FT_Get_First_Char(fonts[fonts_amount - 1].face, &gindex);
@@ -248,9 +270,6 @@ int font_util_new(char *path, char *name)
 		char_count++;
 	}
 	
-	printf("%i characters\n", char_count);
-	
-	printf("Converting characters...\n");
 	fonts[fonts_amount - 1].characters = malloc(char_count * sizeof(character_t *));
 	fonts[fonts_amount - 1].characters_amount = char_count;
 	if(fonts[fonts_amount - 1].characters == NULL)
@@ -301,6 +320,8 @@ int font_util_new(char *path, char *name)
 			return -1;
 		}
 		
+		font_util_outline_decode_close_path((void *)(&glyph_path));
+		
 		fonts[fonts_amount - 1].characters[char_count]->charcode = charcode;
 		fonts[fonts_amount - 1].characters[char_count]->glyph_index = gindex;
 		fonts[fonts_amount - 1].characters[char_count]->path = glyph_path;
@@ -325,16 +346,18 @@ int font_util_new(char *path, char *name)
 		char_count++;
 	}
 	
-	printf("%i converted characters, %lli coordinates\n", char_count, point_count);
+	printf("%i characters, %lli coordinates", char_count, point_count);
 	
 	if(FT_HAS_KERNING(fonts[fonts_amount - 1].face))
 	{
-		printf("Kerning for font '%s' available.\n", name);
+		printf(", kerning available\n");
 		
 		fonts[fonts_amount - 1].kerning_available = VG_TRUE;
 	}
 	else
 	{
+		printf("\n");
+		
 		fonts[fonts_amount - 1].kerning_available = VG_FALSE;
 	}
 	

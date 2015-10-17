@@ -20,19 +20,21 @@
 #include "include-openvg.h"
 // #include "include-freetype.h"
 
-#include "egl-util.h"
-#include "canvas-beginPath.h"
-#include "canvas-paint.h"
-#include "canvas-strokeStyle.h"
-#include "canvas-stroke.h"
+#include "canvas-scale.h"
 
 /**
- * The stroke() method fills the current or given path with the current stroke
- * style using the non-zero or even-odd winding rule.
+ * The scale() method adds a scaling transformation to the canvas units by x
+ * horizontally and by y vertically.
+ * 
+ * By default, one unit on the canvas is exactly one pixel. If we apply, for
+ * instance, a scaling factor of 0.5, the resulting unit would become 0.5 pixels
+ * and so shapes would be drawn at half size. In a similar way setting the
+ * scaling factor to 2.0 would increase the unit size and one unit now becomes
+ * two pixels. This results in shapes being drawn twice as large.
+ * @param x Scaling factor in the horizontal direction.
+ * @param y Scaling factor in the vertical direction.
  */
-void canvas_stroke(void)
+void canvas_scale(VGfloat x, VGfloat y)
 {
-	paint_activate(canvas_strokeStyle_get(), VG_STROKE_PATH);
-	
-	vgDrawPath(canvas_beginPath_get(), VG_STROKE_PATH);
+	vgScale(x, y);
 }

@@ -52,6 +52,7 @@ typedef struct font_t
 #define FONT_UTIL_TO_FLOAT(ft_size) ((float)(ft_size) / (FONT_UTIL_SIZE))
 
 int font_util_get(char *name);
+char *font_util_get_name(unsigned int fonts_index);
 FT_Face font_util_get_face(unsigned int fonts_index, char character);
 void font_util_init(void);
 void font_util_cleanup(void);

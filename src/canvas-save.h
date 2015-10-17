@@ -21,7 +21,10 @@
 
 typedef struct canvas_save_stack_t
 {
-	// TODO: transformation matrix missing
+	VGfloat matrix_path[9];
+	VGfloat matrix_image[9];
+	VGfloat matrix_fill[9];
+	VGfloat matrix_stroke[9];
 	
 	VGboolean clip_clipping;
 	VGMaskLayer clip_mask;
@@ -43,17 +46,13 @@ typedef struct canvas_save_stack_t
 	char *lineJoin;
 	VGfloat miterLimit;
 	
-	// TODO: shadowOffsetX missing
-	// TODO: shadowOffsetY missing
-	// TODO: shadowOffsetBlur missing
-	// TODO: shadowOffsetColor missing
+	char *globalCompositeOperation;
 	
-	// TODO: globalCompositeOperation missing
+	char *font_name;
+	VGfloat font_size;
 	
-	// TODO: font missing
-	// TODO: textAlign missing
-	// TODO: textBaseline missing
-	// TODO: direction missing
+	char *textAlign;
+	char *textBaseline;
 	
 	// TODO: imageSmoothingEnabled missing
 	

@@ -21,6 +21,7 @@
 
 #include <stdint.h>
 #include <EGL/egl.h>
+#include <VG/openvg.h>
 
 void egl_init(void);
 void egl_cleanup(void);
@@ -29,7 +30,8 @@ void egl_swap_buffers(void);
 // EGLDisplay egl_get_display(void);
 // EGLSurface egl_get_display(void);
 // EGLContext egl_get_display(void);
-uint32_t egl_get_width(void);
-uint32_t egl_get_height(void);
+int32_t egl_get_width(void);
+int32_t egl_get_height(void);
+void egl_debug_print_matrices(void);
 
 #endif /* __GL_UTIL_H__ */

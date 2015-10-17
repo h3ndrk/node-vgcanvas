@@ -20,19 +20,14 @@
 #include "include-openvg.h"
 // #include "include-freetype.h"
 
-#include "egl-util.h"
-#include "canvas-beginPath.h"
-#include "canvas-paint.h"
-#include "canvas-strokeStyle.h"
-#include "canvas-stroke.h"
+#include "canvas-setTransform.h"
+#include "canvas-resetTransform.h"
 
 /**
- * The stroke() method fills the current or given path with the current stroke
- * style using the non-zero or even-odd winding rule.
+ * The resetTransform() method resets the current transform by the identity
+ * matrix.
  */
-void canvas_stroke(void)
+void canvas_resetTransform(void)
 {
-	paint_activate(canvas_strokeStyle_get(), VG_STROKE_PATH);
-	
-	vgDrawPath(canvas_beginPath_get(), VG_STROKE_PATH);
+	canvas_setTransform(1, 0, 0, 1, 0, 0);
 }

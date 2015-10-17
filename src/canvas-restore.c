@@ -34,6 +34,10 @@
 #include "canvas-strokeStyle.h"
 #include "canvas-save.h"
 #include "canvas-restore.h"
+#include "canvas-globalCompositeOperation.h"
+#include "canvas-font.h"
+#include "canvas-textAlign.h"
+#include "canvas-textBaseline.h"
 
 /**
  * The restore() method restores the most recently saved canvas state by popping
@@ -45,7 +49,7 @@ void canvas_restore(void)
 	canvas_save_stack_t *state_top = canvas_save_get();
 	canvas_save_stack_t *state_beneath = NULL;
 	
-	printf("Restoring from stack...\n");
+	// printf("Restoring from stack...\n");
 	
 	if(state_top == NULL)
 	{
@@ -60,7 +64,15 @@ void canvas_restore(void)
 	canvas_save_set(state_beneath);
 	
 	// restore properties from top state in stack
-	// TODO: transformation matrix missing
+	vgSeti(VG_MATRIX_MODE, VG_MATRIX_PATH_USER_TO_SURFACE);
+	vgLoadMatrix(state_top->matrix_path);
+	vgSeti(VG_MATRIX_MODE, VG_MATRIX_IMAGE_USER_TO_SURFACE);
+	vgLoadMatrix(state_top->matrix_image);
+	vgSeti(VG_MATRIX_MODE, VG_MATRIX_FILL_PAINT_TO_USER);
+	vgLoadMatrix(state_top->matrix_fill);
+	vgSeti(VG_MATRIX_MODE, VG_MATRIX_STROKE_PAINT_TO_USER);
+	vgLoadMatrix(state_top->matrix_stroke);
+	vgSeti(VG_MATRIX_MODE, VG_MATRIX_PATH_USER_TO_SURFACE);
 	
 	if(state_top->clip_clipping == VG_TRUE)
 	{
@@ -73,16 +85,12 @@ void canvas_restore(void)
 	canvas_fillStyle(state_top->fillStyle);
 	if(state_top->fillStyle_count != 0 && state_top->fillStyle_data != NULL)
 	{
-		// printf("Restoring color...\n");
-		
 		memcpy(canvas_fillStyle_get()->data, state_top->fillStyle_data, state_top->fillStyle_count * sizeof(VGfloat));
 		canvas_fillStyle_get()->count = state_top->fillStyle_count;
 	}
 	canvas_strokeStyle(state_top->strokeStyle);
 	if(state_top->strokeStyle_count != 0 && state_top->strokeStyle_data != NULL)
 	{
-		// printf("Restoring color...\n");
-		
 		memcpy(canvas_strokeStyle_get()->data, state_top->strokeStyle_data, state_top->strokeStyle_count * sizeof(VGfloat));
 		canvas_strokeStyle_get()->count = state_top->strokeStyle_count;
 	}
@@ -94,17 +102,15 @@ void canvas_restore(void)
 	canvas_miterLimit(state_top->miterLimit);
 	canvas_lineDashOffset(state_top->lineDash_offset);
 	
-	// TODO: shadowOffsetX missing
-	// TODO: shadowOffsetY missing
-	// TODO: shadowOffsetBlur missing
-	// TODO: shadowOffsetColor missing
+	canvas_globalCompositeOperation(state_top->globalCompositeOperation);
 	
-	// TODO: globalCompositeOperation missing
+	if(state_top->font_name != NULL)
+	{
+		canvas_font(state_top->font_name, state_top->font_size);
+	}
 	
-	// TODO: font missing
-	// TODO: textAlign missing
-	// TODO: textBaseline missing
-	// TODO: direction missing
+	canvas_textAlign(state_top->textAlign);
+	canvas_textBaseline(state_top->textBaseline);
 	
 	// TODO: imageSmoothingEnabled missing
 	

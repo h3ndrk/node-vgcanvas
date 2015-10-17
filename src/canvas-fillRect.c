@@ -38,7 +38,7 @@
 void canvas_fillRect(VGfloat x, VGfloat y, VGfloat width, VGfloat height)
 {
 	paint_activate(canvas_fillStyle_get(), VG_FILL_PATH);
-
+	
 	canvas_beginPath();
 	
 	vguRect(canvas_beginPath_get(), x, egl_get_height() - y - height, width, height);

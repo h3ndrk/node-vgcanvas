@@ -21,18 +21,19 @@
 // #include "include-freetype.h"
 
 #include "egl-util.h"
-#include "canvas-beginPath.h"
-#include "canvas-paint.h"
-#include "canvas-strokeStyle.h"
-#include "canvas-stroke.h"
+#include "canvas-rotate.h"
 
 /**
- * The stroke() method fills the current or given path with the current stroke
- * style using the non-zero or even-odd winding rule.
+ * The rotate() method adds a rotation to the transformation matrix. The angle
+ * argument represents a clockwise rotation angle and is expressed in radians.
+ * @param angle The angle to rotate clockwise in radians. You can use
+ * degree * M_PI / 180 if you want to calculate from a degree value.
  */
-void canvas_stroke(void)
+void canvas_rotate(VGfloat angle)
 {
-	paint_activate(canvas_strokeStyle_get(), VG_STROKE_PATH);
+	vgTranslate(0, egl_get_height());
 	
-	vgDrawPath(canvas_beginPath_get(), VG_STROKE_PATH);
+	vgRotate(angle / M_PI * 180);
+	
+	vgTranslate(0, -egl_get_height());
 }

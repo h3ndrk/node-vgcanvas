@@ -52,34 +52,10 @@
 #include "canvas-strokeStyle.h"
 #include "canvas-strokeRect.h"
 #include "canvas-strokeText.h"
-#include "image-util.h"
-#include "canvas-drawImage.h"
+#include "canvas-measureText.h"
 #include "canvas-kerning.h"
-
-void draw_grid(void)
-{
-	paint_t paint;
-	paint_createColor(&paint, 0.7f, 0.7f, 0.7f, 1);
-	canvas_strokeStyle(&paint);
-	
-	for(int x = 0; x < egl_get_width(); x += 100)
-	{
-		canvas_beginPath();
-		canvas_moveTo(x, 0);
-		canvas_lineTo(x, egl_get_height());
-		canvas_stroke();
-	}
-	
-	for(int y = 0; y < egl_get_height(); y += 100)
-	{
-		canvas_beginPath();
-		canvas_moveTo(0, y);
-		canvas_lineTo(egl_get_width(), y);
-		canvas_stroke();
-	}
-	
-	paint_cleanup(&paint);
-}
+#include "canvas-textAlign.h"
+#include "canvas-textBaseline.h"
 
 int main(void)
 {
@@ -88,27 +64,32 @@ int main(void)
 	canvas__init();
 	
 	font_util_new("./font.ttf", "Font");
-	image_t* image = image_load("./test.png");
 	
-	draw_grid();
+	canvas_clearRect(0, 0, egl_get_width(), egl_get_height());
+	canvas_lineWidth(10);
 	
-	canvas_drawImage(image, 100, 100, 200, 200, 0, 0, 200, 200);
-	canvas_drawImage(image, 400, 100, 200, 200, 0, 100, 200, 200);
-	canvas_drawImage(image, 100, 500, 200, 200, 100, 0, 400, 200);
+	paint_t black;
+	paint_t red;
+	paint_createColor(&black, 0, 0, 0, 1);
+	paint_createColor(&red, 1, 0, 0, 1);
 	
-	
-	canvas_font("Font", 100);
-	canvas_kerning(VG_FALSE);
-	canvas_fillText("Kerning OFF", 100, 100);
-	canvas_kerning(VG_TRUE);
-	canvas_fillText("Kerning ON", 100, 380);
+	canvas_fillStyle(&black);
+	canvas_font("Font", 200);
+	canvas_textBaseline("middle");
+	canvas_textAlign("right");
+	canvas_fillText("I", egl_get_width() / 2 - 200, egl_get_height() / 2);
+	canvas_textAlign("left");
+	canvas_fillText("node", egl_get_width() / 2 + 200, egl_get_height() / 2);
+	canvas_fillStyle(&red);
+	canvas_fillRect(egl_get_width() / 2 - 80, egl_get_height() / 2 - 80, 160, 160);
 	
 	egl_swap_buffers();
 	
 	printf("Press <Enter> to shutdown.\n");
 	fgets(s, 2, stdin);
 	
-	image_cleanup(image);
+	paint_cleanup(&black);
+	paint_cleanup(&red);
 	canvas__cleanup();
 	
 	return 0;

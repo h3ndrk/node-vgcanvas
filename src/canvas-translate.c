@@ -21,18 +21,15 @@
 // #include "include-freetype.h"
 
 #include "egl-util.h"
-#include "canvas-beginPath.h"
-#include "canvas-paint.h"
-#include "canvas-strokeStyle.h"
-#include "canvas-stroke.h"
+#include "canvas-translate.h"
 
 /**
- * The stroke() method fills the current or given path with the current stroke
- * style using the non-zero or even-odd winding rule.
+ * The translate() method adds a translation transformation by moving the canvas
+ * and its origin x horizontally and y vertically on the grid.
+ * @param x Distance to move in the horizontal direction.
+ * @param y Distance to move in the vertical direction.
  */
-void canvas_stroke(void)
+void canvas_translate(VGfloat x, VGfloat y)
 {
-	paint_activate(canvas_strokeStyle_get(), VG_STROKE_PATH);
-	
-	vgDrawPath(canvas_beginPath_get(), VG_STROKE_PATH);
+	vgTranslate(x, -y);
 }

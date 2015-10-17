@@ -112,7 +112,7 @@ void egl_init(void)
 	
 	vgLoadIdentity();
 	
-	printf("OpenVG %s initialized (%s %s).\n%i x %i\n", vgGetString(VG_VERSION), vgGetString(VG_VENDOR), vgGetString(VG_RENDERER), screen_width, screen_height);
+	printf("OpenVG %s initialized (%s %s), %i x %i\n", vgGetString(VG_VERSION), vgGetString(VG_VENDOR), vgGetString(VG_RENDERER), screen_width, screen_height);
 }
 
 void egl_cleanup(void)
@@ -157,12 +157,86 @@ void egl_swap_buffers(void)
 // 	return context;
 // }
 
-uint32_t egl_get_width(void)
+int32_t egl_get_width(void)
 {
-	return screen_width;
+	return (int32_t)screen_width;
 }
 
-uint32_t egl_get_height(void)
+int32_t egl_get_height(void)
 {
-	return screen_height;
+	return (int32_t)screen_height;
+}
+
+void egl_debug_print_matrices(void)
+{
+	VGfloat matrix[9];
+	unsigned int n = 0;
+	unsigned int m = 0;
+	
+	vgSeti(VG_MATRIX_MODE, VG_MATRIX_PATH_USER_TO_SURFACE);
+	vgGetMatrix(matrix);
+	printf("path: {\n");
+	for(m = 0; m < 3; m++)
+	{
+		printf("\t{ ");
+		for(n = 0; n < 3; n++)
+		{
+			printf("%f ", matrix[n * 3 + m]);
+		}
+		printf("}\n");
+	}
+	printf("}\n");
+	vgSeti(VG_MATRIX_MODE, VG_MATRIX_IMAGE_USER_TO_SURFACE);
+	vgGetMatrix(matrix);
+	printf("image: {\n");
+	for(m = 0; m < 3; m++)
+	{
+		printf("\t{ ");
+		for(n = 0; n < 3; n++)
+		{
+			printf("%f ", matrix[n * 3 + m]);
+		}
+		printf("}\n");
+	}
+	printf("}\n");
+	vgSeti(VG_MATRIX_MODE, VG_MATRIX_FILL_PAINT_TO_USER);
+	vgGetMatrix(matrix);
+	printf("fill: {\n");
+	for(m = 0; m < 3; m++)
+	{
+		printf("\t{ ");
+		for(n = 0; n < 3; n++)
+		{
+			printf("%f ", matrix[n * 3 + m]);
+		}
+		printf("}\n");
+	}
+	printf("}\n");
+	vgSeti(VG_MATRIX_MODE, VG_MATRIX_STROKE_PAINT_TO_USER);
+	vgGetMatrix(matrix);
+	printf("stroke: {\n");
+	for(m = 0; m < 3; m++)
+	{
+		printf("\t{ ");
+		for(n = 0; n < 3; n++)
+		{
+			printf("%f ", matrix[n * 3 + m]);
+		}
+		printf("}\n");
+	}
+	printf("}\n");
+	vgSeti(VG_MATRIX_MODE, VG_MATRIX_GLYPH_USER_TO_SURFACE);
+	vgGetMatrix(matrix);
+	printf("glyph: {\n");
+	for(m = 0; m < 3; m++)
+	{
+		printf("\t{ ");
+		for(n = 0; n < 3; n++)
+		{
+			printf("%f ", matrix[n * 3 + m]);
+		}
+		printf("}\n");
+	}
+	printf("}\n");
+	vgSeti(VG_MATRIX_MODE, VG_MATRIX_PATH_USER_TO_SURFACE);
 }

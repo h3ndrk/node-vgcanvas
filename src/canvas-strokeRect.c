@@ -38,7 +38,7 @@
 void canvas_strokeRect(VGfloat x, VGfloat y, VGfloat width, VGfloat height)
 {
 	paint_activate(canvas_strokeStyle_get(), VG_STROKE_PATH);
-
+	
 	canvas_beginPath();
 	
 	vguRect(canvas_beginPath_get(), x, egl_get_height() - y - height, width, height);
