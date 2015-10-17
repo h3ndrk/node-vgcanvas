@@ -47,4 +47,6 @@
 - [x] Use new paths for `[fill|stroke]Rect()`
 - [x] `closePath` for `strokeText()`
 - [ ] `requestAnimationFrame`
-- [ ] `imageSmoothingEnabled`
+- [ ] `imageSmoothingEnabled` (also in `save` and `restore`)
+- [ ] remove unused variables and struct-typedefs
+- [ ] reduce log output to a minimum (only errors)

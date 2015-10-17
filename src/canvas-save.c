@@ -21,6 +21,7 @@
 // #include "include-freetype.h"
 
 #include "log-util.h"
+#include "font-util.h"
 #include "canvas-clip.h"
 #include "canvas-setLineDash.h"
 #include "canvas-globalAlpha.h"
@@ -33,6 +34,10 @@
 #include "canvas-fillStyle.h"
 #include "canvas-strokeStyle.h"
 #include "canvas-save.h"
+#include "canvas-globalCompositeOperation.h"
+#include "canvas-font.h"
+#include "canvas-textAlign.h"
+#include "canvas-textBaseline.h"
 
 static canvas_save_stack_t *canvas_save_stack_top = NULL;
 
@@ -44,7 +49,7 @@ void canvas_save(void)
 {
 	canvas_save_stack_t *state = NULL;
 	
-	printf("Saving to stack...\n");
+	// printf("Saving to stack...\n");
 	
 	state = malloc(sizeof(canvas_save_stack_t));
 	
@@ -66,7 +71,15 @@ void canvas_save(void)
 	}
 	
 	// save properties to top state of stack
-	// TODO: transformation matrix missing
+	vgSeti(VG_MATRIX_MODE, VG_MATRIX_PATH_USER_TO_SURFACE);
+	vgGetMatrix(canvas_save_stack_top->matrix_path);
+	vgSeti(VG_MATRIX_MODE, VG_MATRIX_IMAGE_USER_TO_SURFACE);
+	vgGetMatrix(canvas_save_stack_top->matrix_image);
+	vgSeti(VG_MATRIX_MODE, VG_MATRIX_FILL_PAINT_TO_USER);
+	vgGetMatrix(canvas_save_stack_top->matrix_fill);
+	vgSeti(VG_MATRIX_MODE, VG_MATRIX_STROKE_PAINT_TO_USER);
+	vgGetMatrix(canvas_save_stack_top->matrix_stroke);
+	vgSeti(VG_MATRIX_MODE, VG_MATRIX_PATH_USER_TO_SURFACE);
 	
 	canvas_save_stack_top->clip_clipping = canvas_clip_get_clipping();
 	if(canvas_save_stack_top->clip_clipping == VG_TRUE)
@@ -155,17 +168,13 @@ void canvas_save(void)
 	canvas_save_stack_top->miterLimit = canvas_miterLimit_get();
 	canvas_save_stack_top->lineDash_offset = canvas_lineDashOffset_get();
 	
-	// TODO: shadowOffsetX missing
-	// TODO: shadowOffsetY missing
-	// TODO: shadowOffsetBlur missing
-	// TODO: shadowOffsetColor missing
+	canvas_save_stack_top->globalCompositeOperation = canvas_globalCompositeOperation_get();
 	
-	// TODO: globalCompositeOperation missing
+	canvas_save_stack_top->font_name = strdup(font_util_get_name(canvas_font_get_index()));
+	canvas_save_stack_top->font_size = canvas_font_get_size();
 	
-	// TODO: font missing
-	// TODO: textAlign missing
-	// TODO: textBaseline missing
-	// TODO: direction missing
+	canvas_save_stack_top->textAlign = canvas_textAlign_get();
+	canvas_save_stack_top->textBaseline = canvas_textBaseline_get();
 	
 	// TODO: imageSmoothingEnabled missing
 }
@@ -190,19 +199,29 @@ void canvas_save_cleanup_state(canvas_save_stack_t *state)
 	if(state->fillStyle_data != NULL)
 	{
 		free(state->fillStyle_data);
+		state->fillStyle_data = NULL;
 	}
 	
 	if(state->strokeStyle_data != NULL)
 	{
 		free(state->strokeStyle_data);
+		state->strokeStyle_data = NULL;
 	}
 	
 	if(state->lineDash_data != NULL)
 	{
 		free(state->lineDash_data);
+		state->lineDash_data = NULL;
+	}
+	
+	if(state->font_name != NULL)
+	{
+		free(state->font_name);
+		state->font_name = NULL;
 	}
 	
 	free(state);
+	state = NULL;
 }
 
 /**

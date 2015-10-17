@@ -31,5 +31,5 @@
  */
 void canvas_translate(VGfloat x, VGfloat y)
 {
-	vgTranslate(x, egl_get_height() - y);
+	vgTranslate(x, -y);
 }

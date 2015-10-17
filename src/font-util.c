@@ -54,6 +54,16 @@ int font_util_get(char *name)
 	return -1;
 }
 
+char *font_util_get_name(unsigned int fonts_index)
+{
+	if(fonts == NULL)
+	{
+		return "";
+	}
+	
+	return fonts[fonts_index].name;
+}
+
 FT_Face font_util_get_face(unsigned int fonts_index, char character)
 {
 	FT_UInt glyph_index = FT_Get_Char_Index(fonts[fonts_index].face, character);
