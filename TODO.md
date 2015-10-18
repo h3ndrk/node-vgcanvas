@@ -29,7 +29,7 @@
 - [x] remove anonymous structs
 - [ ] `miterLimit`: what values does effect what? OpenVG documentation does not inform well about that topic.
 - [x] set standard values at initialization
-- [ ] create font if it is firstly used
+- [x] create font if it is firstly used *No, defaults to "no font".*
 - [x] Replace `onecolor` with regular expressions and native code
 - [x] `textBaseline`, `textAlign`
 - [ ] general error handling: worst case scenario for user input
@@ -43,7 +43,7 @@
     - [x] gradients
     - [ ] patterns
 - [x] add dependencies for `#include`s
-- [ ] error handling for `[fill|stroke]Text()` when no font has been loaded
+- [x] error handling for `[fill|stroke]Text()` when no font has been loaded *Text is simply not rendered (silent, change?)*
 - [x] Use new paths for `[fill|stroke]Rect()`
 - [x] `closePath` for `strokeText()`
 - [ ] `requestAnimationFrame`
@@ -51,4 +51,5 @@
 - [ ] remove unused variables and struct-typedefs
 - [x] reduce log output to a minimum (only errors)
 - [ ] remove `egl_debug_print_matrices()` from `src/egl-util.c`
-- [ ] add `toDataURL` to wrapper
+- [ ] add `toDataURL` to wrapper (pointer must be freed)
+- [ ] add `toBlob` to wrapper (pointer must be freed)
