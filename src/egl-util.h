@@ -29,6 +29,5 @@ EGLint egl_error(void);
 void egl_swap_buffers(void);
 int32_t egl_get_width(void);
 int32_t egl_get_height(void);
-void egl_debug_print_matrices(void);
 
 #endif /* __GL_UTIL_H__ */

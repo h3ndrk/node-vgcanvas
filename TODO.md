@@ -19,7 +19,7 @@
     - [ ] not only the functions but also the code
 - [ ] remove Makefile, remove "`bin`" from "`.gitignore`", remove "`src/home-infoscreen.c`"
 - [x] "`openSubPath`" in "`src/canvas.c`" *Not needed*
-- [ ] https://developer.mozilla.org/en-US/docs/Web/API/Path2D/Path2D
+- [x] https://developer.mozilla.org/en-US/docs/Web/API/Path2D/Path2D *Unable to implement because paths are only stored in the VRAM. There are no plans to change that.*
 - [x] Remove "`src/color.*`"
 - [x] Adjust coordinates
 - [x] `eprintf` for errors
@@ -27,7 +27,7 @@
 - [ ] replace all `void`-return-types with `int`-return-types
 - [ ] eventually handle V8 Fatal Errors http://izs.me/v8-docs/classv8_1_1V8.html#ab386f81a6d58dcf481d00446e8d15c9e
 - [x] remove anonymous structs
-- [ ] `miterLimit`: what values does effect what? OpenVG documentation does not inform well about that topic.
+- [x] `miterLimit`: what values do effect what? OpenVG documentation does not inform well about that topic. *Ratio of the `lineWidth`*
 - [x] set standard values at initialization
 - [x] create font if it is firstly used *No, defaults to "no font".*
 - [x] Replace `onecolor` with regular expressions and native code
@@ -50,6 +50,6 @@
 - [ ] `imageSmoothingEnabled` (also in `save` and `restore`)
 - [ ] remove unused variables and struct-typedefs
 - [x] reduce log output to a minimum (only errors)
-- [ ] remove `egl_debug_print_matrices()` from `src/egl-util.c`
+- [x] remove `egl_debug_print_matrices()` from `src/egl-util.c`
 - [ ] add `toDataURL` to wrapper (pointer must be freed)
 - [ ] add `toBlob` to wrapper (pointer must be freed)
