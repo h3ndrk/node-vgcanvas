@@ -9,7 +9,7 @@
     - [x] hsla()
 - [x] Rename "`src/infoscreen.cc`" to "`src/vgcanvas.cc`"
 - [x] gradients
-- [ ] patterns
+- [ ] @Gebatzens: patterns
 - [x] shadows *Won't implement*
 - [x] images
 - [x] text
@@ -25,7 +25,7 @@
 - [x] `eprintf` for errors
 - [x] coordinates for closePath? *No*
 - [ ] replace all `void`-return-types with `int`-return-types
-- [ ] eventually handle V8 Fatal Errors http://izs.me/v8-docs/classv8_1_1V8.html#ab386f81a6d58dcf481d00446e8d15c9e
+- [ ] @Gebatzens: eventually handle V8 Fatal Errors http://izs.me/v8-docs/classv8_1_1V8.html#ab386f81a6d58dcf481d00446e8d15c9e
 - [x] remove anonymous structs
 - [x] `miterLimit`: what values do effect what? OpenVG documentation does not inform well about that topic. *Ratio of the `lineWidth`*
 - [x] set standard values at initialization
@@ -41,15 +41,15 @@
 - [ ] add properties for `fillText` and `strokeText`
     - [ ] `miterLimit`
     - [x] gradients
-    - [ ] patterns
+    - [ ] @Gebatzens: patterns
 - [x] add dependencies for `#include`s
 - [x] error handling for `[fill|stroke]Text()` when no font has been loaded *Text is simply not rendered (silent, change?)*
 - [x] Use new paths for `[fill|stroke]Rect()`
 - [x] `closePath` for `strokeText()`
-- [ ] `requestAnimationFrame`
-- [ ] `imageSmoothingEnabled` (also in `save` and `restore`)
-- [ ] remove unused variables and struct-typedefs
+- [ ] @Gebatzens: `requestAnimationFrame`
+- [ ] @Gebatzens: `imageSmoothingEnabled` (also in `save` and `restore`)
+- [x] remove unused variables and struct-typedefs
 - [x] reduce log output to a minimum (only errors)
 - [x] remove `egl_debug_print_matrices()` from `src/egl-util.c`
-- [ ] add `toDataURL` to wrapper (pointer must be freed)
-- [ ] add `toBlob` to wrapper (pointer must be freed)
+- [ ] @Gebatzens: add `toDataURL` to wrapper (pointer must be freed)
+- [ ] @Gebatzens: add `toBlob` to wrapper (pointer must be freed)
