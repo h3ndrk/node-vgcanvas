@@ -89,6 +89,7 @@ SRC += canvas-translate.c
 SRC += egl-util.c
 SRC += font-util.c
 SRC += image-util.c
+SRC += version.c
 
 OBJS = $(addprefix bin/obj/, $(SRC:%.c=%.o))
 

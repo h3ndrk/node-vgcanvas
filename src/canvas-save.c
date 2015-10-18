@@ -49,8 +49,6 @@ void canvas_save(void)
 {
 	canvas_save_stack_t *state = NULL;
 	
-	// printf("Saving to stack...\n");
-	
 	state = malloc(sizeof(canvas_save_stack_t));
 	
 	if(state == NULL)
@@ -125,8 +123,6 @@ void canvas_save(void)
 		}
 		else
 		{
-			// printf("Saving color...\n");
-			
 			memcpy(canvas_save_stack_top->fillStyle_data, canvas_save_stack_top->fillStyle->data, canvas_save_stack_top->fillStyle->count * sizeof(VGfloat));
 			canvas_save_stack_top->fillStyle_count = canvas_save_stack_top->fillStyle->count;
 		}
@@ -149,8 +145,6 @@ void canvas_save(void)
 		}
 		else
 		{
-			// printf("Saving color...\n");
-			
 			memcpy(canvas_save_stack_top->strokeStyle_data, canvas_save_stack_top->strokeStyle->data, canvas_save_stack_top->strokeStyle->count * sizeof(VGfloat));
 			canvas_save_stack_top->strokeStyle_count = canvas_save_stack_top->strokeStyle->count;
 		}
@@ -229,8 +223,6 @@ void canvas_save_cleanup_state(canvas_save_stack_t *state)
  */
 void canvas_save_cleanup(void)
 {
-	printf("Cleaning up stack...\n");
-	
 	if(canvas_save_stack_top != NULL)
 	{
 		canvas_save_cleanup_state(canvas_save_stack_top);

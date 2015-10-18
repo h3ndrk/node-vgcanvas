@@ -112,8 +112,6 @@ void canvas_strokeText(char *text, VGfloat x, VGfloat y)
 		}
 	}
 	
-	// printf("{\n\ttext: \"%s\",\n\tfont_index: %i,\n\tsize: %f,\n\tstart_x: %f,\n\tend_x: %f,\n\tstart_y: %f,\n\tend_y: %f,\n\tascender: %f,\n\tdescender: %f\n}\n", text, fonts_index, size, start_x * size, end_x * size, start_y * size, end_y * size, font_util_get_ascender(fonts_index) * size, font_util_get_descender(fonts_index) * size);
-	
 	switch(canvas_textAlign_get_internal())
 	{
 		case CANVAS_TEXT_ALIGN_LEFT:

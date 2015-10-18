@@ -16,10 +16,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <FreeImage.h>
-
 #include "include-core.h"
 #include "include-openvg.h"
+#include "include-freeimage.h"
 #include "image-util.h"
 #include "log-util.h"
 #include "egl-util.h"

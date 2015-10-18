@@ -49,8 +49,6 @@ void canvas_restore(void)
 	canvas_save_stack_t *state_top = canvas_save_get();
 	canvas_save_stack_t *state_beneath = NULL;
 	
-	// printf("Restoring from stack...\n");
-	
 	if(state_top == NULL)
 	{
 		eprintf("Failed to restore top state of stack. No states in stack.\n");

@@ -33,6 +33,7 @@ static unsigned int char_count = 0;
 static FT_Library font_library = NULL;
 static font_t *fonts = NULL;
 static int fonts_amount = 0;
+static char *font_version = NULL;
 
 int font_util_get(char *name)
 {
@@ -100,13 +101,22 @@ void font_util_init(void)
 	
 	FT_Library_Version(font_library, &major, &minor, &patch);
 	
-	printf("Freetype %i.%i.%i initialized.\n", major, minor, patch);
+	font_version = malloc(((major == 0 ? 1 : (int)(log10(major)+1)) + 1 + (minor == 0 ? 1 : (int)(log10(minor)+1)) + 1 + (patch == 0 ? 1 : (int)(log10(patch)+1))) * sizeof(char) + 1);
+	if(font_version == NULL)
+	{
+		return;
+	}
+	
+	sprintf(font_version, "%i.%i.%i", major, minor, patch);
+}
+
+char *font_util_version(void)
+{
+	return font_version;
 }
 
 void font_util_cleanup(void)
 {
-	printf("Cleaning up fonts...\n");
-	
 	if(fonts != NULL)
 	{
 		while(fonts != NULL)
@@ -116,12 +126,12 @@ void font_util_cleanup(void)
 	}
 	
 	FT_Done_FreeType(font_library);
+	
+	free(font_version);
 }
 
 static int font_util_outline_decode_move_to(const FT_Vector *to, void *user)
 {
-	// printf("moveTo(%f, %f)\n", FONT_UTIL_TO_FLOAT(to->x), FONT_UTIL_TO_FLOAT(to->y));
-	
 	VGubyte segment[1] = { VG_MOVE_TO_ABS };
 	VGfloat data[2];
 	
@@ -137,8 +147,6 @@ static int font_util_outline_decode_move_to(const FT_Vector *to, void *user)
 
 static int font_util_outline_decode_line_to(const FT_Vector *to, void *user)
 {
-	// printf("lineTo(%f, %f)\n", FONT_UTIL_TO_FLOAT(to->x), FONT_UTIL_TO_FLOAT(to->y));
-	
 	VGubyte segment[1] = { VG_LINE_TO_ABS };
 	VGfloat data[2];
 	
@@ -154,8 +162,6 @@ static int font_util_outline_decode_line_to(const FT_Vector *to, void *user)
 
 static int font_util_outline_decode_conic_to(const FT_Vector *control, const FT_Vector *to, void *user)
 {
-	// printf("conicTo(%f, %f, %f, %f)\n", FONT_UTIL_TO_FLOAT(control->x), FONT_UTIL_TO_FLOAT(control->y), FONT_UTIL_TO_FLOAT(to->x), FONT_UTIL_TO_FLOAT(to->y));
-	
 	VGubyte segment[1] = { VG_QUAD_TO_ABS };
 	VGfloat data[4];
 	
@@ -173,8 +179,6 @@ static int font_util_outline_decode_conic_to(const FT_Vector *control, const FT_
 
 static int font_util_outline_decode_cubic_to(const FT_Vector *control1, const FT_Vector *control2, const FT_Vector *to, void *user)
 {
-	// printf("cubicTo(%f, %f, %f, %f, %f, %f)\n", FONT_UTIL_TO_FLOAT(control1->x), FONT_UTIL_TO_FLOAT(control1->y), FONT_UTIL_TO_FLOAT(control2->x), FONT_UTIL_TO_FLOAT(control2->y), FONT_UTIL_TO_FLOAT(to->x), FONT_UTIL_TO_FLOAT(to->y));
-	
 	VGubyte segment[1] = { VG_CUBIC_TO_ABS };
 	VGfloat data[6];
 	
@@ -194,8 +198,6 @@ static int font_util_outline_decode_cubic_to(const FT_Vector *control1, const FT
 
 static void font_util_outline_decode_close_path(void *user)
 {
-	// printf("closePath()\n");
-	
 	VGubyte segment[1] = { VG_CLOSE_PATH };
 	VGfloat data[2];
 	
@@ -221,8 +223,6 @@ int font_util_new(char *path, char *name)
 	
 	outline_functions.shift = 0;
 	outline_functions.delta = 0;
-	
-	printf("Adding font: %s, name: %s ...\n", path, name);
 	
 	fonts = realloc(fonts, (++fonts_amount) * sizeof(font_t));
 	
@@ -346,18 +346,12 @@ int font_util_new(char *path, char *name)
 		char_count++;
 	}
 	
-	printf("%i characters, %lli coordinates", char_count, point_count);
-	
 	if(FT_HAS_KERNING(fonts[fonts_amount - 1].face))
 	{
-		printf(", kerning available\n");
-		
 		fonts[fonts_amount - 1].kerning_available = VG_TRUE;
 	}
 	else
 	{
-		printf("\n");
-		
 		fonts[fonts_amount - 1].kerning_available = VG_FALSE;
 	}
 	
@@ -373,8 +367,6 @@ void font_util_remove(char *name)
 	{
 		return;
 	}
-	
-	printf("Removing font: %s\n", name);
 	
 	fonts_index = font_util_get(name);
 	

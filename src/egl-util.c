@@ -113,14 +113,10 @@ void egl_init(void)
 	eglSurfaceAttrib(display, surface, EGL_SWAP_BEHAVIOR, EGL_BUFFER_PRESERVED);
 	
 	vgLoadIdentity();
-	
-	printf("OpenVG %s initialized (%s %s), %i x %i\n", vgGetString(VG_VERSION), vgGetString(VG_VENDOR), vgGetString(VG_RENDERER), screen_width, screen_height);
 }
 
 void egl_cleanup(void)
 {
-	printf("Cleaning up EGL...\n");
-	
 	glClear(GL_COLOR_BUFFER_BIT);
 	eglSwapBuffers(display, surface);
 	eglMakeCurrent(display, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
@@ -143,21 +139,6 @@ void egl_swap_buffers(void)
 	result = eglSwapBuffers(display, surface);
 	assert(EGL_FALSE != result);
 }
-
-// EGLDisplay egl_get_display(void)
-// {
-// 	return display;
-// }
-
-// EGLSurface egl_get_surface(void)
-// {
-// 	return surface;
-// }
-
-// EGLContext egl_get_context(void)
-// {
-// 	return context;
-// }
 
 int32_t egl_get_width(void)
 {

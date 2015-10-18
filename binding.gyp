@@ -50,7 +50,8 @@
         "src/canvas.c",
         "src/egl-util.c",
         "src/font-util.c",
-        "src/image-util.c"
+        "src/image-util.c",
+        "src/version.c"
       ],
       "include_dirs": [
         "<!(node -e \"require('nan')\")",

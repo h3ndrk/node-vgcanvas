@@ -38,11 +38,13 @@
 #include "canvas-strokeStyle.h"
 #include "canvas-kerning.h"
 #include "font-util.h"
+#include "version.h"
 
 void canvas__init(void)
 {
 	font_util_init();
 	egl_init();
+	version_init();
 	
 	paint_t *fill = malloc(sizeof(paint_t));
 	paint_t *stroke = malloc(sizeof(paint_t));

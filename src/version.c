@@ -1,7 +1,7 @@
 /**
  * Copyright (C) 2015 NIPE-SYSTEMS
  * Copyright (C) 2015 Hauke Oldsen
- *
+ * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -16,19 +16,24 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __GL_UTIL_H__
-#define __GL_UTIL_H__
+#include "include-core.h"
+#include "include-openvg.h"
+#include "include-freetype.h"
+#include "include-freeimage.h"
 
-#include <stdint.h>
-#include <EGL/egl.h>
-#include <VG/openvg.h>
+#include "font-util.h"
+#include "version.h"
 
-void egl_init(void);
-void egl_cleanup(void);
-EGLint egl_error(void);
-void egl_swap_buffers(void);
-int32_t egl_get_width(void);
-int32_t egl_get_height(void);
-void egl_debug_print_matrices(void);
+static char *versions[3];
 
-#endif /* __GL_UTIL_H__ */
+void version_init(void)
+{
+	versions[0] = (char *)vgGetString(VG_VERSION);
+	versions[1] = font_util_version();
+	versions[2] = (char *)FreeImage_GetVersion();
+}
+
+char **version_get(void)
+{
+	return versions;
+}

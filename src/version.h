@@ -16,19 +16,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __GL_UTIL_H__
-#define __GL_UTIL_H__
+#ifndef __VERSION_H__
+#define __VERSION_H__
 
-#include <stdint.h>
-#include <EGL/egl.h>
-#include <VG/openvg.h>
+void version_init(void);
+char **version_get(void);
 
-void egl_init(void);
-void egl_cleanup(void);
-EGLint egl_error(void);
-void egl_swap_buffers(void);
-int32_t egl_get_width(void);
-int32_t egl_get_height(void);
-void egl_debug_print_matrices(void);
-
-#endif /* __GL_UTIL_H__ */
+#endif /* __VERSION_H__ */
