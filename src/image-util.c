@@ -241,11 +241,10 @@ char *image_to_blob(char *type, float encoder_options, size_t *data_amount)
 	RGBQUAD color = { 0, 0, 0, 0 };
 	FIMEMORY *memory_stream = NULL;
 	FIBITMAP *image = FreeImage_Allocate(egl_get_width(), egl_get_height(), 32, 0xFF000000, 0x00FF0000, 0x0000FF00);
-	unsigned char *data = malloc(egl_get_width() * egl_get_height() * 4);
-	unsigned char *data_copy = NULL;
+	char *data = malloc(egl_get_width() * egl_get_height() * 4);
+	char *data_copy = NULL;
 	FREE_IMAGE_FORMAT save_format = FIF_PNG;
 	int save_flags = 0;
-	char *save_prefix = "";
 	
 	if(data == NULL || !image)
 	{
@@ -277,7 +276,6 @@ char *image_to_blob(char *type, float encoder_options, size_t *data_amount)
 	{
 		save_format = FIF_PNG;
 		save_flags = PNG_DEFAULT;
-		save_prefix = "data:image/png;base64,";
 	}
 	else if(!strcmp(type, "image/jpeg"))
 	{
@@ -290,13 +288,11 @@ char *image_to_blob(char *type, float encoder_options, size_t *data_amount)
 		{
 			save_flags = JPEG_DEFAULT;
 		}
-		save_prefix = "data:image/jpeg;base64,";
 	}
 	else
 	{
 		save_format = FIF_PNG;
 		save_flags = PNG_DEFAULT;
-		save_prefix = "data:image/png;base64,";
 	}
 	
 	memory_stream = FreeImage_OpenMemory(NULL, 0);
