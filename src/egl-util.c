@@ -19,8 +19,10 @@
 #include "include-core.h"
 #include "include-openvg.h"
 // #include "include-freetype.h"
+#include <FreeImage.h>
 
 #include "egl-util.h"
+#include "log-util.h"
 
 static EGLDisplay display = NULL;
 static EGLContext context = NULL;

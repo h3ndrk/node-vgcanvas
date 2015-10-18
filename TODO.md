@@ -50,3 +50,5 @@
 - [ ] `imageSmoothingEnabled` (also in `save` and `restore`)
 - [ ] remove unused variables and struct-typedefs
 - [ ] reduce log output to a minimum (only errors)
+- [ ] remove `egl_debug_print_matrices()` from `src/egl-util.c`
+- [ ] add `toDataURL` to wrapper
