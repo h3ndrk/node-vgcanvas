@@ -19,13 +19,6 @@
 #ifndef __CANVAS_LINEJOIN_H__
 #define __CANVAS_LINEJOIN_H__
 
-typedef enum canvas_line_join_t
-{
-	CANVAS_LINE_JOIN_MITER = VG_JOIN_MITER,
-	CANVAS_LINE_JOIN_ROUND = VG_JOIN_ROUND,
-	CANVAS_LINE_JOIN_BEVEL = VG_JOIN_BEVEL
-} canvas_line_join_t;
-
 void canvas_lineJoin(char *line_join);
 char *canvas_lineJoin_get(void);
 
