@@ -19,22 +19,26 @@
 #include "include-core.h"
 #include "include-openvg.h"
 
-static VGboolean smoothing_value = VG_TRUE;
+#include "canvas-imageSmoothingEnabled.h"
+
+static VGboolean canvas_imageSmoothingEnabled = VG_TRUE;
 
 /**
- * The imageSmoothing property can be set to change if images are smoothed (true, default) or not (false).
- * @param smoothing A Boolean indicating whether to smooth images or not.
+ * The imageSmoothingEnabled property can be set to change if images are
+ * smoothed (true, default) or not (false).
+ * @param image_smoothing_enabled A Boolean indicating whether to smooth images
+ *                                or not.
  */
-void canvas_imageSmoothing(VGboolean smoothing)
+void canvas_imageSmoothingEnabled(VGboolean image_smoothing_enabled)
 {
-	vgSeti(VG_IMAGE_QUALITY, smoothing ? VG_IMAGE_QUALITY_BETTER : VG_IMAGE_QUALITY_NONANTIALIASED);
+	vgSeti(VG_IMAGE_QUALITY, image_smoothing_enabled ? VG_IMAGE_QUALITY_BETTER : VG_IMAGE_QUALITY_NONANTIALIASED);
 }
 
 /**
  * Returns the current value (true by default).
  * @return A boolean value specifying .
  */
-VGboolean canvas_imageSmoothing_get(void)
+VGboolean canvas_imageSmoothingEnabled_get(void)
 {
-	return smoothing_value;
+	return canvas_imageSmoothingEnabled;
 }

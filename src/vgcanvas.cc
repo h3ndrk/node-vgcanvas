@@ -55,7 +55,7 @@ extern "C" {
 	#include "canvas-fillText.h"
 	#include "canvas-strokeText.h"
 	#include "canvas-drawImage.h"
-	#include "canvas-imageSmoothing.h"
+	#include "canvas-imageSmoothingEnabled.h"
 	#include "canvas-globalCompositeOperation.h"
 	#include "canvas-textAlign.h"
 	#include "canvas-textBaseline.h"
@@ -465,11 +465,11 @@ namespace vgcanvas {
 			return;
 		}
 		
-		canvas_imageSmoothing(args[0]->BooleanValue() ? VG_TRUE : VG_FALSE);
+		canvas_imageSmoothingEnabled(args[0]->BooleanValue() ? VG_TRUE : VG_FALSE);
 	}
 	
 	void GetImageSmoothing(const Nan::FunctionCallbackInfo<Value>& args) {
-		args.GetReturnValue().Set(Nan::New(canvas_imageSmoothing_get() == VG_TRUE));
+		args.GetReturnValue().Set(Nan::New(canvas_imageSmoothingEnabled_get() == VG_TRUE));
 	}
 
 
