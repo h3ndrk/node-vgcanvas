@@ -476,6 +476,19 @@ namespace vgcanvas {
 	void GetGlobalCompositeOperation(const Nan::FunctionCallbackInfo<Value>& args) {
 		args.GetReturnValue().Set(Nan::New(canvas_globalCompositeOperation_get()).ToLocalChecked());
 	}
+	
+	void GetMiterLimit(const Nan::FunctionCallbackInfo<Value>& args) {
+		args.GetReturnValue().Set(Nan::New(canvas_miterLimit_get()));
+	}
+
+	void SetMiterLimit(const Nan::FunctionCallbackInfo<Value>& args) {
+		if(!checkArgs(args, 1)) {
+			Nan::ThrowTypeError("wrong arg");
+			return;
+		}
+
+		canvas_miterLimit(args[0]->NumberValue());
+	}
 
 	void ModuleInit(Local<Object> exports) {
 		exports->Set(Nan::New("init").ToLocalChecked(), Nan::New<FunctionTemplate>(Init)->GetFunction());
@@ -535,6 +548,9 @@ namespace vgcanvas {
 		
 		exports->Set(Nan::New("setGlobalCompositeOperation").ToLocalChecked(), Nan::New<FunctionTemplate>(SetGlobalCompositeOperation)->GetFunction());
 		exports->Set(Nan::New("getGlobalCompositeOperation").ToLocalChecked(), Nan::New<FunctionTemplate>(GetGlobalCompositeOperation)->GetFunction());
+		
+		exports->Set(Nan::New("setMiterLimit").ToLocalChecked(), Nan::New<FunctionTemplate>(SetMiterLimit)->GetFunction());
+		exports->Set(Nan::New("getMiterLimit").ToLocalChecked(), Nan::New<FunctionTemplate>(GetMiterLimit)->GetFunction());
 		
 		Gradient::Init(exports);
 		Image::Init(exports);
