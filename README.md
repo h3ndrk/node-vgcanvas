@@ -46,7 +46,7 @@ Canvas 2D Method | C implementation | C++ wrapper implementation | Node.js imple
 `VGContext.ellipse()` | pending | pending | pending 
 `VGContext.fill()` | **implemented** | **implemented** | **implemented**
 `VGContext.fillRect()` | **implemented** | **implemented** | **implemented**
-`VGContext.fillText()` | **implemented** | pending | pending 
+`VGContext.fillText()` | **implemented** | **implemented** | **implemented** 
 `VGContext.getImageData()` | pending | pending | pending 
 `VGContext.getLineDash()` | **implemented** | **implemented** | **implemented**
 `VGContext.isPointInPath()` | *won't implement* | *won't implement* | *won't implement* 
@@ -58,19 +58,19 @@ Canvas 2D Method | C implementation | C++ wrapper implementation | Node.js imple
 `VGContext.quadraticCurveTo()` | **implemented** | **implemented** | **implemented**
 `VGContext.rect()` | **implemented** | **implemented** | **implemented**
 `VGContext.removeHitRegion()` | *won't implement* | *won't implement* | *won't implement* 
-`VGContext.resetTransform()` | **implemented** | pending | pending 
+`VGContext.resetTransform()` | **implemented** | **implemented** | **implemented** 
 `VGContext.restore()` | **implemented** | **implemented** | **implemented**
-`VGContext.rotate()` | **implemented** | pending | pending 
+`VGContext.rotate()` | **implemented** | **implemented** | **implemented** 
 `VGContext.save()` | **implemented** | **implemented** | **implemented**
-`VGContext.scale()` | **implemented** | pending | pending 
+`VGContext.scale()` | **implemented** | **implemented** | **implemented** 
 `VGContext.scrollPathIntoView()` | *won't implement* | *won't implement* | *won't implement* 
 `VGContext.setLineDash()` | **implemented** | **implemented** | **implemented**
-`VGContext.setTransform()` | **implemented** | pending | pending 
+`VGContext.setTransform()` | **implemented** | **implemented** | **implemented** 
 `VGContext.stroke()` | **implemented** | **implemented** | **implemented**
 `VGContext.strokeRect()` | **implemented** | **implemented** | **implemented**
 `VGContext.strokeText()` | **implemented** | **implemented** | **implemented** 
-`VGContext.transform()` | **implemented** | pending | pending 
-`VGContext.translate()` | **implemented** | pending | pending 
+`VGContext.transform()` | **implemented** | **implemented** | **implemented** 
+`VGContext.translate()` | **implemented** | **implemented** | **implemented** 
 
 ## Need help?
 

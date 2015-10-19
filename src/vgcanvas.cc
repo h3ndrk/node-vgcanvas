@@ -59,6 +59,12 @@ extern "C" {
 	#include "canvas-globalCompositeOperation.h"
 	#include "canvas-textAlign.h"
 	#include "canvas-textBaseline.h"
+	#include "canvas-resetTransform.h"
+	#include "canvas-rotate.h"
+	#include "canvas-scale.h"
+	#include "canvas-transform.h"
+	#include "canvas-setTransform.h"
+	#include "canvas-translate.h"
 }
 
 #include <nan.h>
@@ -524,6 +530,53 @@ namespace vgcanvas {
 	void GetTextBaseline(const Nan::FunctionCallbackInfo<Value>& args) {
 		args.GetReturnValue().Set(Nan::New(canvas_textBaseline_get()).ToLocalChecked());
 	}
+	
+	
+	void ResetTransform(const Nan::FunctionCallbackInfo<Value>& args) {
+		canvas_resetTransform();
+	}
+	
+	void Rotate(const Nan::FunctionCallbackInfo<Value>& args) {
+		if(!checkArgs(args, 1)) {
+			Nan::ThrowTypeError("wrong arg");
+		}
+		
+		canvas_rotate(args[0]->NumberValue());
+	}
+	
+	void Scale(const Nan::FunctionCallbackInfo<Value>& args) {
+		if(!checkArgs(args, 2)) {
+			Nan::ThrowTypeError("wrong arg");
+		}
+		
+		canvas_scale(args[0]->NumberValue(), args[1]->NumberValue());
+	}
+	
+	void Translate(const Nan::FunctionCallbackInfo<Value>& args) {
+		if(!checkArgs(args, 2)) {
+			Nan::ThrowTypeError("wrong arg");
+		}
+		
+		canvas_translate(args[0]->NumberValue(), args[1]->NumberValue());
+	}
+	
+	void Transform(const Nan::FunctionCallbackInfo<Value>& args) {
+		if(!checkArgs(args, 6)) {
+			Nan::ThrowTypeError("wrong arg");
+		}
+		
+		canvas_transform(args[0]->NumberValue(), args[1]->NumberValue(), args[2]->NumberValue(), 
+			args[3]->NumberValue(), args[4]->NumberValue(), args[5]->NumberValue());
+	}
+	
+	void SetTransform(const Nan::FunctionCallbackInfo<Value>& args) {
+		if(!checkArgs(args, 6)) {
+			Nan::ThrowTypeError("wrong arg");
+		}
+		
+		canvas_setTransform(args[0]->NumberValue(), args[1]->NumberValue(), args[2]->NumberValue(), 
+			args[3]->NumberValue(), args[4]->NumberValue(), args[5]->NumberValue());
+	}
 
 	void ModuleInit(Local<Object> exports) {
 		exports->Set(Nan::New("init").ToLocalChecked(), Nan::New<FunctionTemplate>(Init)->GetFunction());
@@ -591,6 +644,13 @@ namespace vgcanvas {
 		exports->Set(Nan::New("getTextAlign").ToLocalChecked(), Nan::New<FunctionTemplate>(GetTextAlign)->GetFunction());
 		exports->Set(Nan::New("setTextBaseline").ToLocalChecked(), Nan::New<FunctionTemplate>(SetTextBaseline)->GetFunction());
 		exports->Set(Nan::New("getTextBaseline").ToLocalChecked(), Nan::New<FunctionTemplate>(GetTextBaseline)->GetFunction());
+		
+		exports->Set(Nan::New("resetTransform").ToLocalChecked(), Nan::New<FunctionTemplate>(ResetTransform)->GetFunction());
+		exports->Set(Nan::New("scale").ToLocalChecked(), Nan::New<FunctionTemplate>(Scale)->GetFunction());
+		exports->Set(Nan::New("rotate").ToLocalChecked(), Nan::New<FunctionTemplate>(Rotate)->GetFunction());
+		exports->Set(Nan::New("translate").ToLocalChecked(), Nan::New<FunctionTemplate>(Translate)->GetFunction());
+		exports->Set(Nan::New("transform").ToLocalChecked(), Nan::New<FunctionTemplate>(Transform)->GetFunction());
+		exports->Set(Nan::New("setTransform").ToLocalChecked(), Nan::New<FunctionTemplate>(SetTransform)->GetFunction());
 		
 		Gradient::Init(exports);
 		Image::Init(exports);
