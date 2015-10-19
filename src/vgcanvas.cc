@@ -57,6 +57,7 @@ extern "C" {
 	#include "canvas-drawImage.h"
 	#include "canvas-imageSmoothing.h"
 	#include "canvas-globalCompositeOperation.h"
+	#include "canvas-textAlign.h"
 }
 
 #include <nan.h>
@@ -450,6 +451,7 @@ namespace vgcanvas {
 		
 	}
 	
+	
 	void SetImageSmoothing(const Nan::FunctionCallbackInfo<Value>& args) {
 		if(args.Length() != 1 || !args[0]->IsBoolean()) {
 			Nan::ThrowTypeError("wrong arg");
@@ -462,6 +464,7 @@ namespace vgcanvas {
 	void GetImageSmoothing(const Nan::FunctionCallbackInfo<Value>& args) {
 		args.GetReturnValue().Set(Nan::New(canvas_imageSmoothing_get() == VG_TRUE));
 	}
+
 
 	void SetGlobalCompositeOperation(const Nan::FunctionCallbackInfo<Value>& args) {
 		if(args.Length() != 1 || !args[0]->IsString()) {
@@ -477,6 +480,7 @@ namespace vgcanvas {
 		args.GetReturnValue().Set(Nan::New(canvas_globalCompositeOperation_get()).ToLocalChecked());
 	}
 	
+	
 	void GetMiterLimit(const Nan::FunctionCallbackInfo<Value>& args) {
 		args.GetReturnValue().Set(Nan::New(canvas_miterLimit_get()));
 	}
@@ -488,6 +492,21 @@ namespace vgcanvas {
 		}
 
 		canvas_miterLimit(args[0]->NumberValue());
+	}
+	
+	
+	void SetTextAlign(const Nan::FunctionCallbackInfo<Value>& args) {
+		if(args.Length() != 1 || !args[0]->IsString()) {
+			Nan::ThrowTypeError("wrong arg");
+			return;
+		}
+
+		canvas_textAlign(*Nan::Utf8String(args[0]));
+
+	}
+
+	void GetTextAlign(const Nan::FunctionCallbackInfo<Value>& args) {
+		args.GetReturnValue().Set(Nan::New(canvas_textAlign_get()).ToLocalChecked());
 	}
 
 	void ModuleInit(Local<Object> exports) {
@@ -551,6 +570,9 @@ namespace vgcanvas {
 		
 		exports->Set(Nan::New("setMiterLimit").ToLocalChecked(), Nan::New<FunctionTemplate>(SetMiterLimit)->GetFunction());
 		exports->Set(Nan::New("getMiterLimit").ToLocalChecked(), Nan::New<FunctionTemplate>(GetMiterLimit)->GetFunction());
+		
+		exports->Set(Nan::New("setTextAlign").ToLocalChecked(), Nan::New<FunctionTemplate>(SetTextAlign)->GetFunction());
+		exports->Set(Nan::New("getTextAlign").ToLocalChecked(), Nan::New<FunctionTemplate>(GetTextAlign)->GetFunction());
 		
 		Gradient::Init(exports);
 		Image::Init(exports);
