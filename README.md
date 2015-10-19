@@ -25,8 +25,8 @@ Canvas 2D Method | C implementation | C++ wrapper implementation | Node.js imple
 `VGContext.shadowOffsetX` | *won't implement* | *won't implement* | *won't implement* 
 `VGContext.shadowOffsetY` | *won't implement* | *won't implement* | *won't implement* 
 `VGContext.strokeStyle` | **implemented** | **implemented** | **implemented**
-`VGContext.textAlign` | **implemented** | pending | pending 
-`VGContext.textBaseline` | **implemented** | pending | pending 
+`VGContext.textAlign` | **implemented** | **implemented** | **implemented** 
+`VGContext.textBaseline` | **implemented** | **implemented** | **implemented** 
 `VGContext.addHitRegion()` | *won't implement* | *won't implement* | *won't implement* 
 `VGContext.arc()` | **implemented** | **implemented** | **implemented**
 `VGContext.arcTo()` | pending | pending | pending 
@@ -68,7 +68,7 @@ Canvas 2D Method | C implementation | C++ wrapper implementation | Node.js imple
 `VGContext.setTransform()` | **implemented** | pending | pending 
 `VGContext.stroke()` | **implemented** | **implemented** | **implemented**
 `VGContext.strokeRect()` | **implemented** | **implemented** | **implemented**
-`VGContext.strokeText()` | **implemented** | pending | pending 
+`VGContext.strokeText()` | **implemented** | **implemented** | **implemented** 
 `VGContext.transform()` | **implemented** | pending | pending 
 `VGContext.translate()` | **implemented** | pending | pending 
 

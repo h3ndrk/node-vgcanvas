@@ -58,6 +58,7 @@ extern "C" {
 	#include "canvas-imageSmoothing.h"
 	#include "canvas-globalCompositeOperation.h"
 	#include "canvas-textAlign.h"
+	#include "canvas-textBaseline.h"
 }
 
 #include <nan.h>
@@ -508,6 +509,21 @@ namespace vgcanvas {
 	void GetTextAlign(const Nan::FunctionCallbackInfo<Value>& args) {
 		args.GetReturnValue().Set(Nan::New(canvas_textAlign_get()).ToLocalChecked());
 	}
+	
+	
+	void SetTextBaseline(const Nan::FunctionCallbackInfo<Value>& args) {
+		if(args.Length() != 1 || !args[0]->IsString()) {
+			Nan::ThrowTypeError("wrong arg");
+			return;
+		}
+
+		canvas_textBaseline(*Nan::Utf8String(args[0]));
+
+	}
+
+	void GetTextBaseline(const Nan::FunctionCallbackInfo<Value>& args) {
+		args.GetReturnValue().Set(Nan::New(canvas_textBaseline_get()).ToLocalChecked());
+	}
 
 	void ModuleInit(Local<Object> exports) {
 		exports->Set(Nan::New("init").ToLocalChecked(), Nan::New<FunctionTemplate>(Init)->GetFunction());
@@ -573,6 +589,8 @@ namespace vgcanvas {
 		
 		exports->Set(Nan::New("setTextAlign").ToLocalChecked(), Nan::New<FunctionTemplate>(SetTextAlign)->GetFunction());
 		exports->Set(Nan::New("getTextAlign").ToLocalChecked(), Nan::New<FunctionTemplate>(GetTextAlign)->GetFunction());
+		exports->Set(Nan::New("setTextBaseline").ToLocalChecked(), Nan::New<FunctionTemplate>(SetTextBaseline)->GetFunction());
+		exports->Set(Nan::New("getTextBaseline").ToLocalChecked(), Nan::New<FunctionTemplate>(GetTextBaseline)->GetFunction());
 		
 		Gradient::Init(exports);
 		Image::Init(exports);
