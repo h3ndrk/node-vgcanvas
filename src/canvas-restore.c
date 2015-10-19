@@ -38,7 +38,7 @@
 #include "canvas-font.h"
 #include "canvas-textAlign.h"
 #include "canvas-textBaseline.h"
-#include "canvas-imageSmoothing.h"
+#include "canvas-imageSmoothingEnabled.h"
 
 /**
  * The restore() method restores the most recently saved canvas state by popping
@@ -111,7 +111,7 @@ void canvas_restore(void)
 	canvas_textAlign(state_top->textAlign);
 	canvas_textBaseline(state_top->textBaseline);
 	
-	canvas_imageSmoothing(state_top->imageSmoothing);
+	canvas_imageSmoothingEnabled(state_top->imageSmoothingEnabled);
 	
 	canvas_save_cleanup_state(state_top);
 }

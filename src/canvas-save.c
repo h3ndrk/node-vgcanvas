@@ -38,7 +38,7 @@
 #include "canvas-font.h"
 #include "canvas-textAlign.h"
 #include "canvas-textBaseline.h"
-#include "canvas-imageSmoothing.h"
+#include "canvas-imageSmoothingEnabled.h"
 
 static canvas_save_stack_t *canvas_save_stack_top = NULL;
 
@@ -171,7 +171,7 @@ void canvas_save(void)
 	canvas_save_stack_top->textAlign = canvas_textAlign_get();
 	canvas_save_stack_top->textBaseline = canvas_textBaseline_get();
 	
-	canvas_save_stack_top->imageSmoothing = canvas_imageSmoothing_get();
+	canvas_save_stack_top->imageSmoothingEnabled = canvas_imageSmoothingEnabled_get();
 }
 
 /**

@@ -21,7 +21,7 @@
 
 #include "canvas-imageSmoothingEnabled.h"
 
-static VGboolean canvas_imageSmoothingEnabled = VG_TRUE;
+static VGboolean canvas_imageSmoothingEnabled_value = VG_TRUE;
 
 /**
  * The imageSmoothingEnabled property can be set to change if images are
@@ -40,5 +40,5 @@ void canvas_imageSmoothingEnabled(VGboolean image_smoothing_enabled)
  */
 VGboolean canvas_imageSmoothingEnabled_get(void)
 {
-	return canvas_imageSmoothingEnabled;
+	return canvas_imageSmoothingEnabled_value;
 }

@@ -58,7 +58,7 @@
 #include "canvas-textAlign.h"
 #include "canvas-textBaseline.h"
 #include "canvas-drawImage.h"
-#include "canvas-imageSmoothing.h"
+#include "canvas-imageSmoothingEnabled.h"
 
 int main(void)
 {
@@ -87,9 +87,9 @@ int main(void)
 	canvas_fillStyle(&red);
 	canvas_fillRect(egl_get_width() / 2 - 80, egl_get_height() / 2 - 80, 160, 160);*/
 
-	canvas_imageSmoothing(VG_TRUE);
+	canvas_imageSmoothingEnabled(VG_TRUE);
 	canvas_drawImage(img, 100, 100, 200, 200, 0, 0, img->width, img->height);
-	canvas_imageSmoothing(VG_FALSE);
+	canvas_imageSmoothingEnabled(VG_FALSE);
 	canvas_drawImage(img, 400, 100, 200, 200, 0, 0, img->width, img->height);
 	
 	canvas_fillStyle(&red);
