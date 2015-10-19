@@ -47,6 +47,7 @@
         "src/canvas-textBaseline.c",
         "src/canvas-transform.c",
         "src/canvas-translate.c",
+        "src/canvas-imageSmoothing.c",
         "src/canvas.c",
         "src/egl-util.c",
         "src/font-util.c",

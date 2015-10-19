@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2015 NIPE-SYSTEMS
  * Copyright (C) 2015 Hauke Oldsen
  * 
@@ -37,6 +37,7 @@
 #include "canvas-fillStyle.h"
 #include "canvas-strokeStyle.h"
 #include "canvas-kerning.h"
+#include "canvas-imageSmoothing.h"
 #include "font-util.h"
 #include "version.h"
 
@@ -67,6 +68,7 @@ void canvas__init(void)
 	canvas_setLineDash(0, NULL);
 	canvas_miterLimit(canvas_miterLimit_get());
 	canvas_kerning(canvas_kerning_get());
+	canvas_imageSmoothing(VG_TRUE);
 }
 
 void canvas__cleanup(void)

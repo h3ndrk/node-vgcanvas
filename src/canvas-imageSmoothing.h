@@ -16,10 +16,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __CANVAS_LINEJOIN_H__
-#define __CANVAS_LINEJOIN_H__
+#ifndef __CANVAS_IMAGESMOOTHING_H__
+#define __CANVAS_IMAGESMOOTHING_H__
 
-void canvas_lineJoin(char *line_join);
-char *canvas_lineJoin_get(void);
+#include <VG/openvg.h>
 
-#endif /* __CANVAS_LINEJOIN_H__ */
+void canvas_imageSmoothing(VGboolean smoothing);
+VGboolean canvas_imageSmoothing_get(void);
+
+#endif /* __CANVAS_IMAGESMOOTHING_H__ */

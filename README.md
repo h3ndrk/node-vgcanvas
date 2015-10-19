@@ -14,7 +14,7 @@ Canvas 2D Method | C implementation | C++ wrapper implementation | Node.js imple
 `VGContext.font` | **implemented** | pending | pending 
 `VGContext.globalAlpha` | **implemented** |  **implemented** | **implemented**
 `VGContext.globalCompositeOperation` | **implemented** | pending | pending 
-`VGContext.imageSmoothingEnabled` | pending | pending | pending 
+`VGContext.imageSmoothingEnabled` | **implemented** | **implemented** | **implemented** 
 `VGContext.lineCap` | **implemented** | **implemented** | **implemented**
 `VGContext.lineDashOffset` | **implemented** | **implemented** | **implemented**
 `VGContext.lineJoin` | **implemented** | **implemented** | **implemented**

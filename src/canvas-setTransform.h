@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2015 NIPE-SYSTEMS
  * Copyright (C) 2015 Hauke Oldsen
  *

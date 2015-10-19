@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2015 NIPE-SYSTEMS
  * Copyright (C) 2015 Hauke Oldsen
  * 
@@ -22,6 +22,7 @@
 
 #include "egl-util.h"
 #include "font-util.h"
+#include "image-util.h"
 #include "canvas-beginPath.h"
 #include "canvas-bezierCurveTo.h"
 #include "canvas-clearRect.h"
@@ -56,6 +57,8 @@
 #include "canvas-kerning.h"
 #include "canvas-textAlign.h"
 #include "canvas-textBaseline.h"
+#include "canvas-drawImage.h"
+#include "canvas-imageSmoothing.h"
 
 int main(void)
 {
@@ -64,16 +67,17 @@ int main(void)
 	canvas__init();
 	
 	font_util_new("./font.ttf", "Font");
+	image_t *img = image_load("test2.png");
 	
 	canvas_clearRect(0, 0, egl_get_width(), egl_get_height());
 	canvas_lineWidth(10);
 	
 	paint_t black;
 	paint_t red;
-	paint_createColor(&black, 0, 0, 0, 1);
-	paint_createColor(&red, 1, 0, 0, 1);
+	paint_createColor(&black, 0, 0, 0, 0.5);
+	paint_createColor(&red, 1, 0, 0, 0.5);
 	
-	canvas_fillStyle(&black);
+	/*canvas_fillStyle(&black);
 	canvas_font("Font", 200);
 	canvas_textBaseline("middle");
 	canvas_textAlign("right");
@@ -81,7 +85,17 @@ int main(void)
 	canvas_textAlign("left");
 	canvas_fillText("node", egl_get_width() / 2 + 200, egl_get_height() / 2);
 	canvas_fillStyle(&red);
-	canvas_fillRect(egl_get_width() / 2 - 80, egl_get_height() / 2 - 80, 160, 160);
+	canvas_fillRect(egl_get_width() / 2 - 80, egl_get_height() / 2 - 80, 160, 160);*/
+
+	canvas_imageSmoothing(VG_TRUE);
+	canvas_drawImage(img, 100, 100, 200, 200, 0, 0, img->width, img->height);
+	canvas_imageSmoothing(VG_FALSE);
+	canvas_drawImage(img, 400, 100, 200, 200, 0, 0, img->width, img->height);
+	
+	canvas_fillStyle(&red);
+	canvas_fillRect(100, 400, 100, 100);
+	canvas_fillStyle(&black);
+	canvas_fillRect(150, 400, 100, 100);
 	
 	egl_swap_buffers();
 	
@@ -90,6 +104,7 @@ int main(void)
 	
 	paint_cleanup(&black);
 	paint_cleanup(&red);
+	image_cleanup(img);
 	canvas__cleanup();
 	
 	return 0;

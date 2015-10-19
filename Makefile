@@ -86,6 +86,7 @@ SRC += canvas-textAlign.c
 SRC += canvas-textBaseline.c
 SRC += canvas-transform.c
 SRC += canvas-translate.c
+SRC += canvas-imageSmoothing.c
 SRC += egl-util.c
 SRC += font-util.c
 SRC += image-util.c

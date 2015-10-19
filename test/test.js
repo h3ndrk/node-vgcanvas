@@ -13,7 +13,7 @@ img.onload = function() {
 	console.log("IMAGE LOADED " + JSON.stringify(img));
 }
 
-img.src = 'test.png';
+img.src = 'test2.png';
 ctx.testImg = img;
 
 function test() {

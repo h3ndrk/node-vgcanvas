@@ -47,7 +47,7 @@
 - [x] Use new paths for `[fill|stroke]Rect()`
 - [x] `closePath` for `strokeText()`
 - [ ] @Gebatzens: `requestAnimationFrame`
-- [ ] @Gebatzens: `imageSmoothingEnabled` (also in `save` and `restore`)
+- [x] @Gebatzens: `imageSmoothingEnabled` (also in `save` and `restore`)
 - [x] remove unused variables and struct-typedefs
 - [x] reduce log output to a minimum (only errors)
 - [x] remove `egl_debug_print_matrices()` from `src/egl-util.c`

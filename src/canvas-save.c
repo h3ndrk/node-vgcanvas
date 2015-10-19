@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2015 NIPE-SYSTEMS
  * Copyright (C) 2015 Hauke Oldsen
  * 
@@ -38,6 +38,7 @@
 #include "canvas-font.h"
 #include "canvas-textAlign.h"
 #include "canvas-textBaseline.h"
+#include "canvas-imageSmoothing.h"
 
 static canvas_save_stack_t *canvas_save_stack_top = NULL;
 
@@ -170,7 +171,7 @@ void canvas_save(void)
 	canvas_save_stack_top->textAlign = canvas_textAlign_get();
 	canvas_save_stack_top->textBaseline = canvas_textBaseline_get();
 	
-	// TODO: imageSmoothingEnabled missing
+	canvas_save_stack_top->imageSmoothing = canvas_imageSmoothing_get();
 }
 
 /**

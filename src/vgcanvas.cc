@@ -1,6 +1,7 @@
 /*
+ * Copyright (C) 2015 NIPE-SYSTEMS
  * Copyright (C) 2015 Hauke Oldsen
- *
+ * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -54,6 +55,7 @@ extern "C" {
 	#include "canvas-fillText.h"
 	#include "canvas-strokeText.h"
 	#include "canvas-drawImage.h"
+	#include "canvas-imageSmoothing.h"
 }
 
 #include <nan.h>
@@ -446,6 +448,19 @@ namespace vgcanvas {
 		}
 		
 	}
+	
+	void SetImageSmoothing(const Nan::FunctionCallbackInfo<Value>& args) {
+		if(args.Length() != 1 || !args[0]->IsBoolean()) {
+			Nan::ThrowTypeError("wrong arg");
+			return;
+		}
+		
+		canvas_imageSmoothing(args[0]->BooleanValue() ? VG_TRUE : VG_FALSE);
+	}
+	
+	void GetImageSmoothing(const Nan::FunctionCallbackInfo<Value>& args) {
+		args.GetReturnValue().Set(Nan::New(canvas_imageSmoothing_get() == VG_TRUE));
+	}
 
 	void ModuleInit(Local<Object> exports) {
 		exports->Set(Nan::New("init").ToLocalChecked(), Nan::New<FunctionTemplate>(Init)->GetFunction());
@@ -500,6 +515,8 @@ namespace vgcanvas {
 		exports->Set(Nan::New("strokeText").ToLocalChecked(), Nan::New<FunctionTemplate>(StrokeText)->GetFunction());
 		
 		exports->Set(Nan::New("drawImage").ToLocalChecked(), Nan::New<FunctionTemplate>(DrawImage)->GetFunction());
+		exports->Set(Nan::New("setImageSmoothing").ToLocalChecked(), Nan::New<FunctionTemplate>(SetImageSmoothing)->GetFunction());
+		exports->Set(Nan::New("getImageSmoothing").ToLocalChecked(), Nan::New<FunctionTemplate>(GetImageSmoothing)->GetFunction());
 		
 		Gradient::Init(exports);
 		Image::Init(exports);

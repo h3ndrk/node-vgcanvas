@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2015 NIPE-SYSTEMS
  * Copyright (C) 2015 Hauke Oldsen
  *
@@ -54,7 +54,7 @@ typedef struct canvas_save_stack_t
 	char *textAlign;
 	char *textBaseline;
 	
-	// TODO: imageSmoothingEnabled missing
+	VGboolean imageSmoothing;
 	
 	struct canvas_save_stack_t *next;
 } canvas_save_stack_t;

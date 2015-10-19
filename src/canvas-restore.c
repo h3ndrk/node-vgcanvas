@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2015 NIPE-SYSTEMS
  * Copyright (C) 2015 Hauke Oldsen
  * 
@@ -38,6 +38,7 @@
 #include "canvas-font.h"
 #include "canvas-textAlign.h"
 #include "canvas-textBaseline.h"
+#include "canvas-imageSmoothing.h"
 
 /**
  * The restore() method restores the most recently saved canvas state by popping
@@ -110,7 +111,7 @@ void canvas_restore(void)
 	canvas_textAlign(state_top->textAlign);
 	canvas_textBaseline(state_top->textBaseline);
 	
-	// TODO: imageSmoothingEnabled missing
+	canvas_imageSmoothing(state_top->imageSmoothing);
 	
 	canvas_save_cleanup_state(state_top);
 }

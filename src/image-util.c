@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2015 NIPE-SYSTEMS
  * Copyright (C) 2015 Hauke Oldsen
  * 
@@ -62,7 +62,7 @@ image_t *image_create(FIBITMAP *bitmap)
 	image_t *image = malloc(sizeof(image_t));
 	image->width = FreeImage_GetWidth(bitmap);
 	image->height = FreeImage_GetHeight(bitmap);
-	image->image = vgCreateImage(VG_sARGB_8888, image->width, image->height, VG_IMAGE_QUALITY_NONANTIALIASED);
+	image->image = vgCreateImage(VG_sARGB_8888, image->width, image->height, VG_IMAGE_QUALITY_BETTER);
 	vgImageSubData(image->image, FreeImage_GetBits(bitmap), image->width * 4, VG_sARGB_8888, 0, 0, image->width, image->height);
 	
 	return image;
