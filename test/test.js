@@ -1,14 +1,16 @@
-var canvas = require('../lib/canvas')
+var vgcanvas = require('../lib/canvas');
 var tests = [require('./colorPaint'), require('./alpha'), require('./gradient'), require('./image')];
 require('keypress')(process.stdin);
 
+var canvas = new vgcanvas.Canvas();
 var ctx = canvas.getContext('2d');
+
 ctx.loadFont('./font.ttf', 'font');
-var w = ctx.getScreenWidth();
-var h = ctx.getScreenHeight();
+var w = canvas.width;
+var h = canvas.height;
 var current = 0;
 
-var img = new canvas.Image();
+var img = new vgcanvas.Image();
 img.onload = function() {
 	console.log("IMAGE LOADED " + JSON.stringify(img));
 }

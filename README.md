@@ -6,7 +6,7 @@ Node.js wrapper for Canvas 2D API targeting the Raspberry Pi. This wrapper uses 
 
 Canvas 2D Method | C implementation | C++ wrapper implementation | Node.js implementation
 -----------------|------------------|----------------------------|-----------------------
-`VGContext.canvas` | *nothing to implement* | pending | pending 
+`VGContext.canvas` | **implemented** | partially | partially
 `VGContext.currentTransform` | *won't implement* | *won't implement* | *won't implement* 
 `VGContext.direction` | *won't implement* | *won't implement* | *won't implement* 
 `VGContext.fillStyle` | **implemented** | **implemented** | **implemented**
