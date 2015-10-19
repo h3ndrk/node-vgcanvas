@@ -11,9 +11,9 @@ Canvas 2D Method | C implementation | C++ wrapper implementation | Node.js imple
 `VGContext.direction` | *won't implement* | *won't implement* | *won't implement* 
 `VGContext.fillStyle` | **implemented** | **implemented** | **implemented**
 `VGContext.filter` | *won't implement* | *won't implement* | *won't implement* 
-`VGContext.font` | **implemented** | pending | pending 
+`VGContext.font` | **implemented** | **implemented** | **implemented** 
 `VGContext.globalAlpha` | **implemented** |  **implemented** | **implemented**
-`VGContext.globalCompositeOperation` | **implemented** | pending | pending 
+`VGContext.globalCompositeOperation` | **implemented** | **implemented** | **implemented** 
 `VGContext.imageSmoothingEnabled` | **implemented** | **implemented** | **implemented** 
 `VGContext.lineCap` | **implemented** | **implemented** | **implemented**
 `VGContext.lineDashOffset` | **implemented** | **implemented** | **implemented**

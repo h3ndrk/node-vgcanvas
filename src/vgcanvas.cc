@@ -56,6 +56,7 @@ extern "C" {
 	#include "canvas-strokeText.h"
 	#include "canvas-drawImage.h"
 	#include "canvas-imageSmoothing.h"
+	#include "canvas-globalCompositeOperation.h"
 }
 
 #include <nan.h>
@@ -462,6 +463,20 @@ namespace vgcanvas {
 		args.GetReturnValue().Set(Nan::New(canvas_imageSmoothing_get() == VG_TRUE));
 	}
 
+	void SetGlobalCompositeOperation(const Nan::FunctionCallbackInfo<Value>& args) {
+		if(args.Length() != 1 || !args[0]->IsString()) {
+			Nan::ThrowTypeError("wrong arg");
+			return;
+		}
+
+		canvas_globalCompositeOperation(*Nan::Utf8String(args[0]));
+
+	}
+
+	void GetGlobalCompositeOperation(const Nan::FunctionCallbackInfo<Value>& args) {
+		args.GetReturnValue().Set(Nan::New(canvas_globalCompositeOperation_get()).ToLocalChecked());
+	}
+
 	void ModuleInit(Local<Object> exports) {
 		exports->Set(Nan::New("init").ToLocalChecked(), Nan::New<FunctionTemplate>(Init)->GetFunction());
 		exports->Set(Nan::New("swapBuffers").ToLocalChecked(), Nan::New<FunctionTemplate>(SwapBuffers)->GetFunction());
@@ -517,6 +532,9 @@ namespace vgcanvas {
 		exports->Set(Nan::New("drawImage").ToLocalChecked(), Nan::New<FunctionTemplate>(DrawImage)->GetFunction());
 		exports->Set(Nan::New("setImageSmoothing").ToLocalChecked(), Nan::New<FunctionTemplate>(SetImageSmoothing)->GetFunction());
 		exports->Set(Nan::New("getImageSmoothing").ToLocalChecked(), Nan::New<FunctionTemplate>(GetImageSmoothing)->GetFunction());
+		
+		exports->Set(Nan::New("setGlobalCompositeOperation").ToLocalChecked(), Nan::New<FunctionTemplate>(SetGlobalCompositeOperation)->GetFunction());
+		exports->Set(Nan::New("getGlobalCompositeOperation").ToLocalChecked(), Nan::New<FunctionTemplate>(GetGlobalCompositeOperation)->GetFunction());
 		
 		Gradient::Init(exports);
 		Image::Init(exports);
