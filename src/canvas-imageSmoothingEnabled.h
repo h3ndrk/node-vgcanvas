@@ -16,12 +16,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __CANVAS_IMAGESMOOTHING_H__
-#define __CANVAS_IMAGESMOOTHING_H__
+#ifndef __CANVAS_IMAGESMOOTHINGENABLED_H__
+#define __CANVAS_IMAGESMOOTHINGENABLED_H__
 
 #include <VG/openvg.h>
 
-void canvas_imageSmoothing(VGboolean smoothing);
-VGboolean canvas_imageSmoothing_get(void);
+void canvas_imageSmoothingEnabled(VGboolean image_smoothing_enabled);
+VGboolean canvas_imageSmoothingEnabled_get(void);
 
-#endif /* __CANVAS_IMAGESMOOTHING_H__ */
+#endif /* __CANVAS_IMAGESMOOTHINGENABLED_H__ */

@@ -54,7 +54,7 @@ typedef struct canvas_save_stack_t
 	char *textAlign;
 	char *textBaseline;
 	
-	VGboolean imageSmoothing;
+	VGboolean imageSmoothingEnabled;
 	
 	struct canvas_save_stack_t *next;
 } canvas_save_stack_t;

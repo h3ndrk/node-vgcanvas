@@ -81,7 +81,7 @@ image_t *image_load(const char *path)
 	return img;
 }
 
-static char *image_base64_encode(char *start_prefix, const unsigned char *data, size_t input_length, size_t *output_length)
+static char *image_base64_encode(char *start_prefix, const unsigned char *data, size_t input_length)
 {
 	char *encoded_data = NULL;
 	unsigned int octet_a = 0;
@@ -90,19 +90,18 @@ static char *image_base64_encode(char *start_prefix, const unsigned char *data, 
 	unsigned int triple = 0;
 	int i = 0;
 	int j = 0;
+	size_t output_length = 0;
 	
 	if(start_prefix == NULL)
 	{
 		start_prefix = "";
 	}
 	
-	*output_length = strlen(start_prefix) + 4 * ((input_length + 2) / 3);
+	output_length = strlen(start_prefix) + 4 * ((input_length + 2) / 3 + 1);
 	
-	encoded_data = malloc(*output_length);
+	encoded_data = malloc(output_length);
 	if(encoded_data == NULL)
 	{
-		*output_length = 0;
-		
 		return NULL;
 	}
 	
@@ -127,13 +126,15 @@ static char *image_base64_encode(char *start_prefix, const unsigned char *data, 
 	
 	for(i = 0; i < mod_table[input_length % 3]; i++)
 	{
-		encoded_data[*output_length - 1 - i] = '=';
+		encoded_data[output_length - 1 - i - 1] = '=';
 	}
+	
+	encoded_data[output_length - 1] = '\0';
 	
 	return encoded_data;
 }
 
-char *image_to_data_url(char *type, float encoder_options, size_t *data_base64_amount)
+char *image_to_data_url(char *type, float encoder_options)
 {
 	unsigned int x = 0;
 	unsigned int y = 0;
@@ -150,8 +151,6 @@ char *image_to_data_url(char *type, float encoder_options, size_t *data_base64_a
 	if(data == NULL || !image)
 	{
 		eprintf("Failed to create data url.\n");
-		
-		*data_base64_amount = 0;
 		
 		return NULL;
 	}
@@ -208,8 +207,6 @@ char *image_to_data_url(char *type, float encoder_options, size_t *data_base64_a
 		FreeImage_Unload(image);
 		FreeImage_CloseMemory(memory_stream);
 		
-		*data_base64_amount = 0;
-		
 		return NULL;
 	}
 	
@@ -221,12 +218,10 @@ char *image_to_data_url(char *type, float encoder_options, size_t *data_base64_a
 		
 		FreeImage_CloseMemory(memory_stream);
 		
-		*data_base64_amount = 0;
-		
 		return NULL;
 	}
 	
-	data_base64 = image_base64_encode(save_prefix, data, data_amount, data_base64_amount);
+	data_base64 = image_base64_encode(save_prefix, data, data_amount);
 	
 	FreeImage_CloseMemory(memory_stream);
 	
