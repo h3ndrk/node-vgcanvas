@@ -6,6 +6,7 @@
         "src/vgcanvas.cc",
         "src/gradient.cc",
         "src/image.cc",
+        "src/pattern.cc",
         "src/canvas-arc.c",
         "src/canvas-beginPath.c",
         "src/canvas-bezierCurveTo.c",

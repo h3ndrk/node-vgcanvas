@@ -38,7 +38,7 @@ Canvas 2D Method | C implementation | C++ wrapper implementation | Node.js imple
 `VGContext.closePath()` | **implemented** | **implemented** | **implemented**
 `VGContext.createImageData()` | pending | pending | pending 
 `VGContext.createLinearGradient()` | **implemented** | **implemented** | **implemented**
-`VGContext.createPattern()` | pending | pending | pending 
+`VGContext.createPattern()` | **implemented** | **implemented** | **implemented** 
 `VGContext.createRadialGradient()` | **implemented** | **implemented** | **implemented**
 `VGContext.drawFocusIfNeeded()` | *won't implement* | *won't implement* | *won't implement* 
 `VGContext.drawImage()` | pending | pending | pending 
@@ -74,7 +74,7 @@ Canvas 2D Method | C implementation | C++ wrapper implementation | Node.js imple
 
 ## Need help?
 
-Contact the developer if you have questions: [dev.nipe.systems@gmail.com](mailto:dev.nipe.systems@gmail.com), [gebatzens@archlinux.info](gebatzens@archlinux.info)
+Contact the developers if you have questions: [dev.nipe.systems@gmail.com](mailto:dev.nipe.systems@gmail.com), [gebatzens@archlinux.info](gebatzens@archlinux.info)
 
 ## Found a bug?
 

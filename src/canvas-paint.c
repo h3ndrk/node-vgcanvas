@@ -104,6 +104,26 @@ void paint_createRadialGradient(paint_t *paint, VGfloat cx, VGfloat cy, VGfloat 
 }
 
 /**
+ * Creates a new pattern paint.
+ *
+ * @param paint Pointer to paint struct
+ * @param img Pointer to image
+ * @param mode The VGTilingMode (no-repeat, repeat)
+ */
+void paint_createPattern(paint_t *paint, image_t *img, VGTilingMode mode)
+{
+	paint->paint_type = PAINT_TYPE_PATTERN;
+	paint->count = 0;
+	paint->data = NULL;
+	
+	paint->paint = vgCreatePaint();
+	vgSetParameteri(paint->paint, VG_PAINT_TYPE, VG_PAINT_TYPE_PATTERN);
+	vgSetParameteri(paint->paint, VG_PAINT_PATTERN_TILING_MODE, mode);
+	vgPaintPattern(paint->paint, img->image);
+	
+}
+
+/**
  * Destroys a paint. Deallocates memory and releases the OpenVG paint.
  *
  * @param paint Pointer to paint struct
@@ -258,6 +278,9 @@ void paint_activate(paint_t *paint, VGbitfield mode)
 			
 			break;
 		}
+		case PAINT_TYPE_PATTERN:
+		
+			break;
 	}
 	
 	vgSetPaint(paint->paint, mode);

@@ -72,6 +72,7 @@ extern "C" {
 #include <map>
 #include "gradient.h"
 #include "image.h"
+#include "pattern.h"
 
 using namespace v8;
 
@@ -231,18 +232,33 @@ namespace vgcanvas {
 				
 			}
 		} else {
-			//Gradient object
+			//Gradient or pattern object
 			paint_t *paint = stroke ? canvas_strokeStyle_get() : canvas_fillStyle_get();
 			if(paint->paint_type == PAINT_TYPE_COLOR) {
 				paint_cleanup(paint);
 				delete paint;
 			}
 
-			Gradient *gr = Gradient::Unwrap<Gradient>(Local<Object>::Cast(args[1]));
-			if(stroke) {
-				canvas_strokeStyle(gr->GetPaint());
+			Local<Object> obj = Local<Object>::Cast(args[1]);
+			std::string constructor(*Nan::Utf8String(obj->GetConstructorName()));
+
+			if(constructor == "Gradient") {
+				Gradient *gr = Gradient::Unwrap<Gradient>(obj);
+				if(stroke) {
+					canvas_strokeStyle(gr->GetPaint());
+				} else {
+					canvas_fillStyle(gr->GetPaint());
+				}
+			} else if(constructor == "Pattern") {
+				Pattern *pattern = Pattern::Unwrap<Pattern>(obj);
+				if(stroke) {
+					canvas_strokeStyle(pattern->GetPaint());
+				} else {
+					canvas_fillStyle(pattern->GetPaint());
+				}
 			} else {
-				canvas_fillStyle(gr->GetPaint());
+				Nan::ThrowTypeError("type of object is neither Gradient nor Pattern");
+				return;
 			}
 
 		}
@@ -654,6 +670,7 @@ namespace vgcanvas {
 		
 		Gradient::Init(exports);
 		Image::Init(exports);
+		Pattern::Init(exports);
 
 	}
 

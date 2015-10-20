@@ -18,6 +18,9 @@ img.onload = function() {
 img.src = 'test2.png';
 ctx.testImg = img;
 
+ctx.testImg2 = new vgcanvas.Image();
+ctx.testImg2.src = 'test.png';
+
 function test() {
 	if(current == tests.length) {
 		console.log('All tests finished');
