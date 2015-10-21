@@ -20,12 +20,14 @@
 #define __CANVAS_PAINT_H__
 
 #include <VG/openvg.h>
+#include "image-util.h"
 
 typedef enum paint_type_t
 {
 	PAINT_TYPE_COLOR = VG_PAINT_TYPE_COLOR,
 	PAINT_TYPE_LINEAR_GRADIENT = VG_PAINT_TYPE_LINEAR_GRADIENT,
-	PAINT_TYPE_RADIAL_GRADIENT = VG_PAINT_TYPE_RADIAL_GRADIENT
+	PAINT_TYPE_RADIAL_GRADIENT = VG_PAINT_TYPE_RADIAL_GRADIENT,
+	PAINT_TYPE_PATTERN = VG_PAINT_TYPE_PATTERN
 } paint_type_t;
 
 typedef struct paint_t
@@ -39,6 +41,7 @@ typedef struct paint_t
 void paint_createColor(paint_t *paint, VGfloat red, VGfloat green, VGfloat blue, VGfloat alpha);
 void paint_createLinearGradient(paint_t *paint, VGfloat x1, VGfloat y1, VGfloat x2, VGfloat y2);
 void paint_createRadialGradient(paint_t *paint, VGfloat cx, VGfloat cy, VGfloat r, VGfloat fx, VGfloat fy);
+void paint_createPattern(paint_t* paint, image_t *img, VGTilingMode mode);
 void paint_cleanup(paint_t *paint);
 void paint_activate(paint_t *paint, VGbitfield mode);
 void paint_setRGBA(paint_t *color, VGfloat red, VGfloat green, VGfloat blue, VGfloat alpha);
