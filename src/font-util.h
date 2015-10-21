@@ -53,12 +53,11 @@ typedef struct font_t
 
 int font_util_get(char *name);
 char *font_util_get_name(unsigned int fonts_index);
-FT_Face font_util_get_face(unsigned int fonts_index, char character);
-void font_util_init(void);
+int font_util_init(void);
 char *font_util_version(void);
 void font_util_cleanup(void);
 int font_util_new(char *path, char *name);
-void font_util_remove(char *name);
+int font_util_remove(char *name);
 int font_util_get_char_index(unsigned int fonts_index, char character);
 VGPath font_util_get_path(unsigned int fonts_index, int char_index);
 VGfloat font_util_get_width(unsigned int fonts_index, int char_index);

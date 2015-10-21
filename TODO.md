@@ -14,7 +14,7 @@
 - [x] images
 - [x] text
 - [ ] comments
-    - [ ] `src/font-util.c`
+    - [x] `src/font-util.c`
     - [ ] `src/log-util.h`
     - [ ] not only the functions but also the code
 - [ ] remove Makefile, remove "`bin`" from "`.gitignore`", remove "`src/home-infoscreen.c`"
@@ -24,7 +24,7 @@
 - [x] Adjust coordinates
 - [x] `eprintf` for errors
 - [x] coordinates for closePath? *No*
-- [ ] replace all `void`-return-types with `int`-return-types
+- [x] replace all `void`-return-types with `int`-return-types
 - [ ] @Gebatzens: eventually handle V8 Fatal Errors http://izs.me/v8-docs/classv8_1_1V8.html#ab386f81a6d58dcf481d00446e8d15c9e
 - [x] remove anonymous structs
 - [x] `miterLimit`: what values do effect what? OpenVG documentation does not inform well about that topic. *Ratio of the `lineWidth`*
