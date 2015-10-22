@@ -9,7 +9,7 @@
     - [x] hsla()
 - [x] Rename "`src/infoscreen.cc`" to "`src/vgcanvas.cc`"
 - [x] gradients
-- [ ] @Gebatzens: patterns
+- [x] @Gebatzens: patterns
 - [x] shadows *Won't implement*
 - [x] images
 - [x] text

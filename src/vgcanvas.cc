@@ -70,6 +70,7 @@ extern "C" {
 #include <nan.h>
 #include <string>
 #include <map>
+#include <cstdio>
 #include "gradient.h"
 #include "image.h"
 #include "pattern.h"
@@ -429,7 +430,11 @@ namespace vgcanvas {
 			return;
 		}
 		
-		font_util_new(*Nan::Utf8String(args[0]), *Nan::Utf8String(args[1]));
+		if(font_util_new(*Nan::Utf8String(args[0]), *Nan::Utf8String(args[1])) == -1) {
+			std::string msg = "Failed to create font: ";
+			msg += strerror(errno);
+			Nan::ThrowError(msg.c_str());
+		}
 	}
 	
 	void SetFont(const Nan::FunctionCallbackInfo<Value>& args) {

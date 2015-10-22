@@ -343,6 +343,7 @@ int font_util_new(char *path, char *name)
 	{
 		eprintf("%s: Failed to load font face: %s\n", name, font_util_get_error(error));
 		
+		fonts[fonts_amount - 1].face = NULL;
 		font_util_remove(name);
 		
 		errno = EBFONT; // Bad font file format
@@ -495,15 +496,19 @@ int font_util_remove(char *name)
 	
 	free(fonts[fonts_index].path);
 	free(fonts[fonts_index].name);
-	FT_Done_Face(fonts[fonts_index].face);
 	
-	// free characters
-	for(i = 0; i < fonts[fonts_index].characters_amount; i++)
+	if(fonts[fonts_index].face)
 	{
-		vgDestroyPath(fonts[fonts_index].characters[i]->path);
-		free(fonts[fonts_index].characters[i]);
+		FT_Done_Face(fonts[fonts_index].face);
+		
+		// free characters
+		for(i = 0; i < fonts[fonts_index].characters_amount; i++)
+		{
+			vgDestroyPath(fonts[fonts_index].characters[i]->path);
+			free(fonts[fonts_index].characters[i]);
+		}
+		free(fonts[fonts_index].characters);
 	}
-	free(fonts[fonts_index].characters);
 	
 	// realign font list
 	for(i = fonts_index; i < fonts_amount - 1; i++)
