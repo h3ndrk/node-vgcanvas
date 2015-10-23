@@ -1,5 +1,5 @@
 var vgcanvas = require('../lib/canvas');
-var tests = [require('./colorPaint'), require('./alpha'), require('./gradient'), require('./image')];
+var tests = [require('./colorPaint'), require('./alpha'), require('./gradient'), require('./image'), require('./text')];
 require('keypress')(process.stdin);
 
 var canvas = new vgcanvas.Canvas();

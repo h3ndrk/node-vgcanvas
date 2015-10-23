@@ -65,6 +65,7 @@ extern "C" {
 	#include "canvas-transform.h"
 	#include "canvas-setTransform.h"
 	#include "canvas-translate.h"
+	#include "canvas-measureText.h"
 }
 
 #include <nan.h>
@@ -598,6 +599,34 @@ namespace vgcanvas {
 		canvas_setTransform(args[0]->NumberValue(), args[1]->NumberValue(), args[2]->NumberValue(), 
 			args[3]->NumberValue(), args[4]->NumberValue(), args[5]->NumberValue());
 	}
+	
+	
+	void MeasureText(const Nan::FunctionCallbackInfo<Value>& args) {
+		if(args.Length() != 1 || !args[0]->IsString()) {
+			Nan::ThrowTypeError("wrong arg");
+			return;
+		}
+		
+		canvas_measure_text_metrics_t metrics;
+		canvas_measureText(&metrics, *Nan::Utf8String(args[0]));
+		
+		Local<Object> obj = Nan::New<Object>();
+  	obj->Set(Nan::New("width").ToLocalChecked(), Nan::New(metrics.width));
+		obj->Set(Nan::New("actualBoundingBoxLeft").ToLocalChecked(), Nan::New(metrics.actual_bounding_box_left));
+		obj->Set(Nan::New("actualBoundingBoxRight").ToLocalChecked(), Nan::New(metrics.actual_bounding_box_right));
+		obj->Set(Nan::New("fontBoundingBoxAscent").ToLocalChecked(), Nan::New(metrics.font_bounding_box_ascent));
+		obj->Set(Nan::New("fontBoundingBoxDescent").ToLocalChecked(), Nan::New(metrics.font_bounding_box_descent));
+		obj->Set(Nan::New("actualBoundingBoxAscent").ToLocalChecked(), Nan::New(metrics.actual_bounding_box_ascent));
+		obj->Set(Nan::New("actualBoundingBoxDescent").ToLocalChecked(), Nan::New(metrics.actual_bounding_box_descent)); 
+		obj->Set(Nan::New("emHeightAscent").ToLocalChecked(), Nan::New(metrics.em_height_ascent));
+		obj->Set(Nan::New("emHeightDescent").ToLocalChecked(), Nan::New(metrics.em_height_descent));
+		obj->Set(Nan::New("hangingBaseline").ToLocalChecked(), Nan::New(metrics.hanging_baseline));
+		obj->Set(Nan::New("alphabeticBaseline").ToLocalChecked(), Nan::New(metrics.alphabetic_baseline));
+		obj->Set(Nan::New("ideographicBaseline").ToLocalChecked(), Nan::New(metrics.ideographic_baseline));
+		
+		args.GetReturnValue().Set(obj);
+		
+	}
 
 	void ModuleInit(Local<Object> exports) {
 		exports->Set(Nan::New("init").ToLocalChecked(), Nan::New<FunctionTemplate>(Init)->GetFunction());
@@ -650,6 +679,7 @@ namespace vgcanvas {
 		exports->Set(Nan::New("loadFont").ToLocalChecked(), Nan::New<FunctionTemplate>(NewFont)->GetFunction());
 		exports->Set(Nan::New("fillText").ToLocalChecked(), Nan::New<FunctionTemplate>(FillText)->GetFunction());
 		exports->Set(Nan::New("strokeText").ToLocalChecked(), Nan::New<FunctionTemplate>(StrokeText)->GetFunction());
+		exports->Set(Nan::New("measureText").ToLocalChecked(), Nan::New<FunctionTemplate>(MeasureText)->GetFunction());
 		
 		exports->Set(Nan::New("drawImage").ToLocalChecked(), Nan::New<FunctionTemplate>(DrawImage)->GetFunction());
 		exports->Set(Nan::New("setImageSmoothing").ToLocalChecked(), Nan::New<FunctionTemplate>(SetImageSmoothing)->GetFunction());
