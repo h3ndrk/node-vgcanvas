@@ -53,3 +53,4 @@
 - [x] remove `egl_debug_print_matrices()` from `src/egl-util.c`
 - [ ] @Gebatzens: add `toDataURL` to wrapper (pointer must be freed)
 - [ ] @Gebatzens: add `toBlob` to wrapper (pointer must be freed)
+- [ ] @Gebatzens: `getImageData()`, `putImageData()`

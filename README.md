@@ -1,76 +1,83 @@
 # node-vgcanvas
 
-Node.js wrapper for Canvas 2D API targeting the Raspberry Pi. This wrapper uses OpenVG for performant GPU rendering.
+*Node.js* wrapper for *Canvas 2D API* targeting the *Raspberry Pi*. This wrapper uses *OpenVG* for performant GPU rendering.
 
-## Canvas 2D API implementation status
+The intention of this library is that every web developer can put *Javascript* code directly to the *Raspberry Pi*. This means that the library tries to be mostly conform to the *Canvas 2D API*. In addition the code will be executed on the powerful GPU of the *Raspberry Pi*.
 
-Canvas 2D Method | C implementation | C++ wrapper implementation | Node.js implementation
------------------|------------------|----------------------------|-----------------------
-`VGContext.canvas` | **implemented** | partially | partially
-`VGContext.currentTransform` | *won't implement* | *won't implement* | *won't implement* 
-`VGContext.direction` | *won't implement* | *won't implement* | *won't implement* 
-`VGContext.fillStyle` | **implemented** | **implemented** | **implemented**
-`VGContext.filter` | *won't implement* | *won't implement* | *won't implement* 
-`VGContext.font` | **implemented** | **implemented** | **implemented** 
-`VGContext.globalAlpha` | **implemented** |  **implemented** | **implemented**
-`VGContext.globalCompositeOperation` | **implemented** | **implemented** | **implemented** 
-`VGContext.imageSmoothingEnabled` | **implemented** | **implemented** | **implemented** 
-`VGContext.lineCap` | **implemented** | **implemented** | **implemented**
-`VGContext.lineDashOffset` | **implemented** | **implemented** | **implemented**
-`VGContext.lineJoin` | **implemented** | **implemented** | **implemented**
-`VGContext.lineWidth` | **implemented** | **implemented** | **implemented**
-`VGContext.miterLimit` | **implemented** | **implemented** | **implemented** 
-`VGContext.shadowBlur` | *won't implement* | *won't implement* | *won't implement* 
-`VGContext.shadowColor` | *won't implement* | *won't implement* | *won't implement* 
-`VGContext.shadowOffsetX` | *won't implement* | *won't implement* | *won't implement* 
-`VGContext.shadowOffsetY` | *won't implement* | *won't implement* | *won't implement* 
-`VGContext.strokeStyle` | **implemented** | **implemented** | **implemented**
-`VGContext.textAlign` | **implemented** | **implemented** | **implemented** 
-`VGContext.textBaseline` | **implemented** | **implemented** | **implemented** 
-`VGContext.addHitRegion()` | *won't implement* | *won't implement* | *won't implement* 
-`VGContext.arc()` | **implemented** | **implemented** | **implemented**
-`VGContext.arcTo()` | pending | pending | pending 
-`VGContext.beginPath()` | **implemented** | **implemented** | **implemented**
-`VGContext.bezierCurveTo()` | **implemented** | **implemented** | **implemented**
-`VGContext.clearHitRegion()` | *won't implement* | *won't implement* | *won't implement* 
-`VGContext.clearRect()` | **implemented** | **implemented** | **implemented**
-`VGContext.clip()` | **implemented** | **implemented** | **implemented**
-`VGContext.closePath()` | **implemented** | **implemented** | **implemented**
-`VGContext.createImageData()` | pending | pending | pending 
-`VGContext.createLinearGradient()` | **implemented** | **implemented** | **implemented**
-`VGContext.createPattern()` | **implemented** | **implemented** | **implemented** 
-`VGContext.createRadialGradient()` | **implemented** | **implemented** | **implemented**
-`VGContext.drawFocusIfNeeded()` | *won't implement* | *won't implement* | *won't implement* 
-`VGContext.drawImage()` | pending | pending | pending 
-`VGContext.drawWindow()` | *won't implement* | *won't implement* | *won't implement* 
-`VGContext.ellipse()` | pending | pending | pending 
-`VGContext.fill()` | **implemented** | **implemented** | **implemented**
-`VGContext.fillRect()` | **implemented** | **implemented** | **implemented**
-`VGContext.fillText()` | **implemented** | **implemented** | **implemented** 
-`VGContext.getImageData()` | pending | pending | pending 
-`VGContext.getLineDash()` | **implemented** | **implemented** | **implemented**
-`VGContext.isPointInPath()` | *won't implement* | *won't implement* | *won't implement* 
-`VGContext.isPointInStroke()` | *won't implement* | *won't implement* | *won't implement* 
-`VGContext.lineTo()` | **implemented** | **implemented** | **implemented**
-`VGContext.measureText()` | **implemented** | pending | pending 
-`VGContext.moveTo()` | **implemented** | **implemented** | **implemented**
-`VGContext.putImageData()` | pending | pending | pending 
-`VGContext.quadraticCurveTo()` | **implemented** | **implemented** | **implemented**
-`VGContext.rect()` | **implemented** | **implemented** | **implemented**
-`VGContext.removeHitRegion()` | *won't implement* | *won't implement* | *won't implement* 
-`VGContext.resetTransform()` | **implemented** | **implemented** | **implemented** 
-`VGContext.restore()` | **implemented** | **implemented** | **implemented**
-`VGContext.rotate()` | **implemented** | **implemented** | **implemented** 
-`VGContext.save()` | **implemented** | **implemented** | **implemented**
-`VGContext.scale()` | **implemented** | **implemented** | **implemented** 
-`VGContext.scrollPathIntoView()` | *won't implement* | *won't implement* | *won't implement* 
-`VGContext.setLineDash()` | **implemented** | **implemented** | **implemented**
-`VGContext.setTransform()` | **implemented** | **implemented** | **implemented** 
-`VGContext.stroke()` | **implemented** | **implemented** | **implemented**
-`VGContext.strokeRect()` | **implemented** | **implemented** | **implemented**
-`VGContext.strokeText()` | **implemented** | **implemented** | **implemented** 
-`VGContext.transform()` | **implemented** | **implemented** | **implemented** 
-`VGContext.translate()` | **implemented** | **implemented** | **implemented** 
+* [W3C: HTML Canvas 2D Context](http://www.w3.org/TR/2015/PR-2dcontext-20150924/)
+* [MDN: CanvasRenderingContext2D](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D)
+
+## Developer informations
+
+This section informs all developers about which features the *node-vgcanvas*-library has and which are not standard compliant to the *Canvas 2D API*. Everything not mentioned in this section should work as you expect the *Canvas 2D API* works.
+
+### Coordinates
+
+The coordinate system is the same which the *Canvas 2D API* uses. The upper left corner is the origin. In the right direction the x axis is positive, in the down direction the y axis is positive.
+
+### Text Rendering
+
+* without any loaded font nothing (text) will be rendered **(see log output)**
+* the correct rendering position is calculated via `textAlign` and `textBaseline` (loop involved)
+* intensive matrix-saving, -restoring and -modifying **(performance warning)**
+    * *path*-matrix
+        * saving and restoring for every text element
+        * modifying for every character (kerning needs extra matrix modifications)
+    * *paint*-matrix (to achieve correct gradient rendering)
+        * saving and restoring for every character
+        * modifying for every character
+* stroked text anomalies
+    * settings which are sensitive for scaling are scaled properly (includes `lineDash`-data which uses a loop: complex `lineDash`-data can result in bad performance) **(performance warning)**
+* see also: *Text Kerning*
+
+### Text Kerning
+
+* enabled by default
+* can be en-/disabled by `ctx.kerning = <boolean>;`
+* some fonts do not support font kerning which results in disabled font kerning when rendering (does not reset `ctx.kerning`) **(see log output)**
+
+### Font Loading
+
+* uses *Freetype*
+* character size is `64 * 64 * 64 = 262144` (*Freetype* font units)
+* all coordinates are divided by the character size which results in lengths of `1`
+* counting of all characters of the font (loop involved) **(performance warning)**
+* for every character
+    * character outline will be converted to a path (for use in OpenVG)
+    * several sizes are computed for the character
+* the font is checked for availability for kerning support
+* fonts must not explicitly removed/clean-upped, they will automatically destroyed if the library exits
+
+### Text Baseline
+
+* `hanging`- and `ideographic` baselines differ from the standard *Canvas 2D API* (*Freetype* does not support these special baselines)
+    * `hanging`: in the library the baseline sits on top of the highest character of the font
+    * `ideographic`: in the library the baseline lays below the smallest character of the font
+
+### Saving and Restoring
+
+Be careful when saving and restoring multiple times in a single frame **(Performance warning)**. The following data will be stored:
+
+* Several current matrices.
+* Clipping region. Complex clipping regions (complex paths) may influence the performance.
+* `lineDash`-data
+* Fill- and Stroke-Colors.
+* Current font. This involves some loops to store the correct font and to restore the correct font.
+
+### Unsupported properties and methods
+
+The following properties and methods are not implemented and will not be implemented in the future. Mostly that are experimental features.
+
+* Transformation matrices are write-only in *node-vgcanvas*. It is not possible to read the current transformation matrix via `ctx.currentTransform`. This may change in the future.
+* Text direction are not supported via `ctx.direction`.
+* Filters are not supported via `ctx.filter`.
+* Shadows are not supported via `ctx.shadowBlur`, `ctx.shadowColor`, `ctx.shadowOffsetX`, `ctx.shadowOffsetY`. Shadows are very ressource intense drawing operations and result in very bad performance.
+* Hit Regions are not supported via `ctx.addHitRegion()`, `ctx.clearHitRegion()` and `ctx.removeHitRegion()`. Hit Regions cannot be implemented currently because all path data is in the VRAM which means that it is not accessable from the library.
+* Focus Drawing is not supported via `ctx.drawFocusIfNeeded()`. There are no focus algorithms available by the library. This feature may be implemented by the application.
+* Test-Point-In-Structure is not supported via `ctx.isPointInPath()` and `ctx.isPointInPath()`. Test-Point-In-Structure cannot be implemented currently because all path data is in the VRAM which means that it is not accessable from the library.
+* Path Scrolling is not supported via `ctx.scrollPathIntoView()`.
+
+See [STATUS.md](./STATUS.md) for more details of the currently supported properties and methods.
 
 ## Need help?
 
