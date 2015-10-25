@@ -627,6 +627,25 @@ namespace vgcanvas {
 		args.GetReturnValue().Set(obj);
 		
 	}
+	
+	void GetImageData(const Nan::FunctionCallbackInfo<Value>& args) {
+		if(!checkArgs(args, 4)) {
+			Nan::ThrowTypeError("wrongs args");
+			return;
+		}
+		
+		VGint x = args[0]->NumberValue();
+		VGint y = args[1]->NumberValue();
+		VGint w = args[2]->NumberValue();
+		VGint h = args[3]->NumberValue();
+		
+		Local<ArrayBuffer> buffer = ArrayBuffer::New(args.GetIsolate(), w * h * 4);
+		Local<Uint8ClampedArray> array = Uint8ClampedArray::New(buffer, 0, w * h * 4);
+		
+		vgReadPixels(buffer->GetContents().Data(), w * 4, VG_sABGR_8888, x, egl_get_height() - y - h, w, h);
+		
+		args.GetReturnValue().Set(array);
+	}
 
 	void ModuleInit(Local<Object> exports) {
 		exports->Set(Nan::New("init").ToLocalChecked(), Nan::New<FunctionTemplate>(Init)->GetFunction());
@@ -702,6 +721,8 @@ namespace vgcanvas {
 		exports->Set(Nan::New("translate").ToLocalChecked(), Nan::New<FunctionTemplate>(Translate)->GetFunction());
 		exports->Set(Nan::New("transform").ToLocalChecked(), Nan::New<FunctionTemplate>(Transform)->GetFunction());
 		exports->Set(Nan::New("setTransform").ToLocalChecked(), Nan::New<FunctionTemplate>(SetTransform)->GetFunction());
+		
+		exports->Set(Nan::New("getImageData").ToLocalChecked(), Nan::New<FunctionTemplate>(GetImageData)->GetFunction());
 		
 		Gradient::Init(exports);
 		Image::Init(exports);

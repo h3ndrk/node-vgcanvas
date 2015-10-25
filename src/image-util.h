@@ -29,7 +29,7 @@ typedef struct image_t {
 
 image_t *image_load(const char *path);
 FIBITMAP* image_load_bitmap(const char *path);
-image_t* image_create(FIBITMAP *bitmap);
+image_t* image_create(VGImageFormat format, VGint width, VGint height, const void *data);
 void image_cleanup(image_t *image);
 void image_free_bitmap(FIBITMAP *bitmap);
 char *image_to_data_url(char *type, float encoder_options);

@@ -52,6 +52,8 @@ namespace vgcanvas {
 		obj->SetAccessor(Nan::New("src").ToLocalChecked(), Image::GetSrc, Image::SetSrc);
 		obj->SetInternalFieldCount(1);
 		
+		Nan::SetPrototypeMethod(tpl, "setData", Image::SetData);
+		
 		exports->Set(Nan::New("Image").ToLocalChecked(), tpl->GetFunction());
 	}
 	
@@ -95,7 +97,7 @@ namespace vgcanvas {
 		Local<Object> localObj = Nan::New(data->obj);
 		Image *obj = Image::Unwrap<Image>(localObj);
 		
-		obj->SetImage(image_create(data->bitmap));
+		obj->SetImage(image_create(VG_sARGB_8888,  FreeImage_GetWidth(data->bitmap),  FreeImage_GetHeight(data->bitmap), FreeImage_GetBits(data->bitmap)));
 		image_free_bitmap(data->bitmap);
 		
 		if(!obj->GetImage()) {
@@ -135,6 +137,36 @@ namespace vgcanvas {
 	void Image::GetSrc(Local<String> property, const PropertyCallbackInfo<Value>& info) {
 		Image* obj = Image::Unwrap<Image>(info.Holder());
 		info.GetReturnValue().Set(Nan::New(obj->GetPath()->c_str()).ToLocalChecked());
+	}
+	
+	void Image::SetData(const Nan::FunctionCallbackInfo<Value> &info) {
+		if(info.Length() != 3 || !info[0]->IsUint8ClampedArray() || !checkArgs(info, 2, 1)) {
+			Nan::ThrowTypeError("wrong arg");
+			return;
+		}
+		
+		Image* obj = Image::Unwrap<Image>(info.Holder());
+		
+		Local<ArrayBufferView> bufferView = Local<ArrayBufferView>::Cast(info[0]);
+		if(!bufferView->HasBuffer()) {
+			Nan::ThrowError("array does not have buffer");
+			return;
+		}
+		
+		ArrayBuffer::Contents contents = bufferView->Buffer()->GetContents();
+		VGint width = info[1]->NumberValue();
+		VGint height = info[2]->NumberValue();
+		
+		if(width * height * 4 != contents.ByteLength()) {
+			Nan::ThrowError("lengths do not match");
+		}
+		
+		if(obj->GetImage()) {
+			image_cleanup(obj->GetImage());
+		}
+		
+		obj->SetImage(image_create(VG_sABGR_8888, width, height, contents.Data()));
+		
 	}
 	
 	image_t* Image::GetImage() {

@@ -37,7 +37,7 @@ Canvas 2D Method | C implementation | C++ wrapper implementation | Node.js imple
 `VGContext.createPattern()` | **implemented** | **implemented** | **implemented** 
 `VGContext.createRadialGradient()` | **implemented** | **implemented** | **implemented**
 `VGContext.drawFocusIfNeeded()` | *won't implement* | *won't implement* | *won't implement* 
-`VGContext.drawImage()` | pending | pending | pending 
+`VGContext.drawImage()` | **implemented**  | **implemented**  | **implemented**  
 `VGContext.ellipse()` | pending | pending | pending 
 `VGContext.fill()` | **implemented** | **implemented** | **implemented**
 `VGContext.fillRect()` | **implemented** | **implemented** | **implemented**
