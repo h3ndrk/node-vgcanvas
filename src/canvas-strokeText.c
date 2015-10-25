@@ -28,6 +28,7 @@
 #include "canvas-font.h"
 #include "font-util.h"
 #include "canvas-lineWidth.h"
+#include "canvas-miterLimit.h"
 #include "canvas-setLineDash.h"
 #include "canvas-lineDashOffset.h"
 #include "canvas-fillText.h"
@@ -51,6 +52,7 @@ void canvas_strokeText(char *text, VGfloat x, VGfloat y)
 	int lineDashPattern_index = 0;
 	VGfloat lineDashOffset = canvas_lineDashOffset_get();
 	VGfloat lineWidth = canvas_lineWidth_get();
+	VGfloat miterLimit = canvas_miterLimit_get();
 	VGint lineDashCount = canvas_setLineDash_get_count();
 	VGfloat *lineDashPattern = NULL;
 	VGfloat *lineDashPattern2 = NULL;
@@ -197,6 +199,7 @@ void canvas_strokeText(char *text, VGfloat x, VGfloat y)
 	
 	canvas_setLineDash(lineDashCount, lineDashPattern2);
 	canvas_lineWidth(lineWidth / size);
+	canvas_miterLimit(miterLimit / size);
 	canvas_lineDashOffset(lineDashOffset / size);
 	
 	vgGetMatrix(matrix_backup_path);
@@ -245,6 +248,7 @@ void canvas_strokeText(char *text, VGfloat x, VGfloat y)
 	
 	canvas_lineDashOffset(lineDashOffset);
 	canvas_lineWidth(lineWidth);
+	canvas_miterLimit(miterLimit);
 	canvas_setLineDash(lineDashCount, lineDashPattern);
 	
 	free(lineDashPattern);
