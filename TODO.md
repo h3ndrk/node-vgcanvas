@@ -41,9 +41,9 @@
 
 - [ ] @Gebatzens: `canvas.toBlob()`
 - [ ] @Gebatzens: `canvas.toDataURL()`
-- [ ] @Gebatzens: `ctx.createImageData()`
-- [ ] @Gebatzens: `ctx.putImageData()`
-- [ ] @Gebatzens: `ctx.getImageData()`
+- [x] @Gebatzens: `ctx.createImageData()`
+- [x] @Gebatzens: `ctx.putImageData()`
+- [x] @Gebatzens: `ctx.getImageData()`
 - [x] @Gebatzens: How does patterns are affected by `ctx.fillText()`, `ctx.strokeText()`
 - [ ] @Gebatzens: `requestAnimationFrame()` (global)
 - [x] @NIPE-SYSTEMS: `miterLimit` in `ctx.strokeText()`
