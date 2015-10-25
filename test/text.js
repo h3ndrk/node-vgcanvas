@@ -13,8 +13,14 @@ module.exports.test = function(ctx, w, h) {
 	ctx.font = '10px font';
 	ctx.fillText("width: " + Math.round(metrics.width) + " pixels", 100, 340);
 	ctx.fillRect(100, 350, metrics.width, 5);
+
+	var pattern = ctx.createPattern(ctx.testImg, 'repeat');
 	
-	ctx.strokeStyle = 'blue';
-	ctx.font = '100px font';
-	ctx.strokeText('blue stroke', 400, 500);
+	ctx.strokeStyle = pattern;
+	ctx.font = '70px font';
+	ctx.lineWidth = 3;
+	ctx.strokeText('pattern stroke', 400, 500);
+	ctx.fillStyle = pattern;
+	ctx.fillText('pattern fill', 500, 600);
+
 }

@@ -44,7 +44,7 @@
 - [ ] @Gebatzens: `ctx.createImageData()`
 - [ ] @Gebatzens: `ctx.putImageData()`
 - [ ] @Gebatzens: `ctx.getImageData()`
-- [ ] @Gebatzens: How does patterns are affected by `ctx.fillText()`, `ctx.strokeText()`
+- [x] @Gebatzens: How does patterns are affected by `ctx.fillText()`, `ctx.strokeText()`
 - [ ] @Gebatzens: `requestAnimationFrame()` (global)
 - [ ] @NIPE-SYSTEMS: `miterLimit` in `ctx.strokeText()`
 - [ ] @Gebatzens: image-util error handling (e.g. see `src/font-util.c`)
