@@ -13,11 +13,6 @@
 - [x] shadows *Won't implement*
 - [x] images
 - [x] text
-- [ ] comments
-    - [x] `src/font-util.c`
-    - [ ] `src/log-util.h`
-    - [ ] not only the functions but also the code
-- [ ] remove Makefile, remove "`bin`" from "`.gitignore`", remove "`src/home-infoscreen.c`"
 - [x] "`openSubPath`" in "`src/canvas.c`" *Not needed*
 - [x] https://developer.mozilla.org/en-US/docs/Web/API/Path2D/Path2D *Unable to implement because paths are only stored in the VRAM. There are no plans to change that.*
 - [x] Remove "`src/color.*`"
@@ -25,32 +20,35 @@
 - [x] `eprintf` for errors
 - [x] coordinates for closePath? *No*
 - [x] replace all `void`-return-types with `int`-return-types
-- [ ] @Gebatzens: eventually handle V8 Fatal Errors http://izs.me/v8-docs/classv8_1_1V8.html#ab386f81a6d58dcf481d00446e8d15c9e
 - [x] remove anonymous structs
 - [x] `miterLimit`: what values do effect what? OpenVG documentation does not inform well about that topic. *Ratio of the `lineWidth`*
 - [x] set standard values at initialization
 - [x] create font if it is firstly used *No, defaults to "no font".*
 - [x] Replace `onecolor` with regular expressions and native code
 - [x] `textBaseline`, `textAlign`
-- [ ] general error handling: worst case scenario for user input
-    - [ ] better `eprintf` and failure exit with memory safety
-    - [ ] error handling for system failures (out-of-memory-failure)
-- [ ] analyze memory leaks
-    - [ ] in the whole code generally
-    - [ ] **VRAM memory leaks** (maybe flush cache?)
-- [ ] add properties for `fillText` and `strokeText`
-    - [ ] `miterLimit`
+- [x] add properties for `fillText` and `strokeText`
     - [x] gradients
-    - [ ] @Gebatzens: patterns
 - [x] add dependencies for `#include`s
 - [x] error handling for `[fill|stroke]Text()` when no font has been loaded *Text is simply not rendered (silent, change?)*
 - [x] Use new paths for `[fill|stroke]Rect()`
 - [x] `closePath` for `strokeText()`
-- [ ] @Gebatzens: `requestAnimationFrame`
 - [x] @Gebatzens: `imageSmoothingEnabled` (also in `save` and `restore`)
 - [x] remove unused variables and struct-typedefs
 - [x] reduce log output to a minimum (only errors)
 - [x] remove `egl_debug_print_matrices()` from `src/egl-util.c`
-- [ ] @Gebatzens: add `toDataURL` to wrapper (pointer must be freed)
-- [ ] @Gebatzens: add `toBlob` to wrapper (pointer must be freed)
-- [ ] @Gebatzens: `getImageData()`, `putImageData()`
+
+---
+
+- [ ] @Gebatzens: `canvas.toBlob()`
+- [ ] @Gebatzens: `canvas.toDataURL()`
+- [ ] @Gebatzens: `ctx.createImageData()`
+- [ ] @Gebatzens: `ctx.putImageData()`
+- [ ] @Gebatzens: `ctx.getImageData()`
+- [ ] @Gebatzens: How does patterns are affected by `ctx.fillText()`, `ctx.strokeText()`
+- [ ] @Gebatzens: `requestAnimationFrame()` (global)
+- [ ] @NIPE-SYSTEMS: `miterLimit` in `ctx.strokeText()`
+- [ ] @Gebatzens: image-util error handling (e.g. see `src/font-util.c`)
+- [ ] @Gebatzens: documenting the image code in the `README.md` (Developer Informations) (describe all differences to the *Canvas 2D API*)
+- [ ] @Gebatzens: commenting the image-util code (`ctx.drawImage()` and other API functions)
+- [ ] @Gebatzens: free VRAM on fatal (unrecoverable) errors (http://izs.me/v8-docs/classv8_1_1V8.html#ab386f81a6d58dcf481d00446e8d15c9e)
+- [ ] @NIPE-SYSTEMS: remove `Makefile`, remove "`bin`" from "`.gitignore`", remove "`src/home-infoscreen.c`"
