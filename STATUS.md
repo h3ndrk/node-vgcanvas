@@ -32,24 +32,24 @@ Canvas 2D Method | C implementation | C++ wrapper implementation | Node.js imple
 `VGContext.clearRect()` | **implemented** | **implemented** | **implemented**
 `VGContext.clip()` | **implemented** | **implemented** | **implemented**
 `VGContext.closePath()` | **implemented** | **implemented** | **implemented**
-`VGContext.createImageData()` | pending | pending | pending 
+`VGContext.createImageData()` | **implemented** | **implemented** | **implemented** 
 `VGContext.createLinearGradient()` | **implemented** | **implemented** | **implemented**
 `VGContext.createPattern()` | **implemented** | **implemented** | **implemented** 
 `VGContext.createRadialGradient()` | **implemented** | **implemented** | **implemented**
 `VGContext.drawFocusIfNeeded()` | *won't implement* | *won't implement* | *won't implement* 
-`VGContext.drawImage()` | pending | pending | pending 
+`VGContext.drawImage()` | **implemented**  | **implemented**  | **implemented**  
 `VGContext.ellipse()` | pending | pending | pending 
 `VGContext.fill()` | **implemented** | **implemented** | **implemented**
 `VGContext.fillRect()` | **implemented** | **implemented** | **implemented**
 `VGContext.fillText()` | **implemented** | **implemented** | **implemented** 
-`VGContext.getImageData()` | pending | pending | pending 
+`VGContext.getImageData()` | **implemented** | **implemented** | **implemented** 
 `VGContext.getLineDash()` | **implemented** | **implemented** | **implemented**
 `VGContext.isPointInPath()` | *won't implement* | *won't implement* | *won't implement* 
 `VGContext.isPointInStroke()` | *won't implement* | *won't implement* | *won't implement* 
 `VGContext.lineTo()` | **implemented** | **implemented** | **implemented**
-`VGContext.measureText()` | **implemented** | pending | pending 
+`VGContext.measureText()` | **implemented** | **implemented** | **implemented** 
 `VGContext.moveTo()` | **implemented** | **implemented** | **implemented**
-`VGContext.putImageData()` | pending | pending | pending 
+`VGContext.putImageData()` | **implemented** | **implemented** | **implemented** 
 `VGContext.quadraticCurveTo()` | **implemented** | **implemented** | **implemented**
 `VGContext.rect()` | **implemented** | **implemented** | **implemented**
 `VGContext.removeHitRegion()` | *won't implement* | *won't implement* | *won't implement* 
