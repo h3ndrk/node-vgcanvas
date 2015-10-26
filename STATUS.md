@@ -2,7 +2,7 @@
 
 Canvas 2D Method | C implementation | C++ wrapper implementation | Node.js implementation
 -----------------|------------------|----------------------------|-----------------------
-`VGContext.canvas` | **implemented** | partially | partially
+`VGContext.canvas` | **implemented** | **implemented** | **implemented**
 `VGContext.currentTransform` | *won't implement now* | *won't implement now* | *won't implement now* 
 `VGContext.direction` | *won't implement* | *won't implement* | *won't implement* 
 `VGContext.fillStyle` | **implemented** | **implemented** | **implemented**

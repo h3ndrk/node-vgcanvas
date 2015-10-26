@@ -32,7 +32,7 @@ FIBITMAP* image_load_bitmap(const char *path);
 image_t* image_create(VGImageFormat format, VGint width, VGint height, const void *data);
 void image_cleanup(image_t *image);
 void image_free_bitmap(FIBITMAP *bitmap);
-char *image_to_data_url(char *type, float encoder_options);
-char *image_to_blob(char *type, float encoder_options, size_t *data_amount);
+char *image_to_data_url(char *src, const char *type, float encoder_options);
+char *image_to_blob(char *src, const char *type, float encoder_options, size_t *data_amount);
 
 #endif /* __IMAGE_UTIL_H__ */

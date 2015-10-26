@@ -134,7 +134,7 @@ static char *image_base64_encode(char *start_prefix, const unsigned char *data, 
 	return encoded_data;
 }
 
-char *image_to_data_url(char *type, float encoder_options)
+char *image_to_data_url(char *src, const char *type, float encoder_options)
 {
 	unsigned int x = 0;
 	unsigned int y = 0;
@@ -142,35 +142,30 @@ char *image_to_data_url(char *type, float encoder_options)
 	FIMEMORY *memory_stream = NULL;
 	FIBITMAP *image = FreeImage_Allocate(egl_get_width(), egl_get_height(), 32, 0xFF000000, 0x00FF0000, 0x0000FF00);
 	char *data_base64 = NULL;
-	unsigned char *data = malloc(egl_get_width() * egl_get_height() * 4);
 	size_t data_amount = 0;
 	FREE_IMAGE_FORMAT save_format = FIF_PNG;
 	int save_flags = 0;
 	char *save_prefix = "";
 	
-	if(data == NULL || !image)
+	if(!image)
 	{
 		eprintf("Failed to create data url.\n");
 		
 		return NULL;
 	}
 	
-	vgReadPixels(data, (egl_get_width() * 4), VG_sRGBX_8888, 0, 0, egl_get_width(), egl_get_height());
-	
-	for(y = 0; y < (unsigned int)egl_get_height(); y++)
+	for(y = 0; y < (unsigned int) egl_get_height(); y++)
 	{
-		for(x = 0; x < (unsigned int)egl_get_width(); x++)
+		for(x = 0; x < (unsigned int) egl_get_width(); x++)
 		{
-			color.rgbRed = data[(y * egl_get_width() + x) * 4 + 3];
-			color.rgbGreen = data[(y * egl_get_width() + x) * 4 + 2];
-			color.rgbBlue = data[(y * egl_get_width() + x) * 4 + 1];
-			color.rgbReserved = data[(y * egl_get_width() + x) * 4 + 0];
+			color.rgbRed = src[(y * egl_get_width() + x) * 4 + 3];
+			color.rgbGreen = src[(y * egl_get_width() + x) * 4 + 2];
+			color.rgbBlue = src[(y * egl_get_width() + x) * 4 + 1];
+			color.rgbReserved = src[(y * egl_get_width() + x) * 4 + 0];
 			
 			FreeImage_SetPixelColor(image, x, y, &color);
 		}
 	}
-	
-	free(data);
 	
 	if(!strcmp(type, "image/png"))
 	{
@@ -212,7 +207,9 @@ char *image_to_data_url(char *type, float encoder_options)
 	
 	FreeImage_Unload(image);
 	
-	if(!FreeImage_AcquireMemory(memory_stream, (BYTE **)&data, &data_amount))
+	BYTE *mem_data;
+	
+	if(!FreeImage_AcquireMemory(memory_stream, &mem_data, &data_amount))
 	{
 		eprintf("Failed to acquire data url.\n");
 		
@@ -221,26 +218,25 @@ char *image_to_data_url(char *type, float encoder_options)
 		return NULL;
 	}
 	
-	data_base64 = image_base64_encode(save_prefix, data, data_amount);
+	data_base64 = image_base64_encode(save_prefix, mem_data, data_amount);
 	
 	FreeImage_CloseMemory(memory_stream);
 	
 	return data_base64;
 }
 
-char *image_to_blob(char *type, float encoder_options, size_t *data_amount)
+char *image_to_blob(char *src, const char *type, float encoder_options, size_t *data_amount)
 {
 	unsigned int x = 0;
 	unsigned int y = 0;
 	RGBQUAD color = { 0, 0, 0, 0 };
 	FIMEMORY *memory_stream = NULL;
 	FIBITMAP *image = FreeImage_Allocate(egl_get_width(), egl_get_height(), 32, 0xFF000000, 0x00FF0000, 0x0000FF00);
-	char *data = malloc(egl_get_width() * egl_get_height() * 4);
 	char *data_copy = NULL;
 	FREE_IMAGE_FORMAT save_format = FIF_PNG;
 	int save_flags = 0;
 	
-	if(data == NULL || !image)
+	if(/*data == NULL || */!image)
 	{
 		eprintf("Failed to create blob.\n");
 		
@@ -248,23 +244,19 @@ char *image_to_blob(char *type, float encoder_options, size_t *data_amount)
 		
 		return NULL;
 	}
-	
-	vgReadPixels(data, (egl_get_width() * 4), VG_sRGBX_8888, 0, 0, egl_get_width(), egl_get_height());
-	
+
 	for(y = 0; y < (unsigned int)egl_get_height(); y++)
 	{
 		for(x = 0; x < (unsigned int)egl_get_width(); x++)
 		{
-			color.rgbRed = data[(y * egl_get_width() + x) * 4 + 3];
-			color.rgbGreen = data[(y * egl_get_width() + x) * 4 + 2];
-			color.rgbBlue = data[(y * egl_get_width() + x) * 4 + 1];
-			color.rgbReserved = data[(y * egl_get_width() + x) * 4 + 0];
+			color.rgbRed = src[(y * egl_get_width() + x) * 4 + 3];
+			color.rgbGreen = src[(y * egl_get_width() + x) * 4 + 2];
+			color.rgbBlue = src[(y * egl_get_width() + x) * 4 + 1];
+			color.rgbReserved = src[(y * egl_get_width() + x) * 4 + 0];
 			
 			FreeImage_SetPixelColor(image, x, y, &color);
 		}
 	}
-	
-	free(data);
 	
 	if(!strcmp(type, "image/png"))
 	{
@@ -305,7 +297,9 @@ char *image_to_blob(char *type, float encoder_options, size_t *data_amount)
 	
 	FreeImage_Unload(image);
 	
-	if(!FreeImage_AcquireMemory(memory_stream, (BYTE **)&data, data_amount))
+	BYTE *mem_data;
+	
+	if(!FreeImage_AcquireMemory(memory_stream, &mem_data, data_amount))
 	{
 		eprintf("Failed to acquire blob.\n");
 		
@@ -328,7 +322,7 @@ char *image_to_blob(char *type, float encoder_options, size_t *data_amount)
 		return NULL;
 	}
 	
-	memcpy(data_copy, data, *data_amount);
+	memcpy(data_copy, mem_data, *data_amount);
 	
 	FreeImage_CloseMemory(memory_stream);
 	

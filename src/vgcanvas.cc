@@ -21,6 +21,7 @@ extern "C" {
 	#include "include-freetype.h"
 	#include "include-openvg.h"
 	#include "font-util.h"
+	#include "image-util.h"
 	#include "canvas.h"
 	#include "canvas-font.h"
 	#include "canvas-paint.h"
@@ -646,6 +647,99 @@ namespace vgcanvas {
 		
 		args.GetReturnValue().Set(array);
 	}
+	
+	
+	struct BlobData {
+		uv_work_t work;
+		std::string type;
+		char *blob;
+		char *src;
+		size_t size;
+		Nan::Callback callback;
+		float encoder;
+	};
+	
+	void BlobCreate(uv_work_t *work) {
+		BlobData *data = static_cast<BlobData*>(work->data);
+		
+		data->blob = image_to_blob(data->src, data->type.c_str(), data->encoder, &data->size);
+
+	}
+	
+	void BlobFinished(uv_work_t *work, int status) {
+		Nan::HandleScope scope;
+		BlobData *data = static_cast<BlobData*>(work->data);
+		
+		if(!data->blob) {
+			Nan::ThrowError("failed to create blob");
+			free(data->src);
+			delete data;
+			return;
+		}
+		
+		Local<Value> buffer = Nan::NewBuffer(data->blob, data->size).ToLocalChecked();
+		
+		data->callback.Call(1, &buffer);
+		
+		free(data->src);
+		delete data;
+	}
+	
+	void ToBlob(const Nan::FunctionCallbackInfo<Value>& args) {
+		if(args.Length() != 3 || !args[0]->IsFunction() || !args[1]->IsString() || !args[2]->IsNumber()) {
+			Nan::ThrowTypeError("wrong args");
+			return;
+		}
+		
+		char *src = static_cast<char*>(malloc(egl_get_width() * egl_get_height() * 4));
+		if(!src) {
+			Nan::ThrowError("Failed to allocate memory");
+			return;
+		}
+		
+		vgReadPixels(src, egl_get_width() * 4, VG_sRGBX_8888, 0, 0, egl_get_width(), egl_get_height());
+		
+		std::string type = *Nan::Utf8String(args[1]);
+		float encoder = args[2]->NumberValue();
+		
+		BlobData *data = new BlobData;
+		data->work.data = data;
+		data->callback.SetFunction(Local<Function>::Cast(args[0]));
+		data->type = type;
+		data->src = src;
+		data->encoder = encoder;
+		
+		uv_queue_work(uv_default_loop(), &data->work, BlobCreate, BlobFinished);
+		
+	}
+	
+	void ToURL(const Nan::FunctionCallbackInfo<Value>& args) {
+		if(args.Length() != 2 || !args[0]->IsString() || !args[1]->IsNumber()) {
+			Nan::ThrowTypeError("wrong args");
+			return;
+		}
+		
+		char *src = static_cast<char*>(malloc(egl_get_width() * egl_get_height() * 4));
+		if(!src) {
+			Nan::ThrowError("Failed to allocate memory");
+			return;
+		}
+		
+		vgReadPixels(src, egl_get_width() * 4, VG_sRGBX_8888, 0, 0, egl_get_width(), egl_get_height());
+		
+		std::string type = *Nan::Utf8String(args[0]);
+		float encoder = args[1]->NumberValue();
+		
+		char *base64 = image_to_data_url(src, type.c_str(), encoder);
+		free(src);
+		
+		if(!base64) {
+			Nan::ThrowError("failed to create data url");
+			return;
+		}
+		
+		args.GetReturnValue().Set(Nan::New(base64).ToLocalChecked());
+	}
 
 	void ModuleInit(Local<Object> exports) {
 		exports->Set(Nan::New("init").ToLocalChecked(), Nan::New<FunctionTemplate>(Init)->GetFunction());
@@ -723,6 +817,9 @@ namespace vgcanvas {
 		exports->Set(Nan::New("setTransform").ToLocalChecked(), Nan::New<FunctionTemplate>(SetTransform)->GetFunction());
 		
 		exports->Set(Nan::New("getImageData").ToLocalChecked(), Nan::New<FunctionTemplate>(GetImageData)->GetFunction());
+		
+		exports->Set(Nan::New("toBlob").ToLocalChecked(), Nan::New<FunctionTemplate>(ToBlob)->GetFunction());
+		exports->Set(Nan::New("toDataURL").ToLocalChecked(), Nan::New<FunctionTemplate>(ToURL)->GetFunction());
 		
 		Gradient::Init(exports);
 		Image::Init(exports);

@@ -1,3 +1,5 @@
+var fs = require('fs');
+
 module.exports.name = "Text";
 module.exports.test = function(ctx, w, h) {
 	
@@ -40,5 +42,13 @@ module.exports.test = function(ctx, w, h) {
 	
 	var data2 = ctx.getImageData(400, 450, 100, 100);
 	ctx.putImageData(data2, 400, 900);
+	
+	/*ctx.canvas.toBlob(function(blob) {
+		console.log('blobbed');
+		
+		fs.writeFile('/tmp/test.png', blob);
+	});*/
+	
+	fs.writeFile('/tmp/test2', ctx.canvas.toDataURL());
 
 }

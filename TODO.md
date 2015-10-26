@@ -39,8 +39,8 @@
 
 ---
 
-- [ ] @Gebatzens: `canvas.toBlob()`
-- [ ] @Gebatzens: `canvas.toDataURL()`
+- [x] @Gebatzens: `canvas.toBlob()`
+- [x] @Gebatzens: `canvas.toDataURL()`
 - [x] @Gebatzens: `ctx.createImageData()`
 - [x] @Gebatzens: `ctx.putImageData()`
 - [x] @Gebatzens: `ctx.getImageData()`
