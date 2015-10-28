@@ -17,6 +17,7 @@
  */
 
 #include <iostream>
+#include <cstdio>
 #include "image.h"
 #include "vgcanvas.h"
 
@@ -92,22 +93,41 @@ namespace vgcanvas {
 		Nan::HandleScope scope;
 		
 		AsyncData *data = static_cast<AsyncData*>(req->data);
-		std::cout << "Finished loading " << data->path->c_str() << "\n";
-		
 		Local<Object> localObj = Nan::New(data->obj);
 		Image *obj = Image::Unwrap<Image>(localObj);
+		bool hasOnLoad = localObj->HasRealNamedProperty(Nan::New("onload").ToLocalChecked());
+		bool hasOnError = localObj->HasRealNamedProperty(Nan::New("onerror").ToLocalChecked());
+		
+		if(!data->bitmap) {
+			if(hasOnError) {
+				std::string msg = "Failed to create image: ";
+				msg += strerror(errno);
+				Local<Value> error = Nan::Error(msg.c_str());
+				Local<Function> func = Local<Function>::Cast(localObj->GetRealNamedProperty(Nan::New("onerror").ToLocalChecked()));
+				func->Call(localObj, 1, &error);
+			}
+			
+			data->obj.Reset();
+			return;
+		}
+		
+		std::cout << "Finished loading " << data->path->c_str() << "\n";
 		
 		obj->SetImage(image_create(VG_sARGB_8888,  FreeImage_GetWidth(data->bitmap),  FreeImage_GetHeight(data->bitmap), FreeImage_GetBits(data->bitmap)));
 		image_free_bitmap(data->bitmap);
 		
 		if(!obj->GetImage()) {
-			Nan::ThrowTypeError("Failed to load image");
+			if(hasOnError) {
+				Local<Value> error = Nan::Error("Failed to create image");
+				Local<Function> func = Local<Function>::Cast(localObj->GetRealNamedProperty(Nan::New("onerror").ToLocalChecked()));
+				func->Call(localObj, 1, &error);
+			}
 			data->obj.Reset();
 			return;
 		}
 		
-		bool hasProp = localObj->HasRealNamedProperty(Nan::New("onload").ToLocalChecked());
-		if(hasProp) {
+		
+		if(hasOnLoad) {
 			Local<Function> func = Local<Function>::Cast(localObj->GetRealNamedProperty(Nan::New("onload").ToLocalChecked()));
 			func->Call(localObj, 0, NULL);
 		}

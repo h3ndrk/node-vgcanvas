@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
+ 
 #include "include-core.h"
 #include "include-openvg.h"
 #include "include-freeimage.h"
@@ -34,12 +34,12 @@ void image_cleanup(image_t *image)
 
 FIBITMAP *image_load_bitmap(const char *path)
 {
-	printf("Loading image %s\n", path);
+	//printf("Loading image %i\n");
 	
 	FIBITMAP *bitmap = FreeImage_Load(FreeImage_GetFileType(path, 0), path, 0);
 	if(!bitmap)
 	{
-		eprintf("Failed to load bitmap.\n");
+		eprintf("Failed to load bitmap %s\n", path);
 		
 		return NULL;
 	}

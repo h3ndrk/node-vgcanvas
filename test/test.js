@@ -15,11 +15,15 @@ img.onload = function() {
 	console.log("IMAGE LOADED " + JSON.stringify(img));
 }
 
-img.src = 'test2.png';
+img.onerror = function(error) {
+	console.error(error);
+}
+
+img.src = 'testasd.png';
 ctx.testImg = img;
 
 ctx.testImg2 = new vgcanvas.Image();
-ctx.testImg2.src = 'test.png';
+ctx.testImg2.src = 'testaasd.png';
 
 function test() {
 	if(current == tests.length) {

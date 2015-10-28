@@ -477,6 +477,9 @@ namespace vgcanvas {
 		if(img->GetImage()) {
 			canvas_drawImage(img->GetImage(), args[1]->NumberValue(), args[2]->NumberValue(), args[3]->NumberValue(), 
 				args[4]->NumberValue(), args[5]->NumberValue(), args[6]->NumberValue(), args[7]->NumberValue(), args[8]->NumberValue());
+		} else {
+			Nan::ThrowError("invalid image");
+			return;
 		}
 		
 	}
