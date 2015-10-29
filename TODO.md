@@ -45,7 +45,7 @@
 - [x] @Gebatzens: `ctx.putImageData()`
 - [x] @Gebatzens: `ctx.getImageData()`
 - [x] @Gebatzens: How does patterns are affected by `ctx.fillText()`, `ctx.strokeText()`
-- [ ] @Gebatzens: `requestAnimationFrame()` (global)
+- [x] @Gebatzens: `requestAnimationFrame()` (~~global~~ `canvas.requestAnimationFrame`)
 - [x] @NIPE-SYSTEMS: `miterLimit` in `ctx.strokeText()`
 - [x] @Gebatzens: image-util error handling (e.g. see `src/font-util.c`)
 - [x] @Gebatzens: documenting the image code in the `README.md` (Developer Informations) (describe all differences to the *Canvas 2D API*)
