@@ -68,10 +68,10 @@ Be careful when saving and restoring multiple times in a single frame **(Perform
 
 * uses *FreeImage*
 * Many formats are suported: [FreeImage features](http://freeimage.sourceforge.net/features.html)
-* *Image* is like HTMLImageElement, supported attributes are *src*, *onload*, *onerror*
-* *ImageData.data* can be modified, but *ImageData.update* must be called manually since the actual data is stored in VRAM.
-* *canvas.toBlob* does not create a *Blob* as specified in the *Canvas 2D API*, but a Node buffer.
-* Currently, *ctx.drawImage* only supports *Image* as image source. This may change in future.
+* `Image` is like `HTMLImageElement`, supported attributes are `src`, `onload`, `onerror`
+* `ImageData.data` can be modified, but `ImageData.update` must be called manually since the actual data is stored in VRAM.
+* `canvas.toBlob` does not create a `Blob` as specified in the *Canvas 2D API*, but a Node buffer.
+* Currently, `ctx.drawImage` only supports `Image` as image source. This may change in future.
 
 ### Unsupported properties and methods
 
