@@ -26,12 +26,24 @@
 static char encoding_table[] = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '/' };
 static int mod_table[] = { 0, 2, 1 };
 
+/**
+ * Destroys the OpenVG image and frees the image structure.
+ *
+ * @param image A pointer to an image structure
+ */
 void image_cleanup(image_t *image)
 {
 	vgDestroyImage(image->image);
 	free(image);
 }
 
+/**
+ * Loads a bitmap. If necessary, it will be converted to a 32 bpp bitmap.
+ * Supported formats: http://freeimage.sourceforge.net/features.html
+ * 
+ * @param path The path of a bitmap file
+ * @return The bitmap
+ */
 FIBITMAP *image_load_bitmap(const char *path)
 {
 	//printf("Loading image %i\n");
@@ -57,6 +69,15 @@ FIBITMAP *image_load_bitmap(const char *path)
 	return bitmap;
 }
 
+/**
+ * Creates an OpenVG image using the given data. Each scanline is assumed to be width * 4
+ *
+ * @param format Format of data. This must be a 4-byte format (e.g. VG_sRGBA_8888 or VG_sARGB_8888)
+ * @param width The width
+ * @param height The height
+ * @param Pointer to data 
+ * @return A pointer to an allocated image structure
+ */
 image_t *image_create(VGImageFormat format, VGint width, VGint height, const void *data)
 {
 	image_t *image = malloc(sizeof(image_t));
@@ -68,11 +89,22 @@ image_t *image_create(VGImageFormat format, VGint width, VGint height, const voi
 	return image;
 }
 
+/**
+ * Frees a bitmap. 
+ *
+ * @param bitmap The bitmap
+ */
 void image_free_bitmap(FIBITMAP *bitmap)
 {
 	FreeImage_Unload(bitmap);
 }
 
+/**
+ * Creates a new image. It is a combination of image_load_bitmap, image_create, image_free_bitmap
+ *
+ * @param path Path to a bitmap
+ * @return The new image
+ */
 image_t *image_load(const char *path)
 {
 	FIBITMAP *bitmap = image_load_bitmap(path);
@@ -81,6 +113,14 @@ image_t *image_load(const char *path)
 	return img;
 }
 
+/**
+ * Encodes data with base64
+ *
+ * @param start_prefix This string will be used as prefix for the output string
+ * @param data The binary data
+ * @param input_length Length of data
+ * @return A base64-encoded representation of data
+ */
 static char *image_base64_encode(char *start_prefix, const unsigned char *data, size_t input_length)
 {
 	char *encoded_data = NULL;
@@ -134,6 +174,14 @@ static char *image_base64_encode(char *start_prefix, const unsigned char *data, 
 	return encoded_data;
 }
 
+/**
+ * Returns a data-URL containing a representation of src in the format specified by the type
+ *
+ * @param src Raw image data of whole screen
+ * @param type Format (currently supported: image/png and image/jpeg)
+ * @param encoder_options Only used for image/jpeg. Specifies the quality of the output image.
+ * @return The data-URL (must be freed)
+ */
 char *image_to_data_url(char *src, const char *type, float encoder_options)
 {
 	unsigned int x = 0;
@@ -225,6 +273,15 @@ char *image_to_data_url(char *src, const char *type, float encoder_options)
 	return data_base64;
 }
 
+/**
+ * Creates a blob representing src
+ *
+ * @param src Raw image data of whole screen
+ * @param type Format (currently supported: image/png and image/jpeg)
+ * @param encoder_options Only used for image/jpeg. Specifies the quality of the output image.
+ * @param data_amount Pointer where to write the blob's size to
+ * @return Pointer to blob (must be freed)
+ */
 char *image_to_blob(char *src, const char *type, float encoder_options, size_t *data_amount)
 {
 	unsigned int x = 0;

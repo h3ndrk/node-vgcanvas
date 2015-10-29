@@ -55,7 +55,7 @@ namespace vgcanvas {
 			
 			Image *img = Image::Unwrap<Image>(Local<Object>::Cast(info[0]));
 			
-			if(!img->GetImage()) {
+			if(img->GetImage()) {
 				std::string mode(*Nan::Utf8String(info[1]));
 				paint_createPattern(pattern->GetPaint(), img->GetImage(), mode == "no-repeat" ? VG_TILE_FILL : VG_TILE_REPEAT);
 			} else {

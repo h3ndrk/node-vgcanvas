@@ -48,7 +48,7 @@
 - [ ] @Gebatzens: `requestAnimationFrame()` (global)
 - [x] @NIPE-SYSTEMS: `miterLimit` in `ctx.strokeText()`
 - [x] @Gebatzens: image-util error handling (e.g. see `src/font-util.c`)
-- [ ] @Gebatzens: documenting the image code in the `README.md` (Developer Informations) (describe all differences to the *Canvas 2D API*)
-- [ ] @Gebatzens: commenting the image-util code (`ctx.drawImage()` and other API functions)
+- [x] @Gebatzens: documenting the image code in the `README.md` (Developer Informations) (describe all differences to the *Canvas 2D API*)
+- [x] @Gebatzens: commenting the image-util code (`ctx.drawImage()` and other API functions)
 - [ ] @Gebatzens: free VRAM on fatal (unrecoverable) errors (http://izs.me/v8-docs/classv8_1_1V8.html#ab386f81a6d58dcf481d00446e8d15c9e)
 - [x] @NIPE-SYSTEMS: remove `Makefile`, remove "`bin`" from "`.gitignore`", remove "`src/home-infoscreen.c`"

@@ -7,7 +7,7 @@ The intention of this library is that every web developer can put *Javascript* c
 * [W3C: HTML Canvas 2D Context](http://www.w3.org/TR/2015/PR-2dcontext-20150924/)
 * [MDN: CanvasRenderingContext2D](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D)
 
-## Developer informations
+## Developer information
 
 This section informs all developers about which features the *node-vgcanvas*-library has and which are not standard compliant to the *Canvas 2D API*. Everything not mentioned in this section should work as you expect the *Canvas 2D API* works.
 
@@ -63,6 +63,15 @@ Be careful when saving and restoring multiple times in a single frame **(Perform
 * `lineDash`-data
 * Fill- and Stroke-Colors.
 * Current font. This involves some loops to store the correct font and to restore the correct font.
+
+### Images
+
+* uses *FreeImage*
+* Many formats are suported: [FreeImage features](http://freeimage.sourceforge.net/features.html)
+* *Image* is like HTMLImageElement, supported attributes are *src*, *onload*, *onerror*
+* *ImageData.data* can be modified, but *ImageData.update* must be called manually since the actual data is stored in VRAM.
+* *canvas.toBlob* does not create a *Blob* as specified in the *Canvas 2D API*, but a Node buffer.
+* Currently, *ctx.drawImage* only supports *Image* as image source. This may change in future.
 
 ### Unsupported properties and methods
 

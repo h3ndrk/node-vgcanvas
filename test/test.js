@@ -19,11 +19,11 @@ img.onerror = function(error) {
 	console.error(error);
 }
 
-img.src = 'testasd.png';
+img.src = 'test2.png';
 ctx.testImg = img;
 
 ctx.testImg2 = new vgcanvas.Image();
-ctx.testImg2.src = 'testaasd.png';
+ctx.testImg2.src = 'test.png';
 
 function test() {
 	if(current == tests.length) {
