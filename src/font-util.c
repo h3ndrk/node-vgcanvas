@@ -131,8 +131,6 @@ int font_util_init(void)
 	FT_Int patch = 0;
 	int error = 0;
 	
-	printf("Error: %s\n", font_util_get_error(FT_Err_Unknown_File_Format));
-	
 	error = FT_Init_FreeType(&font_library);
 	if(error != 0)
 	{
