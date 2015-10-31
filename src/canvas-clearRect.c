@@ -28,7 +28,7 @@
  */
 void canvas_clearRect_init(void)
 {
-	VGfloat clear_color[4] = { 0.0f, 0.0f, 0.0f, 0.0f }; // white
+	VGfloat clear_color[4] = { 1.0f, 1.0f, 1.0f, 1.0f }; // white
 	vgSetfv(VG_CLEAR_COLOR, 4, clear_color);
 
 	vgSeti(VG_SCISSORING, VG_FALSE);

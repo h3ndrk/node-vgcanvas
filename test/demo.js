@@ -82,6 +82,9 @@ function paint(timestamp)
 	}
 	
 	ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+	ctx.fillStyle = "#000000";
+	ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+	ctx.fillStyle = "#FFFFFF";
 	
 	switch(animationId)
 	{
