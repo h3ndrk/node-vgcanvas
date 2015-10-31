@@ -101,3 +101,9 @@ Write an issue: [https://github.com/NIPE-SYSTEMS/node-vgcanvas/issues](https://g
 lastest GPL-license (see `LICENSE`-file)
 
 Copyright (C) 2015 NIPE-SYSTEMS ([http://nipe-systems.de](http://nipe-systems.de)), Hauke Oldsen ([https://gebatzens.de](https://gebatzens.de))
+
+### License of example font
+
+The font ("Lato Regular") used by the examples is published under the OFL-license (see [OFL.txt](OFL.txt)).
+
+Further informations can be found at: [https://www.google.com/fonts/specimen/Lato](https://www.google.com/fonts/specimen/Lato)
