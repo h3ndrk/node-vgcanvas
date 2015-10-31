@@ -62,6 +62,7 @@ void canvas_save(void)
 	if(canvas_save_stack_top == NULL) // state is first element in stack
 	{
 		canvas_save_stack_top = state;
+		state->next = NULL;
 	}
 	else
 	{
