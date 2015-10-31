@@ -5,7 +5,7 @@ require('keypress')(process.stdin);
 var canvas = new vgcanvas.Canvas();
 var ctx = canvas.getContext('2d');
 
-ctx.loadFont('./font.ttf', 'font');
+ctx.loadFont('./Lato-Regular.ttf', 'font');
 var w = canvas.width;
 var h = canvas.height;
 var current = 0;
