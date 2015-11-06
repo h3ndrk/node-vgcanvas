@@ -32,16 +32,18 @@ function test() {
 		return process.stdin.pause();
 	}
 	
-	ctx.clearRect(0, 0, w, h);
-	ctx.font = '20px font';
-	var str = 'Test ' + current + ': ' + tests[current].name;
-	console.log(str);
-	ctx.fillStyle = '#000';
-	ctx.strokeStyle = '#000';
-	ctx.fillText(str, 10, 30);
-	tests[current].test(ctx, w, h);
-	ctx.swapBuffers();
-	current++;
+	canvas.requestAnimationFrame(function() {
+		ctx.clearRect(0, 0, w, h);
+		ctx.font = '20px font';
+		var str = 'Test ' + current + ': ' + tests[current].name;
+		console.log(str);
+		ctx.fillStyle = '#000';
+		ctx.strokeStyle = '#000';
+		ctx.fillText(str, 10, 30);
+		tests[current].test(ctx, w, h);
+		current++;
+
+	});
 }
 
 process.stdin.on('keypress', function(ch, key) {
