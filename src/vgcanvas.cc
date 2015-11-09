@@ -21,6 +21,7 @@ extern "C" {
 	#include "include-freetype.h"
 	#include "include-openvg.h"
 	#include "font-util.h"
+	#include "log-util.h"
 	#include "image-util.h"
 	#include "canvas.h"
 	#include "canvas-font.h"
@@ -82,6 +83,7 @@ using namespace v8;
 namespace vgcanvas {
 
 	static std::map<uint32_t, paint_t*> paintMap;
+	static bool initialized = false;
 
 	bool checkArgs(const Nan::FunctionCallbackInfo<Value> &args, int number, int offset) {
 
@@ -106,8 +108,24 @@ namespace vgcanvas {
 		return checkArgs(args, number, 0);
 	}
 
+	void ErrorHandler(const char *location, const char *message) {
+		eprintf("V8 FATAL ERROR: %s %s\n", location, message);
+		
+		if(initialized) {
+			initialized = false;
+			canvas__cleanup();
+		}
+	}
+
 	void Init(const Nan::FunctionCallbackInfo<Value>& args) {
+		if(initialized) {
+			Nan::ThrowError("Only one canvas can be created at the same time");
+			return;
+		}
+		
+		args.GetIsolate()->SetFatalErrorHandler(ErrorHandler);
 		canvas__init();
+		initialized = true;
 	}
 
 	void SwapBuffers(const Nan::FunctionCallbackInfo<Value>& args) {
@@ -115,7 +133,13 @@ namespace vgcanvas {
 	}
 
 	void Cleanup(const Nan::FunctionCallbackInfo<Value>& args) {
+		if(!initialized) {
+			Nan::ThrowError("Not initialized");
+			return;
+		}
+		
 		canvas__cleanup();
+		initialized = false;
 	}
 
 	void FillRect(const Nan::FunctionCallbackInfo<Value>& args) {
