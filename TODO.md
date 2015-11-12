@@ -36,6 +36,7 @@
 - [x] remove unused variables and struct-typedefs
 - [x] reduce log output to a minimum (only errors)
 - [x] remove `egl_debug_print_matrices()` from `src/egl-util.c`
+- [ ] Text rendering: Unicode / UTF-8 support
 
 ---
 
