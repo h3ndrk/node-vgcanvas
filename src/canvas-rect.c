@@ -23,6 +23,9 @@
 #include "egl-util.h"
 #include "canvas-beginPath.h"
 #include "canvas-rect.h"
+#include "canvas-moveTo.h"
+#include "canvas-lineTo.h"
+#include "canvas-closePath.h"
 
 /**
  * The rect() method creates a path for a rectangle at position (x, y) with a
@@ -36,5 +39,10 @@
  */
 void canvas_rect(VGfloat x, VGfloat y, VGfloat width, VGfloat height)
 {
-	vguRect(canvas_beginPath_get(), x, egl_get_height() - y - height, width, height);
+	//vguRect(canvas_beginPath_get(), x, egl_get_height() - y - height, width, height);
+	canvas_moveTo(x, y);
+	canvas_lineTo(x + width, y);
+	canvas_lineTo(x + width, y + height);
+	canvas_lineTo(x, y + height);
+	canvas_closePath();
 }

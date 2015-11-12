@@ -25,6 +25,9 @@
 #include "canvas-fillStyle.h"
 #include "canvas-beginPath.h"
 #include "canvas-fillRect.h"
+#include "canvas-moveTo.h"
+#include "canvas-lineTo.h"
+#include "canvas-closePath.h"
 
 /**
  * The fillRect() method draws a filled rectangle at (x, y) position whose size
@@ -41,7 +44,12 @@ void canvas_fillRect(VGfloat x, VGfloat y, VGfloat width, VGfloat height)
 	
 	canvas_beginPath();
 	
-	vguRect(canvas_beginPath_get(), x, egl_get_height() - y - height, width, height);
+	//vguRect(canvas_beginPath_get(), x, egl_get_height() - y - height, width, height);
+	canvas_moveTo(x, y);
+	canvas_lineTo(x + width, y);
+	canvas_lineTo(x + width, y + height);
+	canvas_lineTo(x, y + height);
+	canvas_closePath();
 	
 	vgDrawPath(canvas_beginPath_get(), VG_FILL_PATH);
 }

@@ -25,6 +25,9 @@
 #include "canvas-paint.h"
 #include "canvas-strokeStyle.h"
 #include "canvas-strokeRect.h"
+#include "canvas-moveTo.h"
+#include "canvas-lineTo.h"
+#include "canvas-closePath.h"
 
 /**
  * The strokeRect() method paints a rectangle which has a starting point at (x,
@@ -41,7 +44,12 @@ void canvas_strokeRect(VGfloat x, VGfloat y, VGfloat width, VGfloat height)
 	
 	canvas_beginPath();
 	
-	vguRect(canvas_beginPath_get(), x, egl_get_height() - y - height, width, height);
+	//vguRect(canvas_beginPath_get(), x, egl_get_height() - y - height, width, height);
+	canvas_moveTo(x, y);
+	canvas_lineTo(x + width, y);
+	canvas_lineTo(x + width, y + height);
+	canvas_lineTo(x, y + height);
+	canvas_closePath();
 	
 	vgDrawPath(canvas_beginPath_get(), VG_STROKE_PATH);
 }
